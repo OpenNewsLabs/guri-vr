@@ -1,0 +1,14 @@
+{
+  "short_name": "GuriVR",
+  "name": "Guri VR",
+  "icons": [
+    {
+      "src": "logo.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait"
+}

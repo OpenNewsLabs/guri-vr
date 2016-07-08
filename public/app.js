@@ -60,6 +60,10 @@
 
 	(0, _preact.render)((0, _preact.h)(_App2.default, null), document.getElementById('root'));
 
+	if ('serviceWorker' in navigator) {
+	  navigator.serviceWorker.register('/sw.js', { scope: '/' });
+	}
+
 /***/ },
 /* 1 */
 /***/ function(module, exports) {
