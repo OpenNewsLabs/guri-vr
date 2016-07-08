@@ -12,7 +12,7 @@
     "saveUninitialized": true
   },
   "email": {
-    "sender": "your@mail.com",
+    "sender": "your@mail.com"
   },
   "s3": {
   }
