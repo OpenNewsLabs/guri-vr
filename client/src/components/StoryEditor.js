@@ -58,7 +58,10 @@ export default class StoryEditor extends Component {
         .then(story => this.setState(Object.assign({}, this.state, story)));
     } else {
       createStory(this.state)
-        .then(story => route(`/stories/${story._id}`));
+        .then(story => {
+          this.setState(Object.assign({}, this.state, story));
+          route(`/stories/${story._id}`);
+        });
     }
   }
 
@@ -71,7 +74,12 @@ export default class StoryEditor extends Component {
     open(`/api/preview?title=${title}&body=${JSON.stringify(body)}`, '_blank');
   }
 
-  render({ matches }, { text, body, title, id, loading }) {
+  onShare() {
+    const { _id } = this.state;
+    open(`http://gurivr.s3-website-us-east-1.amazonaws.com/s/${_id}.html`, '_blank');
+  }
+
+  render({ matches }, { text, body, title, _id, loading }) {
     return (
       <div style={styles.container}>
         {!loading ? <Editor value={text} onInput={this.onEditorChange.bind(this)} /> : null}
@@ -79,19 +87,24 @@ export default class StoryEditor extends Component {
         <Toolbar onSave={this.onSave.bind(this)}
           onPreview={this.onPreview.bind(this)}
           onChangeTitle={this.onChangeTitle.bind(this)}
-          title={title} />
+          title={title}
+          id={_id}
+          onShare={this.onShare.bind(this)} />
       </div>
     );
   }
 }
 
-const Toolbar = ({ onSave, onPreview, title, onChangeTitle }) => (
+const Toolbar = ({ onSave, onPreview, onShare, title, onChangeTitle, id }) => (
   <footer style={styles.toolbarContainer}>
     <div>
       <TextField label="title" floatingLabel={true} value={title} onChange={onChangeTitle} required />
       <Button onClick={onSave} colored>Save</Button>
     </div>
-    <Button onClick={onPreview} colored>Fullscreen preview</Button>
+    <div>
+      { id ? <Button onClick={onShare} colored>Share link</Button> : null }
+      <Button onClick={onPreview} colored>Fullscreen preview</Button>
+    </div>
   </footer>
 );
 

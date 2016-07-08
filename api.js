@@ -3,6 +3,8 @@ const express = require('express');
 const auth = require('./auth');
 const db = require('./db');
 const buildStory = require('./story-builder');
+const upload = require('./uploader');
+const config = require('./config.json');
 
 const app = module.exports = express.Router();
 
@@ -29,7 +31,9 @@ app.post('/stories', (req, res, next) =>
     body: JSON.stringify(req.body.body),
     text: req.body.text,
     user_id: req.user
-  }).then(story => res.json(story))
+  })
+  .then(story => upload(story))
+  .then(story => res.json(story))
   .catch(error => next(error))
 );
 
@@ -67,7 +71,10 @@ app.put('/stories/:id', (req, res, next) =>
     title: req.body.title,
     body: JSON.stringify(req.body.body),
     text: req.body.text
-  }}).then(story => res.json(story))
+  }})
+  .then(() => stories.findOne({ _id: req.params.id }))
+  .then(story => upload(story))
+  .then(story => res.json(story))
   .catch(error => next(error))
 );
 

@@ -19002,7 +19002,8 @@
 	        });
 	      } else {
 	        (0, _datalayer.createStory)(this.state).then(function (story) {
-	          return (0, _preactRouter.route)('/stories/' + story._id);
+	          _this2.setState(Object.assign({}, _this2.state, story));
+	          (0, _preactRouter.route)('/stories/' + story._id);
 	        });
 	      }
 	    }
@@ -19021,13 +19022,20 @@
 	      open('/api/preview?title=' + title + '&body=' + JSON.stringify(body), '_blank');
 	    }
 	  }, {
+	    key: 'onShare',
+	    value: function onShare() {
+	      var _id = this.state._id;
+
+	      open('http://gurivr.s3-website-us-east-1.amazonaws.com/s/' + _id + '.html', '_blank');
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render(_ref, _ref2) {
 	      var matches = _ref.matches;
 	      var text = _ref2.text;
 	      var body = _ref2.body;
 	      var title = _ref2.title;
-	      var id = _ref2.id;
+	      var _id = _ref2._id;
 	      var loading = _ref2.loading;
 
 	      return (0, _preact.h)(
@@ -19038,7 +19046,9 @@
 	        (0, _preact.h)(Toolbar, { onSave: this.onSave.bind(this),
 	          onPreview: this.onPreview.bind(this),
 	          onChangeTitle: this.onChangeTitle.bind(this),
-	          title: title })
+	          title: title,
+	          id: _id,
+	          onShare: this.onShare.bind(this) })
 	      );
 	    }
 	  }]);
@@ -19052,8 +19062,10 @@
 	var Toolbar = function Toolbar(_ref3) {
 	  var onSave = _ref3.onSave;
 	  var onPreview = _ref3.onPreview;
+	  var onShare = _ref3.onShare;
 	  var title = _ref3.title;
 	  var onChangeTitle = _ref3.onChangeTitle;
+	  var id = _ref3.id;
 	  return (0, _preact.h)(
 	    'footer',
 	    { style: styles.toolbarContainer },
@@ -19068,9 +19080,18 @@
 	      )
 	    ),
 	    (0, _preact.h)(
-	      _preactMdl.Button,
-	      { onClick: onPreview, colored: true },
-	      'Fullscreen preview'
+	      'div',
+	      null,
+	      id ? (0, _preact.h)(
+	        _preactMdl.Button,
+	        { onClick: onShare, colored: true },
+	        'Share link'
+	      ) : null,
+	      (0, _preact.h)(
+	        _preactMdl.Button,
+	        { onClick: onPreview, colored: true },
+	        'Fullscreen preview'
+	      )
 	    )
 	  );
 	};

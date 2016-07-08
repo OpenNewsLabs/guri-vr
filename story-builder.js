@@ -10,14 +10,14 @@ module.exports = story =>
     <meta name="twitter:site" content="@guri_vr">
     <meta name="twitter:title" content="${story.title}">
     <meta name="twitter:description" content="">
-    <meta name="twitter:player" content="">
+    <meta name="twitter:player" content="http://gurivr.s3-website-us-east-1.amazonaws.com/s/${story._id}.html">
     <meta name="twitter:player:width" content="600">
     <meta name="twitter:player:height" content="370">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>${story.title}</title>
-    <script src="/aframe.min.js"></script>
-    <script src="/aframe-text-component.min.js"></script>
+    <script src="https://s3.amazonaws.com/gurivr/aframe.min.js"></script>
+    <script src="https://s3.amazonaws.com/gurivr/aframe-text-component.min.js"></script>
     <style>
       html, body, #root {
         background-color: #000;
