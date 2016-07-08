@@ -1,0 +1,15 @@
+html
+  head
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    title GuriVR
+    link(href="https://fonts.googleapis.com/css?family=Roboto", rel="stylesheet", type="text/css")
+    link(rel="stylesheet", href="/codemirror.css")
+    link(rel="stylesheet", href="/material.min.css")
+    link(rel="stylesheet", href="/material-icons.css")
+    style * { box-sizing: border-box; } html, body, #root { margin: 0; height: 100%; } .CodeMirror { font-size: 1.3em; }
+  body
+    #root
+    script
+      | var __user__ = !{JSON.stringify(user)};
+    script(src="/app.js")
