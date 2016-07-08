@@ -18719,9 +18719,9 @@
 	      }
 	    }
 	  }, {
-	    key: 'onPreview',
-	    value: function onPreview(title, body) {
-	      open('/api/preview?title=' + title + '&body=' + body, '_blank');
+	    key: 'onShare',
+	    value: function onShare(id) {
+	      open('http://gurivr.s3-website-us-east-1.amazonaws.com/s/' + id + '.html', '_blank');
 	    }
 	  }, {
 	    key: 'onEdit',
@@ -18777,8 +18777,8 @@
 	                ),
 	                (0, _preact.h)(
 	                  _preactMdl.Button,
-	                  { onClick: _this4.onPreview.bind(_this4, story.title, story.body), icon: true },
-	                  (0, _preact.h)(_preactMdl.Icon, { icon: 'play arrow' })
+	                  { onClick: _this4.onShare.bind(_this4, story._id), icon: true },
+	                  (0, _preact.h)(_preactMdl.Icon, { icon: 'share' })
 	                )
 	              ),
 	              (0, _preact.h)(

@@ -29,8 +29,8 @@ export default class StoryList extends Component {
     }
   }
 
-  onPreview(title, body) {
-    open(`/api/preview?title=${title}&body=${body}`, '_blank');
+  onShare(id) {
+    open(`http://gurivr.s3-website-us-east-1.amazonaws.com/s/${id}.html`, '_blank');
   }
 
   onEdit(id) {
@@ -55,7 +55,7 @@ export default class StoryList extends Component {
             <Card.Actions style={styles.cardActions} class='mdl-card--border'>
               <div>
                 <Button onClick={this.onEdit.bind(this, story._id)} icon><Icon icon='mode edit' /></Button>
-                <Button onClick={this.onPreview.bind(this, story.title, story.body)} icon><Icon icon='play arrow' /></Button>
+                <Button onClick={this.onShare.bind(this, story._id)} icon><Icon icon='share' /></Button>
               </div>
               <div>
                 <Button onClick={this.onDelete.bind(this, story._id, key)} icon><Icon icon='delete' /></Button>
