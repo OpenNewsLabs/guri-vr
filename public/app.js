@@ -1343,15 +1343,15 @@
 
 	var _Home2 = _interopRequireDefault(_Home);
 
-	var _Login = __webpack_require__(78);
+	var _Login = __webpack_require__(83);
 
 	var _Login2 = _interopRequireDefault(_Login);
 
-	var _StoryList = __webpack_require__(79);
+	var _StoryList = __webpack_require__(84);
 
 	var _StoryList2 = _interopRequireDefault(_StoryList);
 
-	var _StoryEditor = __webpack_require__(81);
+	var _StoryEditor = __webpack_require__(86);
 
 	var _StoryEditor2 = _interopRequireDefault(_StoryEditor);
 
@@ -8850,15 +8850,15 @@
 
 	var _guri = __webpack_require__(73);
 
-	var _nlp = __webpack_require__(82);
+	var _nlp = __webpack_require__(78);
 
 	var _nlp2 = _interopRequireDefault(_nlp);
 
-	var _Editor = __webpack_require__(84);
+	var _Editor = __webpack_require__(79);
 
 	var _Editor2 = _interopRequireDefault(_Editor);
 
-	var _Previewer = __webpack_require__(83);
+	var _Previewer = __webpack_require__(82);
 
 	var _Previewer2 = _interopRequireDefault(_Previewer);
 
@@ -9081,587 +9081,6 @@
 
 /***/ },
 /* 78 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _preact = __webpack_require__(4);
-
-	var _preactMdl = __webpack_require__(8);
-
-	var _datalayer = __webpack_require__(76);
-
-	var _radium = __webpack_require__(10);
-
-	var _radium2 = _interopRequireDefault(_radium);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var Login = function (_Component) {
-	  _inherits(Login, _Component);
-
-	  function Login(props) {
-	    _classCallCheck(this, Login);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Login).call(this, props));
-
-	    _this.state = {
-	      email: '',
-	      sent: false
-	    };
-	    return _this;
-	  }
-
-	  _createClass(Login, [{
-	    key: 'onSubmit',
-	    value: function onSubmit(evt) {
-	      var _this2 = this;
-
-	      evt.preventDefault();
-	      (0, _datalayer.sendVerification)(this.state.email).then(function () {
-	        return _this2.setState({ sent: true });
-	      });
-
-	      return false;
-	    }
-	  }, {
-	    key: 'renderSent',
-	    value: function renderSent() {
-	      return (0, _preact.h)(
-	        'div',
-	        { style: styles.sent },
-	        (0, _preact.h)(
-	          _preactMdl.Card.Text,
-	          null,
-	          'Magic Link sent to your Email address!'
-	        )
-	      );
-	    }
-	  }, {
-	    key: 'renderForm',
-	    value: function renderForm() {
-	      var email = this.state.email;
-
-	      return (0, _preact.h)(
-	        'form',
-	        { onSubmit: this.onSubmit.bind(this) },
-	        (0, _preact.h)(
-	          _preactMdl.Card.Text,
-	          null,
-	          (0, _preact.h)(_preactMdl.TextField, { placeholder: 'me@gmail.com',
-	            label: 'E-mail',
-	            type: 'email',
-	            'floating-label': true,
-	            value: email, onInput: this.linkState('email'), autofocus: true })
-	        ),
-	        (0, _preact.h)(
-	          _preactMdl.Card.Actions,
-	          null,
-	          (0, _preact.h)(
-	            _preactMdl.Button,
-	            { raised: true, colored: true, type: 'submit' },
-	            'Login'
-	          )
-	        )
-	      );
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render(props, _ref) {
-	      var sent = _ref.sent;
-
-	      return (0, _preact.h)(
-	        'div',
-	        { style: styles.container },
-	        (0, _preact.h)(
-	          _preactMdl.Card,
-	          { shadow: 2 },
-	          sent ? this.renderSent() : this.renderForm()
-	        )
-	      );
-	    }
-	  }]);
-
-	  return Login;
-	}(_preact.Component);
-
-	exports.default = Login;
-
-
-	var styles = {
-	  container: {
-	    margin: '50px auto'
-	  },
-	  sent: {
-	    flex: 1,
-	    display: 'flex',
-	    flexDirection: 'column',
-	    justifyContent: 'center',
-	    alignItems: 'center'
-	  }
-	};
-
-/***/ },
-/* 79 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _preact = __webpack_require__(4);
-
-	var _radium = __webpack_require__(10);
-
-	var _radium2 = _interopRequireDefault(_radium);
-
-	var _preactRouter = __webpack_require__(9);
-
-	var _preactMdl = __webpack_require__(8);
-
-	var _datalayer = __webpack_require__(76);
-
-	var _Fab = __webpack_require__(80);
-
-	var _Fab2 = _interopRequireDefault(_Fab);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var StoryList = function (_Component) {
-	  _inherits(StoryList, _Component);
-
-	  function StoryList(props) {
-	    _classCallCheck(this, StoryList);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(StoryList).call(this, props));
-
-	    _this.state = {
-	      stories: []
-	    };
-	    return _this;
-	  }
-
-	  _createClass(StoryList, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      var _this2 = this;
-
-	      (0, _datalayer.fetchUserStories)().then(function (stories) {
-	        return _this2.setState({ stories: stories });
-	      });
-	    }
-	  }, {
-	    key: 'onDelete',
-	    value: function onDelete(id, key) {
-	      var _this3 = this;
-
-	      if (confirm('Are you sure you want to delete this story?')) {
-	        (0, _datalayer.deleteStory)(id).then(function () {
-	          return _this3.setState({
-	            stories: _this3.state.stories.filter(function (_ref) {
-	              var _id = _ref._id;
-	              return _id !== id;
-	            })
-	          });
-	        });
-	      }
-	    }
-	  }, {
-	    key: 'onPreview',
-	    value: function onPreview(title, body) {
-	      open('/api/preview?title=' + title + '&body=' + body, '_blank');
-	    }
-	  }, {
-	    key: 'onEdit',
-	    value: function onEdit(id) {
-	      (0, _preactRouter.route)('/stories/' + id);
-	    }
-	  }, {
-	    key: 'onCreate',
-	    value: function onCreate() {
-	      (0, _preactRouter.route)('/stories/create');
-	    }
-	  }, {
-	    key: 'renderList',
-	    value: function renderList() {
-	      var _this4 = this;
-
-	      var stories = this.state.stories;
-
-
-	      return (0, _preact.h)(
-	        'div',
-	        { style: styles.listContainer },
-	        stories.map(function (story, key) {
-	          return (0, _preact.h)(
-	            _preactMdl.Card,
-	            { style: styles.cardContainer, shadow: 2 },
-	            (0, _preact.h)(
-	              _preactMdl.Card.Title,
-	              { style: styles.cardTitle },
-	              (0, _preact.h)(
-	                _preactMdl.Card.TitleText,
-	                null,
-	                story.title
-	              )
-	            ),
-	            (0, _preact.h)(
-	              _preactMdl.Card.Text,
-	              { style: styles.cardText },
-	              story.text.split('\n').filter(function (p) {
-	                return p.length;
-	              })[0]
-	            ),
-	            (0, _preact.h)(
-	              _preactMdl.Card.Actions,
-	              { style: styles.cardActions, 'class': 'mdl-card--border' },
-	              (0, _preact.h)(
-	                'div',
-	                null,
-	                (0, _preact.h)(
-	                  _preactMdl.Button,
-	                  { onClick: _this4.onEdit.bind(_this4, story._id), icon: true },
-	                  (0, _preact.h)(_preactMdl.Icon, { icon: 'mode edit' })
-	                ),
-	                (0, _preact.h)(
-	                  _preactMdl.Button,
-	                  { onClick: _this4.onPreview.bind(_this4, story.title, story.body), icon: true },
-	                  (0, _preact.h)(_preactMdl.Icon, { icon: 'play arrow' })
-	                )
-	              ),
-	              (0, _preact.h)(
-	                'div',
-	                null,
-	                (0, _preact.h)(
-	                  _preactMdl.Button,
-	                  { onClick: _this4.onDelete.bind(_this4, story._id, key), icon: true },
-	                  (0, _preact.h)(_preactMdl.Icon, { icon: 'delete' })
-	                )
-	              )
-	            )
-	          );
-	        })
-	      );
-	    }
-	  }, {
-	    key: 'renderEmpty',
-	    value: function renderEmpty() {
-	      return (0, _preact.h)(
-	        'p',
-	        { style: styles.empty },
-	        'It seems that you don',
-	        '\'',
-	        't have stories yet. You can start by clicking on the + button below 😸'
-	      );
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render(props, _ref2) {
-	      var stories = _ref2.stories;
-
-	      return (0, _preact.h)(
-	        'div',
-	        { style: styles.container },
-	        stories.length ? this.renderList() : this.renderEmpty(),
-	        (0, _preact.h)(_Fab2.default, { icon: 'add', onClick: this.onCreate.bind(this) })
-	      );
-	    }
-	  }]);
-
-	  return StoryList;
-	}(_preact.Component);
-
-	exports.default = StoryList;
-
-
-	var styles = {
-	  container: {
-	    width: '100vw'
-	  },
-	  spinner: {
-	    display: 'flex',
-	    alignItems: 'center',
-	    justifyContent: 'center',
-	    flex: 1,
-	    height: '100%'
-	  },
-	  listContainer: {
-	    margin: 30,
-	    display: 'flex',
-	    justifyContent: 'center',
-	    flexWrap: 'wrap'
-	  },
-	  cardContainer: {
-	    margin: 20,
-	    height: 250
-	  },
-	  cardTitle: {
-	    fontSize: '1.5em',
-	    backgroundColor: '#1A237E',
-	    color: '#fff'
-	  },
-	  empty: {
-	    textAlign: 'center',
-	    marginTop: 150,
-	    padding: 25,
-	    fontSize: '1.3em'
-	  },
-	  cardActions: {
-	    display: 'flex',
-	    justifyContent: 'space-between'
-	  },
-	  cardText: {
-	    flex: 1,
-	    overflow: 'hidden',
-	    textOverflow: 'ellipsis'
-	  }
-	};
-
-/***/ },
-/* 80 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _preact = __webpack_require__(4);
-
-	var _preactMdl = __webpack_require__(8);
-
-	exports.default = function (_ref) {
-	  var icon = _ref.icon;
-	  var onClick = _ref.onClick;
-	  return (0, _preact.h)(
-	    _preactMdl.Button,
-	    { style: styles.container, onClick: onClick, fab: true, colored: true },
-	    (0, _preact.h)(_preactMdl.Icon, { icon: icon })
-	  );
-	};
-
-	var styles = {
-	  container: {
-	    position: 'fixed',
-	    right: 30,
-	    bottom: 30
-	  }
-	};
-
-/***/ },
-/* 81 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	var _preact = __webpack_require__(4);
-
-	var _preactMdl = __webpack_require__(8);
-
-	var _radium = __webpack_require__(10);
-
-	var _radium2 = _interopRequireDefault(_radium);
-
-	var _preactRouter = __webpack_require__(9);
-
-	var _nlp = __webpack_require__(82);
-
-	var _nlp2 = _interopRequireDefault(_nlp);
-
-	var _datalayer = __webpack_require__(76);
-
-	var _Previewer = __webpack_require__(83);
-
-	var _Previewer2 = _interopRequireDefault(_Previewer);
-
-	var _Editor = __webpack_require__(84);
-
-	var _Editor2 = _interopRequireDefault(_Editor);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-	var defaultText = '\n\nThis is the GuriVR editor 🎉. You can create your VR experience by describing how you would like it to be. Every paragraph will be a scene as soon as you mention the duration. Let\'s start with an example:\n\nMy first scene lasts 5 seconds and has a text that says "This is my first scene. This is amazing!".\n\nThe second is 30 seconds and have just a panorama located at https://ucarecdn.com/8e6da182-c794-4692-861d-d43da2fd5507/ along with the audio https://ucarecdn.com/49f6a82b-30fc-4ab9-80b5-85f286d67830/\n';
-
-	var StoryEditor = function (_Component) {
-	  _inherits(StoryEditor, _Component);
-
-	  function StoryEditor(props) {
-	    _classCallCheck(this, StoryEditor);
-
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(StoryEditor).call(this, props));
-
-	    var id = props.matches.id !== 'create' ? props.matches.id : null;
-	    var initialText = id ? '' : defaultText;
-
-	    _this.state = {
-	      body: (0, _nlp2.default)(initialText),
-	      title: 'Untitled story',
-	      text: initialText,
-	      _id: id,
-	      loading: !!id
-	    };
-
-	    if (id) {
-	      (0, _datalayer.fetchStory)(id).then(function (story) {
-	        return _this.setState(Object.assign({}, _this.state, story, { loading: false }));
-	      }).catch(function (error) {
-	        return _this.setState({ loading: false });
-	      });
-	    }
-	    return _this;
-	  }
-
-	  _createClass(StoryEditor, [{
-	    key: 'onEditorChange',
-	    value: function onEditorChange(text) {
-	      this.setState({
-	        text: text,
-	        body: (0, _nlp2.default)(text)
-	      });
-	    }
-	  }, {
-	    key: 'onSave',
-	    value: function onSave() {
-	      var _this2 = this;
-
-	      var _state = this.state;
-	      var body = _state.body;
-	      var title = _state.title;
-
-
-	      if (!title.length) return;
-
-	      if (this.state._id) {
-	        (0, _datalayer.updateStory)(this.state).then(function (story) {
-	          return _this2.setState(Object.assign({}, _this2.state, story));
-	        });
-	      } else {
-	        (0, _datalayer.createStory)(this.state).then(function (story) {
-	          return (0, _preactRouter.route)('/stories/' + story._id);
-	        });
-	      }
-	    }
-	  }, {
-	    key: 'onChangeTitle',
-	    value: function onChangeTitle(evt) {
-	      this.setState({ title: evt.target.value });
-	    }
-	  }, {
-	    key: 'onPreview',
-	    value: function onPreview() {
-	      var _state2 = this.state;
-	      var body = _state2.body;
-	      var title = _state2.title;
-
-	      open('/api/preview?title=' + title + '&body=' + JSON.stringify(body), '_blank');
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render(_ref, _ref2) {
-	      var matches = _ref.matches;
-	      var text = _ref2.text;
-	      var body = _ref2.body;
-	      var title = _ref2.title;
-	      var id = _ref2.id;
-	      var loading = _ref2.loading;
-
-	      return (0, _preact.h)(
-	        'div',
-	        { style: styles.container },
-	        !loading ? (0, _preact.h)(_Editor2.default, { value: text, onInput: this.onEditorChange.bind(this) }) : null,
-	        (0, _preact.h)(_Previewer2.default, { body: body }),
-	        (0, _preact.h)(Toolbar, { onSave: this.onSave.bind(this),
-	          onPreview: this.onPreview.bind(this),
-	          onChangeTitle: this.onChangeTitle.bind(this),
-	          title: title })
-	      );
-	    }
-	  }]);
-
-	  return StoryEditor;
-	}(_preact.Component);
-
-	exports.default = StoryEditor;
-
-
-	var Toolbar = function Toolbar(_ref3) {
-	  var onSave = _ref3.onSave;
-	  var onPreview = _ref3.onPreview;
-	  var title = _ref3.title;
-	  var onChangeTitle = _ref3.onChangeTitle;
-	  return (0, _preact.h)(
-	    'footer',
-	    { style: styles.toolbarContainer },
-	    (0, _preact.h)(
-	      'div',
-	      null,
-	      (0, _preact.h)(_preactMdl.TextField, { label: 'title', floatingLabel: true, value: title, onChange: onChangeTitle, required: true }),
-	      (0, _preact.h)(
-	        _preactMdl.Button,
-	        { onClick: onSave, colored: true },
-	        'Save'
-	      )
-	    ),
-	    (0, _preact.h)(
-	      _preactMdl.Button,
-	      { onClick: onPreview, colored: true },
-	      'Fullscreen preview'
-	    )
-	  );
-	};
-
-	var styles = {
-	  container: {
-	    display: 'flex',
-	    flexDirection: 'column',
-	    flex: 1
-	  },
-	  toolbarContainer: {
-	    backgroundColor: '#eee',
-	    display: 'flex',
-	    padding: '0 10px',
-	    justifyContent: 'space-between',
-	    alignItems: 'center'
-	  }
-	};
-
-/***/ },
-/* 82 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -9794,31 +9213,7 @@
 	}
 
 /***/ },
-/* 83 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _preact = __webpack_require__(4);
-
-	exports.default = function (_ref) {
-	  var body = _ref.body;
-	  var height = _ref.height;
-	  return (0, _preact.h)('iframe', { height: height, style: styles.container, src: '/api/preview?body=' + JSON.stringify(body) });
-	};
-
-	var styles = {
-	  container: {
-	    flex: 1
-	  }
-	};
-
-/***/ },
-/* 84 */
+/* 79 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -9835,11 +9230,11 @@
 
 	var _radium2 = _interopRequireDefault(_radium);
 
-	var _codemirror = __webpack_require__(85);
+	var _codemirror = __webpack_require__(80);
 
 	var _codemirror2 = _interopRequireDefault(_codemirror);
 
-	__webpack_require__(86);
+	__webpack_require__(81);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -9939,7 +9334,7 @@
 	};
 
 /***/ },
-/* 85 */
+/* 80 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// CodeMirror, copyright (c) by Marijn Haverbeke and others
@@ -18867,7 +18262,7 @@
 
 
 /***/ },
-/* 86 */
+/* 81 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// CodeMirror, copyright (c) by Marijn Haverbeke and others
@@ -18875,7 +18270,7 @@
 
 	(function(mod) {
 	  if (true) // CommonJS
-	    mod(__webpack_require__(85));
+	    mod(__webpack_require__(80));
 	  else if (typeof define == "function" && define.amd) // AMD
 	    define(["../../lib/codemirror"], mod);
 	  else // Plain browser env
@@ -19084,6 +18479,612 @@
 	  }
 	});
 
+
+/***/ },
+/* 82 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _preact = __webpack_require__(4);
+
+	exports.default = function (_ref) {
+	  var body = _ref.body;
+	  var height = _ref.height;
+	  return (0, _preact.h)('iframe', { height: height, style: styles.container, src: '/api/preview?body=' + JSON.stringify(body) });
+	};
+
+	var styles = {
+	  container: {
+	    flex: 1
+	  }
+	};
+
+/***/ },
+/* 83 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _preact = __webpack_require__(4);
+
+	var _preactMdl = __webpack_require__(8);
+
+	var _datalayer = __webpack_require__(76);
+
+	var _radium = __webpack_require__(10);
+
+	var _radium2 = _interopRequireDefault(_radium);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Login = function (_Component) {
+	  _inherits(Login, _Component);
+
+	  function Login(props) {
+	    _classCallCheck(this, Login);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Login).call(this, props));
+
+	    _this.state = {
+	      email: '',
+	      sent: false
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Login, [{
+	    key: 'onSubmit',
+	    value: function onSubmit(evt) {
+	      var _this2 = this;
+
+	      evt.preventDefault();
+	      (0, _datalayer.sendVerification)(this.state.email).then(function () {
+	        return _this2.setState({ sent: true });
+	      });
+
+	      return false;
+	    }
+	  }, {
+	    key: 'renderSent',
+	    value: function renderSent() {
+	      return (0, _preact.h)(
+	        'div',
+	        { style: styles.sent },
+	        (0, _preact.h)(
+	          _preactMdl.Card.Text,
+	          null,
+	          'Magic Link sent to your Email address!'
+	        )
+	      );
+	    }
+	  }, {
+	    key: 'renderForm',
+	    value: function renderForm() {
+	      var email = this.state.email;
+
+	      return (0, _preact.h)(
+	        'form',
+	        { onSubmit: this.onSubmit.bind(this) },
+	        (0, _preact.h)(
+	          _preactMdl.Card.Text,
+	          null,
+	          (0, _preact.h)(_preactMdl.TextField, { placeholder: 'me@gmail.com',
+	            label: 'E-mail',
+	            type: 'email',
+	            'floating-label': true,
+	            required: true,
+	            value: email, onInput: this.linkState('email'), autofocus: true })
+	        ),
+	        (0, _preact.h)(
+	          _preactMdl.Card.Actions,
+	          null,
+	          (0, _preact.h)(
+	            _preactMdl.Button,
+	            { raised: true, colored: true, type: 'submit' },
+	            'Login'
+	          )
+	        )
+	      );
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render(props, _ref) {
+	      var sent = _ref.sent;
+
+	      return (0, _preact.h)(
+	        'div',
+	        { style: styles.container },
+	        (0, _preact.h)(
+	          _preactMdl.Card,
+	          { shadow: 2 },
+	          sent ? this.renderSent() : this.renderForm()
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Login;
+	}(_preact.Component);
+
+	exports.default = Login;
+
+
+	var styles = {
+	  container: {
+	    margin: '50px auto'
+	  },
+	  sent: {
+	    flex: 1,
+	    display: 'flex',
+	    flexDirection: 'column',
+	    justifyContent: 'center',
+	    alignItems: 'center'
+	  }
+	};
+
+/***/ },
+/* 84 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _preact = __webpack_require__(4);
+
+	var _radium = __webpack_require__(10);
+
+	var _radium2 = _interopRequireDefault(_radium);
+
+	var _preactRouter = __webpack_require__(9);
+
+	var _preactMdl = __webpack_require__(8);
+
+	var _datalayer = __webpack_require__(76);
+
+	var _Fab = __webpack_require__(85);
+
+	var _Fab2 = _interopRequireDefault(_Fab);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var StoryList = function (_Component) {
+	  _inherits(StoryList, _Component);
+
+	  function StoryList(props) {
+	    _classCallCheck(this, StoryList);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(StoryList).call(this, props));
+
+	    _this.state = {
+	      stories: []
+	    };
+	    return _this;
+	  }
+
+	  _createClass(StoryList, [{
+	    key: 'componentWillMount',
+	    value: function componentWillMount() {
+	      var _this2 = this;
+
+	      (0, _datalayer.fetchUserStories)().then(function (stories) {
+	        return _this2.setState({ stories: stories });
+	      });
+	    }
+	  }, {
+	    key: 'onDelete',
+	    value: function onDelete(id, key) {
+	      var _this3 = this;
+
+	      if (confirm('Are you sure you want to delete this story?')) {
+	        (0, _datalayer.deleteStory)(id).then(function () {
+	          return _this3.setState({
+	            stories: _this3.state.stories.filter(function (_ref) {
+	              var _id = _ref._id;
+	              return _id !== id;
+	            })
+	          });
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'onPreview',
+	    value: function onPreview(title, body) {
+	      open('/api/preview?title=' + title + '&body=' + body, '_blank');
+	    }
+	  }, {
+	    key: 'onEdit',
+	    value: function onEdit(id) {
+	      (0, _preactRouter.route)('/stories/' + id);
+	    }
+	  }, {
+	    key: 'onCreate',
+	    value: function onCreate() {
+	      (0, _preactRouter.route)('/stories/create');
+	    }
+	  }, {
+	    key: 'renderList',
+	    value: function renderList() {
+	      var _this4 = this;
+
+	      var stories = this.state.stories;
+
+
+	      return (0, _preact.h)(
+	        'div',
+	        { style: styles.listContainer },
+	        stories.map(function (story, key) {
+	          return (0, _preact.h)(
+	            _preactMdl.Card,
+	            { style: styles.cardContainer, shadow: 2 },
+	            (0, _preact.h)(
+	              _preactMdl.Card.Title,
+	              { style: styles.cardTitle },
+	              (0, _preact.h)(
+	                _preactMdl.Card.TitleText,
+	                null,
+	                story.title
+	              )
+	            ),
+	            (0, _preact.h)(
+	              _preactMdl.Card.Text,
+	              { style: styles.cardText },
+	              story.text.split('\n').filter(function (p) {
+	                return p.length;
+	              })[0]
+	            ),
+	            (0, _preact.h)(
+	              _preactMdl.Card.Actions,
+	              { style: styles.cardActions, 'class': 'mdl-card--border' },
+	              (0, _preact.h)(
+	                'div',
+	                null,
+	                (0, _preact.h)(
+	                  _preactMdl.Button,
+	                  { onClick: _this4.onEdit.bind(_this4, story._id), icon: true },
+	                  (0, _preact.h)(_preactMdl.Icon, { icon: 'mode edit' })
+	                ),
+	                (0, _preact.h)(
+	                  _preactMdl.Button,
+	                  { onClick: _this4.onPreview.bind(_this4, story.title, story.body), icon: true },
+	                  (0, _preact.h)(_preactMdl.Icon, { icon: 'play arrow' })
+	                )
+	              ),
+	              (0, _preact.h)(
+	                'div',
+	                null,
+	                (0, _preact.h)(
+	                  _preactMdl.Button,
+	                  { onClick: _this4.onDelete.bind(_this4, story._id, key), icon: true },
+	                  (0, _preact.h)(_preactMdl.Icon, { icon: 'delete' })
+	                )
+	              )
+	            )
+	          );
+	        })
+	      );
+	    }
+	  }, {
+	    key: 'renderEmpty',
+	    value: function renderEmpty() {
+	      return (0, _preact.h)(
+	        'p',
+	        { style: styles.empty },
+	        'It seems that you don',
+	        '\'',
+	        't have stories yet. You can start by clicking on the + button below 😸'
+	      );
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render(props, _ref2) {
+	      var stories = _ref2.stories;
+
+	      return (0, _preact.h)(
+	        'div',
+	        { style: styles.container },
+	        stories.length ? this.renderList() : this.renderEmpty(),
+	        (0, _preact.h)(_Fab2.default, { icon: 'add', onClick: this.onCreate.bind(this) })
+	      );
+	    }
+	  }]);
+
+	  return StoryList;
+	}(_preact.Component);
+
+	exports.default = StoryList;
+
+
+	var styles = {
+	  container: {
+	    width: '100vw'
+	  },
+	  spinner: {
+	    display: 'flex',
+	    alignItems: 'center',
+	    justifyContent: 'center',
+	    flex: 1,
+	    height: '100%'
+	  },
+	  listContainer: {
+	    margin: 30,
+	    display: 'flex',
+	    justifyContent: 'center',
+	    flexWrap: 'wrap'
+	  },
+	  cardContainer: {
+	    margin: 20,
+	    height: 250
+	  },
+	  cardTitle: {
+	    fontSize: '1.5em',
+	    backgroundColor: '#1A237E',
+	    color: '#fff'
+	  },
+	  empty: {
+	    textAlign: 'center',
+	    marginTop: 150,
+	    padding: 25,
+	    fontSize: '1.3em'
+	  },
+	  cardActions: {
+	    display: 'flex',
+	    justifyContent: 'space-between'
+	  },
+	  cardText: {
+	    flex: 1,
+	    overflow: 'hidden',
+	    textOverflow: 'ellipsis'
+	  }
+	};
+
+/***/ },
+/* 85 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _preact = __webpack_require__(4);
+
+	var _preactMdl = __webpack_require__(8);
+
+	exports.default = function (_ref) {
+	  var icon = _ref.icon;
+	  var onClick = _ref.onClick;
+	  return (0, _preact.h)(
+	    _preactMdl.Button,
+	    { style: styles.container, onClick: onClick, fab: true, colored: true },
+	    (0, _preact.h)(_preactMdl.Icon, { icon: icon })
+	  );
+	};
+
+	var styles = {
+	  container: {
+	    position: 'fixed',
+	    right: 30,
+	    bottom: 30
+	  }
+	};
+
+/***/ },
+/* 86 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _preact = __webpack_require__(4);
+
+	var _preactMdl = __webpack_require__(8);
+
+	var _radium = __webpack_require__(10);
+
+	var _radium2 = _interopRequireDefault(_radium);
+
+	var _preactRouter = __webpack_require__(9);
+
+	var _nlp = __webpack_require__(78);
+
+	var _nlp2 = _interopRequireDefault(_nlp);
+
+	var _datalayer = __webpack_require__(76);
+
+	var _Previewer = __webpack_require__(82);
+
+	var _Previewer2 = _interopRequireDefault(_Previewer);
+
+	var _Editor = __webpack_require__(79);
+
+	var _Editor2 = _interopRequireDefault(_Editor);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var defaultText = '\n\nThis is the GuriVR editor 🎉. You can create your VR experience by describing how you would like it to be. Every paragraph will be a scene as soon as you mention the duration. Let\'s start with an example:\n\nMy first scene lasts 5 seconds and has a text that says "This is my first scene. This is amazing!".\n\nThe second is 30 seconds and have just a panorama located at https://ucarecdn.com/8e6da182-c794-4692-861d-d43da2fd5507/ along with the audio https://ucarecdn.com/49f6a82b-30fc-4ab9-80b5-85f286d67830/\n';
+
+	var StoryEditor = function (_Component) {
+	  _inherits(StoryEditor, _Component);
+
+	  function StoryEditor(props) {
+	    _classCallCheck(this, StoryEditor);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(StoryEditor).call(this, props));
+
+	    var id = props.matches.id !== 'create' ? props.matches.id : null;
+	    var initialText = id ? '' : defaultText;
+
+	    _this.state = {
+	      body: (0, _nlp2.default)(initialText),
+	      title: 'Untitled story',
+	      text: initialText,
+	      _id: id,
+	      loading: !!id
+	    };
+
+	    if (id) {
+	      (0, _datalayer.fetchStory)(id).then(function (story) {
+	        return _this.setState(Object.assign({}, _this.state, story, { loading: false }));
+	      }).catch(function (error) {
+	        return _this.setState({ loading: false });
+	      });
+	    }
+	    return _this;
+	  }
+
+	  _createClass(StoryEditor, [{
+	    key: 'onEditorChange',
+	    value: function onEditorChange(text) {
+	      this.setState({
+	        text: text,
+	        body: (0, _nlp2.default)(text)
+	      });
+	    }
+	  }, {
+	    key: 'onSave',
+	    value: function onSave() {
+	      var _this2 = this;
+
+	      var _state = this.state;
+	      var body = _state.body;
+	      var title = _state.title;
+
+
+	      if (!title.length) return;
+
+	      if (this.state._id) {
+	        (0, _datalayer.updateStory)(this.state).then(function (story) {
+	          return _this2.setState(Object.assign({}, _this2.state, story));
+	        });
+	      } else {
+	        (0, _datalayer.createStory)(this.state).then(function (story) {
+	          return (0, _preactRouter.route)('/stories/' + story._id);
+	        });
+	      }
+	    }
+	  }, {
+	    key: 'onChangeTitle',
+	    value: function onChangeTitle(evt) {
+	      this.setState({ title: evt.target.value });
+	    }
+	  }, {
+	    key: 'onPreview',
+	    value: function onPreview() {
+	      var _state2 = this.state;
+	      var body = _state2.body;
+	      var title = _state2.title;
+
+	      open('/api/preview?title=' + title + '&body=' + JSON.stringify(body), '_blank');
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render(_ref, _ref2) {
+	      var matches = _ref.matches;
+	      var text = _ref2.text;
+	      var body = _ref2.body;
+	      var title = _ref2.title;
+	      var id = _ref2.id;
+	      var loading = _ref2.loading;
+
+	      return (0, _preact.h)(
+	        'div',
+	        { style: styles.container },
+	        !loading ? (0, _preact.h)(_Editor2.default, { value: text, onInput: this.onEditorChange.bind(this) }) : null,
+	        (0, _preact.h)(_Previewer2.default, { body: body }),
+	        (0, _preact.h)(Toolbar, { onSave: this.onSave.bind(this),
+	          onPreview: this.onPreview.bind(this),
+	          onChangeTitle: this.onChangeTitle.bind(this),
+	          title: title })
+	      );
+	    }
+	  }]);
+
+	  return StoryEditor;
+	}(_preact.Component);
+
+	exports.default = StoryEditor;
+
+
+	var Toolbar = function Toolbar(_ref3) {
+	  var onSave = _ref3.onSave;
+	  var onPreview = _ref3.onPreview;
+	  var title = _ref3.title;
+	  var onChangeTitle = _ref3.onChangeTitle;
+	  return (0, _preact.h)(
+	    'footer',
+	    { style: styles.toolbarContainer },
+	    (0, _preact.h)(
+	      'div',
+	      null,
+	      (0, _preact.h)(_preactMdl.TextField, { label: 'title', floatingLabel: true, value: title, onChange: onChangeTitle, required: true }),
+	      (0, _preact.h)(
+	        _preactMdl.Button,
+	        { onClick: onSave, colored: true },
+	        'Save'
+	      )
+	    ),
+	    (0, _preact.h)(
+	      _preactMdl.Button,
+	      { onClick: onPreview, colored: true },
+	      'Fullscreen preview'
+	    )
+	  );
+	};
+
+	var styles = {
+	  container: {
+	    display: 'flex',
+	    flexDirection: 'column',
+	    flex: 1
+	  },
+	  toolbarContainer: {
+	    backgroundColor: '#eee',
+	    display: 'flex',
+	    padding: '0 10px',
+	    justifyContent: 'space-between',
+	    alignItems: 'center'
+	  }
+	};
 
 /***/ }
 /******/ ]);

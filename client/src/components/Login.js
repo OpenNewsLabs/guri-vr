@@ -42,6 +42,7 @@ export default class Login extends Component {
             label='E-mail'
             type='email'
             floating-label
+            required
             value={email} onInput={this.linkState('email')} autofocus />
         </Card.Text>
         <Card.Actions>
