@@ -27,6 +27,21 @@ module.exports = story =>
         font-size: 1.6em;
         text-align: center;
       }
+
+      #root {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: center;
+        -webkit-justify-content: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+      }
     </style>
   </head>
   <body>
