@@ -18721,7 +18721,7 @@
 	  }, {
 	    key: 'onShare',
 	    value: function onShare(id) {
-	      open('http://gurivr.s3-website-us-east-1.amazonaws.com/s/' + id + '.html', '_blank');
+	      open('https://s3.amazonaws.com/gurivr/s/' + id + '.html', '_blank');
 	    }
 	  }, {
 	    key: 'onEdit',
@@ -19026,7 +19026,7 @@
 	    value: function onShare() {
 	      var _id = this.state._id;
 
-	      open('http://gurivr.s3-website-us-east-1.amazonaws.com/s/' + _id + '.html', '_blank');
+	      open('https://s3.amazonaws.com/gurivr/s/' + _id + '.html', '_blank');
 	    }
 	  }, {
 	    key: 'render',

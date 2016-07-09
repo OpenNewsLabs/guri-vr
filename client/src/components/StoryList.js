@@ -30,7 +30,7 @@ export default class StoryList extends Component {
   }
 
   onShare(id) {
-    open(`http://gurivr.s3-website-us-east-1.amazonaws.com/s/${id}.html`, '_blank');
+    open(`https://s3.amazonaws.com/gurivr/s/${id}.html`, '_blank');
   }
 
   onEdit(id) {

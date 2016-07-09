@@ -76,7 +76,7 @@ export default class StoryEditor extends Component {
 
   onShare() {
     const { _id } = this.state;
-    open(`http://gurivr.s3-website-us-east-1.amazonaws.com/s/${_id}.html`, '_blank');
+    open(`https://s3.amazonaws.com/gurivr/s/${_id}.html`, '_blank');
   }
 
   render({ matches }, { text, body, title, _id, loading }) {
