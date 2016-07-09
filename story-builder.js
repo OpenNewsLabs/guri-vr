@@ -10,7 +10,7 @@ module.exports = story =>
     <meta name="twitter:site" content="@guri_vr">
     <meta name="twitter:title" content="${story.title}">
     <meta name="twitter:description" content="">
-    <meta name="twitter:player" content="http://gurivr.s3-website-us-east-1.amazonaws.com/s/${story._id}.html">
+    <meta name="twitter:player" content="https://gurivr.s3-website-us-east-1.amazonaws.com/s/${story._id}.html">
     <meta name="twitter:player:width" content="600">
     <meta name="twitter:player:height" content="370">
 
