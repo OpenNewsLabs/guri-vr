@@ -17,7 +17,7 @@ module.exports = story =>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>${story.title}</title>
     <script src="https://s3.amazonaws.com/gurivr/aframe.min.js"></script>
-    <script src="https://s3.amazonaws.com/gurivr/aframe-text-component.min.js"></script>
+    ${getChartUrl(story)}
     <style>
       html, body, #root {
         background-color: #000;
@@ -72,23 +72,36 @@ const renderObject = (obj, i, chapter) => {
     return `<a-videosphere src="${obj.src}" />`;
   case 'audio':
     return `<a-entity sound="src: ${obj.src}" />`;
+  case 'chart':
+    return `<a-entity chartbuilder="src: ${obj.src};" rotation="0 180 0" />`;
   }
 }
 
 const renderScript = chapters => {
   const times = [];
+  const voices = [];
   chapters.forEach(chapter =>
     chapter.filter(obj => obj.type === 'duration')
     .forEach(obj => times.push(obj.value)));
 
+  chapters.forEach(chapter => {
+    var voice = chapter.filter(obj => obj.type === 'voiceover');
+    voices.push(voice.length ? voice[0].text : null);
+  });
+
+
   return `
     var times = ${JSON.stringify(times)};
+    var voices = ${JSON.stringify(voices)};
+
     var chapters = document.querySelectorAll('.chapter');
     var actual = 0;
 
     function nextChapter() {
       actual++;
       if(actual >= chapters.length) return end();
+
+      playVoiceover();
 
       chapters[actual - 1].setAttribute('visible', false);
       chapters[actual].setAttribute('visible', true);
@@ -110,7 +123,30 @@ const renderScript = chapters => {
         document.body.innerHTML = '<div id="root" onclick="javascript:window.location = window.location"><p>Click or tap the screen to replay</p></div>';
     }
 
+    function playVoiceover() {
+      if (voices[actual]) {
+        try {
+          speechSynthesis.cancel();
+          var txt = new SpeechSynthesisUtterance(voices[actual]);
+          speechSynthesis.speak(txt);
+        } catch (err) {}
+      }
+    }
+
     setTimeout(nextChapter, times[actual] * 1000);
+    playVoiceover();
 
   `;
+};
+
+const getChartUrl = story => {
+  var charts = false;
+  story.chapters.forEach(chapter => {
+    chapter.forEach(obj => {
+      if(obj.type === 'chart') charts = true;
+    });
+  });
+
+  return charts ? '<script src="https://s3.amazonaws.com/gurivr/aframe-chartbuilder-component.js"></script>' :
+  '<script src="https://s3.amazonaws.com/gurivr/aframe-text-component.min.js"></script>';
 };

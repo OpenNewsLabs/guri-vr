@@ -9102,7 +9102,8 @@
 
 	function getObjects(p) {
 
-	  var objects = p.match(/(audio|sound|panorama|image|picture|text|videosphere|video|seconds)/gi) || [];
+	  var objects = p.match(/(audio|sound|panorama|image|picture|text|videosphere|video|seconds|voiceover|chart)/gi) || [];
+	  console.log('pepe', objects);
 
 	  return objects.map(function (obj, i) {
 	    // special case for duration
@@ -9114,9 +9115,11 @@
 	        value: parseInt(match[0].replace(' seconds', ''), 10)
 	      };
 	    }
+
 	    p = p.slice(p.indexOf(obj) + obj.length);
 	    var strLength = i === objects.length - 1 ? p.length : p.indexOf(objects[i + 1]);
 	    var str = p.substr(0, strLength);
+
 	    switch (obj) {
 	      case 'audio':
 	      case 'sound':
@@ -9124,6 +9127,16 @@
 	          type: 'audio',
 	          src: getUrl(str),
 	          position: getPosition(str)
+	        };
+	      case 'voiceover':
+	        return {
+	          type: 'voiceover',
+	          text: getQuote(str)
+	        };
+	      case 'chart':
+	        return {
+	          type: 'chart',
+	          src: getUrl(str)
 	        };
 	      case 'panorama':
 	        return {
@@ -9296,7 +9309,6 @@
 	        _this2.value = _this2.editor.getValue();
 	        onInput(_this2.value);
 	      });
-	      console.log(this.editor);
 	    }
 	  }, {
 	    key: 'render',
@@ -9313,7 +9325,7 @@
 
 	_codemirror2.default.defineSimpleMode('guri', {
 	  start: [{
-	    regex: /(audio|sound|panorama|image|picture|text|videosphere|video)/,
+	    regex: /(audio|sound|panorama|image|picture|text|videosphere|video|voiceover|chart)/,
 	    token: "atom"
 	  }, {
 	    regex: /([0-9]+) (seconds)/,

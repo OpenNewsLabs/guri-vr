@@ -36,7 +36,6 @@ export default class Editor extends Component {
       this.value = this.editor.getValue();
       onInput(this.value);
     });
-    console.log(this.editor)
   }
 
   render() {
@@ -47,7 +46,7 @@ export default class Editor extends Component {
 codemirror.defineSimpleMode('guri', {
   start: [
     {
-      regex: /(audio|sound|panorama|image|picture|text|videosphere|video)/,
+      regex: /(audio|sound|panorama|image|picture|text|videosphere|video|voiceover|chart)/,
       token: "atom"
     },
     {
