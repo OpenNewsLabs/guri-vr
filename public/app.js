@@ -636,11 +636,11 @@
 	            if (attributes.children) delete attributes.children;
 	            if (!isFunction(nodeName)) {
 	                if ('className' in attributes) {
-	                    attributes['class'] = attributes.className;
+	                    attributes.class = attributes.className;
 	                    delete attributes.className;
 	                }
-	                lastSimple = attributes['class'];
-	                if (lastSimple && !isString(lastSimple)) attributes['class'] = hashToClassName(lastSimple);
+	                lastSimple = attributes.class;
+	                if (lastSimple && !isString(lastSimple)) attributes.class = hashToClassName(lastSimple);
 	                lastSimple = attributes.style;
 	                if (lastSimple && !isString(lastSimple)) attributes.style = styleObjToCss(lastSimple);
 	            }
@@ -686,7 +686,7 @@
 	        return nodeName && isFunction(nodeName) && !(nodeName.prototype && nodeName.prototype.render);
 	    }
 	    function buildFunctionalComponent(vnode, context) {
-	        return vnode.nodeName(getNodeProps(vnode), context || EMPTY) || EMPTY_BASE;
+	        return vnode.nodeName(getNodeProps(vnode), context || EMPTY) || '';
 	    }
 	    function ensureNodeData(node, data) {
 	        return node[ATTR_KEY] || (node[ATTR_KEY] = data || {});
@@ -709,7 +709,9 @@
 	        } else if ('o' === name[0] && 'n' === name[1]) {
 	            var l = node._listeners || (node._listeners = {});
 	            name = toLowerCase(name.substring(2));
-	            if (!l[name]) node.addEventListener(name, eventProxy); else if (!value) node.removeEventListener(name, eventProxy);
+	            if (value) {
+	                if (!l[name]) node.addEventListener(name, eventProxy);
+	            } else if (l[name]) node.removeEventListener(name, eventProxy);
 	            l[name] = value;
 	        } else {
 	            var ns = isSvg && name.match(/^xlink\:?(.+)/);
@@ -779,16 +781,16 @@
 	        if (isFunction(nodeName)) return buildComponentFromVNode(dom, vnode, context, mountAll);
 	        if (!isString(nodeName)) nodeName = String(nodeName);
 	        svgMode = 'svg' === toLowerCase(nodeName);
-	        if (svgMode) SVG_MODE = !0;
-	        if (!dom) out = createNode(nodeName, SVG_MODE); else if (!isNamedNode(dom, nodeName)) {
-	            out = createNode(nodeName, SVG_MODE);
+	        if (svgMode) isSvgMode = !0;
+	        if (!dom) out = createNode(nodeName, isSvgMode); else if (!isNamedNode(dom, nodeName)) {
+	            out = createNode(nodeName, isSvgMode);
 	            while (dom.firstChild) out.appendChild(dom.firstChild);
 	            if (!unmountChildrenOnly) recollectNodeTree(dom);
 	        }
 	        diffNode(out, vnode.children, context, mountAll);
 	        diffAttributes(out, vnode.attributes);
 	        if (originalAttributes && originalAttributes.ref) (out[ATTR_KEY].ref = originalAttributes.ref)(out);
-	        if (svgMode) SVG_MODE = !1;
+	        if (svgMode) isSvgMode = !1;
 	        return out;
 	    }
 	    function diffNode(dom, vchildren, context, mountAll) {
@@ -802,18 +804,15 @@
 	        if (data) return data.key; else ;
 	    }
 	    function innerDiffNode(dom, vchildren, context, mountAll) {
-	        var children, keyed, originalChildren = dom.childNodes, keyedLen = 0, min = 0, len = originalChildren.length, childrenLen = 0;
-	        if (len) {
-	            children = [];
-	            for (var i = 0; i < len; i++) {
-	                var child = originalChildren[i], key = getKey(child);
-	                if (key || 0 === key) {
-	                    if (!keyedLen++) keyed = {};
-	                    keyed[key] = child;
-	                } else children[childrenLen++] = child;
-	            }
+	        var j, c, originalChildren = dom.childNodes, children = [], keyed = {}, keyedLen = 0, min = 0, len = originalChildren.length, childrenLen = 0, vlen = vchildren && vchildren.length;
+	        if (len) for (var i = 0; i < len; i++) {
+	            var child = originalChildren[i], key = getKey(child);
+	            if ((key || 0 === key) && vlen) {
+	                keyedLen++;
+	                keyed[key] = child;
+	            } else children[childrenLen++] = child;
 	        }
-	        if (vchildren) for (var i = 0; i < vchildren.length; i++) {
+	        if (vlen) for (var i = 0; i < vlen; i++) {
 	            var vchild = vchildren[i], child = void 0;
 	            if (keyedLen && vchild.attributes) {
 	                var key = vchild.key;
@@ -823,10 +822,10 @@
 	                    keyedLen--;
 	                }
 	            }
-	            if (!child && min < childrenLen) for (var j = min; j < childrenLen; j++) {
-	                var _c = children[j];
-	                if (_c && isSameNodeType(_c, vchild)) {
-	                    child = _c;
+	            if (!child && min < childrenLen) for (j = min; j < childrenLen; j++) {
+	                c = children[j];
+	                if (c && isSameNodeType(c, vchild)) {
+	                    child = c;
 	                    children[j] = void 0;
 	                    if (j === childrenLen - 1) childrenLen--;
 	                    if (j === min) min++;
@@ -834,10 +833,10 @@
 	                }
 	            }
 	            child = diff(child, vchild, context, mountAll);
-	            var c = (mountAll || child.parentNode !== dom) && child._component;
+	            c = (mountAll || child.parentNode !== dom) && child._component;
 	            if (c) deepHook(c, 'componentWillMount');
 	            var next = originalChildren[i];
-	            if (next !== child) if (next) dom.insertBefore(child, next); else dom.appendChild(child);
+	            if (next !== child && originalChildren[i + 1] !== child) if (next) dom.insertBefore(child, next); else dom.appendChild(child);
 	            if (c) deepHook(c, 'componentDidMount');
 	        }
 	        if (keyedLen) for (var i in keyed) if (keyed[i]) children[min = childrenLen++] = keyed[i];
@@ -867,8 +866,8 @@
 	    }
 	    function diffAttributes(dom, attrs) {
 	        var old = dom[ATTR_KEY] || getRawNodeAttributes(dom);
-	        for (var _name in old) if (!(attrs && _name in attrs)) setAccessor(dom, _name, null, SVG_MODE);
-	        if (attrs) for (var _name2 in attrs) if (!(_name2 in old) || attrs[_name2] != ('value' === _name2 || 'selected' === _name2 || 'checked' === _name2 ? dom[_name2] : old[_name2])) setAccessor(dom, _name2, attrs[_name2], SVG_MODE);
+	        for (var _name in old) if (!(attrs && _name in attrs)) setAccessor(dom, _name, null, isSvgMode);
+	        if (attrs) for (var _name2 in attrs) if (!(_name2 in old) || attrs[_name2] != ('value' === _name2 || 'selected' === _name2 || 'checked' === _name2 ? dom[_name2] : old[_name2])) setAccessor(dom, _name2, attrs[_name2], isSvgMode);
 	    }
 	    function collectComponent(component) {
 	        var name = component.constructor.name, list = components[name];
@@ -876,7 +875,7 @@
 	    }
 	    function createComponent(Ctor, props, context, fresh) {
 	        var inst = new Ctor(props, context), list = !fresh && components[Ctor.name];
-	        if (list) for (var i = 0; i < list.length; i++) if (list[i].constructor === Ctor) {
+	        if (list) for (var i = list.length; i--; ) if (list[i].constructor === Ctor) {
 	            inst.nextBase = list[i].base;
 	            list.splice(i, 1);
 	            break;
@@ -890,11 +889,11 @@
 	        }
 	    }
 	    function setComponentProps(component, props, opts, context, mountAll) {
-	        var d = component._disableRendering === !0;
+	        var d = component._disableRendering === !0, b = component.base;
 	        component._disableRendering = !0;
 	        if (component.__ref = props.ref) delete props.ref;
 	        if (component.__key = props.key) delete props.key;
-	        if (!empty(component.base)) hook(component, 'componentWillReceiveProps', props, context);
+	        if (!empty(b)) hook(component, 'componentWillReceiveProps', props, context);
 	        if (context && context !== component.context) {
 	            if (!component.prevContext) component.prevContext = component.context;
 	            component.context = context;
@@ -902,17 +901,17 @@
 	        if (!component.prevProps) component.prevProps = component.props;
 	        component.props = props;
 	        component._disableRendering = d;
-	        if (opts !== NO_RENDER) if (opts === SYNC_RENDER || options.syncComponentUpdates !== !1) renderComponent(component, SYNC_RENDER, mountAll); else triggerComponentRender(component);
+	        if (0 !== opts) if (1 === opts || options.syncComponentUpdates !== !1 || !b) renderComponent(component, 1, mountAll); else triggerComponentRender(component);
 	        hook(component, '__ref', component);
 	    }
 	    function renderComponent(component, opts, mountAll) {
 	        if (!component._disableRendering) {
-	            var skip, rendered, props = component.props, state = component.state, context = component.context, previousProps = component.prevProps || props, previousState = component.prevState || state, previousContext = component.prevContext || context, isUpdate = component.base, initialBase = isUpdate || component.nextBase, initialComponent = initialBase && initialBase._component;
+	            var skip, rendered, props = component.props, state = component.state, context = component.context, previousProps = component.prevProps || props, previousState = component.prevState || state, previousContext = component.prevContext || context, isUpdate = component.base, initialBase = isUpdate || component.nextBase, initialComponent = initialBase && initialBase._component, initialChildComponent = component._component;
 	            if (isUpdate) {
 	                component.props = previousProps;
 	                component.state = previousState;
 	                component.context = previousContext;
-	                if (opts !== FORCE_RENDER && hook(component, 'shouldComponentUpdate', props, state, context) === !1) skip = !0; else hook(component, 'componentWillUpdate', props, state, context);
+	                if (2 !== opts && hook(component, 'shouldComponentUpdate', props, state, context) === !1) skip = !0; else hook(component, 'componentWillUpdate', props, state, context);
 	                component.props = props;
 	                component.state = state;
 	                component.context = context;
@@ -925,31 +924,31 @@
 	                while (isFunctionalComponent(rendered)) rendered = buildFunctionalComponent(rendered, context);
 	                var toUnmount, base, childComponent = rendered && rendered.nodeName;
 	                if (isFunction(childComponent) && childComponent.prototype.render) {
-	                    var inst = component._component, childProps = getNodeProps(rendered);
-	                    if (inst && inst.constructor === childComponent) setComponentProps(inst, childProps, SYNC_RENDER, context); else {
+	                    var inst = initialChildComponent, childProps = getNodeProps(rendered);
+	                    if (inst && inst.constructor === childComponent) setComponentProps(inst, childProps, 1, context); else {
 	                        toUnmount = inst;
 	                        inst = createComponent(childComponent, childProps, context, !1);
 	                        inst._parentComponent = component;
 	                        component._component = inst;
 	                        if (isUpdate) deepHook(inst, 'componentWillMount');
-	                        setComponentProps(inst, childProps, NO_RENDER, context);
-	                        renderComponent(inst, SYNC_RENDER);
+	                        setComponentProps(inst, childProps, 0, context);
+	                        renderComponent(inst, 1);
 	                        if (isUpdate) deepHook(inst, 'componentDidMount');
 	                    }
 	                    base = inst.base;
 	                } else {
 	                    var cbase = initialBase;
-	                    toUnmount = component._component;
+	                    toUnmount = initialChildComponent;
 	                    if (toUnmount) cbase = component._component = null;
-	                    if (initialBase || opts === SYNC_RENDER) {
+	                    if (initialBase || 1 === opts) {
 	                        if (cbase) cbase._component = null;
-	                        base = diff(cbase, rendered || EMPTY_BASE, context, mountAll || !isUpdate, !0);
+	                        base = diff(cbase, rendered || '', context, mountAll || !isUpdate, !0);
 	                    }
 	                }
 	                if (initialBase && base !== initialBase) {
 	                    var p = initialBase.parentNode;
 	                    if (p && base !== p) p.replaceChild(base, initialBase);
-	                    if (!toUnmount && initialComponent === component) {
+	                    if (!toUnmount && initialComponent === component && !initialChildComponent) {
 	                        initialBase._component = null;
 	                        recollectNodeTree(initialBase);
 	                    }
@@ -970,17 +969,20 @@
 	        }
 	    }
 	    function buildComponentFromVNode(dom, vnode, context, mountAll) {
-	        var c = dom && dom._component, oldDom = dom, isDirectOwner = c && dom._componentConstructor === vnode.nodeName, isOwner = isDirectOwner;
+	        var c = dom && dom._component, oldDom = dom, isDirectOwner = c && dom._componentConstructor === vnode.nodeName, isOwner = isDirectOwner, props = getNodeProps(vnode);
 	        while (c && !isOwner && (c = c._parentComponent)) isOwner = c.constructor === vnode.nodeName;
 	        if (isOwner && (!mountAll || c._component)) {
-	            setComponentProps(c, getNodeProps(vnode), SYNC_RENDER, context, mountAll);
+	            setComponentProps(c, props, 3, context, mountAll);
 	            dom = c.base;
 	        } else {
 	            if (c && !isDirectOwner) {
 	                unmountComponent(c, !0);
 	                dom = oldDom = null;
 	            }
-	            dom = createComponentFromVNode(vnode, dom, context, mountAll);
+	            c = createComponent(vnode.nodeName, props, context);
+	            if (dom && !c.nextBase) c.nextBase = dom;
+	            setComponentProps(c, props, 1, context, mountAll);
+	            dom = c.base;
 	            if (oldDom && dom !== oldDom) {
 	                oldDom._component = null;
 	                recollectNodeTree(oldDom);
@@ -988,29 +990,19 @@
 	        }
 	        return dom;
 	    }
-	    function createComponentFromVNode(vnode, dom, context, mountAll) {
-	        var props = getNodeProps(vnode);
-	        var component = createComponent(vnode.nodeName, props, context, !!dom);
-	        if (dom) component.nextBase = dom;
-	        setComponentProps(component, props, SYNC_RENDER, context, mountAll);
-	        return component.base;
-	    }
 	    function unmountComponent(component, remove) {
 	        hook(component, '__ref', null);
 	        hook(component, 'componentWillUnmount');
 	        var inner = component._component;
-	        if (inner) {
-	            unmountComponent(inner, remove);
-	            remove = !1;
-	        }
-	        var base = component.base;
-	        if (base) {
-	            if (remove !== !1) removeNode(base);
-	            removeOrphanedChildren(base.childNodes, !0);
-	        }
-	        if (remove) {
-	            component._parentComponent = null;
-	            collectComponent(component);
+	        if (inner) unmountComponent(inner, remove); else {
+	            var base = component.base;
+	            if (base) {
+	                if (remove) {
+	                    removeNode(base);
+	                    collectComponent(component);
+	                }
+	                removeOrphanedChildren(base.childNodes, !0, remove);
+	            }
 	        }
 	        hook(component, 'componentDidUnmount');
 	    }
@@ -1029,12 +1021,8 @@
 	        if (c) deepHook(c, 'componentDidMount');
 	        return built;
 	    }
-	    var NO_RENDER = 0;
-	    var SYNC_RENDER = 1;
-	    var FORCE_RENDER = 2;
 	    var EMPTY = {};
-	    var EMPTY_BASE = '';
-	    var ATTR_KEY = 'undefined' != typeof Symbol ? Symbol['for']('preactattr') : '__preactattr_';
+	    var ATTR_KEY = 'undefined' != typeof Symbol ? Symbol.for('preactattr') : '__preactattr_';
 	    var NON_DIMENSION_PROPS = {
 	        boxFlex: 1,
 	        boxFlexGroup: 1,
@@ -1073,7 +1061,7 @@
 	    var items = [];
 	    var itemsOffline = [];
 	    var nodes = {};
-	    var SVG_MODE = !1;
+	    var isSvgMode = !1;
 	    var components = {};
 	    extend(Component.prototype, {
 	        linkState: function(key, eventPath) {
@@ -1088,7 +1076,7 @@
 	            triggerComponentRender(this);
 	        },
 	        forceUpdate: function() {
-	            renderComponent(this, FORCE_RENDER);
+	            renderComponent(this, 2);
 	        },
 	        render: function() {
 	            return null;
@@ -4055,6 +4043,9 @@
 				newComponentHook.call(this, props, context);
 			}
 
+			if (obj.statics) {
+				extend(cl, obj.statics);
+			}
 			if (obj.propTypes) {
 				cl.propTypes = obj.propTypes;
 			}
@@ -6725,7 +6716,7 @@
 	   * @return {number}
 	   */
 	  function getVersionPrecision(version) {
-	      return version.split(".").length;
+	    return version.split(".").length;
 	  }
 
 	  /**
@@ -6759,36 +6750,36 @@
 	   * @return {Number} comparison result
 	   */
 	  function compareVersions(versions) {
-	      // 1) get common precision for both versions, for example for "10.0" and "9" it should be 2
-	      var precision = Math.max(getVersionPrecision(versions[0]), getVersionPrecision(versions[1]));
-	      var chunks = map(versions, function (version) {
-	        var delta = precision - getVersionPrecision(version);
+	    // 1) get common precision for both versions, for example for "10.0" and "9" it should be 2
+	    var precision = Math.max(getVersionPrecision(versions[0]), getVersionPrecision(versions[1]));
+	    var chunks = map(versions, function (version) {
+	      var delta = precision - getVersionPrecision(version);
 
-	        // 2) "9" -> "9.0" (for precision = 2)
-	        version = version + new Array(delta + 1).join(".0");
+	      // 2) "9" -> "9.0" (for precision = 2)
+	      version = version + new Array(delta + 1).join(".0");
 
-	        // 3) "9.0" -> ["000000000"", "000000009"]
-	        return map(version.split("."), function (chunk) {
-	          return new Array(20 - chunk.length).join("0") + chunk;
-	        }).reverse();
-	      });
+	      // 3) "9.0" -> ["000000000"", "000000009"]
+	      return map(version.split("."), function (chunk) {
+	        return new Array(20 - chunk.length).join("0") + chunk;
+	      }).reverse();
+	    });
 
-	      // iterate in reverse order by reversed chunks array
-	      while (--precision >= 0) {
-	          // 4) compare: "000000009" > "000000010" = false (but "9" > "10" = true)
-	          if (chunks[0][precision] > chunks[1][precision]) {
-	              return 1;
-	          }
-	          else if (chunks[0][precision] === chunks[1][precision]) {
-	              if (precision === 0) {
-	                  // all version chunks are same
-	                  return 0;
-	              }
-	          }
-	          else {
-	              return -1;
-	          }
+	    // iterate in reverse order by reversed chunks array
+	    while (--precision >= 0) {
+	      // 4) compare: "000000009" > "000000010" = false (but "9" > "10" = true)
+	      if (chunks[0][precision] > chunks[1][precision]) {
+	        return 1;
 	      }
+	      else if (chunks[0][precision] === chunks[1][precision]) {
+	        if (precision === 0) {
+	          // all version chunks are same
+	          return 0;
+	        }
+	      }
+	      else {
+	        return -1;
+	      }
+	    }
 	  }
 
 	  /**
@@ -6810,33 +6801,32 @@
 	   * @return {Boolean}
 	   */
 	  function isUnsupportedBrowser(minVersions, strictMode, ua) {
-	      var _bowser = bowser;
+	    var _bowser = bowser;
 
-	      // make strictMode param optional with ua param usage
-	      if (typeof strictMode === 'string') {
-	        ua = strictMode;
-	        strictMode = void(0);
-	      }
+	    // make strictMode param optional with ua param usage
+	    if (typeof strictMode === 'string') {
+	      ua = strictMode;
+	      strictMode = void(0);
+	    }
 
-	      if (strictMode === void(0)) {
-	        strictMode = false;
-	      }
-	      if (ua) {
-	        _bowser = detect(ua);
-	      }
+	    if (strictMode === void(0)) {
+	      strictMode = false;
+	    }
+	    if (ua) {
+	      _bowser = detect(ua);
+	    }
 
-	      var version = "" + _bowser.version;
-	      for (var browser in minVersions) {
-	          if (minVersions.hasOwnProperty(browser)) {
-	              if (_bowser[browser]) {
-	                  // browser version and min supported version.
-	                  if (compareVersions([version, minVersions[browser]]) < 0) {
-	                      return true; // unsupported
-	                  }
-	              }
-	          }
+	    var version = "" + _bowser.version;
+	    for (var browser in minVersions) {
+	      if (minVersions.hasOwnProperty(browser)) {
+	        if (_bowser[browser]) {
+	          // browser version and min supported version.
+	          return compareVersions([version, minVersions[browser]]) < 0;
+	        }
 	      }
-	      return strictMode; // not found
+	    }
+
+	    return strictMode; // not found
 	  }
 
 	  /**
@@ -6844,10 +6834,11 @@
 	   *
 	   * @param  {Object} minVersions map of minimal version to browser
 	   * @param  {Boolean} [strictMode = false] flag to return false if browser wasn't found in map
+	   * @param  {String}  [ua] user agent string
 	   * @return {Boolean}
 	   */
-	  function check(minVersions, strictMode) {
-	    return !isUnsupportedBrowser(minVersions, strictMode);
+	  function check(minVersions, strictMode, ua) {
+	    return !isUnsupportedBrowser(minVersions, strictMode, ua);
 	  }
 
 	  bowser.isUnsupportedBrowser = isUnsupportedBrowser;
