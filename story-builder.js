@@ -73,7 +73,7 @@ const renderObject = (obj, i, chapter) => {
   case 'audio':
     return `<a-entity sound="src: ${obj.src}" />`;
   case 'chart':
-    return `<a-entity chartbuilder="src: ${obj.src};" rotation="0 180 0" />`;
+    return `<a-entity chartbuilder="src: ${obj.src};" />`;
   }
 }
 
