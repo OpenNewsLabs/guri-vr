@@ -9103,7 +9103,6 @@
 	function getObjects(p) {
 
 	  var objects = p.match(/(audio|sound|panorama|image|picture|text|videosphere|video|seconds|voiceover|chart)/gi) || [];
-	  console.log('pepe', objects);
 
 	  return objects.map(function (obj, i) {
 	    // special case for duration
