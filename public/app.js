@@ -8874,7 +8874,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var defaultEditorText = '\nYou not need to be a coder to create VR experiences. The GuriVR editor interprets your words and creates the world you described.\n\nTry adding some scenes. For example my first scene will last 500 seconds and display the following text: "Guri is cooooool!" and a panorama located at https://s3.amazonaws.com/gurivr/pano.jpg\n\nTry adding more scenes!\n';
+	var defaultEditorText = '\nYou not need to be a coder to create VR experiences. The GuriVR editor interprets your words and creates the world you described.\n\nTry adding some scenes. For example my first scene will last 500 seconds and display the following text: "Guri is cooooool!" and a panorama located at https://s3.amazonaws.com/gurivr/pano.jpg\n\nTry adding more scenes!\nhint: Try with words like audio, panorama, text, videosphere, voiceover and chart\n';
 
 	var Home = function (_Component) {
 	  _inherits(Home, _Component);
@@ -18956,7 +18956,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var defaultText = '\n\nThis is the GuriVR editor 🎉. You can create your VR experience by describing how you would like it to be. Every paragraph will be a scene as soon as you mention the duration. Let\'s start with an example:\n\nMy first scene lasts 5 seconds and has a text that says "This is my first scene. This is amazing!".\n\nThe second is 30 seconds and have just a panorama located at https://ucarecdn.com/8e6da182-c794-4692-861d-d43da2fd5507/ along with the audio https://ucarecdn.com/49f6a82b-30fc-4ab9-80b5-85f286d67830/\n';
+	var defaultText = '\n\nThis is the GuriVR editor 🎉. You can create your VR experience by describing how you would like it to be. Every paragraph will be a scene as soon as you mention the duration. Let\'s start with an example:\n\nMy first scene lasts 5 seconds and has a text that says "This is my first scene. This is amazing!".\n\nThe second is 30 seconds and have just a panorama located at https://ucarecdn.com/8e6da182-c794-4692-861d-d43da2fd5507/ along with the audio https://ucarecdn.com/49f6a82b-30fc-4ab9-80b5-85f286d67830/\n\nhint: Try with words like audio, panorama, text, videosphere, voiceover and chart\n';
 
 	var StoryEditor = function (_Component) {
 	  _inherits(StoryEditor, _Component);

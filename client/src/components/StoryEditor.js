@@ -16,6 +16,8 @@ This is the GuriVR editor 🎉. You can create your VR experience by describing 
 My first scene lasts 5 seconds and has a text that says "This is my first scene. This is amazing!".
 
 The second is 30 seconds and have just a panorama located at https://ucarecdn.com/8e6da182-c794-4692-861d-d43da2fd5507/ along with the audio https://ucarecdn.com/49f6a82b-30fc-4ab9-80b5-85f286d67830/
+
+hint: Try with words like audio, panorama, text, videosphere, voiceover and chart
 `;
 
 @Radium
