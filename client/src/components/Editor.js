@@ -54,6 +54,10 @@ codemirror.defineSimpleMode('guri', {
       token: ["number", "atom"]
     },
     {
+      regex: /(#[a-fA-F0-9]{3,6}|\w) (background)/,
+      token: ["string", "atom"]
+    },
+    {
       regex: /https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
       token: "string"
     },

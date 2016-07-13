@@ -9102,7 +9102,7 @@
 
 	function getObjects(p) {
 
-	  var objects = p.match(/(audio|sound|panorama|image|picture|text|videosphere|video|seconds|voiceover|chart)/gi) || [];
+	  var objects = p.match(/(audio|sound|panorama|image|picture|text|videosphere|video|seconds|voiceover|chart|background)/gi) || [];
 
 	  return objects.map(function (obj, i) {
 	    // special case for duration
@@ -9112,6 +9112,14 @@
 	      return {
 	        type: 'duration',
 	        value: parseInt(match[0].replace(' seconds', ''), 10)
+	      };
+	    } else if (obj === 'background') {
+	      var match = p.match(/(#[a-fA-F0-9]{3,6}|\w+) background/i);
+
+	      p = p.slice(p.indexOf(obj) + obj.length);
+	      return {
+	        type: 'background',
+	        color: match[0].replace(' background', '')
 	      };
 	    }
 
@@ -9135,7 +9143,8 @@
 	      case 'chart':
 	        return {
 	          type: 'chart',
-	          src: getUrl(str)
+	          src: getUrl(str),
+	          position: getPosition(str)
 	        };
 	      case 'panorama':
 	        return {
@@ -9329,6 +9338,9 @@
 	  }, {
 	    regex: /([0-9]+) (seconds)/,
 	    token: ["number", "atom"]
+	  }, {
+	    regex: /(#[a-fA-F0-9]{3,6}|\w) (background)/,
+	    token: ["string", "atom"]
 	  }, {
 	    regex: /https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
 	    token: "string"
@@ -18510,7 +18522,7 @@
 	exports.default = function (_ref) {
 	  var body = _ref.body;
 	  var height = _ref.height;
-	  return (0, _preact.h)('iframe', { height: height, style: styles.container, src: '/api/preview?body=' + JSON.stringify(body) });
+	  return (0, _preact.h)('iframe', { height: height, style: styles.container, src: '/api/preview?body=' + encodeURIComponent(JSON.stringify(body)) });
 	};
 
 	var styles = {

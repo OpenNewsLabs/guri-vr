@@ -6,7 +6,7 @@ export default str => str
 
 function getObjects(p) {
 
-  var objects = p.match(/(audio|sound|panorama|image|picture|text|videosphere|video|seconds|voiceover|chart)/gi) || [];
+  var objects = p.match(/(audio|sound|panorama|image|picture|text|videosphere|video|seconds|voiceover|chart|background)/gi) || [];
 
   return objects.map(function(obj, i){
     // special case for duration
@@ -16,6 +16,14 @@ function getObjects(p) {
       return {
         type: 'duration',
         value: parseInt(match[0].replace(' seconds', ''), 10)
+      }
+    } else if (obj === 'background') {
+      var match = p.match(/(#[a-fA-F0-9]{3,6}|\w+) background/i)
+
+      p = p.slice(p.indexOf(obj) + obj.length)
+      return {
+        type: 'background',
+        color: match[0].replace(' background', '')
       }
     }
 
@@ -39,7 +47,8 @@ function getObjects(p) {
       case 'chart':
         return {
           type: 'chart',
-          src: getUrl(str)
+          src: getUrl(str),
+          position: getPosition(str)
         };
       case 'panorama':
       return {

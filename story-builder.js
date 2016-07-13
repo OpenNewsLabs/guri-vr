@@ -68,12 +68,14 @@ const renderObject = (obj, i, chapter) => {
     return `<a-entity material="color: #fff" position="${obj.position.join(', ')}" text="text: ${obj.text}"></a-entity>`;
   case 'panorama':
     return `<a-sky src="${obj.src}" />`;
+  case 'background':
+    return `<a-sky color="${obj.color}" />`;
   case 'videosphere':
     return `<a-videosphere src="${obj.src}" />`;
   case 'audio':
     return `<a-entity sound="src: ${obj.src}" />`;
   case 'chart':
-    return `<a-entity chartbuilder="src: ${obj.src};" />`;
+    return `<a-entity position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src};" />`;
   }
 }
 
