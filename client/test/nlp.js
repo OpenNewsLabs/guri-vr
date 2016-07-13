@@ -44,4 +44,19 @@ describe('Natural language interpreter', () => {
     assert(out[0][2].src === 'http://pepe.com');
   });
 
+  it('Shouldn\'t get an object type if it\'s inside a url or another word', () => {
+    const out = nlp(`
+      My first scene lasts for 30 seconds and have a chart located at http://my-domain.com/chart-mychart.html
+    `);
+    assert(Array.isArray(out));
+    assert(out.length === 1);
+
+    assert(Array.isArray(out[0]));
+    assert(out[0].length === 1);
+
+    assert(out[0][0].type === 'chart');
+    assert(out[0][0].src === 'http://my-domain.com/chart-mychart.html');
+  });
+
+
 });
