@@ -67,9 +67,9 @@ const renderObject = (obj, i, chapter) => {
   case 'text':
     return `<a-entity material="color: #fff" position="${obj.position.join(', ')}" text="text: ${obj.text}"></a-entity>`;
   case 'panorama':
-    return `<a-sky src="${obj.src}" />`;
+    return `<a-sky rotation="0 180 0" src="${obj.src}" />`;
   case 'background':
-    return `<a-sky color="${obj.color}" />`;
+    return `<a-sky rotation="0 180 0"  color="${obj.color}" />`;
   case 'videosphere':
     return `<a-videosphere src="${obj.src}" />`;
   case 'audio':
