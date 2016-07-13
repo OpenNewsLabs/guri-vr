@@ -13,7 +13,6 @@ const stories = db.get('stories');
 
 app.get('/preview', (req, res) => {
   try {
-
     const story = {
       title: req.query.title,
       chapters: JSON.parse(req.query.body)
@@ -32,10 +31,13 @@ app.post('/stories', (req, res, next) =>
     text: req.body.text,
     user_id: req.user
   })
-  .then(story => upload(story))
+  .then(story => upload.story(story))
   .then(story => res.json(story))
   .catch(error => next(error))
 );
+
+app.post('/assets', upload.asset.single('file'),
+(req, res) => res.json({ url: req.file.location }));
 
 app.post('/login', auth.requestToken(
   (email, delivery, callback, req) =>
@@ -73,7 +75,7 @@ app.put('/stories/:id', (req, res, next) =>
     text: req.body.text
   }})
   .then(() => stories.findOne({ _id: req.params.id }))
-  .then(story => upload(story))
+  .then(story => upload.story(story))
   .then(story => res.json(story))
   .catch(error => next(error))
 );

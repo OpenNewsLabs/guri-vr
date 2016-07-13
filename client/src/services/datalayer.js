@@ -52,3 +52,12 @@ fetch(`/api/stories/${story._id}`, {
   })
 })
 .then(res => res.json());
+
+export const uploadAsset = file => {
+  const data = new FormData();
+  data.append('file', file);
+  return fetch(`/api/assets`, {
+    method: 'POST',
+    body: data
+  }).then(res => res.json());
+};

@@ -2,6 +2,7 @@
 import { h, Component } from 'preact';
 import Radium from 'radium';
 import codemirror from 'codemirror';
+import { uploadAsset } from 'services/datalayer';
 import 'codemirror/addon/mode/simple';
 
 @Radium
@@ -25,6 +26,7 @@ export default class Editor extends Component {
       autofocus: true,
       showCursorWhenSelecting: true,
       lineWrapping: true,
+      allowDropFileTypes: ['image/jpeg', 'image/png', 'image/gif', 'audio/mpeg3', 'video/mpeg'],
       mode: 'guri'
     });
     this.editor.setCursor(this.editor.lineCount(), 0)
@@ -35,6 +37,19 @@ export default class Editor extends Component {
     this.editor.on('change', () => {
       this.value = this.editor.getValue();
       onInput(this.value);
+    });
+
+    this.editor.on('drop', (editor, evt) => {
+      evt.stopPropagation();
+      evt.preventDefault();
+      const { files } = evt.dataTransfer;
+      if (files && files.length) {
+        uploadAsset(files[0])
+          .then(({ url }) => {
+            this.editor.replaceSelection(url);
+            onInput(this.editor.getValue());
+          });
+      }
     });
   }
 

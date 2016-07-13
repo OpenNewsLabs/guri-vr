@@ -8758,7 +8758,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.updateStory = exports.createStory = exports.fetchStory = exports.fetchUserStories = exports.deleteStory = exports.sendVerification = exports.logout = undefined;
+	exports.uploadAsset = exports.updateStory = exports.createStory = exports.fetchStory = exports.fetchUserStories = exports.deleteStory = exports.sendVerification = exports.logout = undefined;
 
 	var _guri = __webpack_require__(73);
 
@@ -8825,6 +8825,17 @@
 	    headers: new Headers({
 	      'Content-Type': 'application/json'
 	    })
+	  }).then(function (res) {
+	    return res.json();
+	  });
+	};
+
+	var uploadAsset = exports.uploadAsset = function uploadAsset(file) {
+	  var data = new FormData();
+	  data.append('file', file);
+	  return fetch('/api/assets', {
+	    method: 'POST',
+	    body: data
 	  }).then(function (res) {
 	    return res.json();
 	  });
@@ -9259,6 +9270,8 @@
 
 	var _codemirror2 = _interopRequireDefault(_codemirror);
 
+	var _datalayer = __webpack_require__(76);
+
 	__webpack_require__(81);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -9304,6 +9317,7 @@
 	        autofocus: true,
 	        showCursorWhenSelecting: true,
 	        lineWrapping: true,
+	        allowDropFileTypes: ['image/jpeg', 'image/png', 'image/gif', 'audio/mpeg3', 'video/mpeg'],
 	        mode: 'guri'
 	      });
 	      this.editor.setCursor(this.editor.lineCount(), 0);
@@ -9316,6 +9330,21 @@
 	      this.editor.on('change', function () {
 	        _this2.value = _this2.editor.getValue();
 	        onInput(_this2.value);
+	      });
+
+	      this.editor.on('drop', function (editor, evt) {
+	        evt.stopPropagation();
+	        evt.preventDefault();
+	        var files = evt.dataTransfer.files;
+
+	        if (files && files.length) {
+	          (0, _datalayer.uploadAsset)(files[0]).then(function (_ref) {
+	            var url = _ref.url;
+
+	            _this2.editor.replaceSelection(url);
+	            onInput(_this2.editor.getValue());
+	          });
+	        }
 	      });
 	    }
 	  }, {
