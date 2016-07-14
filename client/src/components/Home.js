@@ -29,9 +29,14 @@ export default class Home extends Component {
   }
 
   onInput(text) {
-    this.setState({
-      text,
-      body: nlp(text)
+    try {
+      this.setState({
+        text,
+        body: nlp(text)
+      });
+    } catch(err) {
+      this.setState({ text });
+    }
     });
   }
 
