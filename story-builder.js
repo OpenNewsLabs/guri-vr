@@ -73,9 +73,9 @@ const renderObject = (obj, i, chapter) => {
   case 'videosphere':
     return `<a-videosphere src="${obj.src}"></a-videosphere>`;
   case 'video':
-    return `<a-entity scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="${obj.src}"></a-entity>`;
+    return `<a-video scale="${obj.scale.join(' ')}" width="10" height="6" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="${obj.src}"></a-video>`;
   case 'image':
-    return `<a-entity scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="${obj.src}" ></a-entity>`;
+    return `<a-image scale="${obj.scale.join(' ')}" width="5" height="5" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="${obj.src}" ></a-image>`;
   case 'audio':
     return `<a-entity sound="src: ${obj.src}"></a-entity>`;
   case 'chart':
