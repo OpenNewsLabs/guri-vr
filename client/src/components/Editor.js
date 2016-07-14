@@ -61,7 +61,7 @@ export default class Editor extends Component {
 codemirror.defineSimpleMode('guri', {
   start: [
     {
-      regex: /(audio|sound|panorama|image|picture|text|videosphere|video|voiceover|chart)/,
+      regex: /(audio|sound|panorama|image|picture|text|videosphere|video|voiceover|chart|model)/,
       token: "atom"
     },
     {

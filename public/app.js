@@ -9120,7 +9120,7 @@
 
 	function getObjects(p) {
 
-	  var objects = p.match(/(audio|sound|panorama|image|picture|text|videosphere|video|seconds|voiceover|chart|background)/gi) || [];
+	  var objects = p.match(/(audio|sound|panorama|image|picture|text|videosphere|video|seconds|voiceover|chart|background|model)/gi) || [];
 
 	  return objects.map(function (obj, i) {
 	    // special case for duration
@@ -9201,7 +9201,14 @@
 	          scale: getSize(str),
 	          rotation: getRotation(str)
 	        };
-
+	      case 'model':
+	        return {
+	          type: 'model',
+	          src: getUrl(str),
+	          position: getPosition(str),
+	          scale: getSize(str),
+	          rotation: getRotation(str)
+	        };
 	    }
 	    return obj;
 	  });
@@ -9393,7 +9400,7 @@
 
 	_codemirror2.default.defineSimpleMode('guri', {
 	  start: [{
-	    regex: /(audio|sound|panorama|image|picture|text|videosphere|video|voiceover|chart)/,
+	    regex: /(audio|sound|panorama|image|picture|text|videosphere|video|voiceover|chart|model)/,
 	    token: "atom"
 	  }, {
 	    regex: /([0-9]+) (seconds)/,
