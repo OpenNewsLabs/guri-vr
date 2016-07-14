@@ -37,7 +37,6 @@ export default class Home extends Component {
     } catch(err) {
       this.setState({ text });
     }
-    });
   }
 
   goToCreate() {

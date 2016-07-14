@@ -67,15 +67,19 @@ const renderObject = (obj, i, chapter) => {
   case 'text':
     return `<a-entity scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" material="color: #fff" position="${obj.position.join(' ')}" text="text: ${obj.text}"></a-entity>`;
   case 'panorama':
-    return `<a-sky rotation="0 180 0" src="${obj.src}" />`;
+    return `<a-sky rotation="0 180 0" src="${obj.src}"></a-sky>`;
   case 'background':
-    return `<a-sky rotation="0 180 0"  color="${obj.color}" />`;
+    return `<a-sky rotation="0 180 0"  color="${obj.color}"></a-sky>`;
   case 'videosphere':
-    return `<a-videosphere src="${obj.src}" />`;
+    return `<a-videosphere src="${obj.src}"></a-videosphere>`;
+  case 'video':
+    return `<a-entity scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="${obj.src}"></a-entity>`;
+  case 'image':
+    return `<a-entity scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="${obj.src}" ></a-entity>`;
   case 'audio':
-    return `<a-entity sound="src: ${obj.src}" />`;
+    return `<a-entity sound="src: ${obj.src}"></a-entity>`;
   case 'chart':
-    return `<a-entity scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src};" />`;
+    return `<a-entity scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src};"></a-entity>`;
   }
 }
 

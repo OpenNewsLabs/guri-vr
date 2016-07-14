@@ -1343,7 +1343,7 @@
 
 	var _Header2 = _interopRequireDefault(_Header);
 
-	var _Home = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"components/Home\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	var _Home = __webpack_require__(77);
 
 	var _Home2 = _interopRequireDefault(_Home);
 
@@ -8842,7 +8842,266 @@
 	};
 
 /***/ },
-/* 77 */,
+/* 77 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _preact = __webpack_require__(4);
+
+	var _preactMdl = __webpack_require__(8);
+
+	var _preactRouter = __webpack_require__(9);
+
+	var _radium = __webpack_require__(10);
+
+	var _radium2 = _interopRequireDefault(_radium);
+
+	var _guri = __webpack_require__(73);
+
+	var _nlp = __webpack_require__(78);
+
+	var _nlp2 = _interopRequireDefault(_nlp);
+
+	var _Editor = __webpack_require__(79);
+
+	var _Editor2 = _interopRequireDefault(_Editor);
+
+	var _Previewer = __webpack_require__(82);
+
+	var _Previewer2 = _interopRequireDefault(_Previewer);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var defaultEditorText = '\nYou not need to be a coder to create VR experiences. The GuriVR editor interprets your words and creates the world you described.\n\nTry adding some scenes. For example my first scene will last 500 seconds and display the following text: "Guri is cooooool!" and a panorama located at https://s3.amazonaws.com/gurivr/pano.jpg\n\nTry adding more scenes!\nhint: Try with words like audio, panorama, text, videosphere, voiceover and chart\n';
+
+	var Home = function (_Component) {
+	  _inherits(Home, _Component);
+
+	  function Home(props) {
+	    _classCallCheck(this, Home);
+
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Home).call(this, props));
+
+	    _this.state = {
+	      text: defaultEditorText,
+	      body: (0, _nlp2.default)(defaultEditorText)
+	    };
+	    return _this;
+	  }
+
+	  _createClass(Home, [{
+	    key: 'onInput',
+	    value: function onInput(text) {
+	      try {
+	        this.setState({
+	          text: text,
+	          body: (0, _nlp2.default)(text)
+	        });
+	      } catch (err) {
+	        this.setState({ text: text });
+	      }
+	    }
+	  }, {
+	    key: 'goToCreate',
+	    value: function goToCreate() {
+	      if (_guri.user) {
+	        (0, _preactRouter.route)('/stories/create');
+	      } else {
+	        (0, _preactRouter.route)('/login');
+	      }
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render(props, _ref) {
+	      var text = _ref.text;
+	      var body = _ref.body;
+
+	      return (0, _preact.h)(
+	        'div',
+	        { style: styles.container },
+	        (0, _preact.h)(
+	          'div',
+	          { style: styles.hero },
+	          (0, _preact.h)(
+	            'h1',
+	            { style: styles.title },
+	            'GuriVR'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            { style: styles.tagline },
+	            'Describe how do you want to tell your VR experience and will do the rest'
+	          ),
+	          (0, _preact.h)(
+	            _preactMdl.Button,
+	            { style: styles.callToAction, onClick: this.goToCreate, colored: true, raised: true },
+	            _guri.user ? 'Create a story' : 'Login to create a story'
+	          )
+	        ),
+	        (0, _preact.h)(
+	          'div',
+	          { style: styles.features },
+	          (0, _preact.h)(
+	            'div',
+	            null,
+	            (0, _preact.h)(
+	              'h4',
+	              null,
+	              'Use your own words'
+	            ),
+	            (0, _preact.h)(
+	              'div',
+	              { style: styles.featureDescription },
+	              (0, _preact.h)(
+	                'div',
+	                { style: styles.featureItem },
+	                (0, _preact.h)(_Editor2.default, { value: text, onInput: this.onInput.bind(this) })
+	              ),
+	              (0, _preact.h)(
+	                'div',
+	                { style: styles.featureItem },
+	                (0, _preact.h)(_Previewer2.default, { height: 300, style: styles.preview, body: body })
+	              )
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'div',
+	            { style: styles.feature },
+	            (0, _preact.h)(
+	              'div',
+	              { style: styles.featureItem },
+	              (0, _preact.h)(
+	                'h4',
+	                null,
+	                'Share it everywhere'
+	              ),
+	              (0, _preact.h)(
+	                'div',
+	                { style: styles.featureDescription },
+	                (0, _preact.h)(
+	                  'p',
+	                  { style: styles.featureText },
+	                  'GuriVR uses ',
+	                  (0, _preact.h)(
+	                    'a',
+	                    { href: 'https://webvr.info' },
+	                    'WebVR'
+	                  ),
+	                  ', the Web Open Standard for the Virtual Reality World. This works on modern web browsers, Google Cardboard and Oculus rift among others. It also fallback for desktop browsers using drag controls. You can share your experiences as standalone websites or inside your site as an iframe.'
+	                )
+	              )
+	            ),
+	            (0, _preact.h)(
+	              'div',
+	              { style: styles.featureItem },
+	              (0, _preact.h)(
+	                'h4',
+	                null,
+	                'Open source'
+	              ),
+	              (0, _preact.h)(
+	                'p',
+	                { style: styles.featureText },
+	                'This is an  ',
+	                (0, _preact.h)(
+	                  'a',
+	                  { href: 'https://github.com/opennewslabs/guri-vr' },
+	                  'open source project'
+	                ),
+	                ' created as part of a ',
+	                (0, _preact.h)(
+	                  'a',
+	                  { href: 'https://opennews.org/what/fellowships/' },
+	                  'Knight-Mozilla fellowship'
+	                ),
+	                '. You can contribute and/or propose ideas you have for this project.'
+	              )
+	            )
+	          )
+	        ),
+	        (0, _preact.h)(
+	          'footer',
+	          { style: styles.footer },
+	          'Made with ♥️ by ',
+	          (0, _preact.h)(
+	            'a',
+	            { href: 'https://twitter.com/impronunciable' },
+	            'Dan Zajdband'
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Home;
+	}(_preact.Component);
+
+	exports.default = Home;
+
+
+	var styles = {
+	  container: {
+	    width: '90vw',
+	    margin: '0 5vw'
+	  },
+	  hero: {
+	    margin: '0 auto',
+	    textAlign: 'center',
+	    paddingBottom: 50
+	  },
+	  title: {
+	    marginBottom: 0
+	  },
+	  tagline: {
+	    fontSize: '1.3em'
+	  },
+	  callToAction: {
+	    marginTop: 15
+	  },
+	  feature: {
+	    display: 'flex',
+	    justifyContent: 'space-between',
+	    flexWrap: 'wrap'
+	  },
+	  features: {
+	    marginBottom: 50,
+	    flexWrap: 'wrap'
+	  },
+	  featureDescription: {
+	    display: 'flex',
+	    flexWrap: 'wrap'
+	  },
+	  featureItem: {
+	    flex: 1,
+	    minWidth: 350,
+	    textAlign: 'justify'
+	  },
+	  footer: {
+	    marginBottom: 20,
+	    textAlign: 'center'
+	  },
+	  featureText: {
+	    padding: 10
+	  },
+	  preview: {
+	    textAlign: 'left'
+	  }
+	};
+
+/***/ },
 /* 78 */
 /***/ function(module, exports) {
 
