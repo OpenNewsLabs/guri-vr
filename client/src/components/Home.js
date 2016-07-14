@@ -127,5 +127,8 @@ const styles = {
   },
   featureText: {
     padding: 10
+  },
+  preview: {
+    textAlign: 'left'
   }
 };

@@ -9091,6 +9091,9 @@
 	  },
 	  featureText: {
 	    padding: 10
+	  },
+	  preview: {
+	    textAlign: 'left'
 	  }
 	};
 
@@ -9137,7 +9140,6 @@
 	    p = p.slice(p.indexOf(obj) + obj.length);
 	    var strLength = i === objects.length - 1 ? p.length : p.indexOf(objects[i + 1]);
 	    var str = p.substr(0, strLength);
-
 	    switch (obj) {
 	      case 'audio':
 	      case 'sound':
@@ -9155,7 +9157,9 @@
 	        return {
 	          type: 'chart',
 	          src: getUrl(str),
-	          position: getPosition(str)
+	          position: getPosition(str, 10, 10),
+	          rotation: getRotation(str),
+	          scale: getSize(str)
 	        };
 	      case 'panorama':
 	        return {
@@ -9167,7 +9171,8 @@
 	          type: 'video',
 	          src: getUrl(str),
 	          position: getPosition(str),
-	          scale: getSize(str)
+	          scale: getSize(str),
+	          rotation: getRotation(str)
 	        };
 	      case 'videosphere':
 	        return {
@@ -9180,15 +9185,17 @@
 	          type: 'image',
 	          src: getUrl(str),
 	          position: getPosition(str),
-	          scale: getSize(str)
+	          scale: getSize(str),
+	          rotation: getRotation(str)
 	        };
 	      case 'text':
 	        var text = getQuote(str);
 	        return {
 	          type: 'text',
 	          text: text,
-	          position: getPosition(str, text),
-	          scale: getSize(str)
+	          position: getPosition(str, text.length * .3),
+	          scale: getSize(str),
+	          rotation: getRotation(str)
 	        };
 
 	    }
@@ -9208,43 +9215,63 @@
 	  return match[0].replace(/"/g, '');
 	}
 
-	function getPosition(str, text) {
+	function getPosition(str) {
+	  var width = arguments.length <= 1 || arguments[1] === undefined ? 0 : arguments[1];
+	  var height = arguments.length <= 2 || arguments[2] === undefined ? 0 : arguments[2];
+
 	  var match = str.match(/right|left|behind|front/i);
-	  if (match && match.length) return getAbsPos(match[0]);
-	  return text ? [-1 * (text.length * .15), 1.5, 0] : [0, 4, 0];
+	  return getAbsPos(match && match.length ? match[0] : 'front', width, height);
 	}
 
 	function getSize(str) {
 	  var match = str.match(/tiny|small|large|huge/i);
-	  if (match && match.length) return getAbsSize(match[0]);
-	  return 1;
+	  return getAbsSize(match && match.length ? match[0] : 'normal');
 	}
 
-	function getAbsPos(str) {
+	function getAbsPos(str, width, height) {
+	  var xSize = -.5 * width;
+	  var ySize = -.5 * height;
 	  switch (str) {
 	    case 'left':
-	      return [-2, 4, 0];
+	      return [-5, 1.5 + ySize, 5 - xSize];
 	    case 'right':
-	      return [2, 4, 0];
+	      return [5, 1.5 + ySize, 5 + xSize];
 	    case 'behind':
-	      return [0, 4, 8];
+	      return [-xSize, 1.5 + ySize, 8];
 	    case 'front':
-	      return [0, 4, 0];
+	      return [0 + xSize, 1.5 + ySize, 0];
+	  }
+	}
+
+	function getRotation(str) {
+	  var match = str.match(/right|left|behind|front/i);
+	  var pos = match && match.length ? match[0] : 'front';
+	  switch (pos) {
+	    case 'left':
+	      return [0, 90, 0];
+	    case 'right':
+	      return [0, -90, 0];
+	    case 'behind':
+	      return [0, 180, 0];
+	    case 'front':
+	      return [0, 0, 0];
+	    default:
+	      return [0, 0, 0];
 	  }
 	}
 
 	function getAbsSize(str) {
 	  switch (str) {
 	    case 'tiny':
-	      return 1 / 3;
+	      return [1 / 3, 1 / 3, 1 / 3];
 	    case 'small':
-	      return 1 / 2;
+	      return [1 / 2, 1 / 2, 1 / 2];
 	    case 'large':
-	      return 2;
+	      return [2, 2, 2];
 	    case 'huge':
-	      return 3;
+	      return [3, 3, 3];
 	    default:
-	      return 1;
+	      return [1, 1, 1];
 	  }
 	}
 

@@ -65,7 +65,7 @@ const renderChapter = (chapter, i) =>`
 const renderObject = (obj, i, chapter) => {
   switch(obj.type) {
   case 'text':
-    return `<a-entity material="color: #fff" position="${obj.position.join(', ')}" text="text: ${obj.text}"></a-entity>`;
+    return `<a-entity scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" material="color: #fff" position="${obj.position.join(' ')}" text="text: ${obj.text}"></a-entity>`;
   case 'panorama':
     return `<a-sky rotation="0 180 0" src="${obj.src}" />`;
   case 'background':
@@ -75,7 +75,7 @@ const renderObject = (obj, i, chapter) => {
   case 'audio':
     return `<a-entity sound="src: ${obj.src}" />`;
   case 'chart':
-    return `<a-entity position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src};" />`;
+    return `<a-entity scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src};" />`;
   }
 }
 
