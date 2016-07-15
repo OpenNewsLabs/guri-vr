@@ -91,6 +91,7 @@ codemirror.defineSimpleMode('guri', {
 const styles = {
   container: {
     flex: 0,
-    height: 300
+    height: 300,
+    textAlign: 'left'
   }
 };

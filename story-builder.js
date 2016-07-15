@@ -77,7 +77,7 @@ const renderObject = (obj, i, chapter) => {
   case 'image':
     return `<a-image scale="${obj.scale.join(' ')}" width="5" height="5" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="${obj.src}" ></a-image>`;
   case 'audio':
-    return `<a-entity sound="src: ${obj.src}"></a-entity>`;
+    return `<a-entity position="${obj.position.join(' ')}" sound="src: ${obj.src}"></a-entity>`;
   case 'chart':
     return `<a-entity scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src};"></a-entity>`;
   case 'model':
@@ -106,25 +106,27 @@ const renderScript = chapters => {
     var actual = 0;
 
     function nextChapter() {
-      actual++;
       if(actual >= chapters.length) return end();
 
+      var prev = actual ? chapters[actual - 1] : chapters[0];
+      var curr = chapters[actual];
       playVoiceover();
 
-      chapters[actual - 1].setAttribute('visible', false);
-      chapters[actual].setAttribute('visible', true);
+      prev.setAttribute('visible', false);
+      curr.setAttribute('visible', true);
 
-      var audio = chapters[actual - 1].querySelector('[sound]');
+      var audio = prev.querySelector('[sound]');
       if(audio) audio.components.sound.pause();
-      var videosphere = chapters[actual - 1].querySelector('a-videosphere');
+      var videosphere = prev.querySelector('a-videosphere');
       if(videosphere) videosphere.pause();
 
-      audio = chapters[actual].querySelector('[sound]');
+      audio = curr.querySelector('[sound]');
       if(audio) audio.components.sound.play();
-      videosphere = chapters[actual].querySelector('a-videosphere');
+      videosphere = curr.querySelector('a-videosphere');
       if(videosphere) videosphere.play();
 
       setTimeout(nextChapter, times[actual] * 1000);
+      actual++;
     }
 
     function end() {
@@ -141,9 +143,7 @@ const renderScript = chapters => {
       }
     }
 
-    setTimeout(nextChapter, times[actual] * 1000);
-    playVoiceover();
-
+    nextChapter();
   `;
 };
 

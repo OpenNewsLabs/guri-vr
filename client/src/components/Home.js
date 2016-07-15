@@ -14,7 +14,9 @@ You not need to be a coder to create VR experiences. The GuriVR editor interpret
 Try adding some scenes. For example my first scene will last 500 seconds and display the following text: "Guri is cooooool!" and a panorama located at https://s3.amazonaws.com/gurivr/pano.jpg
 
 Try adding more scenes!
-hint: Try with words like audio, panorama, text, videosphere, voiceover and chart
+
+hint: Try with words like audio, panorama, text, videosphere, voiceover and chart.
+You can also drag your files into the editor and get back a url 🙀
 `;
 
 @Radium

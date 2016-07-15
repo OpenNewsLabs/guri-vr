@@ -1359,6 +1359,10 @@
 
 	var _StoryEditor2 = _interopRequireDefault(_StoryEditor);
 
+	var _Guide = __webpack_require__(87);
+
+	var _Guide2 = _interopRequireDefault(_Guide);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1407,6 +1411,7 @@
 	            _preactRouter2.default,
 	            null,
 	            (0, _preact.h)(_Home2.default, { path: '/' }),
+	            (0, _preact.h)(_Guide2.default, { path: '/guide' }),
 	            (0, _preact.h)(_Login2.default, { path: '/login' }),
 	            (0, _preact.h)(_StoryList2.default, { path: '/stories' }),
 	            (0, _preact.h)(_StoryEditor2.default, { path: '/stories/:id' })
@@ -8719,6 +8724,11 @@
 	        )
 	      ),
 	      (0, _preact.h)(_preactMdl.Layout.Spacer, null),
+	      (0, _preact.h)(
+	        _preactRouter.Link,
+	        { style: styles.link, href: '/guide' },
+	        'Guide'
+	      ),
 	      user ? (0, _preact.h)(
 	        'div',
 	        null,
@@ -8745,7 +8755,7 @@
 	  link: {
 	    color: '#fff',
 	    textDecoration: 'none',
-	    marginRight: 10
+	    marginRight: 15
 	  }
 	};
 
@@ -8885,7 +8895,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var defaultEditorText = '\nYou not need to be a coder to create VR experiences. The GuriVR editor interprets your words and creates the world you described.\n\nTry adding some scenes. For example my first scene will last 500 seconds and display the following text: "Guri is cooooool!" and a panorama located at https://s3.amazonaws.com/gurivr/pano.jpg\n\nTry adding more scenes!\nhint: Try with words like audio, panorama, text, videosphere, voiceover and chart\n';
+	var defaultEditorText = '\nYou not need to be a coder to create VR experiences. The GuriVR editor interprets your words and creates the world you described.\n\nTry adding some scenes. For example my first scene will last 500 seconds and display the following text: "Guri is cooooool!" and a panorama located at https://s3.amazonaws.com/gurivr/pano.jpg\n\nTry adding more scenes!\n\nhint: Try with words like audio, panorama, text, videosphere, voiceover and chart.\nYou can also drag your files into the editor and get back a url 🙀\n';
 
 	var Home = function (_Component) {
 	  _inherits(Home, _Component);
@@ -9423,7 +9433,8 @@
 	var styles = {
 	  container: {
 	    flex: 0,
-	    height: 300
+	    height: 300,
+	    textAlign: 'left'
 	  }
 	};
 
@@ -19035,7 +19046,7 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var defaultText = '\n\nThis is the GuriVR editor 🎉. You can create your VR experience by describing how you would like it to be. Every paragraph will be a scene as soon as you mention the duration. Let\'s start with an example:\n\nMy first scene lasts 5 seconds and has a text that says "This is my first scene. This is amazing!".\n\nThe second is 30 seconds and have just a panorama located at https://ucarecdn.com/8e6da182-c794-4692-861d-d43da2fd5507/ along with the audio https://ucarecdn.com/49f6a82b-30fc-4ab9-80b5-85f286d67830/\n\nhint: Try with words like audio, panorama, text, videosphere, voiceover and chart\n';
+	var defaultText = '\n\nThis is the GuriVR editor 🎉. You can create your VR experience by describing how you would like it to be. Every paragraph will be a scene as soon as you mention the duration. Let\'s start with an example:\n\nMy first scene lasts 5 seconds and has a text that says "This is my first scene. This is amazing!".\n\nThe second is 30 seconds and have just a panorama located at https://ucarecdn.com/8e6da182-c794-4692-861d-d43da2fd5507/ along with the audio https://ucarecdn.com/49f6a82b-30fc-4ab9-80b5-85f286d67830/\n\nhint: Try with words like audio, panorama, text, videosphere, voiceover and chart.\nYou can also drag your files into the editor and get back a url 🙀\n';
 
 	var StoryEditor = function (_Component) {
 	  _inherits(StoryEditor, _Component);
@@ -19202,6 +19213,961 @@
 	    padding: '0 10px',
 	    justifyContent: 'space-between',
 	    alignItems: 'center'
+	  }
+	};
+
+/***/ },
+/* 87 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	var _preact = __webpack_require__(4);
+
+	var _radium = __webpack_require__(10);
+
+	var _radium2 = _interopRequireDefault(_radium);
+
+	var _nlp = __webpack_require__(78);
+
+	var _nlp2 = _interopRequireDefault(_nlp);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+	var Guide = function (_Component) {
+	  _inherits(Guide, _Component);
+
+	  function Guide() {
+	    _classCallCheck(this, Guide);
+
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Guide).apply(this, arguments));
+	  }
+
+	  _createClass(Guide, [{
+	    key: 'render',
+	    value: function render() {
+	      return (0, _preact.h)(
+	        'article',
+	        { style: styles.container },
+	        (0, _preact.h)(
+	          'header',
+	          { style: styles.header },
+	          (0, _preact.h)(
+	            'h2',
+	            { style: styles.title },
+	            'Guide'
+	          )
+	        ),
+	        (0, _preact.h)(
+	          'section',
+	          null,
+	          (0, _preact.h)(
+	            'h3',
+	            null,
+	            'Introduction'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'GuriVR is a free, open source project created to allow everybody to make ',
+	            (0, _preact.h)(
+	              'a',
+	              { href: 'https://en.wikipedia.org/wiki/Virtual_reality' },
+	              'Virtual Reality'
+	            ),
+	            ' experiences with the lowest possible learning curve. The main tool that follows the goal is the online editor which is described below but Guri attempts to make the job easy in different ways. For example, it is possible to create a basic 360 panorama that works in the browser and with headsets like the Google Cardboard just by tweeting the picture with a mention to ',
+	            (0, _preact.h)(
+	              'a',
+	              { href: 'https://twitter.com/guri_vr' },
+	              '@guri_vr'
+	            ),
+	            '.'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Guri is under ',
+	            (0, _preact.h)(
+	              'a',
+	              { href: 'https://github.com/opennewslabs/guri-vr' },
+	              'active development'
+	            ),
+	            ' and ',
+	            (0, _preact.h)(
+	              'a',
+	              { href: 'https://github.com/opennewslabs/guri-vr/issues' },
+	              'feedback'
+	            ),
+	            ' is always welcome and under consideration for new features and bug reports. If you see something, say something 🚨 👮'
+	          )
+	        ),
+	        (0, _preact.h)(
+	          'section',
+	          null,
+	          (0, _preact.h)(
+	            'h3',
+	            null,
+	            'Getting started'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'The easiest way to learn how to use the editor is to play around with the sample scene located at the ',
+	            (0, _preact.h)(
+	              'a',
+	              { href: '/' },
+	              'Homepage'
+	            ),
+	            ' or ',
+	            (0, _preact.h)(
+	              'a',
+	              { href: '/login' },
+	              'create an account'
+	            ),
+	            ' to be able to save your stories.'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'The editor uses natural language processing techniques to interpret your words and convert the description into a VR experience. The ultimate goal for Guri is to be so intuitive you can express yourself using your own words without the need to think about it. In the next section'
+	          )
+	        ),
+	        (0, _preact.h)(
+	          'section',
+	          null,
+	          (0, _preact.h)(
+	            'h3',
+	            null,
+	            'Scenes'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Guri organize your stories into sequential scenes. Each scene is directly mapped with a paragraph in your description as soon as you specify the scene length.'
+	          ),
+	          (0, _preact.h)(CodeExample, { text: '\nThis is my first scene. It lasts 4 seconds, has a skyblue background and shows a text saying "This is the first scene"\n\nThis paragraph is never interpreted because I\'m not specifying the duration. This paragraphs can be used for talking about different parts of your story without generating scenes.\n\nThe last scene lasts 10 seconds and has just a text saying "The End!".\n          ' }),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'You can create as many scenes as you want but don',
+	            '\'',
+	            't forget about to set the duration in seconds.'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Now that you know how to create scenes, let',
+	            '\'',
+	            's see what kind of element you can add to your scenes:'
+	          )
+	        ),
+	        (0, _preact.h)(
+	          'section',
+	          null,
+	          (0, _preact.h)(
+	            'h3',
+	            null,
+	            'Entities'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'A Guri scene is composed by a set of entities. A entity can be a 360 panorama, a videosphere, some text floating around, a 3d chart, images and more.'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Each kind of entity has modifiers (or attributes) associated. For example some elements can have a color, an asset or a determined position. For example, if I want a tiny picture of a pokemon at the left of the viewer I can express that to Guri using the following words:'
+	          ),
+	          (0, _preact.h)(CodeExample, {
+	            title: 'Entities',
+	            text: '\nI want my scene to last 30 seconds and to have a green pink background and a picture of a pokemon (why not?) located at https://gurivr.s3.amazonaws.com/c5155f5b-83eb-4729-873b-238abb916362-psyduck.png to my left, and make it tiny please. Also add a text saying "Look to your leeeeeeeft!"\n            ' }),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Below you can see the list of available entities and the modifiers that can be applied:'
+	          )
+	        ),
+	        (0, _preact.h)(
+	          'section',
+	          null,
+	          (0, _preact.h)(
+	            'h4',
+	            null,
+	            'Audio'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Audio source in the 3d space. It can be positioned in different parts of the scene. It needs a url as the source, the prefered format is mp3.'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Keywords: ',
+	            (0, _preact.h)(
+	              'span',
+	              { style: styles.attr },
+	              'audio | sound'
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Attributes:'
+	          ),
+	          (0, _preact.h)(
+	            'ul',
+	            null,
+	            (0, _preact.h)(
+	              'li',
+	              null,
+	              (0, _preact.h)(
+	                'span',
+	                { style: styles.attr },
+	                'src'
+	              ),
+	              ' (url) | required'
+	            ),
+	            (0, _preact.h)(
+	              'li',
+	              null,
+	              (0, _preact.h)(
+	                'span',
+	                { style: styles.attr },
+	                'position'
+	              ),
+	              ' (left, right, front, behind) | optional'
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Example'
+	          ),
+	          (0, _preact.h)(CodeExample, { title: 'Audio example',
+	            text: '\nI want a  5 seconds scene showing a text saying "Hi!"\nThen I want a 40 seconds scene with a white background and an audio located at https://gurivr.s3.amazonaws.com/86474203-6d3d-4d39-9342-5ed63dca56c6-santa.mp3 behind me\n' })
+	        ),
+	        (0, _preact.h)(
+	          'section',
+	          null,
+	          (0, _preact.h)(
+	            'h4',
+	            null,
+	            'Panorama'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            '360 spherical image envolving the user view. It needs a url to display. It works better with equirectangular panoramas but works with any kind of images.'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Keywords: ',
+	            (0, _preact.h)(
+	              'span',
+	              { style: styles.attr },
+	              'panorama'
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Attributes:'
+	          ),
+	          (0, _preact.h)(
+	            'ul',
+	            null,
+	            (0, _preact.h)(
+	              'li',
+	              null,
+	              (0, _preact.h)(
+	                'span',
+	                { style: styles.attr },
+	                'src'
+	              ),
+	              ' (url) | required'
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Example'
+	          ),
+	          (0, _preact.h)(CodeExample, { title: 'Panorama example',
+	            text: 'My scene is 500 seconds long and shows a panorama located at https://gurivr.s3.amazonaws.com/7ec6043a-3924-4341-96ab-e8df10faaa93-pa.jpg' })
+	        ),
+	        (0, _preact.h)(
+	          'section',
+	          null,
+	          (0, _preact.h)(
+	            'h4',
+	            null,
+	            'Videosphere'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            '360 spherical video envolving the user view. It needs a url to display. It works better with equirectangular videos but works with any kind of video.'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Keywords: ',
+	            (0, _preact.h)(
+	              'span',
+	              { style: styles.attr },
+	              'videosphere'
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Attributes:'
+	          ),
+	          (0, _preact.h)(
+	            'ul',
+	            null,
+	            (0, _preact.h)(
+	              'li',
+	              null,
+	              (0, _preact.h)(
+	                'span',
+	                { style: styles.attr },
+	                'src'
+	              ),
+	              ' (url) | required'
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Example'
+	          ),
+	          (0, _preact.h)(CodeExample, { title: 'Videosphere example',
+	            text: 'My scene is 30 seconds long and shows a panorama located at https://ucarecdn.com/bcece0a8-86ce-460e-856b-40dac4875f15/ and a voiceover saying "This is the future. I know, is not that good"' })
+	        ),
+	        (0, _preact.h)(
+	          'section',
+	          null,
+	          (0, _preact.h)(
+	            'h4',
+	            null,
+	            'Image'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            '2d images can be located inside the scene and placed in different positions.'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Keywords: ',
+	            (0, _preact.h)(
+	              'span',
+	              { style: styles.attr },
+	              'image | picture'
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Attributes:'
+	          ),
+	          (0, _preact.h)(
+	            'ul',
+	            null,
+	            (0, _preact.h)(
+	              'li',
+	              null,
+	              (0, _preact.h)(
+	                'span',
+	                { style: styles.attr },
+	                'src'
+	              ),
+	              ' (url) | required'
+	            ),
+	            (0, _preact.h)(
+	              'li',
+	              null,
+	              (0, _preact.h)(
+	                'span',
+	                { style: styles.attr },
+	                'position'
+	              ),
+	              ' (right, left, behind, front) | optional'
+	            ),
+	            (0, _preact.h)(
+	              'li',
+	              null,
+	              (0, _preact.h)(
+	                'span',
+	                { style: styles.attr },
+	                'scale'
+	              ),
+	              ' (tiny, small, large, huge) | optional'
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Example'
+	          ),
+	          (0, _preact.h)(CodeExample, { title: 'Image example',
+	            text: 'My scene is 500 seconds long, it has blue background, a voiceover saying "Look to your right" and a random picture of a cat from https://gurivr.s3.amazonaws.com/7ec6043a-3924-4341-96ab-e8df10faaa93-pa.jpg to my right' })
+	        ),
+	        (0, _preact.h)(
+	          'section',
+	          null,
+	          (0, _preact.h)(
+	            'h4',
+	            null,
+	            'Video'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            '2d videos can be located inside the scene and placed in different positions.'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Keywords: ',
+	            (0, _preact.h)(
+	              'span',
+	              { style: styles.attr },
+	              'video'
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Attributes:'
+	          ),
+	          (0, _preact.h)(
+	            'ul',
+	            null,
+	            (0, _preact.h)(
+	              'li',
+	              null,
+	              (0, _preact.h)(
+	                'span',
+	                { style: styles.attr },
+	                'src'
+	              ),
+	              ' (url) | required'
+	            ),
+	            (0, _preact.h)(
+	              'li',
+	              null,
+	              (0, _preact.h)(
+	                'span',
+	                { style: styles.attr },
+	                'position'
+	              ),
+	              ' (right, left, behind, front) | optional'
+	            ),
+	            (0, _preact.h)(
+	              'li',
+	              null,
+	              (0, _preact.h)(
+	                'span',
+	                { style: styles.attr },
+	                'scale'
+	              ),
+	              ' (tiny, small, large, huge) | optional'
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Example'
+	          ),
+	          (0, _preact.h)(CodeExample, { title: 'Video example',
+	            text: 'My scene is 500 seconds long, it has skyblue background and a video from https://s3.amazonaws.com/gurivr/licha.mp4 to my left' })
+	        ),
+	        (0, _preact.h)(
+	          'section',
+	          null,
+	          (0, _preact.h)(
+	            'h4',
+	            null,
+	            'Text'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'You can write text and it will be displayed into the screen. There is no color or font support (it',
+	            '\'',
+	            's just blank text for now)'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Keywords: ',
+	            (0, _preact.h)(
+	              'span',
+	              { style: styles.attr },
+	              'text'
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Attributes:'
+	          ),
+	          (0, _preact.h)(
+	            'ul',
+	            null,
+	            (0, _preact.h)(
+	              'li',
+	              null,
+	              (0, _preact.h)(
+	                'span',
+	                { style: styles.attr },
+	                'text'
+	              ),
+	              ' (string) | required'
+	            ),
+	            (0, _preact.h)(
+	              'li',
+	              null,
+	              (0, _preact.h)(
+	                'span',
+	                { style: styles.attr },
+	                'position'
+	              ),
+	              ' (right, left, behind, front) | optional'
+	            ),
+	            (0, _preact.h)(
+	              'li',
+	              null,
+	              (0, _preact.h)(
+	                'span',
+	                { style: styles.attr },
+	                'scale'
+	              ),
+	              ' (tiny, small, large, huge) | optional'
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Example'
+	          ),
+	          (0, _preact.h)(CodeExample, { title: 'Text example',
+	            text: 'My scene is 500 seconds long, it has red background, a text telling me "You can read" and another text that says "Say no more" to my left' })
+	        ),
+	        (0, _preact.h)(
+	          'section',
+	          null,
+	          (0, _preact.h)(
+	            'h4',
+	            null,
+	            'Duration'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'You need to specify the duration of each scene in seconds. Otherwise it won',
+	            '\'',
+	            't be displayed.'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Keywords: ',
+	            (0, _preact.h)(
+	              'span',
+	              { style: styles.attr },
+	              'seconds'
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Attributes:'
+	          ),
+	          (0, _preact.h)(
+	            'ul',
+	            null,
+	            (0, _preact.h)(
+	              'li',
+	              null,
+	              (0, _preact.h)(
+	                'span',
+	                { style: styles.attr },
+	                'duration'
+	              ),
+	              ' (number) | required'
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Example'
+	          ),
+	          (0, _preact.h)(CodeExample, { title: 'Duration example',
+	            text: 'My scene is 8 seconds long, it has blue background and text saying "This will finish soon"' })
+	        ),
+	        (0, _preact.h)(
+	          'section',
+	          null,
+	          (0, _preact.h)(
+	            'h4',
+	            null,
+	            'Voiceover'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'You can make your computer say phrases out loud. This will only work on browsers supporting speech synthesis.'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Keywords: ',
+	            (0, _preact.h)(
+	              'span',
+	              { style: styles.attr },
+	              'voiceover'
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Attributes:'
+	          ),
+	          (0, _preact.h)(
+	            'ul',
+	            null,
+	            (0, _preact.h)(
+	              'li',
+	              null,
+	              (0, _preact.h)(
+	                'span',
+	                { style: styles.attr },
+	                'text'
+	              ),
+	              ' (string) | required'
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Example'
+	          ),
+	          (0, _preact.h)(CodeExample, { title: 'Voiceover example',
+	            text: 'My scene is 8 seconds long and have a voiceover saying "If you are listening to me, your computer, then your browser supports speech synthesis."' })
+	        ),
+	        (0, _preact.h)(
+	          'section',
+	          null,
+	          (0, _preact.h)(
+	            'h4',
+	            null,
+	            'Chart'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Everything here is experimental but this feature really is. (In theory) you can create a chart on ',
+	            (0, _preact.h)(
+	              'a',
+	              { href: 'https://quartz.github.io/Chartbuilder/' },
+	              'ChartBuilder'
+	            ),
+	            ', drag the json into the editor (or host it by yourself), and GuriVR will render it as a 3d chart. Give it a chance and if it don',
+	            '\'',
+	            't work please raise an ',
+	            (0, _preact.h)(
+	              'a',
+	              { href: 'https://github.com/opennewslabs/guri-vr' },
+	              'issue'
+	            ),
+	            '.'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Keywords: ',
+	            (0, _preact.h)(
+	              'span',
+	              { style: styles.attr },
+	              'chart'
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Attributes:'
+	          ),
+	          (0, _preact.h)(
+	            'ul',
+	            null,
+	            (0, _preact.h)(
+	              'li',
+	              null,
+	              (0, _preact.h)(
+	                'span',
+	                { style: styles.attr },
+	                'src'
+	              ),
+	              ' (url) | required'
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Example'
+	          ),
+	          (0, _preact.h)(CodeExample, { title: 'Chart example',
+	            text: 'My scene is 500 seconds long and have a #eee background and a chart from https://s3.amazonaws.com/gurivr/my-data.json in front of me' })
+	        ),
+	        (0, _preact.h)(
+	          'section',
+	          null,
+	          (0, _preact.h)(
+	            'h4',
+	            null,
+	            'Background'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'You can change the boring black background on each scene with a cooler color.'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Keywords: ',
+	            (0, _preact.h)(
+	              'span',
+	              { style: styles.attr },
+	              'background'
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Attributes:'
+	          ),
+	          (0, _preact.h)(
+	            'ul',
+	            null,
+	            (0, _preact.h)(
+	              'li',
+	              null,
+	              (0, _preact.h)(
+	                'span',
+	                { style: styles.attr },
+	                'color'
+	              ),
+	              ' (string or hex color) | required'
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Example'
+	          ),
+	          (0, _preact.h)(CodeExample, { title: 'Background example',
+	            text: 'My scene is 500 seconds long and have a #ccc background and a text saying "Calaaaar"' })
+	        ),
+	        (0, _preact.h)(
+	          'section',
+	          null,
+	          (0, _preact.h)(
+	            'h4',
+	            null,
+	            '3D Models'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Another ',
+	            (0, _preact.h)(
+	              'del',
+	              null,
+	              'broken'
+	            ),
+	            ' experimental feature. You can insert Collada models into the scene.'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Keywords: ',
+	            (0, _preact.h)(
+	              'span',
+	              { style: styles.attr },
+	              'model'
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Attributes:'
+	          ),
+	          (0, _preact.h)(
+	            'ul',
+	            null,
+	            (0, _preact.h)(
+	              'li',
+	              null,
+	              (0, _preact.h)(
+	                'span',
+	                { style: styles.attr },
+	                'src'
+	              ),
+	              ' (url) | required'
+	            )
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'Example'
+	          ),
+	          (0, _preact.h)(CodeExample, { title: 'Model example',
+	            text: 'My scene is 500 seconds long, has skyblue background and a model of some trees from https://s3.amazonaws.com/gurivr/23f1972f-99c6-4f68-a0f0-392c16a02333-trees.dae you can move around with wasd 😎' })
+	        ),
+	        (0, _preact.h)(
+	          'section',
+	          null,
+	          (0, _preact.h)(
+	            'h3',
+	            null,
+	            'Sharing'
+	          ),
+	          (0, _preact.h)(
+	            'p',
+	            null,
+	            'While logged in, you can save your stories and a share link is generated every time you save the story. This link can be shared as a standalone website or be embed into an iframe to be a part of a interactive piece.',
+	            (0, _preact.h)(
+	              'div',
+	              { style: styles.embed },
+	              (0, _preact.h)('iframe', { src: 'https://s3.amazonaws.com/gurivr/s/87298957f8e8d6a3696098d8.html', width: '100%', height: '300' })
+	            ),
+	            'The generated link is a HTML file using ',
+	            (0, _preact.h)(
+	              'a',
+	              { href: 'https://aframe.io' },
+	              'A-Frame'
+	            ),
+	            ' so it can be easily modified. The link sets also the required information for the Twitter Card player for a better integration. This is an example:',
+	            (0, _preact.h)(
+	              'div',
+	              { style: styles.embed },
+	              (0, _preact.h)(
+	                'blockquote',
+	                { 'class': 'twitter-tweet', 'data-lang': 'en' },
+	                (0, _preact.h)(
+	                  'p',
+	                  { lang: 'en', dir: 'ltr' },
+	                  (0, _preact.h)(
+	                    'a',
+	                    { href: 'https://twitter.com/impronunciable' },
+	                    '@impronunciable'
+	                  ),
+	                  ' your scene is here ',
+	                  (0, _preact.h)(
+	                    'a',
+	                    { href: 'https://t.co/n2O4S2OTh7' },
+	                    'https://t.co/n2O4S2OTh7'
+	                  )
+	                ),
+	                '— Guri VR (@guri_vr) ',
+	                (0, _preact.h)(
+	                  'a',
+	                  { href: 'https://twitter.com/guri_vr/status/751870382219599872' },
+	                  'July 9, 2016'
+	                )
+	              ),
+	              (0, _preact.h)('script', { async: true, src: '//platform.twitter.com/widgets.js', charset: 'utf-8' })
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+
+	  return Guide;
+	}(_preact.Component);
+
+	exports.default = Guide;
+
+
+	var CodeExample = function CodeExample(_ref) {
+	  var text = _ref.text;
+	  var _ref$title = _ref.title;
+	  var title = _ref$title === undefined ? 'GuriVR' : _ref$title;
+	  return (0, _preact.h)(
+	    'div',
+	    { style: styles.codeExample.container },
+	    (0, _preact.h)(
+	      'pre',
+	      { style: styles.codeExample.text },
+	      text
+	    ),
+	    (0, _preact.h)(
+	      'a',
+	      { href: '/api/preview?title=' + title + '&body=' + encodeURIComponent(JSON.stringify((0, _nlp2.default)(text))), target: '_blank', style: styles.codeExample.run },
+	      'Run the story'
+	    )
+	  );
+	};
+
+	var styles = {
+	  codeExample: {
+	    container: {
+	      padding: 20,
+	      margin: 20,
+	      backgroundColor: '#eee'
+	    },
+	    text: {
+	      whiteSpace: 'pre-wrap',
+	      margin: 0
+	    },
+	    run: {
+	      display: 'block',
+	      textAlign: 'right'
+	    }
+	  },
+	  container: {
+	    marginLeft: 50,
+	    marginRight: 50,
+	    width: '100vw',
+	    maxWidth: 800,
+	    padding: 20,
+	    margin: '0 auto'
+	  },
+	  header: {
+	    borderBottom: '1px solid #ccc'
+	  },
+	  title: {
+	    textAlign: 'center'
+	  },
+	  embed: {
+	    display: 'flex',
+	    justifyContent: 'center',
+	    margin: 15
+	  },
+	  attr: {
+	    backgroundColor: '#eee',
+	    padding: 3
 	  }
 	};
 

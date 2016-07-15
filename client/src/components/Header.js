@@ -11,6 +11,7 @@ export default ({ user }) => (
         <Link style={styles.link} href='/'>GuriVR</Link>
       </Layout.Title>
       <Layout.Spacer />
+      <Link style={styles.link} href='/guide'>Guide</Link>
       { user ?
         <div>
           <Link style={styles.link} href='/stories'>My stories</Link>
@@ -26,6 +27,6 @@ const styles = {
   link: {
     color: '#fff',
     textDecoration: 'none',
-    marginRight: 10
+    marginRight: 15
   }
 };

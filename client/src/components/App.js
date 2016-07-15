@@ -9,6 +9,7 @@ import Home from 'components/Home';
 import Login from 'components/Login';
 import StoryList from 'components/StoryList';
 import StoryEditor from 'components/StoryEditor';
+import Guide from 'components/Guide';
 
 @Radium
 export default class App extends Component {
@@ -30,6 +31,7 @@ export default class App extends Component {
         <Layout.Content style={styles.mainContainer}>
           <Router>
             <Home path='/' />
+            <Guide path='/guide' />
             <Login path='/login' />
             <StoryList path='/stories' />
             <StoryEditor path='/stories/:id' />
