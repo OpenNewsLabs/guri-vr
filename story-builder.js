@@ -81,7 +81,7 @@ const renderObject = (obj, i, chapter) => {
   case 'chart':
     return `<a-entity scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src};"></a-entity>`;
   case 'model':
-  return `<a-collada-model scale="${obj.scale.join(' ')}" rotation="${obj.rotation[0] + 180} ${obj.rotation[1]} ${obj.rotation[2]}" position="${obj.position.join(' ')}" src="${obj.src}"></a-collada-model>`;
+  return `<a-collada-model scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="${obj.src}"></a-collada-model>`;
   }
 }
 
