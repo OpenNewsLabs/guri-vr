@@ -9129,32 +9129,35 @@
 	};
 
 	function getObjects(p) {
-
-	  var objects = p.match(/(audio|sound|panorama|image|picture|text|videosphere|video|seconds|voiceover|chart|background|model)/gi) || [];
+	  var entitiesRegex = /(^|\s|;|\.|,|:)(audio|sound|panorama|image|picture|text|videosphere|video|seconds|voiceover|chart|background|model)(\s|$|;|\.|,|:)/gi;
+	  var objects = [],
+	      obj;
+	  while ((obj = entitiesRegex.exec(p)) !== null) {
+	    objects.push({ type: obj[2].trim(), index: obj.index });
+	  }
 
 	  return objects.map(function (obj, i) {
+	    // for backwards words I'm going back to the previous obj and add the length
+	    var sp = i !== 0 ? p.substring(objects[i - 1].index + objects[i - 1].type.length) : p;
 	    // special case for duration
-	    if (obj === 'seconds') {
-	      var match = p.match(/[0-9]+ seconds/i);
-	      p = p.slice(p.indexOf(obj) + obj.length);
+	    if (obj.type === 'seconds') {
+	      var match = sp.match(/[0-9]+ seconds/i);
 	      return {
 	        type: 'duration',
 	        value: parseInt(match[0].replace(' seconds', ''), 10)
 	      };
-	    } else if (obj === 'background') {
-	      var match = p.match(/(#[a-fA-F0-9]{3,6}|\w+) background/i);
-
-	      p = p.slice(p.indexOf(obj) + obj.length);
+	    } else if (obj.type === 'background') {
+	      var match = sp.match(/(#[a-fA-F0-9]{3,6}|\w+) background/i);
 	      return {
 	        type: 'background',
 	        color: match[0].replace(' background', '')
 	      };
 	    }
 
-	    p = p.slice(p.indexOf(obj) + obj.length);
-	    var strLength = i === objects.length - 1 ? p.length : p.indexOf(objects[i + 1]);
-	    var str = p.substr(0, strLength);
-	    switch (obj) {
+	    sp = i === objects.length - 1 ? p.substring(obj.index) : p.substring(obj.index, objects[i + 1].index);
+
+	    var str = sp;
+	    switch (obj.type) {
 	      case 'audio':
 	      case 'sound':
 	        return {
@@ -9231,7 +9234,7 @@
 	}
 
 	function getQuote(str) {
-	  var match = str.match(/["].*["]/);
+	  var match = str.match(/".*"/);
 	  if (!(match && match.length)) return;
 	  return match[0].replace(/"/g, '');
 	}

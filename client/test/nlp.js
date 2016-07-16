@@ -52,11 +52,68 @@ describe('Natural language interpreter', () => {
     assert(out.length === 1);
 
     assert(Array.isArray(out[0]));
-    assert(out[0].length === 1);
+    assert(out[0].length === 2);
 
-    assert(out[0][0].type === 'chart');
-    assert(out[0][0].src === 'http://my-domain.com/chart-mychart.html');
+    assert(out[0][0].type === 'duration');
+    assert(out[0][0].value === 30);
+
+    assert(out[0][1].type === 'chart');
+    assert(out[0][1].src === 'http://my-domain.com/chart-mychart.html');
   });
 
+  it('Should pass the homepage story', () => {
+    const out = nlp(`
+      Try adding some scenes. For example my first scene will last 500 seconds and display the following text: "Guri is cooooool!" and a panorama located at https://s3.amazonaws.com/gurivr/pano.jpg
+    `);
+
+    assert(Array.isArray(out));
+    assert(out.length === 1);
+
+    assert(Array.isArray(out[0]));
+    assert(out[0].length === 3);
+
+    assert(out[0][0].type === 'duration');
+    assert(out[0][0].value === 500);
+
+    assert(out[0][1].type === 'text');
+    assert(out[0][1].text === 'Guri is cooooool!');
+
+    assert(out[0][2].type === 'panorama');
+    assert(out[0][2].src === 'https://s3.amazonaws.com/gurivr/pano.jpg');
+  });
+
+  it('Should accept multiple scenes', () => {
+    const out = nlp(`
+      This is my first scene. It lasts 4 seconds, has a skyblue background and shows a text saying "This is the first scene"
+
+      This paragraph is never interpreted because I'm not specifying the duration. This paragraphs can be used for talking about different parts of your story without generating scenes.
+
+      The last scene lasts 10 seconds and has just a text saying "The End!".
+    `);
+
+    assert(Array.isArray(out));
+    assert(out.length === 2);
+
+    assert(Array.isArray(out[0]));
+    assert(out[0].length === 3);
+
+    assert(out[0][0].type === 'duration');
+    assert(out[0][0].value === 4);
+
+    assert(out[0][1].type === 'background');
+    assert(out[0][1].color === 'skyblue');
+
+    assert(out[0][2].type === 'text');
+    assert(out[0][2].text === 'This is the first scene');
+
+    assert(Array.isArray(out[1]));
+    assert(out[1].length === 2);
+
+    assert(out[1][0].type === 'duration');
+    assert(out[1][0].value === 10);
+
+    assert(out[1][1].type === 'text');
+    assert(out[1][1].text === 'The End!');
+  });
 
 });
