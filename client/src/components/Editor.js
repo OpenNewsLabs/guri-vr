@@ -65,7 +65,7 @@ codemirror.defineSimpleMode('guri', {
       token: "atom"
     },
     {
-      regex: /([0-9]+) (seconds)/,
+      regex: /[0-9]+ seconds|[0-9]+ second/,
       token: ["number", "atom"]
     },
     {

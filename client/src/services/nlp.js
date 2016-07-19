@@ -6,7 +6,7 @@ export default str => str
 
 
 function getObjects(p) {
-  var entitiesRegex = /(^|\s|;|\.|,|:)(audio|sound|panorama|image|picture|text|videosphere|video|seconds|voiceover|chart|background|model)(\s|$|;|\.|,|:)/gi;
+  var entitiesRegex = /(^|\s|;|\.|,|:)(audio|sound|panorama|image|picture|text|videosphere|video|seconds|second|voiceover|chart|background|model)(\s|$|;|\.|,|:)/gi;
   var objects = [], obj;
   while((obj = entitiesRegex.exec(p)) !== null) {
     objects.push({ type: obj[2].trim(), index: obj.index });
@@ -15,9 +15,10 @@ function getObjects(p) {
   return objects.map(function(obj, i){
     // for backwards words I'm going back to the previous obj and add the length
     var sp = i !== 0 ? p.substring(objects[i - 1].index + objects[i - 1].type.length) : p;
+
     // special case for duration
-    if(obj.type === 'seconds') {
-      var match = sp.match(/[0-9]+ seconds/i)
+    if(obj.type === 'seconds' || obj.type === 'second') {
+      var match = sp.match(/[0-9]+ seconds|[0-9]+ second/)
       return {
         type: 'duration',
         value: parseInt(match[0].replace(' seconds', ''), 10)
