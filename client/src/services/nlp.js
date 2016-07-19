@@ -1,7 +1,7 @@
 
 export default str => str
 .split('\n')
-.filter(p => /seconds?/.test(p))
+.filter(p => /[0-9]+ seconds?/.test(p))
 .map(getObjects);
 
 
@@ -14,14 +14,19 @@ function getObjects(p) {
 
   return objects.map(function(obj, i){
     // for backwards words I'm going back to the previous obj and add the length
-    var sp = i !== 0 ? p.substring(objects[i - 1].index + objects[i - 1].type.length) : p;
+    var sp = i !== 0 ?
+      p.substring(objects[i - 1].index + objects[i - 1].type.length, objects[i].index + objects[i].type.length + 1) :
+      p.substring(0, objects[i].index + objects[i].type.length + 1);
 
     // special case for duration
     if(obj.type === 'seconds' || obj.type === 'second') {
-      var match = sp.match(/[0-9]+ seconds|[0-9]+ second/)
+      var match = sp.match(/[0-9]+ seconds?/)
+    //console.log(match)
+      if(!match) return false;
+
       return {
         type: 'duration',
-        value: parseInt(match[0].replace(' seconds', ''), 10)
+        value: parseInt(match[0].replace(/seconds?/, ''), 10)
       }
     } else if (obj.type === 'background') {
       var match = sp.match(/(#[a-fA-F0-9]{3,6}|\w+) background/i)
@@ -31,7 +36,7 @@ function getObjects(p) {
       }
     }
 
-    sp = i === objects.length - 1 ? p.substring(obj.index) : p.substring(obj.index, objects[i+1].index);
+    sp = i === objects.length - 1 ? p.substring(obj.index) : p.substring(obj.index, objects[i+1].index + 1);
 
     var str = sp
     switch(obj.type) {
@@ -102,6 +107,8 @@ function getObjects(p) {
     }
     return obj
   })
+  // remove `falsy` objects
+  .filter(obj => !!obj);
 
 }
 

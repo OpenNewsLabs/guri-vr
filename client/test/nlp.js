@@ -116,4 +116,33 @@ describe('Natural language interpreter', () => {
     assert(out[1][1].text === 'The End!');
   });
 
+  it('If there is a second keyword without a number prefix it should ignore it', () => {
+    const out = nlp(`
+      My first scene lasts for 30 seconds and have a text saying "Hi Guri!" and a videosphere located at http://pepe.com
+
+      My second scene lasts 10 seconds
+    `);
+    assert(Array.isArray(out));
+    assert(out.length === 2);
+
+    assert(Array.isArray(out[0]));
+    assert(out[0].length === 3);
+
+    assert(out[0][0].type === 'duration');
+    assert(out[0][0].value === 30);
+
+    assert(out[0][1].type === 'text');
+    assert(out[0][1].text === 'Hi Guri!');
+
+    assert(out[0][2].type === 'videosphere');
+    assert(out[0][2].src === 'http://pepe.com');
+
+    assert(Array.isArray(out[1]));
+    assert(out[1].length === 1);
+
+    assert(out[1][0].type === 'duration');
+    assert(out[1][0].value === 10);
+  });
+
+
 });
