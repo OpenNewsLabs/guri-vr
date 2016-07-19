@@ -4,6 +4,7 @@ import Radium from 'radium';
 import { route } from 'preact-router';
 import { Spinner, Card, Button, Icon } from 'preact-mdl';
 import { fetchUserStories, deleteStory } from 'services/datalayer';
+import { assetsHost } from 'services/config';
 import Fab from 'components/Fab';
 
 export default class StoryList extends Component {
@@ -30,7 +31,7 @@ export default class StoryList extends Component {
   }
 
   onShare(id) {
-    open(`https://s3.amazonaws.com/gurivr/s/${id}.html`, '_blank');
+    open(`${assetsHost}/s/${id}.html`, '_blank');
   }
 
   onEdit(id) {

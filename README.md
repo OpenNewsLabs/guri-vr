@@ -16,7 +16,9 @@ Code for [GuriVR.com](https://gurivr.com)
 - `$ npm start`
 
 ## Frontend Development
+
 - `$ cd client`
+- `$ cp config.sample.json config.json`
 - `$ npm install`
 - `$ npm start`
 

@@ -7,6 +7,7 @@ import nlp from 'services/nlp';
 import { fetchStory, createStory, updateStory } from 'services/datalayer';
 import Previewer from 'components/Previewer';
 import Editor from 'components/Editor';
+import { assetsHost } from 'services/config';
 
 const defaultText =
 `
@@ -83,7 +84,7 @@ export default class StoryEditor extends Component {
 
   onShare() {
     const { _id } = this.state;
-    open(`https://s3.amazonaws.com/gurivr/s/${_id}.html`, '_blank');
+    open(`${assetsHost}/s/${_id}.html`, '_blank');
   }
 
   render({ matches }, { text, body, title, _id, loading }) {
