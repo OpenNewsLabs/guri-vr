@@ -2,7 +2,6 @@ node_modules
 .DS_Store
 config.json
 npm-debug.log
-public/app.js
 public/uploads/*
 !public/uploads/.gitkeep
 !public/uploads/s
