@@ -4,6 +4,7 @@ const auth = require('./auth');
 const db = require('./db');
 const buildStory = require('./story-builder');
 const upload = require('./uploader');
+const nlp = require('./nlp');
 const config = require('./config.json');
 
 const app = module.exports = express.Router();
@@ -24,17 +25,23 @@ app.get('/preview', (req, res) => {
   }
 });
 
-app.post('/stories', (req, res, next) =>
-  stories.insert({
-    title: req.body.title,
-    body: JSON.stringify(req.body.body),
-    text: req.body.text,
-    user_id: req.user
-  })
-  .then(story => upload.story(story))
-  .then(story => res.json(story))
-  .catch(error => next(error))
-);
+app.post('/stories', (req, res, next) => {
+  try {
+    const body = req.body.body || nlp(req.body.text);
+
+    stories.insert({
+      title: req.body.title,
+      body: JSON.stringify(body),
+      text: req.body.text,
+      user_id: req.user
+    })
+    .then(story => upload.story(story))
+    .then(story => res.json(story))
+    .catch(error => next(error));
+  } catch (err) {
+    next(err);
+  }
+});
 
 app.post('/assets', upload.asset.single('file'),
 (req, res) => res.json({ url: req.file.location }));
