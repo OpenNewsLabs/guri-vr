@@ -11,7 +11,8 @@ export default ({ icon, onClick }) => (
 const styles = {
   container: {
     position: 'fixed',
-    right: 30,
-    bottom: 30
+    right: 10,
+    bottom: 10,
+    zIndex: 2
   }
 };
