@@ -12,7 +12,7 @@ export default class StoryList extends Component {
     super(props);
 
     this.state = {
-      stories: []
+      stories: null
     };
   }
 
@@ -74,10 +74,14 @@ export default class StoryList extends Component {
     );
   }
 
+  renderLoader() {
+    return <Spinner is-active single-color style={styles.spinner} />;
+  }
+
   render(props, { stories }) {
     return (
       <div style={styles.container}>
-        {stories.length ? this.renderList() : this.renderEmpty()}
+        {stories ? stories.length ? this.renderList() : this.renderEmpty() : this.renderLoader()}
         <Fab icon='add' onClick={this.onCreate.bind(this)} />
       </div>
     );
@@ -124,5 +128,10 @@ const styles = {
     flex: 1,
     overflow: 'hidden',
     textOverflow: 'ellipsis'
+  },
+  spinner: {
+    position: 'fixed',
+    left: '45%',
+    top: '45%'
   }
 };
