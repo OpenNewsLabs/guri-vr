@@ -4,7 +4,7 @@ module.exports = function (str) {
   .split('\n')
   .filter(function (p) { return  /[0-9]+ seconds?/.test(p) })
   .map(getObjects);
-} 
+}
 
 function getObjects(p) {
   var entitiesRegex = /(^|\s|;|\.|,|:)(audio|sound|panorama|image|picture|text|videosphere|video|seconds|second|voiceover|chart|background|model)(\s|$|;|\.|,|:)/gi;
@@ -92,8 +92,8 @@ function getObjects(p) {
       return {
         type: 'text',
         text: text,
-        position: getPosition(str, text.length * .3),
-        scale: getSize(str),
+        position: getPosition(str, 14, text.length / 30),
+        scale: getSize(str).map(function(el){ return el * 5; }),
         rotation: getRotation(str)
       }
       case 'model':

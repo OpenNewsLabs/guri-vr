@@ -11,7 +11,7 @@ module.exports = story =>
     <meta name="twitter:title" content="${story.title}">
     <meta name="twitter:description" content="">
     <meta name="twitter:player" content="https://s3.amazonaws.com/gurivr/s/${story._id}.html">
-    <meta name="twitter:player:width" content="600">
+    <meta name="twitter:player:width" content="400">
     <meta name="twitter:player:height" content="370">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -65,7 +65,7 @@ const renderChapter = (chapter, i) =>`
 const renderObject = (obj, i, chapter) => {
   switch(obj.type) {
   case 'text':
-    return `<a-entity scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" material="color: #fff" position="${obj.position.join(' ')}" text="text: ${obj.text}"></a-entity>`;
+    return `<a-entity scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" bmfont-text="text: ${obj.text}; width: 600; color: white; align: center;"></a-entity>`;
   case 'panorama':
     return `<a-sky rotation="0 180 0" src="${obj.src}"></a-sky>`;
   case 'background':
@@ -73,13 +73,13 @@ const renderObject = (obj, i, chapter) => {
   case 'videosphere':
     return `<a-videosphere src="${obj.src}"></a-videosphere>`;
   case 'video':
-    return `<a-video scale="${obj.scale.join(' ')}" width="10" height="6" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="${obj.src}"></a-video>`;
+    return `<a-video scale="${obj.scale.join(' ')}" width="10" height="6" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="${obj.src};"></a-video>`;
   case 'image':
     return `<a-image scale="${obj.scale.join(' ')}" width="5" height="5" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="${obj.src}" ></a-image>`;
   case 'audio':
     return `<a-entity position="${obj.position.join(' ')}" sound="src: ${obj.src}"></a-entity>`;
   case 'chart':
-    return `<a-entity scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src};"></a-entity>`;
+    return `<a-entity rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src}; scale: ${obj.scale.join(' ')};"></a-entity>`;
   case 'model':
   return `<a-collada-model scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="${obj.src}"></a-collada-model>`;
   }
@@ -156,5 +156,5 @@ const getChartUrl = story => {
   });
 
   return charts ? '<script src="https://s3.amazonaws.com/gurivr/aframe-chartbuilder-component.js"></script>' :
-  '<script src="https://s3.amazonaws.com/gurivr/aframe-text-component.min.js"></script>';
+  '<script src="https://s3.amazonaws.com/gurivr/aframe-bmfont-text-component.min.js"></script>';
 };
