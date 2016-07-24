@@ -1,5 +1,6 @@
 
 var path = require('path');
+var OfflinePlugin = require('offline-plugin');
 
 module.exports = {
   entry: path.join(__dirname, 'src', 'index.js'),
@@ -19,5 +20,13 @@ module.exports = {
       'react': 'preact-compat',
       'react-dom': 'preact-compat'
     }
-  }
+  },
+  plugins: [
+    new OfflinePlugin({
+      externals: ['/', 'styles.css'],
+      ServiceWorker: {
+        navigateFallbackURL: '/'
+      }
+    })
+  ]
 };
