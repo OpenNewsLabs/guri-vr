@@ -1,7 +1,7 @@
 
 import { h, Component } from 'preact';
 import Radium from 'radium';
-import nlp from 'services/nlp';
+import CodeExample from 'components/CodeExample';
 
 @Radium
 export default class Guide extends Component {
@@ -226,29 +226,7 @@ Then I want a 40 seconds scene with a white background and an audio located at h
 
 }
 
-const CodeExample = ({ text, title='GuriVR' }) => (
-  <div style={styles.codeExample.container}>
-    <pre style={styles.codeExample.text}>{text}</pre>
-    <a href={`/api/preview?title=${title}&body=${encodeURIComponent(JSON.stringify(nlp(text)))}`} target='_blank' style={styles.codeExample.run}>Run the story</a>
-  </div>
-);
-
 const styles = {
-  codeExample: {
-    container: {
-      padding: 20,
-      margin: 20,
-      backgroundColor: '#eee'
-    },
-    text: {
-      whiteSpace: 'pre-wrap',
-      margin: 0
-    },
-    run: {
-      display: 'block',
-      textAlign: 'right'
-    }
-  },
   container: {
     marginLeft: 50,
     marginRight: 50,
