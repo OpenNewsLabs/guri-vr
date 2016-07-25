@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --watch",
+    "start": "webpack --watch --config webpack.config.dev.js",
+    "build": "webpack",
     "test": "mocha --compilers js:babel-register"
   },
   "keywords": [],
