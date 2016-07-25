@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack --watch",
+    "start": "webpack --watch --config webpack.config.dev.js",
+    "build": "webpack",
     "test": "mocha --compilers js:babel-register"
   },
   "keywords": [],
@@ -16,8 +17,9 @@
     "babel-plugin-syntax-decorators": "6.8.0",
     "babel-plugin-transform-react-jsx": "6.8.0",
     "babel-preset-es2015": "6.9.0",
-    "json-loader": "^0.5.4",
-    "mocha": "^2.5.3",
+    "json-loader": "0.5.4",
+    "mocha": "2.5.3",
+    "offline-plugin": "3.4.2",
     "preact-compat": "1.9.0",
     "webpack": "1.13.1"
   },
