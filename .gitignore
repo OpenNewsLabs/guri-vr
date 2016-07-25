@@ -7,3 +7,4 @@ public/uploads/*
 !public/uploads/s
 public/uploads/s/*
 !public/uploads/s/.gitkeep
+public/app.js
