@@ -80,8 +80,7 @@ export default class Home extends Component {
             </div>
             <div style={styles.featureItem}>
               <h4>Open source</h4>
-              <p style={styles.featureText}>This is an <a href="https://github.com/opennewslabs/guri-vr">open source project</a> created as part of a <a href="https://opennews.org/what/fellowships/">Knight-Mozilla fellowship</a>. You can contribute and/or propose ideas you have for this project.</p>
-              <p>Note: A wise reporter once said "60% of the time it works every time". This tool is under development and you may find some bugs. In that case we will appreciate if you can <a href="https://github.com/opennewslabs/guri-vr/issues">fill an issue</a>.</p>
+              <p style={styles.featureText}>This is an <a href="https://github.com/opennewslabs/guri-vr">open source project</a> created as part of a <a href="https://opennews.org/what/fellowships/">Knight-Mozilla fellowship</a>. You can contribute and/or propose ideas you have for this project. <strong>Note</strong>: A wise reporter once said "60% of the time it works every time". This tool is under development and you may find some bugs. In that case we will appreciate if you can <a href="https://github.com/opennewslabs/guri-vr/issues">fill an issue</a>.</p>
             </div>
           </div>
         </div>
