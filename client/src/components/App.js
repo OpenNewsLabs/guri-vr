@@ -26,7 +26,7 @@ export default class App extends Component {
 
   render(props, { user }) {
     return (
-      <Layout fixed-header>
+      <Layout fixed-header js={false}>
         <Header user={user} />
         <Layout.Content style={styles.mainContainer}>
           <Router>
