@@ -9,6 +9,7 @@ module.exports = story =>
     <meta name="twitter:card" content="player">
     <meta name="twitter:site" content="@guri_vr">
     <meta name="twitter:title" content="${story.title}">
+    <meta name="twitter:image" content="${getMainImage(story.chapters)}">
     <meta name="twitter:description" content="">
     <meta name="twitter:player" content="https://s3.amazonaws.com/gurivr/s/${story._id}.html">
     <meta name="twitter:player:width" content="400">
@@ -180,4 +181,16 @@ const getChartUrl = story => {
 
   return charts ? '<script src="https://s3.amazonaws.com/gurivr/aframe-chartbuilder-component.js"></script>' :
   '<script src="https://s3.amazonaws.com/gurivr/aframe-bmfont-text-component.min.js"></script>';
+};
+
+const getMainImage = chapters => {
+  for (let i = 0; i < chapters.length; i++) {
+    for (let j = 0; j < chapters[i].length; j++) {
+      if (['panorama', 'image'].indexOf(chapters[i][j].type) !== -1) {
+        return chapters[i][j].src;
+      }
+    }
+  }
+
+  return 'https://s3.amazonaws.com/gurivr/logo.png';
 };
