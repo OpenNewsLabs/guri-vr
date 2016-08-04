@@ -21,7 +21,7 @@ module.exports = story =>
     ${getChartUrl(story)}
     <style>
       html, body, #root, #arVideo {
-        background-color: transparent;
+        background-color: ${story.mode === 'ar' ? 'transparent' : '#000'};
         height: 100vh;
         width: 100vw;
         color: #fff;
@@ -166,7 +166,7 @@ const renderScript = story => {
     }
 
     function end() {
-        document.body.innerHTML = '<div id="root" onclick="javascript:window.location = window.location"><p>Click or tap the screen to replay</p></div>';
+        document.body.innerHTML = '<div id="root" style="background: #000" onclick="javascript:window.location = window.location"><p>Click or tap the screen to replay</p></div>';
     }
 
     function playVoiceover() {
@@ -181,7 +181,7 @@ const renderScript = story => {
 
     nextChapter();
 
-    ${story.mode === 'ar' && renderARScript()}
+    ${story.mode === 'ar' ? renderARScript() : ''}
   `;
 };
 
@@ -195,15 +195,15 @@ const renderARScript = () =>
 
   var video = document.querySelector("#arVideo");
   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-           
-  if (navigator.getUserMedia) {       
+
+  if (navigator.getUserMedia) {
     navigator.getUserMedia({video: true}, handleVideo, videoError);
   }
- 
+  
   function handleVideo(stream) {
     video.src = window.URL.createObjectURL(stream);
   }
- 
+  
   function videoError(e) {
     alert('There was an error trying to get your camera stream :(');
   }

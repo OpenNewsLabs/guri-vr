@@ -35,7 +35,7 @@ app.post('/stories', (req, res, next) => {
       body: JSON.stringify(body),
       text: req.body.text,
       user_id: req.user,
-      mode: req.query.mode || 'vr'
+      mode: req.body.mode || 'vr'
     })
     .then(story => upload.story(story))
     .then(story => res.json(story))
@@ -82,7 +82,7 @@ app.put('/stories/:id', (req, res, next) =>
     title: req.body.title,
     body: JSON.stringify(req.body.body),
     text: req.body.text,
-    mode: req.query.mode || 'vr'
+    mode: req.body.mode || 'vr'
   }})
   .then(() => stories.findOne({ _id: req.params.id }))
   .then(story => upload.story(story))

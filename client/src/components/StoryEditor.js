@@ -59,7 +59,7 @@ export default class StoryEditor extends Component {
   }
 
   onSave() {
-    const { body, title } = this.state;
+    const { body, title, mode } = this.state;
 
     if (!title.length) return;
 
@@ -80,8 +80,8 @@ export default class StoryEditor extends Component {
   }
 
   onPreview() {
-    const { body, title } = this.state;
-    open(`/api/preview?title=${title}&body=${JSON.stringify(body)}`, '_blank');
+    const { body, title, mode } = this.state;
+    open(`/api/preview?title=${title}&mode=${mode}&body=${JSON.stringify(body)}`, '_blank');
   }
 
   onShare() {
