@@ -16,7 +16,8 @@ app.get('/preview', (req, res) => {
   try {
     const story = {
       title: req.query.title,
-      chapters: JSON.parse(req.query.body)
+      chapters: JSON.parse(req.query.body),
+      mode: req.query.mode || 'vr'
     };
     const html = buildStory(story);
     res.send(html);
@@ -33,7 +34,8 @@ app.post('/stories', (req, res, next) => {
       title: req.body.title,
       body: JSON.stringify(body),
       text: req.body.text,
-      user_id: req.user
+      user_id: req.user,
+      mode: req.query.mode || 'vr'
     })
     .then(story => upload.story(story))
     .then(story => res.json(story))
@@ -79,7 +81,8 @@ app.put('/stories/:id', (req, res, next) =>
   stories.update({ _id: req.params.id, user_id: req.user }, { $set: {
     title: req.body.title,
     body: JSON.stringify(req.body.body),
-    text: req.body.text
+    text: req.body.text,
+    mode: req.query.mode || 'vr'
   }})
   .then(() => stories.findOne({ _id: req.params.id }))
   .then(story => upload.story(story))

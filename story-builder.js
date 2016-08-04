@@ -20,8 +20,8 @@ module.exports = story =>
     <script src="https://s3.amazonaws.com/gurivr/aframe.min.js"></script>
     ${getChartUrl(story)}
     <style>
-      html, body, #root {
-        background-color: #000;
+      html, body, #root, #arVideo {
+        background-color: transparent;
         height: 100vh;
         width: 100vw;
         color: #fff;
@@ -43,6 +43,16 @@ module.exports = story =>
         -ms-flex-align: center;
         align-items: center;
       }
+
+      #arVideo {
+        width: 100%    !important;
+        max-width: 100%    !important;
+        height: auto   !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1000;
+      }
     </style>
   </head>
   <body>
@@ -53,8 +63,9 @@ module.exports = story =>
       <a-sky color="#000"></a-sky>
       ${story.chapters.map(renderChapter).join('\n')}
     </a-scene>
+    <video autoplay="true" id="arVideo">
     <script>
-      ${renderScript(story.chapters)}
+      ${renderScript(story)}
     </script>
   </body>
 </html>
@@ -109,7 +120,8 @@ const renderObject = (obj, i, j) => {
   }
 }
 
-const renderScript = chapters => {
+const renderScript = story => {
+  const chapters = story.chapters;
   const times = [];
   const voices = [];
   chapters.forEach(chapter =>
@@ -168,8 +180,34 @@ const renderScript = chapters => {
     }
 
     nextChapter();
+
+    ${story.mode === 'ar' && renderARScript()}
   `;
 };
+
+const renderARScript = () =>
+`
+  var sky = document.querySelectorAll('a-sky, a-panorama, a-videosphere');
+
+  for (var i = 0; i < sky.length; i++) {
+    sky[i].setAttribute('visible', 'false');
+  }
+
+  var video = document.querySelector("#arVideo");
+  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+           
+  if (navigator.getUserMedia) {       
+    navigator.getUserMedia({video: true}, handleVideo, videoError);
+  }
+ 
+  function handleVideo(stream) {
+    video.src = window.URL.createObjectURL(stream);
+  }
+ 
+  function videoError(e) {
+    alert('There was an error trying to get your camera stream :(');
+  }
+`;
 
 const getChartUrl = story => {
   var charts = false;

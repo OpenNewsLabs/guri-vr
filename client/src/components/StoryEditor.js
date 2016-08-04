@@ -33,6 +33,7 @@ export default class StoryEditor extends Component {
       body: nlp(initialText),
       title: 'Untitled story',
       text: initialText,
+      mode: 'vr',
       _id: id,
       loading: !!id
     };
@@ -49,7 +50,8 @@ export default class StoryEditor extends Component {
     try {
       this.setState({
         text,
-        body: nlp(text)
+        body: nlp(text),
+        mode: /ar mode/gi.test(text) ? 'ar' : 'vr'
       });
     } catch(err) {
       this.setState({ text });
@@ -87,11 +89,11 @@ export default class StoryEditor extends Component {
     open(`${assetsHost}/s/${_id}.html`, '_blank');
   }
 
-  render({ matches }, { text, body, title, _id, loading }) {
+  render({ matches }, { text, body, title, _id, loading, mode }) {
     return (
       <div style={styles.container}>
         {!loading ? <Editor value={text} onInput={this.onEditorChange.bind(this)} /> : null}
-        <Previewer body={body} />
+        <Previewer body={body} mode={mode} />
         <Toolbar onSave={this.onSave.bind(this)}
           onPreview={this.onPreview.bind(this)}
           onChangeTitle={this.onChangeTitle.bind(this)}

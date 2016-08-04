@@ -26,7 +26,8 @@ export default class Home extends Component {
 
     this.state = {
       text: defaultEditorText,
-      body: nlp(defaultEditorText)
+      body: nlp(defaultEditorText),
+      mode: 'vr'
     };
   }
 
@@ -34,8 +35,10 @@ export default class Home extends Component {
     try {
       this.setState({
         text,
-        body: nlp(text)
+        body: nlp(text),
+        mode: /ar mode/gi.test(text) ? 'ar' : 'vr'
       });
+      console.log(this.state)
     } catch(err) {
       this.setState({ text });
     }
@@ -49,7 +52,7 @@ export default class Home extends Component {
     }
   }
 
-  render(props, { text, body }) {
+  render(props, { text, body, mode }) {
     return (
       <div style={styles.container}>
         <div style={styles.hero}>
@@ -67,7 +70,7 @@ export default class Home extends Component {
                 <Editor value={text} onInput={this.onInput.bind(this)} />
               </div>
               <div style={styles.featureItem}>
-                <Previewer height={300} style={styles.preview} body={body} />
+                <Previewer height={300} style={styles.preview} body={body} mode={mode} />
               </div>
             </div>
           </div>
