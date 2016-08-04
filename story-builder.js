@@ -46,6 +46,9 @@ module.exports = story =>
   </head>
   <body>
     <a-scene>
+      <a-assets>
+      ${story.chapters.map(renderChapterAssets).join('\n')}
+      </a-assets>
       <a-sky color="#000"></a-sky>
       ${story.chapters.map(renderChapter).join('\n')}
     </a-scene>
@@ -56,32 +59,52 @@ module.exports = story =>
 </html>
 `;
 
+const renderChapterAssets = (chapter, i) => chapter
+.map((obj, key) => (obj.src && renderObjectAsset(obj, i, key)) || null)
+.filter(asset => !!asset)
+.join('\n');
+
+const renderObjectAsset = (obj, i, j) => {
+  switch (obj.type) {
+    case 'panorama':
+    case 'image':
+      return `<img src="${obj.src}" id="asset-${i}-${j}" crossorigin="anonymous">`;
+    case 'video':
+    case 'videosphere':
+      return `<video src="${obj.src}" id="asset-${i}-${j}" crossorigin="anonymous">`;
+    case 'audio':
+      return `<audio src="${obj.src}" id="asset-${i}-${j}" crossorigin="anonymous">`;
+    case 'model':
+      return `<a-asset-item src="${obj.src}" id="asset-${i}-${j}"  crossorigin="anonymous"></a-asset-item>`;
+  }
+};
+
 const renderChapter = (chapter, i) =>`
   <a-entity class="chapter" visible="${ i === 0 ? 'true' : 'false' }">
-    ${chapter.map((obj, key) => renderObject(obj, key, i)).join('\n')}
+    ${chapter.map((obj, key) => renderObject(obj, i, key)).join('\n')}
   </a-entity>
 `;
 
-const renderObject = (obj, i, chapter) => {
+const renderObject = (obj, i, j) => {
   switch(obj.type) {
   case 'text':
     return `<a-entity scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" bmfont-text="text: ${obj.text}; width: 600; color: white; align: center;"></a-entity>`;
   case 'panorama':
-    return `<a-sky rotation="0 180 0" src="${obj.src}"></a-sky>`;
+    return `<a-sky rotation="0 180 0" src="#asset-${i}-${j}"></a-sky>`;
   case 'background':
-    return `<a-sky rotation="0 180 0"  color="${obj.color}"></a-sky>`;
+    return `<a-sky rotation="0 180 0" color="${obj.color}"></a-sky>`;
   case 'videosphere':
-    return `<a-videosphere src="${obj.src}"></a-videosphere>`;
+    return `<a-videosphere src="#asset-${i}-${j}"></a-videosphere>`;
   case 'video':
-    return `<a-video scale="${obj.scale.join(' ')}" width="10" height="6" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="${obj.src}"></a-video>`;
+    return `<a-video scale="${obj.scale.join(' ')}" width="10" height="6" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-video>`;
   case 'image':
-    return `<a-image scale="${obj.scale.join(' ')}" width="5" height="5" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="${obj.src}" ></a-image>`;
+    return `<a-image scale="${obj.scale.join(' ')}" width="5" height="5" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}" ></a-image>`;
   case 'audio':
-    return `<a-entity position="${obj.position.join(' ')}" sound="src: ${obj.src}"></a-entity>`;
+    return `<a-entity position="${obj.position.join(' ')}" sound="src: ${obj.src};"></a-entity>`;
   case 'chart':
     return `<a-entity rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src}; scale: ${obj.scale.join(' ')};"></a-entity>`;
   case 'model':
-  return `<a-collada-model scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="${obj.src}"></a-collada-model>`;
+  return `<a-collada-model scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-collada-model>`;
   }
 }
 
