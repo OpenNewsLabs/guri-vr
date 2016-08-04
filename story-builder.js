@@ -68,14 +68,14 @@ const renderObjectAsset = (obj, i, j) => {
   switch (obj.type) {
     case 'panorama':
     case 'image':
-      return `<img src="${obj.src}" id="asset-${i}-${j}">`;
+      return `<img src="${obj.src}" id="asset-${i}-${j}" crossorigin="anonymous">`;
     case 'video':
     case 'videosphere':
-      return `<video src="${obj.src}" id="asset-${i}-${j}">`;
+      return `<video src="${obj.src}" id="asset-${i}-${j}" crossorigin="anonymous">`;
     case 'audio':
-      return `<audio src="${obj.src}" id="asset-${i}-${j}">`;
+      return `<audio src="${obj.src}" id="asset-${i}-${j}" crossorigin="anonymous">`;
     case 'model':
-      return `<a-asset-item src="${obj.src}" id="asset-${i}-${j}"></a-asset-item>`;
+      return `<a-asset-item src="${obj.src}" id="asset-${i}-${j}"  crossorigin="anonymous"></a-asset-item>`;
   }
 };
 
@@ -100,7 +100,7 @@ const renderObject = (obj, i, j) => {
   case 'image':
     return `<a-image scale="${obj.scale.join(' ')}" width="5" height="5" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}" ></a-image>`;
   case 'audio':
-    return `<a-entity position="${obj.position.join(' ')}" sound="src: #asset-${i}-${j}"></a-entity>`;
+    return `<a-entity position="${obj.position.join(' ')}" sound="src: ${obj.src};"></a-entity>`;
   case 'chart':
     return `<a-entity rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src}; scale: ${obj.scale.join(' ')};"></a-entity>`;
   case 'model':
