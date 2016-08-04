@@ -184,8 +184,8 @@ const getChartUrl = story => {
 };
 
 const getMainImage = chapters => {
-  for (let i = 0; i < chapters.length; i++) {
-    for (let j = 0; j < chapters[i].length; j++) {
+  for (var i = 0; i < chapters.length; i++) {
+    for (var j = 0; j < chapters[i].length; j++) {
       if (['panorama', 'image'].indexOf(chapters[i][j].type) !== -1) {
         return chapters[i][j].src;
       }
