@@ -1,34 +1,46 @@
 
+/**
+ * Module constants
+ */
+
+var ENTITIES_REGEX = /(^|\s|;|\.|,|:)(audio|sound|🔊|panorama|🌅|image|picture|text|📝|videosphere|🎥|video|seconds|second|⏲|voiceover|📢|chart|📊|background|model)(\s|$|;|\.|,|:)/gi;
+var LOCATION_REGEX = /right|left|behind|front/i;
+var SIZE_REGEX = /tiny|small|large|huge/i;
+
+
 module.exports = function (str) {
   return str
   .split('\n')
-  .filter(function (p) { return  /[0-9]+ seconds?/.test(p) })
+  .filter(function (p) { return  /[0-9]+ (⏲|seconds?)/.test(p) })
   .map(getObjects);
 }
 
 function getObjects(p) {
-  var entitiesRegex = /(^|\s|;|\.|,|:)(audio|sound|panorama|image|picture|text|videosphere|video|seconds|second|voiceover|chart|background|model)(\s|$|;|\.|,|:)/gi;
-  var objects = [], obj;
-  while((obj = entitiesRegex.exec(p)) !== null) {
-    objects.push({ type: obj[2].trim(), index: obj.index });
+  var entities = [], entity;
+
+  // Iterate over the paragraph and extract entities
+  while((entity = ENTITIES_REGEX.exec(p)) !== null) {
+    entities.push({ type: entity[2].trim(), index: entity.index });
   }
 
-  return objects.map(function(obj, i){
-    // for backwards words I'm going back to the previous obj and add the length
+  // Extract attributes for each entity
+  return entities.map(function(entity, i){
+
+    // for backwards words I'm going back to the previous entity and add the length
     var sp = i !== 0 ?
-      p.substring(objects[i - 1].index + objects[i - 1].type.length, objects[i].index + objects[i].type.length + 1) :
-      p.substring(0, objects[i].index + objects[i].type.length + 1);
+      p.substring(entities[i - 1].index + entities[i - 1].type.length, entities[i].index + entities[i].type.length + 1) :
+      p.substring(0, entities[i].index + entities[i].type.length + 1);
 
     // special case for duration
-    if(obj.type === 'seconds' || obj.type === 'second') {
-      var match = sp.match(/[0-9]+ seconds?/)
+    if(entity.type === 'seconds' || entity.type === 'second' || entity.type === '⏲') {
+      var match = sp.match(/[0-9]+ (⏲|seconds?)/)
       if(!match) return false;
 
       return {
         type: 'duration',
-        value: parseInt(match[0].replace(/seconds?/, ''), 10)
+        value: parseInt(match[0].replace(/(⏲|seconds?)/, ''), 10)
       }
-    } else if (obj.type === 'background') {
+    } else if (entity.type === 'background') {
       var match = sp.match(/(#[a-fA-F0-9]{3,6}|\w+) background/i)
       return {
         type: 'background',
@@ -36,23 +48,27 @@ function getObjects(p) {
       }
     }
 
-    sp = i === objects.length - 1 ? p.substring(obj.index) : p.substring(obj.index, objects[i+1].index + 1);
+    // Get the portion of the text relative to this entity
+    sp = i === entities.length - 1 ? p.substring(entity.index) : p.substring(entity.index, entities[i+1].index + 1);
 
     var str = sp
-    switch(obj.type) {
+    switch(entity.type) {
       case 'audio':
       case 'sound':
+      case '🔊':
         return {
           type: 'audio',
           src: getUrl(str),
           position: getPosition(str)
         }
       case 'voiceover':
+      case '📢':
         return {
           type: 'voiceover',
           text: getQuote(str)
         };
       case 'chart':
+      case '📊':
         return {
           type: 'chart',
           src: getUrl(str),
@@ -61,6 +77,7 @@ function getObjects(p) {
           scale: getSize(str)
         };
       case 'panorama':
+      case '🌅':
       return {
         type: 'panorama',
         src: getUrl(str)
@@ -74,6 +91,7 @@ function getObjects(p) {
         rotation: getRotation(str)
       }
       case 'videosphere':
+      case '🎥':
       return {
         type: 'videosphere',
         src: getUrl(str)
@@ -88,6 +106,7 @@ function getObjects(p) {
         rotation: getRotation(str)
       }
       case 'text':
+      case '📝':
       var text = getQuote(str);
       return {
         type: 'text',
@@ -105,9 +124,10 @@ function getObjects(p) {
         rotation: getRotation(str)
       }
     }
-    return obj
+
+    return entity;
   })
-  .filter(function(obj) { return !!obj; });
+  .filter(function(entity) { return !!entity; });
 }
 
 function getUrl(str) {
@@ -125,12 +145,12 @@ function getQuote(str) {
 function getPosition(str, width, height) {
   width = width || 0;
   height = height || 0;
-  var match = str.match(/right|left|behind|front/i)
+  var match = str.match(LOCATION_REGEX)
   return getAbsPos(match && match.length ? match[0] : 'front', width, height)
 }
 
 function getSize(str) {
-  var match = str.match(/tiny|small|large|huge/i)
+  var match = str.match(SIZE_REGEX)
   return getAbsSize(match && match.length ? match[0] : 'normal')
 }
 
@@ -150,7 +170,7 @@ function getAbsPos(str, width, height) {
 }
 
 function getRotation(str) {
-  var match = str.match(/right|left|behind|front/i);
+  var match = str.match(LOCATION_REGEX);
   var pos = match && match.length ? match[0] : 'front';
   switch(pos) {
     case 'left':
