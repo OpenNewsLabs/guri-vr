@@ -11,7 +11,7 @@ import Previewer from 'components/Previewer';
 const defaultEditorText = `
 You not need to be a coder to create VR experiences. The GuriVR editor interprets your words and creates the world you described.
 
-Try adding some scenes. For example my first scene will last 500 seconds and display the following text: "Guri is cooooool!" and a panorama located at https://s3.amazonaws.com/gurivr/pano.jpg
+Try adding some scenes. For example my first scene will last 500 seconds and display an image located at https://gurivr.com/logo.svg along with a text saying: "Guri is cool!" to my left and a panorama located at https://s3.amazonaws.com/gurivr/pano.jpg
 
 Try adding more scenes!
 
