@@ -92,6 +92,7 @@ app.put('/stories/:id', (req, res, next) =>
 
 app.delete('/stories/:id', (req, res, next) =>
   stories.remove({ _id: req.params.id, user_id: req.user })
+  .then(() => upload.deleteStory(req.params.id))
   .then(() => res.send('ok'))
   .catch(error => next(error))
 );
