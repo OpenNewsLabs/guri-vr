@@ -59,19 +59,22 @@ export default class StoryEditor extends Component {
   }
 
   onSave() {
-    const { body, title, mode } = this.state;
+    const { title } = this.state;
 
-    if (!title.length) return;
+    if (!title.length) {
+      alert('Please enter a name for the story');
+      return; 
+    }
 
     if (this.state._id) {
       updateStory(this.state)
-        .then(story => this.setState(Object.assign({}, this.state, story)));
+        .then(story => this.setState(Object.assign({}, this.state, {_id: story._id})));
     } else {
       createStory(this.state)
         .then(story => {
-          this.setState(Object.assign({}, this.state, story));
+          this.setState(Object.assign({}, this.state, { _id: story._id }));
           route(`/stories/${story._id}`);
-        });
+        }).then(()=> console.log(this.state, 'state'));
     }
   }
 
