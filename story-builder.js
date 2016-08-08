@@ -179,7 +179,7 @@ const renderScript = story => {
       }
     }
 
-    nextChapter();
+    document.querySelector('a-assets').addEventListener('loaded', nextChapter);
 
     ${story.mode === 'ar' ? renderARScript() : ''}
   `;
