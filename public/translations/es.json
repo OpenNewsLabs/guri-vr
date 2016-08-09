@@ -3,122 +3,122 @@
     "run": "Comenzar la historia"
   },
   "guide": {
-    "title": "Guia",
+    "title": "Guía",
     "introduction": {
-      "title": "Introduction",
-      "first": "GuriVR is a free, open source project created to allow everybody to make <a href='https://en.wikipedia.org/wiki/Virtual_reality'>Virtual Reality</a> experiences with the lowest possible learning curve. The main tool that follows the goal is the online editor which is described below but Guri attempts to make the job easy in different ways. For example, it is possible to create a basic 360 panorama that works in the browser and with headsets like the Google Cardboard just by tweeting the picture with a mention to <a href='https://twitter.com/guri_vr'>@guri_vr</a>.",
-      "second": "Guri is under <a href='https://github.com/opennewslabs/guri-vr'>active development</a> and <a href='https://github.com/opennewslabs/guri-vr/issues'>feedback</a> is always welcome and under consideration for new features and bug reports. If you see something, say something 🚨 👮"
+      "title": "Introducción",
+      "first": "GuriVR es un proyecto libre y open source con el fín de que cualquiera pueda crear experiencias de <a href='https://es.wikipedia.org/wiki/Realidad_virtual'>Realidad Virtual</a> con la menor curva de aprendizaje posible. La herramienta principal para llegar a esta meta es el editor online descripto a continuación pero Guri intenta hacer esta tarea más simple de distintas maneras. Por ejemplo, es posible crear un simple panorama 360 tanto en el navegador como en headsets como el Google Cardboard tan solo twiteando la foto mencionando a <a href='https://twitter.com/guri_vr'>@guri_vr</a>.",
+      "second": "Guri se encuentra bajo <a href='https://github.com/opennewslabs/guri-vr'>activo desarrollo</a> y el <a href='https://github.com/opennewslabs/guri-vr/issues'>feedback</a> es siempre bien recibido y bajo consideración para nuevas características y reportes de fallas. Si ves algo, decí algo 🚨 👮"
     },
     "getting_started": {
-      "title": "Getting started",
-      "first": "The easiest way to learn how to use the editor is to play around with the sample scene located at the <a href='/'>Homepage</a> or <a href='/login'>create an account</a> to be able to save your stories.",
-      "second": "The editor uses natural language processing techniques to interpret your words and convert the description into a VR experience. The ultimate goal for Guri is to be so intuitive you can express yourself using your own words without the need to think about it."
+      "title": "Comenzando",
+      "first": "La manera más simple de aprender a usar el editor es jugar con la escena de ejemplo alojada en el <a href='/'>Inicio</a> o <a href='/login'>creando una cuenta</a> para poder guardar tus historias.",
+      "second": "El editor usa técnicas de procesamiento del lenguaje natural para interpretar tus palabras y convertir la descripción en una experiencia de VR (Realidad Virtual). La meta última de Guri es ser tan intuitivo que te puedas exppresar usando tus propias palabras sin tener que pensarlo."
     },
     "scenes": {
-      "title": "Scenes",
-      "first": "Guri organize your stories into sequential scenes. Each scene is directly mapped with a paragraph in your description as soon as you specify the scene length.",
-      "second": "You can create as many scenes as you want but don't forget about to set the duration in seconds.",
-      "third": "Now that you know how to create scenes, let's see what kind of element you can add to your scenes:"
+      "title": "Escenas",
+      "first": "Guri organiza tus historias en escenas secuenciales. Cada escena mapea directamente con un párrafo en tu descripción siempre y cuando especifiques la duración de la misma.",
+      "second": "Podés crear cuantas escenas quieras pero nunca te olvides de especificar la duración en segundos de cada una de ellas.",
+      "third": "Ahora que sabes como crear escenas, veamos que tipo de elementos podes agregar a tus escenas:"
     },
     "entities": {
-      "title": "Entities",
-      "first": "A Guri scene is composed by a set of entities. A entity can be a 360 panorama, a videosphere, some text floating around, a 3d chart, images and more.",
-      "second": "Each kind of entity has modifiers (or attributes) associated. For example some elements can have a color, an asset or a determined position. For example, if I want a tiny picture of a pokemon at the left of the viewer I can express that to Guri using the following words:",
-      "third": "Below you can see the list of available entities and the modifiers that can be applied:",
-      "keywords": "Keywords",
-      "attributes": "Attributes",
-      "required": "required",
-      "optional": "optional",
-      "example": "Example"
+      "title": "Entidades",
+      "first": "Una escena en Gurí está compuesta por un conjunto de entidades. Una entidad puede ser un panorama 360, una videoesfera, texto flotando por ahí, un gráfico 3d, imágenes y más.",
+      "second": "Cada tipo de entidad tiene un conjunto de modificadores (o atributos) asociado. Por ejemplo algunos elementos tienen un color, un asset o una determinada posición. Digamos, Si quiero una pequeña imagen de un pokemon a la izquierda del espectador puedo expresarlo con Guri usando la siguiente descripción:",
+      "third": "A continuación podes ver una lista con las entidades disponibles y los atributos que pueden ser aplicados en cada caso:",
+      "keywords": "Palabras clave",
+      "attributes": "Atributos",
+      "required": "requerido",
+      "optional": "opcional",
+      "example": "Ejemplo"
     },
     "audio": {
       "title": "Audio",
-      "description": "Audio source in the 3d space. It can be positioned in different parts of the scene. It needs a url as the source, the prefered format is mp3."
+      "description": "Fuente de audio en el espacio 3D. Puede ser posicionado en distintas partes de la escena. Necesita una url como fuente, el formato preferido es mp3."
     },
     "panorama": {
       "title": "Panorama",
-      "description": "360 spherical image envolving the user view. It needs a url to display. It works better with equirectangular panoramas but works with any kind of images."
+      "description": "Imagen esférica que envuelve la vista del usuario. Necesita una url de fuente. Funciona mejor con panoramas equirectangulares pero funciona con cualquier tipo de imagen."
     },
     "videosphere": {
-      "title": "Videosphere",
-      "description": "360 spherical video envolving the user view. It needs a url to display. It works better with equirectangular videos but works with any kind of video."
+      "title": "Videoesféra",
+      "description": "Video esférico que envuelve la vista del usuario. Necesita una url de fuente. Funciona mejor con videos equirectangulares pero funciona con cualquier tipo de video."
     },
     "image": {
-      "title": "Image",
-      "description": "2d images can be located inside the scene and placed in different positions."
+      "title": "Imagen",
+      "description": "Imagen 2d que puede ser localizada dentro de la escena en distintas posiciones."
     },
     "video": {
       "title": "Video",
-      "description": "2d videos can be located inside the scene and placed in different positions."
+      "description": "Video 2d que puede ser localizado en distintas posiciones dentro de la escena."
     },
     "text": {
-      "title": "Text",
-      "description": "You can write text and it will be displayed into the screen. There is no color or font support (it's just blank text for now)"
+      "title": "Texto",
+      "description": "Podés escribir texto y va a ser ubicado dentro de la pantalla. No hay soporte de color ni texto por ahora."
     },
     "duration": {
-      "title": "Duration",
-      "description": "You need to specify the duration of each scene in seconds. Otherwise it won't be displayed."
+      "title": "Duración",
+      "description": "Es necesario especificar la duración de cada escena en segundos. De otro modo la escena no es tomada en cuenta."
     },
     "voiceover": {
-      "title": "Voiceover",
-      "description": "You can make your computer say phrases out loud. This will only work on browsers supporting speech synthesis."
+      "title": "Voz en off",
+      "description": "Podés hacer que la computadora diga frases en voz alta. Esta funcionalidad solo anda en navegadores que soportan síntesis de voz."
     },
     "chart": {
-      "title": "Chart",
-      "description": "Everything here is experimental but this feature really is. (In theory) you can create a chart on <a href='https://quartz.github.io/Chartbuilder/'>ChartBuilder</a>, drag the json into the editor (or host it by yourself), and GuriVR will render it as a 3d chart. Give it a chance and if it don't work please raise an <a href='https://github.com/opennewslabs/guri-vr'>issue</a>."
+      "title": "Gráfico",
+      "description": "Toda funcionalidad acá es experimental pero esta lo es en serio. (En teoría) podés crear un gráfico en <a href='https://quartz.github.io/Chartbuilder/'>ChartBuilder</a>, arrastrar el json en el editor (o hostearlo por tu cuenta), y GuriVR va a dibujarlo como un gráfico 3D. Probalo y si no funciona <a href='https://github.com/opennewslabs/guri-vr/issues'>reportalo</a>."
     },
     "background": {
-      "title": "Background",
-      "description": "You can change the boring black background on each scene with a cooler color."
+      "title": "Fondo",
+      "description": "Podés cambiar el fondo negro aburrido en cada escena por un color más lindo."
     },
     "3dmodel": {
-      "title": "3D Models",
-      "description": "Another <del>broken</del> experimental feature. You can insert Collada models into the scene."
+      "title": "Modelos 3D",
+      "description": "Otra funcionalidad <del>rota</del> experimental. Podés insertar modelos de Collada (.cae) en las escenas."
     },
     "sharing": {
-      "title": "Sharing",
-      "first": "While logged in, you can save your stories and a share link is generated every time you save the story. This link can be shared as a standalone website or be embed into an iframe to be a part of a interactive piece.",
-      "second": "The generated link is a HTML file using <a href='https://aframe.io'>A-Frame</a> so it can be easily modified. The link sets also the required information for the Twitter Card player for a better integration. This is an example:"
+      "title": "Compartiendo",
+      "first": "Una vez registrado podes guardar tus historias y se generará un link para compartir cada vez que guardes la historia. Este link puede ser compartido como un sitio por si mismo o ser embebido en un iframe para ser parte de una pieza interactiva, por ejemplo",
+      "second": "El link generado es un archivo HTML que usa <a href='https://aframe.io'>A-Frame</a> para que pueda ser facilmente modificado si se requiere. El link también contiene la información requerida por el reproductor embebido de Twitter para una mejor integración. Este es un ejemplo:"
     }
   },
   "header": {
-    "guide": "Guide",
-    "my_stories": "My stories",
-    "logout": "Logout",
-    "login": "Login"
+    "guide": "Guía",
+    "my_stories": "Mis historias",
+    "logout": "Desconectarme",
+    "login": "Ingresar"
   },
   "home": {
     "intro": {
-      "tagline": "Describe how do you want to tell your VR experience and will do the rest",
-      "login": "Login to create a story",
-      "create": "Create a story"
+      "tagline": "Describí como querés contar tu experiencia VR y nosotros hacemos el resto",
+      "login": "Ingresá para crear una historia",
+      "create": "Creá una historia"
     },
     "preview": {
-      "title": "Use your own words"
+      "title": "Usá tus propias palabras"
     },
     "share": {
-      "title": "Share it everywhere",
-      "description": "GuriVR uses <a href='https://webvr.info'>WebVR</a>, the Web Open Standard for the Virtual Reality World. This works on modern web browsers, Google Cardboard and Oculus rift among others. It also fallback for desktop browsers using drag controls. You can share your experiences as standalone websites or inside your site as an iframe."
+      "title": "Compartilo en todas partes",
+      "description": "GuriVR usa <a href='https://webvr.info'>WebVR</a>, el estándar web para el mundo de la Realidad Virtual. esto funciona en navegadores, Google Cardboard y Oculus rift entre otros. También cuenta con controles para el mouse y teclado. Podés compartir tus experiencias como sitios web o embeberlas en iframes."
     },
     "oss": {
-      "title": "Open source",
-      "description": "This is an <a href='https://github.com/opennewslabs/guri-vr'>open source project</a> created as part of a <a href='https://opennews.org/what/fellowships/'>Knight-Mozilla fellowship</a>. You can contribute and/or propose ideas you have for this project. <strong>Note</strong>: A wise reporter once said \"60% of the time it works every time\". This tool is under development and you may find some bugs. In that case we will appreciate if you can <a href='https://github.com/opennewslabs/guri-vr/issues'>fill an issue</a>."
+      "title": "Código abierto",
+      "description": "Este es un <a href='https://github.com/opennewslabs/guri-vr'>proyecto open source</a> creado como parte de mi <a href='https://opennews.org/what/fellowships/'>Knight-Mozilla fellowship</a>. Podés contribuir y/o aportar ideas que tengas para este proyecto. <strong>Nota</strong>: Como un sabio periodista una vez dijo \"60% de las veces, funciona todas las veces\". Esta herramienta se encuentra bajo activo desarrollo y podés encontrar fallas. En ese caso nos encantaría que las <a href='https://github.com/opennewslabs/guri-vr/issues'>reportes</a>."
     },
-    "by": "Made with ♥️ by"
+    "by": "Con ♥️ por"
   },
   "login": {
-    "sent": "Magic Link sent to your Email address!",
-    "login": "Login"
+    "sent": "Un link mágico fue enviado a tu correo!",
+    "login": "Ingresar"
   },
   "editor": {
-    "title_missing": "Please enter a name for the story",
-    "title": "title",
-    "save": "Save",
-    "share": "Share link",
-    "preview": "Fullscreen preview"
+    "title_missing": "Por favor ingresá un título para la historia",
+    "title": "título",
+    "save": "Guardar",
+    "share": "Link para compartir",
+    "preview": "Previsualizar"
   },
   "stories": {
-    "delete_confirm": "Are you sure you want to delete this story?",
-    "empty": "It seems that you don't have stories yet. You can start by clicking on the + button below 😸"
+    "delete_confirm": "Seguro querés borrar esta historia?",
+    "empty": "Parece que todavía no creaste ninguna historia. Podés empezar clickeando el botón de + que se encuentra abajo 😸"
   }
 }

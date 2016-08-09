@@ -65,7 +65,7 @@
     },
     "chart": {
       "title": "Chart",
-      "description": "Everything here is experimental but this feature really is. (In theory) you can create a chart on <a href='https://quartz.github.io/Chartbuilder/'>ChartBuilder</a>, drag the json into the editor (or host it by yourself), and GuriVR will render it as a 3d chart. Give it a chance and if it don't work please raise an <a href='https://github.com/opennewslabs/guri-vr'>issue</a>."
+      "description": "Everything here is experimental but this feature really is. (In theory) you can create a chart on <a href='https://quartz.github.io/Chartbuilder/'>ChartBuilder</a>, drag the json into the editor (or host it by yourself), and GuriVR will render it as a 3d chart. Give it a chance and if it don't work please raise an <a href='https://github.com/opennewslabs/guri-vr/issues'>issue</a>."
     },
     "background": {
       "title": "Background",
