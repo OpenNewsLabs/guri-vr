@@ -1,4 +1,6 @@
 
+import bus from 'services/guri';
+
 const locales = {'en': 'en', 'es': 'es'};
 let translations = {};
 
@@ -15,6 +17,15 @@ export default key => {
   }
 };
 
+export const setLocale = locale => {
+  try {
+    localStorage.setItem('locale', locale);
+  } catch (err) {}
+  return loadTranslations().then(() => bus.emit('renderApp'));
+};
+
+export const getLocale = () => (localStorage.getItem('locale') || navigator.locale || 'en').split('-')[0]
+
 export const loadTranslations = () => {
   try {
     const locale = localStorage.getItem('locale') || navigator.language;
@@ -29,3 +40,7 @@ export const loadTranslations = () => {
 const fetchTranslations = locale => fetch(`/translations/${locale}.json`)
   .then(res => res.json())
   .then(json => translations = json);
+
+
+// Load translations
+loadTranslations().then(() => bus.emit('renderApp'))

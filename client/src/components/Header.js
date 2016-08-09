@@ -3,7 +3,7 @@ import { h } from 'preact';
 import { Layout } from 'preact-mdl';
 import { Link } from 'preact-router';
 import { logout } from 'services/datalayer';
-import t from 'services/i18n';
+import t, { getLocale, setLocale } from 'services/i18n';
 
 export default ({ user }) => (
   <Layout.Header>
@@ -20,6 +20,7 @@ export default ({ user }) => (
         </div> :
         <Link style={styles.link} href='/login'>{t('header.login')}</Link>
       }
+      { getLocale() === 'en' ? <a style={styles.link} onClick={() => setLocale('es-ES')}>🇪🇸</a> : <a style={styles.link} onClick={() => setLocale('en-US')}>🇬🇧</a> }
     </Layout.HeaderRow>
   </Layout.Header>
 );
@@ -28,6 +29,7 @@ const styles = {
   link: {
     color: '#fff',
     textDecoration: 'none',
-    marginRight: 15
+    marginRight: 15,
+    cursor: 'pointer'
   }
 };
