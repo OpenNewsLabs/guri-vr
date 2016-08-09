@@ -3,6 +3,7 @@ import { h } from 'preact';
 import { Layout } from 'preact-mdl';
 import { Link } from 'preact-router';
 import { logout } from 'services/datalayer';
+import t from 'services/i18n';
 
 export default ({ user }) => (
   <Layout.Header>
@@ -11,13 +12,13 @@ export default ({ user }) => (
         <Link style={styles.link} href='/'>GuriVR</Link>
       </Layout.Title>
       <Layout.Spacer />
-      <Link style={styles.link} href='/guide'>Guide</Link>
+      <Link style={styles.link} href='/guide'>{t('header.guide')}</Link>
       { user ?
         <div>
-          <Link style={styles.link} href='/stories'>My stories</Link>
-          <a href='#' onClick={logout} style={styles.link}>Logout</a>
+          <Link style={styles.link} href='/stories'>{t('header.my_stories')}</Link>
+          <a href='#' onClick={logout} style={styles.link}>{t('header.logout')}</a>
         </div> :
-        <Link style={styles.link} href='/login'>Login</Link>
+        <Link style={styles.link} href='/login'>{t('header.login')}</Link>
       }
     </Layout.HeaderRow>
   </Layout.Header>

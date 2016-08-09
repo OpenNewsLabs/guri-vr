@@ -8,6 +8,7 @@ import { fetchStory, createStory, updateStory } from 'services/datalayer';
 import Previewer from 'components/Previewer';
 import Editor from 'components/Editor';
 import { assetsHost } from 'services/config';
+import t from 'services/i18n';
 
 const defaultText =
 `
@@ -62,7 +63,7 @@ export default class StoryEditor extends Component {
     const { title } = this.state;
 
     if (!title.length) {
-      alert('Please enter a name for the story');
+      alert(t('editor.title_missing'));
       return; 
     }
 
@@ -111,12 +112,12 @@ export default class StoryEditor extends Component {
 const Toolbar = ({ onSave, onPreview, onShare, title, onChangeTitle, id }) => (
   <footer style={styles.toolbarContainer}>
     <div>
-      <TextField label="title" floatingLabel={true} value={title} onChange={onChangeTitle} required />
-      <Button onClick={onSave} colored>Save</Button>
+      <TextField label={t('editor.title')} floatingLabel={true} value={title} onChange={onChangeTitle} required />
+      <Button onClick={onSave} colored>{t('editor.save')}</Button>
     </div>
     <div>
-      { id ? <Button onClick={onShare} colored>Share link</Button> : null }
-      <Button onClick={onPreview} colored>Fullscreen preview</Button>
+      { id ? <Button onClick={onShare} colored>{t('editor.share')}</Button> : null }
+      <Button onClick={onPreview} colored>{t('editor.preview')}</Button>
     </div>
   </footer>
 );

@@ -7,6 +7,7 @@ import { user } from 'services/guri';
 import nlp from 'services/nlp';
 import Editor from 'components/Editor';
 import Previewer from 'components/Previewer';
+import t from 'services/i18n';
 
 const defaultEditorText = `
 You not need to be a coder to create VR experiences. The GuriVR editor interprets your words and creates the world you described.
@@ -56,14 +57,14 @@ export default class Home extends Component {
       <div style={styles.container}>
         <div style={styles.hero}>
           <h1 style={styles.title}>GuriVR</h1>
-          <p style={styles.tagline}>Describe how do you want to tell your VR experience and will do the rest</p>
+          <p style={styles.tagline}>{t('home.intro.tagline')}</p>
           <Button style={styles.callToAction} onClick={this.goToCreate} colored raised>
-            {user ? 'Create a story' : 'Login to create a story'}
+            {user ? t('home.intro.create') : t('home.intro.login')}
           </Button>
         </div>
         <div style={styles.features}>
           <div>
-            <h4>Use your own words</h4>
+            <h4>{t('home.preview.title')}</h4>
             <div style={styles.featureDescription}>
               <div style={styles.featureItem}>
                 <Editor value={text} onInput={this.onInput.bind(this)} />
@@ -75,18 +76,18 @@ export default class Home extends Component {
           </div>
           <div style={styles.feature}>
             <div style={styles.featureItem}>
-              <h4>Share it everywhere</h4>
+              <h4>{t('home.share.title')}</h4>
               <div style={styles.featureDescription}>
-                <p style={styles.featureText}>GuriVR uses <a href="https://webvr.info">WebVR</a>, the Web Open Standard for the Virtual Reality World. This works on modern web browsers, Google Cardboard and Oculus rift among others. It also fallback for desktop browsers using drag controls. You can share your experiences as standalone websites or inside your site as an iframe.</p>
+                <p style={styles.featureText} dangerouslySetInnerHTML={{ __html: t('home.share.description') }}></p>
               </div>
             </div>
             <div style={styles.featureItem}>
-              <h4>Open source</h4>
-              <p style={styles.featureText}>This is an <a href="https://github.com/opennewslabs/guri-vr">open source project</a> created as part of a <a href="https://opennews.org/what/fellowships/">Knight-Mozilla fellowship</a>. You can contribute and/or propose ideas you have for this project. <strong>Note</strong>: A wise reporter once said "60% of the time it works every time". This tool is under development and you may find some bugs. In that case we will appreciate if you can <a href="https://github.com/opennewslabs/guri-vr/issues">fill an issue</a>.</p>
+              <h4>{t('home.oss.title')}</h4>
+              <p style={styles.featureText} dangerouslySetInnerHTML={{ __html: t('home.oss.description') }}></p>
             </div>
           </div>
         </div>
-        <footer style={styles.footer}>Made with ♥️ by <a href="https://twitter.com/impronunciable">Dan Zajdband</a></footer>
+        <footer style={styles.footer}>{t('home.by')} <a href="https://twitter.com/impronunciable">Dan Zajdband</a></footer>
       </div>
     );
   }

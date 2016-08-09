@@ -6,6 +6,7 @@ import { Spinner, Card, Button, Icon } from 'preact-mdl';
 import { fetchUserStories, deleteStory } from 'services/datalayer';
 import { assetsHost } from 'services/config';
 import Fab from 'components/Fab';
+import t from 'services/i18n';
 
 export default class StoryList extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ export default class StoryList extends Component {
   }
 
   onDelete(id, key) {
-    if (confirm('Are you sure you want to delete this story?')) {
+    if (confirm(t('stories.delete_confirm'))) {
       deleteStory(id)
         .then(() => this.setState({
           stories: this.state.stories.filter(({ _id }) => _id !== id)
@@ -69,9 +70,7 @@ export default class StoryList extends Component {
   }
 
   renderEmpty() {
-    return (
-      <p style={styles.empty}>It seems that you don{`'`}t have stories yet. You can start by clicking on the + button below 😸</p>
-    );
+    return <p style={styles.empty}>{t('stories.empty')}</p>;
   }
 
   renderLoader() {

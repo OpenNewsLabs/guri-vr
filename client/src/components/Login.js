@@ -3,6 +3,7 @@ import { h, Component } from 'preact';
 import { TextField, Card, Button } from 'preact-mdl';
 import { sendVerification } from 'services/datalayer';
 import Radium from 'radium';
+import t from 'services/i18n';
 
 @Radium
 export default class Login extends Component {
@@ -26,9 +27,7 @@ export default class Login extends Component {
   renderSent() {
     return (
       <div style={styles.sent}>
-        <Card.Text>
-          Magic Link sent to your Email address!
-        </Card.Text>
+        <Card.Text>{t('login.sent')}</Card.Text>
       </div>
     );
   }
@@ -46,7 +45,7 @@ export default class Login extends Component {
             value={email} onInput={this.linkState('email')} autofocus />
         </Card.Text>
         <Card.Actions>
-          <Button raised colored type='submit'>Login</Button>
+          <Button raised colored type='submit'>{t('login.login')}</Button>
         </Card.Actions>
       </form>
     );
