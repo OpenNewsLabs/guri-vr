@@ -83,9 +83,9 @@ const renderObjectAsset = (obj, i, j) => {
       return `<img src="${obj.src}" id="asset-${i}-${j}" crossorigin="anonymous">`;
     case 'video':
     case 'videosphere':
-      return `<video src="${obj.src}" id="asset-${i}-${j}" crossorigin="anonymous">`;
+      return `<video src="${obj.src}" id="asset-${i}-${j}" class="chapter-${i}" crossorigin="anonymous">`;
     case 'audio':
-      return `<audio src="${obj.src}" id="asset-${i}-${j}" crossorigin="anonymous">`;
+      return `<audio src="${obj.src}" id="asset-${i}-${j}" class="chapter-${i}"  crossorigin="anonymous">`;
     case 'model':
       return `<a-asset-item src="${obj.src}" id="asset-${i}-${j}"  crossorigin="anonymous"></a-asset-item>`;
   }
@@ -145,21 +145,22 @@ const renderScript = story => {
       if(actual >= chapters.length) return end();
 
       var prev = actual ? chapters[actual - 1] : chapters[0];
+      var prevIdx = actual ? actual - 1 : 0;
       var curr = chapters[actual];
       playVoiceover();
 
       prev.setAttribute('visible', false);
       curr.setAttribute('visible', true);
 
-      var audio = prev.querySelector('[sound]');
-      if(audio) audio.components.sound.pause();
-      var videosphere = prev.querySelector('a-videosphere');
-      if(videosphere) videosphere.pause();
+      var assets = document.querySelectorAll(`.chapter-${prevIdx}`);
+      for (var i = 0; i < assets.length; i++) {
+        assets[i] && assets[i].pause && assets[i].pause();
+      }
 
-      audio = curr.querySelector('[sound]');
-      if(audio) audio.components.sound.play();
-      videosphere = curr.querySelector('a-videosphere');
-      if(videosphere) videosphere.play();
+      assets = document.querySelectorAll(`.chapter-${actual}`);
+      for (var i = 0; i < assets.length; i++) {
+        assets[i] && assets[i].play && assets[i].play();
+      }
 
       setTimeout(nextChapter, times[actual] * 1000);
       actual++;
