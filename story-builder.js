@@ -152,12 +152,12 @@ const renderScript = story => {
       prev.setAttribute('visible', false);
       curr.setAttribute('visible', true);
 
-      var assets = document.querySelectorAll(`.chapter-${prevIdx}`);
+      var assets = document.querySelectorAll('.chapter-' + prevIdx);
       for (var i = 0; i < assets.length; i++) {
         assets[i] && assets[i].pause && assets[i].pause();
       }
 
-      assets = document.querySelectorAll(`.chapter-${actual}`);
+      assets = document.querySelectorAll('.chapter-' + actual);
       for (var i = 0; i < assets.length; i++) {
         assets[i] && assets[i].play && assets[i].play();
       }
