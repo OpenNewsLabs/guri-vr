@@ -74,7 +74,7 @@ Then I want a 40 seconds scene with a white background and an audio located at h
           </ul>
           <p>{t('guide.entities.example')}</p>
           <CodeExample title='Panorama example'
-            text='My scene is 500 seconds long and shows a panorama located at https://gurivr.s3.amazonaws.com/7ec6043a-3924-4341-96ab-e8df10faaa93-pa.jpg' />
+            text='My scene is 500 seconds long and shows a videosphere located at https://gurivr.s3.amazonaws.com/7ec6043a-3924-4341-96ab-e8df10faaa93-pa.jpg' />
         </section>
         <section>
           <h4>{t('guide.videosphere.title')}</h4>
