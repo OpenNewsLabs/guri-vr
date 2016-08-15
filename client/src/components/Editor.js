@@ -61,27 +61,27 @@ export default class Editor extends Component {
 codemirror.defineSimpleMode('guri', {
   start: [
     {
-      regex: /(audio|sound|panorama|image|picture|text|videosphere|video|voiceover|chart|model|foto|texto|video esfera|voz en off|gráfico|modelo)/,
+      regex: /(audio|sound|panorama|image|picture|texto|text|videosphere|video|voiceover|chart|modelo|model|foto|video esfera|voz en off|gráfico)/gi,
       token: "atom"
     },
     {
-      regex: /[0-9]+ seconds|[0-9]+ second|[0-9]+ segundos/,
+      regex: /[0-9]+ seconds|[0-9]+ second|[0-9]+ segundos/gi,
       token: ["number", "atom"]
     },
     {
-      regex: /(#[a-fA-F0-9]{3,6}|\w) (background)/,
+      regex: /(#[a-fA-F0-9]{3,6}|\w) (background)/gi,
       token: ["string", "atom"]
     },
     {
-      regex: /(fondo) (#[a-fA-F0-9]{3,6})/,
+      regex: /(fondo) (#[a-fA-F0-9]{3,6})/gi,
       token: ["string", "atom"]
     },
     {
-      regex: /https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/,
+      regex: /https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi,
       token: "string"
     },
     {
-      regex: /(right|left|behind|front|tiny|small|large|huge|derecha|izquierda|atrás|frente|diminuto|pequeño|grande|enorme)/,
+      regex: /(right|left|behind|front|tiny|small|large|huge|derecha|izquierda|atrás|frente|diminuto|pequeño|grande|enorme)/gi,
       token: "string"
     },
     {

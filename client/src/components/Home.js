@@ -9,21 +9,11 @@ import Editor from 'components/Editor';
 import Previewer from 'components/Previewer';
 import t from 'services/i18n';
 
-const defaultEditorText = `
-You not need to be a coder to create VR experiences. The GuriVR editor interprets your words and creates the world you described.
-
-Try adding some scenes. For example my first scene will last 500 seconds and display an image located at https://s3.amazonaws.com/gurivr/logo.svg along with a text saying: "Guri is cool!" to my left and a panorama located at https://s3.amazonaws.com/gurivr/pano.jpg
-
-Try adding more scenes!
-
-hint: Try with words like audio, panorama, text, videosphere, voiceover and chart.
-You can also drag your files into the editor and get back a url 🙀
-`;
-
 @Radium
 export default class Home extends Component {
   constructor(props) {
     super(props);
+    const defaultEditorText = t('home.preview.text');
 
     this.state = {
       text: defaultEditorText,
