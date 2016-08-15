@@ -51,7 +51,7 @@ exports.asset = multer({
     acl: 'public-read'
   }),
   limits: {
-    fileSize: 5000000, // 5mb
+    fieldSize: 5000000, // 5mb
     files: 1
   }
 });
