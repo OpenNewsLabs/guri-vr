@@ -3,15 +3,15 @@
  * Module constants
  */
 
-var ENTITIES_REGEX = /(^|\s|;|\.|,|:)(audio|sound|🔊|panorama|🌅|image|picture|text|📝|videosphere|🎥|video|seconds|second|⏲|voiceover|📢|chart|📊|background|model)(\s|$|;|\.|,|:)/gi;
-var LOCATION_REGEX = /right|left|behind|front/i;
-var SIZE_REGEX = /tiny|small|large|huge/i;
+var ENTITIES_REGEX = /(^|\s|;|\.|,|:)(audio|sound|🔊|panorama|🌅|image|foto|picture|text|texto|📝|videosphere|video esfera|🎥|video|seconds|second|segundos|⏲|voiceover|voz en off|📢|chart|gráfico|📊|background|fondo|model|modelo)(\s|$|;|\.|,|:)/gi;
+var LOCATION_REGEX = /right|left|behind|front|atrás|frente|izquierda|derecha/i;
+var SIZE_REGEX = /tiny|small|large|huge|diminuto|pequeño|grande|enorme/i;
 
 
 module.exports = function (str) {
   return str
   .split('\n')
-  .filter(function (p) { return  /[0-9]+ (⏲|seconds?)/.test(p) })
+  .filter(function (p) { return  /[0-9]+ (⏲|seconds?|segundos)/.test(p) })
   .map(getObjects);
 }
 
@@ -32,20 +32,20 @@ function getObjects(p) {
       p.substring(0, entities[i].index + entities[i].type.length + 1);
 
     // special case for duration
-    if(entity.type === 'seconds' || entity.type === 'second' || entity.type === '⏲') {
-      var match = sp.match(/[0-9]+ (⏲|seconds?)/)
+    if(entity.type === 'seconds' || entity.type === 'second' || entity.type === '⏲' || entity.type === 'segundos') {
+      var match = sp.match(/[0-9]+ (⏲|seconds?|segundos)/)
       if(!match) return false;
 
       return {
         type: 'duration',
-        value: parseInt(match[0].replace(/(⏲|seconds?)/, ''), 10)
+        value: parseInt(match[0].replace(/(⏲|seconds?|segundos)/, ''), 10)
       }
     } else if (entity.type === 'background') {
       var match = sp.match(/(#[a-fA-F0-9]{3,6}|\w+) background/i)
       return {
         type: 'background',
         color: match[0].replace(' background', '')
-      }
+      };
     }
 
     // Get the portion of the text relative to this entity
@@ -62,12 +62,14 @@ function getObjects(p) {
           position: getPosition(str)
         }
       case 'voiceover':
+      case 'voz en off':
       case '📢':
         return {
           type: 'voiceover',
           text: getQuote(str)
         };
       case 'chart':
+      case 'gráfico':
       case '📊':
         return {
           type: 'chart',
@@ -91,6 +93,7 @@ function getObjects(p) {
         rotation: getRotation(str)
       }
       case 'videosphere':
+      case 'video esfera':
       case '🎥':
       return {
         type: 'videosphere',
@@ -98,6 +101,7 @@ function getObjects(p) {
       }
       case 'image':
       case 'picture':
+      case 'foto':
       return {
         type: 'image',
         src: getUrl(str),
@@ -106,6 +110,7 @@ function getObjects(p) {
         rotation: getRotation(str)
       }
       case 'text':
+      case 'texto':
       case '📝':
       var text = getQuote(str);
       return {
@@ -116,6 +121,7 @@ function getObjects(p) {
         rotation: getRotation(str)
       }
       case 'model':
+      case 'modelo':
       return {
         type: 'model',
         src: getUrl(str),
@@ -123,6 +129,13 @@ function getObjects(p) {
         scale: getSize(str),
         rotation: getRotation(str)
       }
+      case 'fondo':
+      var match = sp.match(/fondo (#[a-fA-F0-9]{3,6})/i)
+      return {
+        type: 'background',
+        color: match[1]
+      }
+
     }
 
     return entity;
@@ -159,12 +172,17 @@ function getAbsPos(str, width, height) {
   var ySize = -.5 * height;
   switch(str) {
     case 'left':
+    case 'izquierda':
       return [-5, 1.5 + ySize, 5 - xSize]
     case 'right':
+    case 'derecha':
       return [5, 1.5 + ySize, 5 + xSize]
     case 'behind':
+    case 'atrás':
       return [-xSize, 1.5 + ySize, 8]
     case 'front':
+    case 'frente':
+    default:
       return [0 + xSize, 1.5 + ySize, 0]
   }
 }
@@ -174,12 +192,16 @@ function getRotation(str) {
   var pos = match && match.length ? match[0] : 'front';
   switch(pos) {
     case 'left':
+    case 'izquierda':
       return [0, 90, 0]
     case 'right':
+    case 'derecha':
       return [0, -90, 0]
     case 'behind':
+    case 'atrás':
       return [0, 180, 0]
     case 'front':
+    case 'frente':
       return [0, 0, 0]
     default:
       return [0, 0, 0]
@@ -189,12 +211,16 @@ function getRotation(str) {
 function getAbsSize(str) {
   switch(str) {
     case 'tiny':
+    case 'diminuto':
       return [1/3, 1/3, 1/3]
     case 'small':
+    case 'pequeño':
       return [1/2, 1/2, 1/2]
     case 'large':
+    case 'grande':
       return [2, 2, 2]
     case 'huge':
+    case 'enorme':
       return [3, 3, 3]
     default:
       return [1, 1, 1]

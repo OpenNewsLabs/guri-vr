@@ -57,13 +57,11 @@ module.exports = story =>
   </head>
   <body>
     <a-scene>
-      <a-assets>
-      ${story.chapters.map(renderChapterAssets).join('\n')}
-      </a-assets>
+      <a-assets>${story.chapters.map(renderChapterAssets).filter(assets => assets.trim().length)}</a-assets>
       <a-sky color="#000"></a-sky>
       ${story.chapters.map(renderChapter).join('\n')}
     </a-scene>
-    
+
     ${story.mode === 'ar' ? '<video autoplay="true" id="arVideo">' : ''}
     <script>
       ${renderScript(story)}
@@ -181,7 +179,11 @@ const renderScript = story => {
       }
     }
 
-    document.querySelector('a-assets').addEventListener('loaded', nextChapter);
+    if (document.querySelector('a-assets').hasChildNodes()) {
+      document.querySelector('a-assets').addEventListener('loaded', nextChapter);
+    } else {
+      nextChapter();
+    }
 
     ${story.mode === 'ar' ? renderARScript() : ''}
   `;
@@ -201,11 +203,11 @@ const renderARScript = () =>
   if (navigator.getUserMedia) {
     navigator.getUserMedia({video: true}, handleVideo, videoError);
   }
-  
+
   function handleVideo(stream) {
     video.src = window.URL.createObjectURL(stream);
   }
-  
+
   function videoError(e) {
     alert('There was an error trying to get your camera stream :(');
   }

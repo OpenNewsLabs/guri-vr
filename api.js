@@ -22,6 +22,7 @@ app.get('/preview', (req, res) => {
     const html = buildStory(story);
     res.send(html);
   } catch (error) {
+    console.log(error)
     res.send(buildStory({ title: '', chapters: [] }));
   }
 });
