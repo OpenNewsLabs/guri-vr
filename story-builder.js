@@ -63,7 +63,8 @@ module.exports = story =>
       <a-sky color="#000"></a-sky>
       ${story.chapters.map(renderChapter).join('\n')}
     </a-scene>
-    <video autoplay="true" id="arVideo">
+    
+    ${story.mode === 'ar' ? '<video autoplay="true" id="arVideo">' : ''}
     <script>
       ${renderScript(story)}
     </script>
