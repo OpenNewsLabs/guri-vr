@@ -129,7 +129,7 @@ export default class Guide extends Component {
           </ul>
           <p>{t('guide.entities.example')}</p>
           <CodeExample title='Duration example'
-            text={t('guide.duration.example')} />
+            text={t('guide.duration.preview')} />
         </section>
         <section>
           <h4>{t('guide.voiceover.title')}</h4>

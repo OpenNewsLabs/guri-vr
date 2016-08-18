@@ -17,7 +17,7 @@ module.exports = story =>
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>${story.title}</title>
-    <script src="https://s3.amazonaws.com/gurivr/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
     ${getChartUrl(story)}
     <style>
       html, body, #root, #arVideo {
@@ -84,7 +84,7 @@ const renderObjectAsset = (obj, i, j) => {
     case 'videosphere':
       return `<video src="${obj.src}" id="asset-${i}-${j}" class="chapter-${i}" crossorigin="anonymous">`;
     case 'audio':
-      return `<audio src="${obj.src}" id="asset-${i}-${j}" class="chapter-${i}"  crossorigin="anonymous">`;
+      return `<audio src="${obj.src}" id="asset-${i}-${j}" class="chapter-${i}"  crossorigin="anonymous" preload="auto">`;
     case 'model':
       return `<a-asset-item src="${obj.src}" id="asset-${i}-${j}"  crossorigin="anonymous"></a-asset-item>`;
   }
@@ -111,7 +111,7 @@ const renderObject = (obj, i, j) => {
   case 'image':
     return `<a-image scale="${obj.scale.join(' ')}" width="5" height="5" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}" ></a-image>`;
   case 'audio':
-    return `<a-entity position="${obj.position.join(' ')}" sound="src: ${obj.src};"></a-entity>`;
+    return `<a-sound position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-sound>`;
   case 'chart':
     return `<a-entity rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src}; scale: ${obj.scale.join(' ')};"></a-entity>`;
   case 'model':
@@ -141,6 +141,7 @@ const renderScript = story => {
     var actual = 0;
 
     function nextChapter() {
+      console.log(actual, chapters.length)
       if(actual >= chapters.length) return end();
 
       var prev = actual ? chapters[actual - 1] : chapters[0];
@@ -179,11 +180,7 @@ const renderScript = story => {
       }
     }
 
-    if (document.querySelector('a-assets').hasChildNodes()) {
-      document.querySelector('a-assets').addEventListener('loaded', nextChapter);
-    } else {
-      nextChapter();
-    }
+    nextChapter();
 
     ${story.mode === 'ar' ? renderARScript() : ''}
   `;

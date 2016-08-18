@@ -173,17 +173,17 @@ function getAbsPos(str, width, height) {
   switch(str) {
     case 'left':
     case 'izquierda':
-      return [-5, 1.5 + ySize, 5 - xSize]
+      return [-8, 1.6 + ySize, -xSize]
     case 'right':
     case 'derecha':
-      return [5, 1.5 + ySize, 5 + xSize]
+      return [8, 1.6 + ySize, -xSize]
     case 'behind':
     case 'atrás':
-      return [-xSize, 1.5 + ySize, 8]
+      return [-xSize, 1.6 + ySize, 8]
     case 'front':
     case 'frente':
     default:
-      return [0 + xSize, 1.5 + ySize, 0]
+      return [0 + xSize, 1.6 + ySize, -8]
   }
 }
 
