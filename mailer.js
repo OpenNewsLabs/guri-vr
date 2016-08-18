@@ -1,7 +1,7 @@
 
-const email = require('emailjs');
-const config = require('./config.json');
+const email = require('emailjs')
+const config = require('./config.json')
 
-const smtpServer = email.server.connect(config.email);
+const smtpServer = email.server.connect(config.email)
 
-module.exports = smtpServer;
+module.exports = smtpServer

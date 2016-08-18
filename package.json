@@ -25,6 +25,7 @@
     "pug": "2.0.0-beta3"
   },
   "devDependencies": {
-    "offline-plugin": "3.4.2"
+    "offline-plugin": "3.4.2",
+    "standard": "^7.1.2"
   }
 }

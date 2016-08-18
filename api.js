@@ -1,16 +1,15 @@
 
-const express = require('express');
-const auth = require('./auth');
-const db = require('./db');
-const buildStory = require('./story-builder');
-const upload = require('./uploader');
-const nlp = require('./nlp');
-const config = require('./config.json');
+const express = require('express')
+const auth = require('./auth')
+const db = require('./db')
+const buildStory = require('./story-builder')
+const upload = require('./uploader')
+const nlp = require('./nlp')
 
-const app = module.exports = express.Router();
+const app = module.exports = express.Router()
 
-const users = db.get('users');
-const stories = db.get('stories');
+const users = db.get('users')
+const stories = db.get('stories')
 
 app.get('/preview', (req, res) => {
   try {
@@ -18,18 +17,18 @@ app.get('/preview', (req, res) => {
       title: req.query.title,
       chapters: JSON.parse(req.query.body),
       mode: req.query.mode || 'vr'
-    };
-    const html = buildStory(story);
-    res.send(html);
+    }
+    const html = buildStory(story)
+    res.send(html)
   } catch (error) {
     console.log(error)
-    res.send(buildStory({ title: '', chapters: [] }));
+    res.send(buildStory({ title: '', chapters: [] }))
   }
-});
+})
 
 app.post('/stories', (req, res, next) => {
   try {
-    const body = req.body.body || nlp(req.body.text);
+    const body = req.body.body || nlp(req.body.text)
 
     stories.insert({
       title: req.body.title,
@@ -40,43 +39,43 @@ app.post('/stories', (req, res, next) => {
     })
     .then(story => upload.story(story))
     .then(story => res.json(story))
-    .catch(error => next(error));
+    .catch(error => next(error))
   } catch (err) {
-    next(err);
+    next(err)
   }
-});
+})
 
 app.post('/assets', upload.asset.single('file'),
-(req, res) => res.json({ url: req.file.location }));
+(req, res) => res.json({ url: req.file.location }))
 
 app.post('/login', auth.requestToken(
   (email, delivery, callback, req) =>
      users.findOne({ email })
       .then(user => {
         if (user) {
-          callback(null, user._id);
+          callback(null, user._id)
         } else {
           users.insert({ email })
-            .then(user => callback(null, user._id));
+            .then(user => callback(null, user._id))
         }
       })
       .catch(err => callback(err))),
-  (req, res) => res.send('ok'));
+  (req, res) => res.send('ok'))
 
-app.use(auth.restricted());
+app.use(auth.restricted())
 
 app.post('/logout', (req, res) =>
-req.session.destroy(() => res.send('ok')));
+req.session.destroy(() => res.send('ok')))
 
-app.get('/stories', (req, res) => stories
+app.get('/stories', (req, res, next) => stories
 .find({ user_id: req.user })
 .then(docs => res.json(docs))
-.catch(err => next(err)));
+.catch(err => next(err)))
 
-app.get('/stories/:id', (req, res) => stories
+app.get('/stories/:id', (req, res, next) => stories
 .findOne({ user_id: req.user, _id: req.params.id })
 .then(doc => res.json(doc))
-.catch(err => next(err)));
+.catch(err => next(err)))
 
 app.put('/stories/:id', (req, res, next) =>
   stories.update({ _id: req.params.id, user_id: req.user }, { $set: {
@@ -89,11 +88,11 @@ app.put('/stories/:id', (req, res, next) =>
   .then(story => upload.story(story))
   .then(story => res.json(story))
   .catch(error => next(error))
-);
+)
 
 app.delete('/stories/:id', (req, res, next) =>
   stories.remove({ _id: req.params.id, user_id: req.user })
   .then(() => upload.deleteStory(req.params.id))
   .then(() => res.send('ok'))
   .catch(error => next(error))
-);
+)

@@ -1,13 +1,13 @@
 
-import { h, Component } from 'preact';
-import Radium from 'radium';
-import CodeExample from 'components/CodeExample';
-import t from 'services/i18n';
+import { h, Component } from 'preact'
+import Radium from 'radium'
+import CodeExample from 'components/CodeExample'
+import t from 'services/i18n'
 
 @Radium
 export default class Guide extends Component {
 
-  render() {
+  render () {
     return (
       <article style={styles.container}>
         <header style={styles.header}>
@@ -38,7 +38,7 @@ export default class Guide extends Component {
           <CodeExample
             title={t('guide.entities.title')}
             text={t('guide.entities.preview')} />
-            <p>{t('guide.entities.third')}</p>
+          <p>{t('guide.entities.third')}</p>
         </section>
         <section>
           <h4>{t('guide.audio.title')}</h4>
@@ -185,19 +185,19 @@ export default class Guide extends Component {
             {t('guide.sharing.first')}
 
             <div style={styles.embed}>
-              <iframe src="https://s3.amazonaws.com/gurivr/s/87298957f8e8d6a3696098d8.html" width="100%" height="300"></iframe>
+              <iframe src='https://s3.amazonaws.com/gurivr/s/87298957f8e8d6a3696098d8.html' width='100%' height='300'></iframe>
             </div>
 
             <span dangerouslySetInnerHTML={{ __html: t('guide.sharing.second') }}></span>
 
             <div style={styles.embed}>
-              <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/impronunciable">@impronunciable</a> your scene is here <a href="https://t.co/n2O4S2OTh7">https://t.co/n2O4S2OTh7</a></p>&mdash; Guri VR (@guri_vr) <a href="https://twitter.com/guri_vr/status/751870382219599872">July 9, 2016</a></blockquote>
-              <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+              <blockquote class='twitter-tweet' data-lang='en'><p lang='en' dir='ltr'><a href='https://twitter.com/impronunciable'>@impronunciable</a> your scene is here <a href='https://t.co/n2O4S2OTh7'>https://t.co/n2O4S2OTh7</a></p>&mdash; Guri VR (@guri_vr) <a href='https://twitter.com/guri_vr/status/751870382219599872'>July 9, 2016</a></blockquote>
+              <script async src='//platform.twitter.com/widgets.js' charset='utf-8'></script>
             </div>
           </p>
         </section>
       </article>
-    );
+    )
   }
 
 }
@@ -226,4 +226,4 @@ const styles = {
     backgroundColor: '#eee',
     padding: 3
   }
-};
+}

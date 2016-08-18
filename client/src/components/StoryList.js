@@ -1,50 +1,51 @@
 
-import { h, Component } from 'preact';
-import Radium from 'radium';
-import { route } from 'preact-router';
-import { Spinner, Card, Button, Icon } from 'preact-mdl';
-import { fetchUserStories, deleteStory } from 'services/datalayer';
-import { assetsHost } from 'services/config';
-import Fab from 'components/Fab';
-import t from 'services/i18n';
+import { h, Component } from 'preact'
+import Radium from 'radium'
+import { route } from 'preact-router'
+import { Spinner, Card, Button, Icon } from 'preact-mdl'
+import { fetchUserStories, deleteStory } from 'services/datalayer'
+import { assetsHost } from 'services/config'
+import Fab from 'components/Fab'
+import t from 'services/i18n'
 
+@Radium
 export default class StoryList extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
 
     this.state = {
       stories: null
-    };
-  }
-
-  componentWillMount() {
-    fetchUserStories()
-      .then(stories => this.setState({ stories }));
-  }
-
-  onDelete(id, key) {
-    if (confirm(t('stories.delete_confirm'))) {
-      deleteStory(id)
-        .then(() => this.setState({
-          stories: this.state.stories.filter(({ _id }) => _id !== id)
-        }));
     }
   }
 
-  onShare(id) {
-    open(`${assetsHost}/s/${id}.html`, '_blank');
+  componentWillMount () {
+    fetchUserStories()
+      .then(stories => this.setState({ stories }))
   }
 
-  onEdit(id) {
-    route(`/stories/${id}`);
+  onDelete (id, key) {
+    if (window.confirm(t('stories.delete_confirm'))) {
+      deleteStory(id)
+        .then(() => this.setState({
+          stories: this.state.stories.filter(({ _id }) => _id !== id)
+        }))
+    }
   }
 
-  onCreate() {
-    route('/stories/create');
+  onShare (id) {
+    window.open(`${assetsHost}/s/${id}.html`, '_blank')
   }
 
-  renderList() {
-    const { stories } = this.state;
+  onEdit (id) {
+    route(`/stories/${id}`)
+  }
+
+  onCreate () {
+    route('/stories/create')
+  }
+
+  renderList () {
+    const { stories } = this.state
 
     return (
       <div style={styles.listContainer}>
@@ -66,37 +67,30 @@ export default class StoryList extends Component {
           </Card>
         ))}
       </div>
-    );
+    )
   }
 
-  renderEmpty() {
-    return <p style={styles.empty}>{t('stories.empty')}</p>;
+  renderEmpty () {
+    return <p style={styles.empty}>{t('stories.empty')}</p>
   }
 
-  renderLoader() {
-    return <Spinner is-active single-color style={styles.spinner} />;
+  renderLoader () {
+    return <Spinner is-active single-color style={styles.spinner} />
   }
 
-  render(props, { stories }) {
+  render (props, { stories }) {
     return (
       <div style={styles.container}>
         {stories ? stories.length ? this.renderList() : this.renderEmpty() : this.renderLoader()}
         <Fab icon='add' onClick={this.onCreate.bind(this)} />
       </div>
-    );
+    )
   }
 }
 
 const styles = {
   container: {
     width: '100vw'
-  },
-  spinner: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flex: 1,
-    height: '100%'
   },
   listContainer: {
     margin: 30,
@@ -133,4 +127,4 @@ const styles = {
     left: '45%',
     top: '45%'
   }
-};
+}

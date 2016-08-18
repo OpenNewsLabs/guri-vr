@@ -1,20 +1,20 @@
 
-import { h, Component } from 'preact';
-import Radium from 'radium';
-import codemirror from 'codemirror';
-import { uploadAsset } from 'services/datalayer';
-import 'codemirror/addon/mode/simple';
+import { h, Component } from 'preact'
+import Radium from 'radium'
+import codemirror from 'codemirror'
+import { uploadAsset } from 'services/datalayer'
+import 'codemirror/addon/mode/simple'
 
 @Radium
 export default class Editor extends Component {
 
-  shouldComponentUpdate() {
-    return false;
+  shouldComponentUpdate () {
+    return false
   }
 
-  componentDidMount() {
-    if (this.editor) return this.editor.refresh();
-    const { value, onInput } = this.props;
+  componentDidMount () {
+    if (this.editor) return this.editor.refresh()
+    const { value, onInput } = this.props
 
     this.editor = codemirror(this.base, {
       value: String(value),
@@ -28,33 +28,33 @@ export default class Editor extends Component {
       lineWrapping: true,
       allowDropFileTypes: ['image/jpeg', 'image/png', 'image/gif', 'audio/mpeg3', 'video/mpeg'],
       mode: 'guri'
-    });
+    })
     this.editor.setCursor(this.editor.lineCount(), 0)
 
-    onInput(this.editor.getValue());
-    setTimeout(() => this.editor.refresh(), 1);
+    onInput(this.editor.getValue())
+    setTimeout(() => this.editor.refresh(), 1)
 
     this.editor.on('change', () => {
-      this.value = this.editor.getValue();
-      onInput(this.value);
-    });
+      this.value = this.editor.getValue()
+      onInput(this.value)
+    })
 
     this.editor.on('drop', (editor, evt) => {
-      evt.stopPropagation();
-      evt.preventDefault();
-      const { files } = evt.dataTransfer;
+      evt.stopPropagation()
+      evt.preventDefault()
+      const { files } = evt.dataTransfer
       if (files && files.length) {
         uploadAsset(files[0])
           .then(({ url }) => {
-            this.editor.replaceSelection(url);
-            onInput(this.editor.getValue());
-          });
+            this.editor.replaceSelection(url)
+            onInput(this.editor.getValue())
+          })
       }
-    });
+    })
   }
 
-  render() {
-    return <div style={styles.container} autofocus />;
+  render () {
+    return <div style={styles.container} autofocus />
   }
 }
 
@@ -62,35 +62,34 @@ codemirror.defineSimpleMode('guri', {
   start: [
     {
       regex: /(audio|sound|panorama|image|picture|texto|text|videosphere|video|voiceover|chart|modelo|model|foto|video esfera|voz en off|gráfico)/gi,
-      token: "atom"
+      token: 'atom'
     },
     {
       regex: /[0-9]+ seconds|[0-9]+ second|[0-9]+ segundos/gi,
-      token: ["number", "atom"]
+      token: ['number', 'atom']
     },
     {
       regex: /(#[a-fA-F0-9]{3,6}|\w) (background)/gi,
-      token: ["string", "atom"]
+      token: ['string', 'atom']
     },
     {
       regex: /(fondo) (#[a-fA-F0-9]{3,6})/gi,
-      token: ["string", "atom"]
+      token: ['string', 'atom']
     },
     {
       regex: /https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi,
-      token: "string"
+      token: 'string'
     },
     {
       regex: /(right|left|behind|front|tiny|small|large|huge|derecha|izquierda|atrás|frente|diminuto|pequeño|grande|enorme)/gi,
-      token: "string"
+      token: 'string'
     },
     {
-      regex: /\".+\"/,
-      token: "string"
+      regex: /".+"/,
+      token: 'string'
     }
   ]
-});
-
+})
 
 const styles = {
   container: {
@@ -98,4 +97,4 @@ const styles = {
     height: 300,
     textAlign: 'left'
   }
-};
+}

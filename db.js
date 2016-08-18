@@ -1,4 +1,4 @@
 
-const config = require('./config.json');
+const config = require('./config.json')
 
-module.exports = require('monk')(config.db.database);
+module.exports = require('monk')(config.db.database)

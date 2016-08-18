@@ -13,6 +13,7 @@
   "license": "ISC",
   "devDependencies": {
     "babel-core": "6.10.4",
+    "babel-eslint": "^6.1.2",
     "babel-loader": "6.2.4",
     "babel-plugin-syntax-decorators": "6.8.0",
     "babel-plugin-transform-react-jsx": "6.8.0",
@@ -21,6 +22,7 @@
     "mocha": "2.5.3",
     "offline-plugin": "3.4.2",
     "preact-compat": "1.9.0",
+    "standard": "^7.1.2",
     "webpack": "1.13.1"
   },
   "dependencies": {
@@ -32,5 +34,9 @@
     "preact-router": "2.0.0",
     "radium": "0.17.1",
     "wildemitter": "1.2.0"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "globals": ["it", "describe", "fetch", "Headers", "FormData", "__user__", "localStorage"]
   }
 }

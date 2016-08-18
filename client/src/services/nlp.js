@@ -1,4 +1,4 @@
 
-import nlp from '../../../nlp';
+import nlp from '../../../nlp'
 
-export default nlp;
+export default nlp

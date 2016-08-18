@@ -1,48 +1,48 @@
 
-import { h, Component } from 'preact';
-import { Button } from 'preact-mdl';
-import { route } from 'preact-router';
-import Radium from 'radium';
-import { user } from 'services/guri';
-import nlp from 'services/nlp';
-import Editor from 'components/Editor';
-import Previewer from 'components/Previewer';
-import t from 'services/i18n';
+import { h, Component } from 'preact'
+import { Button } from 'preact-mdl'
+import { route } from 'preact-router'
+import Radium from 'radium'
+import { user } from 'services/guri'
+import nlp from 'services/nlp'
+import Editor from 'components/Editor'
+import Previewer from 'components/Previewer'
+import t from 'services/i18n'
 
 @Radium
 export default class Home extends Component {
-  constructor(props) {
-    super(props);
-    const defaultEditorText = t('home.preview.text');
+  constructor (props) {
+    super(props)
+    const defaultEditorText = t('home.preview.text')
 
     this.state = {
       text: defaultEditorText,
       body: nlp(defaultEditorText),
       mode: 'vr'
-    };
+    }
   }
 
-  onInput(text) {
+  onInput (text) {
     try {
       this.setState({
         text,
         body: nlp(text),
         mode: /ar mode/gi.test(text) ? 'ar' : 'vr'
-      });
-    } catch(err) {
-      this.setState({ text });
+      })
+    } catch (err) {
+      this.setState({ text })
     }
   }
 
-  goToCreate() {
+  goToCreate () {
     if (user) {
-      route('/stories/create');
+      route('/stories/create')
     } else {
-      route('/login');
+      route('/login')
     }
   }
 
-  render(props, { text, body, mode }) {
+  render (props, { text, body, mode }) {
     return (
       <div style={styles.container}>
         <div style={styles.hero}>
@@ -77,9 +77,9 @@ export default class Home extends Component {
             </div>
           </div>
         </div>
-        <footer style={styles.footer}>{t('home.by')} <a href="https://twitter.com/impronunciable">Dan Zajdband</a></footer>
+        <footer style={styles.footer}>{t('home.by')} <a href='https://twitter.com/impronunciable'>Dan Zajdband</a></footer>
       </div>
-    );
+    )
   }
 }
 
@@ -130,4 +130,4 @@ const styles = {
   preview: {
     textAlign: 'left'
   }
-};
+}

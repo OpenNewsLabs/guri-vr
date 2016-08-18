@@ -1,6 +1,4 @@
 
-const config = require('./config.json');
-
 module.exports = story =>
 `
 <!doctype html>
@@ -68,69 +66,69 @@ module.exports = story =>
     </script>
   </body>
 </html>
-`;
+`
 
 const renderChapterAssets = (chapter, i) => chapter
 .map((obj, key) => (obj.src && renderObjectAsset(obj, i, key)) || null)
 .filter(asset => !!asset)
-.join('\n');
+.join('\n')
 
 const renderObjectAsset = (obj, i, j) => {
   switch (obj.type) {
     case 'panorama':
     case 'image':
-      return `<img src="${obj.src}" id="asset-${i}-${j}" crossorigin="anonymous">`;
+      return `<img src="${obj.src}" id="asset-${i}-${j}" crossorigin="anonymous">`
     case 'video':
     case 'videosphere':
-      return `<video src="${obj.src}" id="asset-${i}-${j}" class="chapter-${i}" crossorigin="anonymous">`;
+      return `<video src="${obj.src}" id="asset-${i}-${j}" class="chapter-${i}" crossorigin="anonymous">`
     case 'audio':
-      return `<audio src="${obj.src}" id="asset-${i}-${j}" class="chapter-${i}"  crossorigin="anonymous" preload="auto">`;
+      return `<audio src="${obj.src}" id="asset-${i}-${j}" class="chapter-${i}"  crossorigin="anonymous" preload="auto">`
     case 'model':
-      return `<a-asset-item src="${obj.src}" id="asset-${i}-${j}"  crossorigin="anonymous"></a-asset-item>`;
+      return `<a-asset-item src="${obj.src}" id="asset-${i}-${j}"  crossorigin="anonymous"></a-asset-item>`
   }
-};
+}
 
-const renderChapter = (chapter, i) =>`
-  <a-entity class="chapter" visible="${ i === 0 ? 'true' : 'false' }">
+const renderChapter = (chapter, i) => `
+  <a-entity class="chapter" visible="${i === 0 ? 'true' : 'false'}">
     ${chapter.map((obj, key) => renderObject(obj, i, key)).join('\n')}
   </a-entity>
-`;
+`
 
 const renderObject = (obj, i, j) => {
-  switch(obj.type) {
-  case 'text':
-    return `<a-entity scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" bmfont-text="text: ${obj.text}; width: 600; color: white; align: center;"></a-entity>`;
-  case 'panorama':
-    return `<a-sky rotation="0 180 0" src="#asset-${i}-${j}"></a-sky>`;
-  case 'background':
-    return `<a-sky rotation="0 180 0" color="${obj.color}"></a-sky>`;
-  case 'videosphere':
-    return `<a-videosphere src="#asset-${i}-${j}"></a-videosphere>`;
-  case 'video':
-    return `<a-video scale="${obj.scale.join(' ')}" width="10" height="6" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-video>`;
-  case 'image':
-    return `<a-image scale="${obj.scale.join(' ')}" width="5" height="5" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}" ></a-image>`;
-  case 'audio':
-    return `<a-sound position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-sound>`;
-  case 'chart':
-    return `<a-entity rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src}; scale: ${obj.scale.join(' ')};"></a-entity>`;
-  case 'model':
-  return `<a-collada-model scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-collada-model>`;
+  switch (obj.type) {
+    case 'text':
+      return `<a-entity scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" bmfont-text="text: ${obj.text}; width: 600; color: white; align: center;"></a-entity>`
+    case 'panorama':
+      return `<a-sky rotation="0 180 0" src="#asset-${i}-${j}"></a-sky>`
+    case 'background':
+      return `<a-sky rotation="0 180 0" color="${obj.color}"></a-sky>`
+    case 'videosphere':
+      return `<a-videosphere src="#asset-${i}-${j}"></a-videosphere>`
+    case 'video':
+      return `<a-video scale="${obj.scale.join(' ')}" width="10" height="6" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-video>`
+    case 'image':
+      return `<a-image scale="${obj.scale.join(' ')}" width="5" height="5" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}" ></a-image>`
+    case 'audio':
+      return `<a-sound position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-sound>`
+    case 'chart':
+      return `<a-entity rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src}; scale: ${obj.scale.join(' ')};"></a-entity>`
+    case 'model':
+      return `<a-collada-model scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-collada-model>`
   }
 }
 
 const renderScript = story => {
-  const chapters = story.chapters;
-  const times = [];
-  const voices = [];
+  const chapters = story.chapters
+  const times = []
+  const voices = []
   chapters.forEach(chapter =>
     chapter.filter(obj => obj.type === 'duration')
-    .forEach(obj => times.push(obj.value)));
+    .forEach(obj => times.push(obj.value)))
 
   chapters.forEach(chapter => {
-    var voice = chapter.filter(obj => obj.type === 'voiceover');
-    voices.push(voice.length ? voice[0].text : null);
-  });
+    var voice = chapter.filter(obj => obj.type === 'voiceover')
+    voices.push(voice.length ? voice[0].text : null)
+  })
 
 
   return `
@@ -141,7 +139,6 @@ const renderScript = story => {
     var actual = 0;
 
     function nextChapter() {
-      console.log(actual, chapters.length)
       if(actual >= chapters.length) return end();
 
       var prev = actual ? chapters[actual - 1] : chapters[0];
@@ -183,8 +180,8 @@ const renderScript = story => {
     nextChapter();
 
     ${story.mode === 'ar' ? renderARScript() : ''}
-  `;
-};
+  `
+}
 
 const renderARScript = () =>
 `
@@ -208,28 +205,29 @@ const renderARScript = () =>
   function videoError(e) {
     alert('There was an error trying to get your camera stream :(');
   }
-`;
+`
 
 const getChartUrl = story => {
-  var charts = false;
+  var charts = false
   story.chapters.forEach(chapter => {
     chapter.forEach(obj => {
-      if(obj.type === 'chart') charts = true;
-    });
-  });
+      if (obj.type === 'chart') charts = true
+    })
+  })
 
-  return charts ? '<script src="https://s3.amazonaws.com/gurivr/aframe-chartbuilder-component.js"></script>' :
-  '<script src="https://s3.amazonaws.com/gurivr/aframe-bmfont-text-component.min.js"></script>';
-};
+  return charts
+  ? '<script src="https://s3.amazonaws.com/gurivr/aframe-chartbuilder-component.js"></script>'
+  : '<script src="https://s3.amazonaws.com/gurivr/aframe-bmfont-text-component.min.js"></script>'
+}
 
 const getMainImage = chapters => {
   for (var i = 0; i < chapters.length; i++) {
     for (var j = 0; j < chapters[i].length; j++) {
       if (['panorama', 'image'].indexOf(chapters[i][j].type) !== -1) {
-        return chapters[i][j].src;
+        return chapters[i][j].src
       }
     }
   }
 
-  return 'https://s3.amazonaws.com/gurivr/logo.png';
-};
+  return 'https://s3.amazonaws.com/gurivr/logo.png'
+}

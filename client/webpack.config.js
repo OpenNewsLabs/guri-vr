@@ -1,13 +1,13 @@
 
-var webpack = require('webpack');
-var OfflinePlugin = require('offline-plugin');
-var devConfig = require('./webpack.config.dev');
+var webpack = require('webpack')
+var OfflinePlugin = require('offline-plugin')
+var devConfig = require('./webpack.config.dev')
 
 module.exports = Object.assign({}, devConfig, {
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       compress: {
-        warnings: false          
+        warnings: false
       }
     }),
     new OfflinePlugin({
@@ -20,4 +20,4 @@ module.exports = Object.assign({}, devConfig, {
       }
     })
   ]
-});
+})

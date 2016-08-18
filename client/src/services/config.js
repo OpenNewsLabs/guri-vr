@@ -1,2 +1,2 @@
 
-export * from '../../config.json';
+export * from '../../config.json'
