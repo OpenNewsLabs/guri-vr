@@ -27,7 +27,7 @@ export default class Home extends Component {
       this.setState({
         text,
         body: nlp(text),
-        mode: /ar mode/gi.test(text) ? 'ar' : 'vr'
+        mode: /ar mode|modo ra/gi.test(text) ? 'ar' : 'vr'
       })
     } catch (err) {
       this.setState({ text })
