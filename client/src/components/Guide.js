@@ -180,6 +180,12 @@ export default class Guide extends Component {
             text={t('guide.3dmodel.preview')} />
         </section>
         <section>
+          <h3>{t('guide.ar.title')}</h3>
+          <p>{t('guide.ar.description')}</p>
+          <p>{t('guide.entities.example')}</p>
+          <CodeExample title='AR mode example' text={t('guide.ar.preview')} />
+        </section>
+        <section>
           <h3>{t('guide.sharing.title')}</h3>
           <p>
             {t('guide.sharing.first')}

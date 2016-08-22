@@ -97,6 +97,11 @@
       "keywords": "model",
       "preview": "My scene is 500 seconds long, has skyblue background and a model of some trees from https://s3.amazonaws.com/gurivr/23f1972f-99c6-4f68-a0f0-392c16a02333-trees.dae you can move around with wasd 😎"
     },
+    "ar": {
+      "title": "Augmented Reality mode",
+      "description": "VR and AR share a lot in common from the technical standpoint. You can use the user camera instead of an asset for the background on your experiences. To do this you just need to write down \"ar mode\" at any point in your story. Usually you'll do it at the beginning to make it clear.",
+      "preview": "This is a story that uses the AR mode\n\nThe only scene lasts 500 seconds and shows a text saying \"We are in AR mode!\""
+    },
     "sharing": {
       "title": "Sharing",
       "first": "While logged in, you can save your stories and a share link is generated every time you save the story. This link can be shared as a standalone website or be embed into an iframe to be a part of a interactive piece.",

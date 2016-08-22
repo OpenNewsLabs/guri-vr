@@ -98,6 +98,11 @@
       "keywords": "modelo",
       "preview": "My escena dura 500 segundos, tiene un fondo #87ceeb y un modelo de un bosque de https://s3.amazonaws.com/gurivr/23f1972f-99c6-4f68-a0f0-392c16a02333-trees.dae podes moverte usando las teclas wasd 😎"
     },
+    "ar": {
+      "title": "Modo Realidad Aumentada",
+      "description": "RV y RA tienen mucho en común. Podés usar la camara de tu usuario como fondo en vez de un video o un panorama. Para hacer esto hay que escribir \"modo ra\" en cualquier punto de la historia. Usualmente lo hacemos al comienzo de la historia para dejarlo en claro.",
+      "preview": "Esta historia usa el modo ra\n\nLa única escena dura 500 segundos y tiene un texto que dice \"Estamos en modo RA!\""
+    },
     "sharing": {
       "title": "Compartiendo",
       "first": "Una vez registrado podes guardar tus historias y se generará un link para compartir cada vez que guardes la historia. Este link puede ser compartido como un sitio por si mismo o ser embebido en un iframe para ser parte de una pieza interactiva, por ejemplo",
