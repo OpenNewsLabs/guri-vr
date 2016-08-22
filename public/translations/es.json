@@ -118,7 +118,7 @@
     },
     "preview": {
       "title": "Usá tus propias palabras",
-      "text": "No necesitás ser un programador para crear historias con Realidad Virtual. El editor de GuriVR interpreta tus palabras y crea el mundo que describiste.\n\nIntentá creando algunas escenas. Por ejemplo mi primera escena dura 500 segundos y muestra una foto alojada en https://s3.amazonaws.com/gurivr/logo.svg con un texto que dice: \"Guri es genial!\" a mi izquierda y un panorama de https://s3.amazonaws.com/gurivr/pano.jpg\n\nAgregá más escenas!\n\nayuda: Probá usando términos como audio, panorama, texto, video esfera, voz en off o modelo.\n\nTambién podés arrastrar archivos en el editor y obtener las urls directamente 🙀"
+      "text": "No necesitás ser un programador para crear historias con Realidad Virtual. El editor de GuriVR interpreta tus palabras y crea el mundo que describiste.\n\nIntentá creando algunas escenas. Por ejemplo mi primera escena dura 500 segundos y muestra una foto alojada en https://s3.amazonaws.com/gurivr/logo.png con un texto que dice: \"Guri es genial!\" a mi izquierda y un panorama de https://s3.amazonaws.com/gurivr/pano.jpg\n\nAgregá más escenas!\n\nayuda: Probá usando términos como audio, panorama, texto, video esfera, voz en off o modelo.\n\nTambién podés arrastrar archivos en el editor y obtener las urls directamente 🙀"
     },
     "share": {
       "title": "Compartilo en todas partes",
