@@ -42,4 +42,4 @@ app.use(function (req, res, next) {
 })
 app.get('*', (req, res) => res.render('index', {user: req.userData, analyticsId: config.analyticsId}))
 
-app.listen(config.server.port)
+app.listen(config.server.port, () => { console.log(`App running on port ${config.server.port}`) })

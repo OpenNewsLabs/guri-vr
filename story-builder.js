@@ -1,4 +1,10 @@
 
+const EXTERNAL_URLS = {
+  text: 'https://s3.amazonaws.com/gurivr/aframe-bmfont-text-component.min.js',
+  chart: 'https://s3.amazonaws.com/gurivr/aframe-chartbuilder-component.js',
+  ply: 'https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js'
+}
+
 module.exports = story =>
 `
 <!doctype html>
@@ -16,7 +22,7 @@ module.exports = story =>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>${story.title}</title>
     <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
-    ${getChartUrl(story)}
+    ${renderExternalUrls(story)}
     <style>
       html, body, #root, #arVideo {
         background-color: ${story.mode === 'ar' ? 'transparent' : '#000'};
@@ -55,7 +61,7 @@ module.exports = story =>
   </head>
   <body>
     <a-scene>
-      <a-assets>${story.chapters.map(renderChapterAssets).filter(assets => assets.trim().length)}</a-assets>
+      <a-assets timeout="20000">${story.chapters.map(renderChapterAssets).filter(assets => assets.trim().length)}</a-assets>
       <a-sky color="#000"></a-sky>
       ${story.chapters.map(renderChapter).join('\n')}
     </a-scene>
@@ -113,7 +119,9 @@ const renderObject = (obj, i, j) => {
     case 'chart':
       return `<a-entity rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src}; scale: ${obj.scale.join(' ')};"></a-entity>`
     case 'model':
-      return `<a-collada-model scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-collada-model>`
+      return obj.extension === 'ply'
+      ? `<a-entity ply-model="src: #asset-${i}-${j}" rotation="-90 0 0" position="${obj.position.join(' ')}" ></a-entity>`
+      : `<a-collada-model scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-collada-model>`
   }
 }
 
@@ -207,17 +215,30 @@ const renderARScript = () =>
   }
 `
 
-const getChartUrl = story => {
-  var charts = false
-  story.chapters.forEach(chapter => {
-    chapter.forEach(obj => {
-      if (obj.type === 'chart') charts = true
-    })
-  })
+const renderExternalUrls = story => {
+  const loaded = {}
+  const urls = []
+  story.chapters.forEach(chapter => chapter.forEach(entity => {
+    switch (entity.type) {
+      case 'text':
+        if (!loaded.text) {
+          urls.push(EXTERNAL_URLS.text)
+        }
+        break
+      case 'chart':
+        if (!loaded.chart) {
+          urls.push(EXTERNAL_URLS.chart)
+        }
+        break
+      case 'model':
+        if (!loaded.ply && entity.extension === 'ply') {
+          urls.push(EXTERNAL_URLS.ply)
+        }
+        break
+    }
+  }))
 
-  return charts
-  ? '<script src="https://s3.amazonaws.com/gurivr/aframe-chartbuilder-component.js"></script>'
-  : '<script src="https://s3.amazonaws.com/gurivr/aframe-bmfont-text-component.min.js"></script>'
+  return urls.map(url => `<script src="${url}"></script>`).join('\n')
 }
 
 const getMainImage = chapters => {

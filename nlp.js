@@ -124,10 +124,13 @@ function getObjects (p) {
         }
       case 'model':
       case 'modelo':
+        const url = getUrl(str)
+        const ext = url.split('.')
         return {
           type: 'model',
-          src: getUrl(str),
-          position: getPosition(str),
+          src: url,
+          extension: ext[ext.length - 1],
+          position: convertModelPosition(getPosition(str)),
           scale: getSize(str),
           rotation: getRotation(str)
         }
@@ -143,6 +146,10 @@ function getObjects (p) {
     return entity
   })
   .filter(function (entity) { return !!entity })
+}
+
+function convertModelPosition (pos) {
+  return [pos[0], pos[1] - 3, pos[2]]
 }
 
 function getUrl (str) {
