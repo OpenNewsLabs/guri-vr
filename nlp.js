@@ -205,7 +205,7 @@ function getRotation (str) {
       return [0, 90, 0]
     case 'right':
     case 'derecha':
-      return [0, -90, 0]
+      return [0, 180, 0]
     case 'behind':
     case 'atrás':
       return [0, 180, 0]
