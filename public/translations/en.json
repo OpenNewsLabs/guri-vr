@@ -93,7 +93,7 @@
     },
     "3dmodel": {
       "title": "3D Models",
-      "description": "Another <del>broken</del> experimental feature. You can insert Collada models into the scene.",
+      "description": "Another <del>broken</del> experimental feature. You can insert Collada, Obj and Bake models into the scene.",
       "keywords": "model",
       "preview": "My scene is 500 seconds long, has skyblue background and a model of some trees from https://s3.amazonaws.com/gurivr/23f1972f-99c6-4f68-a0f0-392c16a02333-trees.dae you can move around with wasd 😎"
     },
