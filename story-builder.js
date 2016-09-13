@@ -90,7 +90,10 @@ const renderObjectAsset = (obj, i, j) => {
     case 'audio':
       return `<audio src="${obj.src}" id="asset-${i}-${j}" class="chapter-${i}"  crossorigin="anonymous" preload="auto">`
     case 'model':
-      return `<a-asset-item src="${obj.src}" id="asset-${i}-${j}"  crossorigin="anonymous"></a-asset-item>`
+      const ext = obj.src.split('.')
+      return ext[ext.length - 1] === 'obj'
+      ? `<a-asset-item src="${obj.src}" id="asset-${i}-${j}-obj"  crossorigin="anonymous"></a-asset-item>`
+      : `<a-asset-item src="${obj.mtl}" id="asset-${i}-${j}-mtl"  crossorigin="anonymous"></a-asset-item>`
   }
 }
 
@@ -119,9 +122,15 @@ const renderObject = (obj, i, j) => {
     case 'chart':
       return `<a-entity rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src}; scale: ${obj.scale.join(' ')};"></a-entity>`
     case 'model':
-      return obj.extension === 'ply'
-      ? `<a-entity ply-model="src: #asset-${i}-${j}" rotation="-90 0 0" position="${obj.position.join(' ')}" ></a-entity>`
-      : `<a-collada-model scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-collada-model>`
+      switch (obj.extension) {
+        case 'ply':
+          return `<a-entity ply-model="src: #asset-${i}-${j}" rotation="-90 0 0" position="${obj.position.join(' ')}" ></a-entity>`
+        case 'obj':
+          return `<a-entity scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" obj-model="obj: #asset-${i}-${j}-obj; mtl:  #asset-${i}-${j}-obj;"></a-entity>`
+        case 'dae':
+        default:
+          return `<a-collada-model scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-collada-model>`
+      }
   }
 }
 
