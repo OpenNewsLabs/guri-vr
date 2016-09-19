@@ -125,7 +125,7 @@ function getObjects (p) {
       case 'model':
       case 'modelo':
         const url = getUrl(str, /\.obj$/)
-        const ext = url.split('.')
+	const ext = url && url.length ? url.split('.') : ''
         const mtl = getUrl(str, /\.mtl$/)
         return {
           type: 'model',
