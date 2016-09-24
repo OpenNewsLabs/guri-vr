@@ -162,7 +162,7 @@ function getUrl (str, validate) {
   }
   if (!match.length) return
 
-  return match[0].toLowerCase()
+  return match[0]
 }
 
 function getQuote (str) {
