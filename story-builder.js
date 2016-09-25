@@ -5,11 +5,14 @@ const EXTERNAL_URLS = {
   ply: 'https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js'
 }
 
+const MANUAL_PLAY_TYPES = ['video', 'videosphere', 'audio']
+
 module.exports = story =>
 `
 <!doctype html>
 <html>
   <head>
+    <meta charset="utf-8">
     <meta name="twitter:card" content="player">
     <meta name="twitter:site" content="@guri_vr">
     <meta name="twitter:title" content="${story.title}">
@@ -61,10 +64,11 @@ module.exports = story =>
   </head>
   <body>
     <a-scene>
-      <a-assets timeout="20000">${story.chapters.map(renderChapterAssets).filter(assets => assets.trim().length)}</a-assets>
+      <a-assets>${story.chapters.map(renderChapterAssets).filter(assets => assets.trim().length)}</a-assets>
       <a-sky color="#000"></a-sky>
       ${story.chapters.map(renderChapter).join('\n')}
     </a-scene>
+    <div id="root" style="background: #000; z-index: 999 !important; cursor: pointer; position: absolute; top: 0; left: 0;" onclick="javascript:start()"><svg style="width:48px;height:48px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div>
 
     ${story.mode === 'ar' ? '<video autoplay="true" id="arVideo">' : ''}
     <script>
@@ -86,9 +90,9 @@ const renderObjectAsset = (obj, i, j) => {
       return `<img src="${obj.src}" id="asset-${i}-${j}" crossorigin="anonymous">`
     case 'video':
     case 'videosphere':
-      return `<video src="${obj.src}" id="asset-${i}-${j}" class="chapter-${i}" crossorigin="anonymous">`
+      return `<video src="${obj.src}" id="asset-${i}-${j}" class="chapter-${i}" crossorigin="anonymous" autoplay="false"></video>`
     case 'audio':
-      return `<audio src="${obj.src}" id="asset-${i}-${j}" class="chapter-${i}"  crossorigin="anonymous" preload="auto">`
+      return `<audio src="${obj.src}" id="asset-${i}-${j}" class="chapter-${i}" crossorigin="anonymous"></audio>`
     case 'model':
       const ext = obj.src.split('.')
       return ext[ext.length - 1] === 'obj'
@@ -98,7 +102,7 @@ const renderObjectAsset = (obj, i, j) => {
 }
 
 const renderChapter = (chapter, i) => `
-  <a-entity class="chapter" visible="${i === 0 ? 'true' : 'false'}">
+  <a-entity class="chapter" visible="false">
     ${chapter.map((obj, key) => renderObject(obj, i, key)).join('\n')}
   </a-entity>
 `
@@ -118,7 +122,8 @@ const renderObject = (obj, i, j) => {
     case 'image':
       return `<a-image scale="${obj.scale.join(' ')}" width="5" height="5" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}" ></a-image>`
     case 'audio':
-      return `<a-sound position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-sound>`
+      return ''
+      return `<a-entity position="${obj.position.join(' ')}" sound="src: #asset-${i}-${j}; autoplay: false;"></a-entity>`
     case 'chart':
       return `<a-entity rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src}; scale: ${obj.scale.join(' ')};"></a-entity>`
     case 'model':
@@ -180,8 +185,15 @@ const renderScript = story => {
       actual++;
     }
 
+    function start() {
+      document.querySelector('a-scene').setAttribute('vr-mode-ui', 'enabled: true');
+      var $root = document.querySelector('#root');
+      $root.parentNode.removeChild($root);
+      nextChapter();
+    }
+
     function end() {
-        document.body.innerHTML = '<div id="root" style="background: #000" onclick="javascript:window.location = window.location"><svg fill="#FFFFFF" height="48" viewBox="0 0 24 24" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg></div>';
+      document.body.innerHTML = '<div id="root" style="background: #000; cursor: pointer" onclick="javascript:window.location = window.location"><svg fill="#FFFFFF" height="48" viewBox="0 0 24 24" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"/><path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/></svg></div>';
     }
 
     function playVoiceover() {
@@ -194,7 +206,7 @@ const renderScript = story => {
       }
     }
 
-    nextChapter();
+    ${!needsManualPlay(story.chapters) ? 'start()' : ''}
 
     ${story.mode === 'ar' ? renderARScript() : ''}
   `
@@ -260,4 +272,20 @@ const getMainImage = chapters => {
   }
 
   return 'https://s3.amazonaws.com/gurivr/logo.png'
+}
+
+/**
+ * Checks if needs a play button for audios and videos
+ */
+
+const needsManualPlay = chapters => {
+  for (let i = 0; i < chapters.length; i++) {
+    for (let j = 0; j < chapters[i].length; j++) {
+      if (MANUAL_PLAY_TYPES.indexOf(chapters[i][j].type) !== -1) {
+        return true
+      }
+    }
+  }
+
+  return false
 }
