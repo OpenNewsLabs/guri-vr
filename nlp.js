@@ -124,9 +124,18 @@ function getObjects (p) {
         }
       case 'model':
       case 'modelo':
-        const url = getUrl(str, /\.obj$/)
-        const ext = url.split('.')
-        const mtl = getUrl(str, /\.mtl$/)
+        var url = getUrl(str, /\.obj$/)
+        var mtl = null
+        var ext = ''
+        if (url) {
+          mtl = getUrl(str, /\.mtl$/)
+          ext = ['obj']
+        } else {
+          url = getUrl(str)
+          if (url) {
+            ext = url.split('.')
+          }
+        }
         return {
           type: 'model',
           src: url,
@@ -212,7 +221,7 @@ function getRotation (str) {
       return [0, 90, 0]
     case 'right':
     case 'derecha':
-      return [0, 180, 0]
+      return [0, -90, 0]
     case 'behind':
     case 'atrás':
       return [0, 180, 0]
