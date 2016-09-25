@@ -124,11 +124,13 @@ function getObjects (p) {
         }
       case 'model':
       case 'modelo':
-        const url = getUrl(str)
+        const url = getUrl(str, /\.obj$/)
         const ext = url.split('.')
+        const mtl = getUrl(str, /\.mtl$/)
         return {
           type: 'model',
           src: url,
+          mtl: mtl,
           extension: ext[ext.length - 1],
           position: convertModelPosition(getPosition(str)),
           scale: getSize(str),
@@ -152,10 +154,15 @@ function convertModelPosition (pos) {
   return [pos[0], pos[1] - 3, pos[2]]
 }
 
-function getUrl (str) {
-  var match = str.match(/https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/)
+function getUrl (str, validate) {
+  var match = str.match(/https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g)
   if (!match.length) return
-  return match[0].toLowerCase()
+  if (validate) {
+    match = match.filter(function (m) { return validate.test(m) })
+  }
+  if (!match.length) return
+
+  return match[0]
 }
 
 function getQuote (str) {

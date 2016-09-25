@@ -5,11 +5,14 @@ const EXTERNAL_URLS = {
   ply: 'https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js'
 }
 
+const MANUAL_PLAY_TYPES = ['video', 'videosphere', 'audio']
+
 module.exports = story =>
 `
 <!doctype html>
 <html>
   <head>
+    <meta charset="utf-8">
     <meta name="twitter:card" content="player">
     <meta name="twitter:site" content="@guri_vr">
     <meta name="twitter:title" content="${story.title}">
@@ -60,8 +63,8 @@ module.exports = story =>
     </style>
   </head>
   <body>
-    <a-scene vr-mode-ui="enabled: false">
-      <a-assets timeout="20000">${story.chapters.map(renderChapterAssets).filter(assets => assets.trim().length)}</a-assets>
+    <a-scene>
+      <a-assets>${story.chapters.map(renderChapterAssets).filter(assets => assets.trim().length)}</a-assets>
       <a-sky color="#000"></a-sky>
       ${story.chapters.map(renderChapter).join('\n')}
     </a-scene>
@@ -87,11 +90,14 @@ const renderObjectAsset = (obj, i, j) => {
       return `<img src="${obj.src}" id="asset-${i}-${j}" crossorigin="anonymous">`
     case 'video':
     case 'videosphere':
-      return `<video src="${obj.src}" id="asset-${i}-${j}" class="chapter-${i}" crossorigin="anonymous" autoplay="false">`
+      return `<video src="${obj.src}" id="asset-${i}-${j}" class="chapter-${i}" crossorigin="anonymous" autoplay="false"></video>`
     case 'audio':
-      return `<audio src="${obj.src}" id="asset-${i}-${j}" class="chapter-${i}"  crossorigin="anonymous" preload="auto" autoplay="false">`
+      return `<audio src="${obj.src}" id="asset-${i}-${j}" class="chapter-${i}" crossorigin="anonymous"></audio>`
     case 'model':
-      return `<a-asset-item src="${obj.src}" id="asset-${i}-${j}"  crossorigin="anonymous" autoplay="false"></a-asset-item>`
+      const ext = obj.src.split('.')
+      return ext[ext.length - 1] === 'obj'
+      ? `<a-asset-item src="${obj.src}" id="asset-${i}-${j}-obj"  crossorigin="anonymous"></a-asset-item><a-asset-item src="${obj.mtl}" id="asset-${i}-${j}-mtl"  crossorigin="anonymous"></a-asset-item>`
+      : `<a-asset-item src="${obj.src}" id="asset-${i}-${j}"  crossorigin="anonymous"></a-asset-item>`
   }
 }
 
@@ -116,13 +122,20 @@ const renderObject = (obj, i, j) => {
     case 'image':
       return `<a-image scale="${obj.scale.join(' ')}" width="5" height="5" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}" ></a-image>`
     case 'audio':
-      return `<a-sound position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-sound>`
+      return ''
+      return `<a-entity position="${obj.position.join(' ')}" sound="src: #asset-${i}-${j}; autoplay: false;"></a-entity>`
     case 'chart':
       return `<a-entity rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src}; scale: ${obj.scale.join(' ')};"></a-entity>`
     case 'model':
-      return obj.extension === 'ply'
-      ? `<a-entity ply-model="src: #asset-${i}-${j}" rotation="-90 0 0" position="${obj.position.join(' ')}" ></a-entity>`
-      : `<a-collada-model scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-collada-model>`
+      switch (obj.extension) {
+        case 'ply':
+          return `<a-entity ply-model="src: #asset-${i}-${j}" rotation="-90 0 0" position="${obj.position.join(' ')}" ></a-entity>`
+        case 'obj':
+          return `<a-entity scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" obj-model="obj: #asset-${i}-${j}-obj; mtl:  #asset-${i}-${j}-mtl;"></a-entity>`
+        case 'dae':
+        default:
+          return `<a-collada-model scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-collada-model>`
+      }
   }
 }
 
@@ -193,6 +206,8 @@ const renderScript = story => {
       }
     }
 
+    ${!needsManualPlay(story.chapters) ? 'start()' : ''}
+
     ${story.mode === 'ar' ? renderARScript() : ''}
   `
 }
@@ -257,4 +272,20 @@ const getMainImage = chapters => {
   }
 
   return 'https://s3.amazonaws.com/gurivr/logo.png'
+}
+
+/**
+ * Checks if needs a play button for audios and videos
+ */
+
+const needsManualPlay = chapters => {
+  for (let i = 0; i < chapters.length; i++) {
+    for (let j = 0; j < chapters[i].length; j++) {
+      if (MANUAL_PLAY_TYPES.indexOf(chapters[i][j].type) !== -1) {
+        return true
+      }
+    }
+  }
+
+  return false
 }
