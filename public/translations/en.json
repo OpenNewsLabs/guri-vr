@@ -97,6 +97,11 @@
       "keywords": "model",
       "preview": "My scene is 500 seconds long, has skyblue background and a model of some trees from https://s3.amazonaws.com/gurivr/23f1972f-99c6-4f68-a0f0-392c16a02333-trees.dae you can move around with wasd 😎"
     },
+    "search": {
+      "title": "Perform a resource search",
+      "description": "The editor can help you getting resources from the internet. Instead of dropping a file or a link into the editor you can search for terms and get back a url. This feature works for now with panoramas and images and can be used by enclosing your search between quotes (\").\nWhen searching for panoramas It will get them from the Flickr equirectangular group and the images from Flickr in general.",
+      "example": "For example searching for \"soccer\" can result in https://farm6.staticflickr.com/5129/5335199935_b6d84f29e6_o.jpg"
+    },
     "ar": {
       "title": "Augmented Reality mode",
       "description": "VR and AR share a lot in common from the technical standpoint. You can use the user camera instead of an asset for the background on your experiences. To do this you just need to write down \"ar mode\" at any point in your story. Usually you'll do it at the beginning to make it clear.",

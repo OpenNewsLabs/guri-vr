@@ -65,9 +65,8 @@ export default class Editor extends Component {
   }
 
   searchReplaceResources () {
-    //try {
+    try {
       const body = nlp(this.editor.getValue())
-      console.log(body)
       body.forEach(chapter => chapter.forEach(obj => {
         switch (obj.type) {
           case 'image':
@@ -83,9 +82,9 @@ export default class Editor extends Component {
             }
         }
       }))
-/*    } catch (err) {
+    } catch (err) {
       console.error(err)
-    }*/
+    }
   }
 
   render () {
