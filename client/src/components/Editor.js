@@ -4,11 +4,9 @@ import Radium from 'radium'
 import codemirror from 'codemirror'
 import 'codemirror/addon/mode/simple'
 import { IconToggle, Icon } from 'preact-mdl'
-import { uploadAsset } from 'services/datalayer'
 import { debounce } from 'services/utils'
-import { searchResources } from 'services/datalayer'
+import { searchResources, uploadAsset } from 'services/datalayer'
 import nlp from 'services/nlp'
-import { uploadAsset } from 'services/datalayer'
 import { getLocale } from 'services/i18n'
 
 @Radium
