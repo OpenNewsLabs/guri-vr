@@ -180,6 +180,11 @@ export default class Guide extends Component {
             text={t('guide.3dmodel.preview')} />
         </section>
         <section>
+          <h4>{t('guide.search.title')}</h4>
+          <p>{t('guide.search.description')}</p>
+          <p>{t('guide.search.example')}</p>
+        </section>
+        <section>
           <h3>{t('guide.ar.title')}</h3>
           <p>{t('guide.ar.description')}</p>
           <p>{t('guide.entities.example')}</p>

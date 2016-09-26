@@ -3,10 +3,19 @@ import { h, Component } from 'preact'
 import Radium from 'radium'
 import codemirror from 'codemirror'
 import { uploadAsset } from 'services/datalayer'
+import { debounce } from 'services/utils'
+import { searchResources } from 'services/datalayer'
+import nlp from 'services/nlp'
 import 'codemirror/addon/mode/simple'
 
 @Radium
 export default class Editor extends Component {
+
+  constructor (props) {
+    super(props)
+
+    this.searchReplaceResources = this.searchReplaceResources.bind(this)
+  }
 
   shouldComponentUpdate () {
     return false
@@ -39,6 +48,8 @@ export default class Editor extends Component {
       onInput(this.value)
     })
 
+    this.editor.on('change', debounce(this.searchReplaceResources, 1000))
+
     this.editor.on('drop', (editor, evt) => {
       evt.stopPropagation()
       evt.preventDefault()
@@ -51,6 +62,29 @@ export default class Editor extends Component {
           })
       }
     })
+  }
+
+  searchReplaceResources () {
+    try {
+      const body = nlp(this.editor.getValue())
+      body.forEach(chapter => chapter.forEach(obj => {
+        switch (obj.type) {
+          case 'image':
+          case 'panorama':
+            if (obj.text) {
+              console.log(obj.text, body)
+              searchResources(obj.type, obj.text)
+              .then(photos => {
+                if (!(photos && photos.length && (photos[0].url_k || photos[0].url_o))) return
+                this.editor.setValue(this.editor.getValue()
+                .replace(`"${obj.text}"`, `${obj.text} ${photos[0].url_k || photos[0].url_o}`))
+              })
+            }
+        }
+      }))
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   render () {

@@ -61,3 +61,7 @@ export const uploadAsset = file => {
     body: data
   }).then(res => res.json())
 }
+
+export const searchResources = (type, text) =>
+fetch(`/api/assets/search?type=${type}&query=${text}`)
+.then(res=> res.json())
