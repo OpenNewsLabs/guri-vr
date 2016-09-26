@@ -46,8 +46,8 @@ export default class Guide extends Component {
           <p>{t('guide.entities.keywords')}: <span style={styles.attr}>{t('guide.audio.keywords')}</span></p>
           <p>{t('guide.entities.attributes')}:</p>
           <ul>
-            <li><span style={styles.attr}>src</span> (url) | {t('guide.entities.required')}</li>
-            <li><span style={styles.attr}>position</span> (left, right, front, behind) | {t('guide.entities.optional')}</li>
+            <li><span style={styles.attr}>{t('guide.attributes.source')}</span> ({t('guide.attributes.source_types')}) | {t('guide.entities.required')}</li>
+            <li><span style={styles.attr}>{t('guide.attributes.position')}</span> ({t('guide.attributes.position_types')}) | {t('guide.entities.optional')}</li>
           </ul>
           <p>{t('guide.entities.example')}</p>
           <CodeExample title='Audio example'
@@ -59,7 +59,7 @@ export default class Guide extends Component {
           <p>{t('guide.entities.keywords')}: <span style={styles.attr}>panorama</span></p>
           <p>{t('guide.entities.attributes')}:</p>
           <ul>
-            <li><span style={styles.attr}>src</span> (url) | {t('guide.entities.required')}</li>
+            <li><span style={styles.attr}>{t('guide.attributes.source')}</span> ({t('guide.attributes.source_types')}) | {t('guide.entities.required')}</li>
           </ul>
           <p>{t('guide.entities.example')}</p>
           <CodeExample title='Panorama example'
@@ -71,7 +71,7 @@ export default class Guide extends Component {
           <p>{t('guide.entities.keywords')}: <span style={styles.attr}>{t('guide.videosphere.keywords')}</span></p>
           <p>{t('guide.entities.attributes')}:</p>
           <ul>
-            <li><span style={styles.attr}>src</span> (url) | {t('guide.entities.required')}</li>
+            <li><span style={styles.attr}>{t('guide.attributes.source')}</span> ({t('guide.attributes.source_types')}) | {t('guide.entities.required')}</li>
           </ul>
           <p>{t('guide.entities.example')}</p>
           <CodeExample title='Videosphere example'
@@ -83,9 +83,9 @@ export default class Guide extends Component {
           <p>{t('guide.entities.keywords')}: <span style={styles.attr}>{t('guide.image.keywords')}</span></p>
           <p>{t('guide.entities.attributes')}:</p>
           <ul>
-            <li><span style={styles.attr}>src</span> (url) | {t('guide.entities.required')}</li>
-            <li><span style={styles.attr}>position</span> (right, left, behind, front) | {t('guide.entities.optional')}</li>
-            <li><span style={styles.attr}>scale</span> (tiny, small, large, huge) | {t('guide.entities.optional')}</li>
+            <li><span style={styles.attr}>{t('guide.attributes.source')}</span> ({t('guide.attributes.source_types')}) | {t('guide.entities.required')}</li>
+            <li><span style={styles.attr}>{t('guide.attributes.position')}</span> ({t('guide.attributes.position_types')}) | {t('guide.entities.optional')}</li>
+            <li><span style={styles.attr}>{t('guide.attributes.scale')}</span> ({t('guide.attributes.scale_types')}) | {t('guide.entities.optional')}</li>
           </ul>
           <p>{t('guide.entities.example')}</p>
           <CodeExample title='Image example'
@@ -97,9 +97,9 @@ export default class Guide extends Component {
           <p>{t('guide.entities.keywords')}: <span style={styles.attr}>video</span></p>
           <p>{t('guide.entities.attributes')}:</p>
           <ul>
-            <li><span style={styles.attr}>src</span> (url) | {t('guide.entities.required')}</li>
-            <li><span style={styles.attr}>position</span> (right, left, behind, front) | {t('guide.entities.optional')}</li>
-            <li><span style={styles.attr}>scale</span> (tiny, small, large, huge) | {t('guide.entities.optional')}</li>
+            <li><span style={styles.attr}>{t('guide.attributes.source')}</span> ({t('guide.attributes.source_types')}) | {t('guide.entities.required')}</li>
+            <li><span style={styles.attr}>{t('guide.attributes.position')}</span> ({t('guide.attributes.position_types')}) | {t('guide.entities.optional')}</li>
+            <li><span style={styles.attr}>{t('guide.attributes.scale')}</span> ({t('guide.attributes.scale_types')}) | {t('guide.entities.optional')}</li>
           </ul>
           <p>{t('guide.entities.example')}</p>
           <CodeExample title='Video example'
@@ -111,9 +111,9 @@ export default class Guide extends Component {
           <p>{t('guide.entities.keywords')}: <span style={styles.attr}>{t('guide.text.keywords')}</span></p>
           <p>{t('guide.entities.attributes')}:</p>
           <ul>
-            <li><span style={styles.attr}>text</span> (string) | {t('guide.entities.required')}</li>
-            <li><span style={styles.attr}>position</span> (right, left, behind, front) | {t('guide.entities.optional')}</li>
-            <li><span style={styles.attr}>scale</span> (tiny, small, large, huge) | {t('guide.entities.optional')}</li>
+            <li><span style={styles.attr}>{t('guide.attributes.text')}</span> ({t('guide.attributes.text_types')}) | {t('guide.entities.required')}</li>
+            <li><span style={styles.attr}>{t('guide.attributes.position')}</span> ({t('guide.attributes.position_types')}) | {t('guide.entities.optional')}</li>
+            <li><span style={styles.attr}>{t('guide.attributes.scale')}</span> ({t('guide.attributes.scale_types')}) | {t('guide.entities.optional')}</li>
           </ul>
           <p>{t('guide.entities.example')}</p>
           <CodeExample title='Text example'
@@ -125,7 +125,7 @@ export default class Guide extends Component {
           <p>{t('guide.entities.keywords')}: <span style={styles.attr}>{t('guide.duration.keywords')}</span></p>
           <p>{t('guide.entities.attributes')}:</p>
           <ul>
-            <li><span style={styles.attr}>duration</span> (number) | {t('guide.entities.required')}</li>
+            <li><span style={styles.attr}>{t('guide.attributes.duration')}</span> ({t('guide.attributes.duration_types')}) | {t('guide.entities.required')}</li>
           </ul>
           <p>{t('guide.entities.example')}</p>
           <CodeExample title='Duration example'
@@ -137,7 +137,7 @@ export default class Guide extends Component {
           <p>{t('guide.entities.keywords')}: <span style={styles.attr}>{t('guide.voiceover.keywords')}</span></p>
           <p>{t('guide.entities.attributes')}:</p>
           <ul>
-            <li><span style={styles.attr}>text</span> (string) | {t('guide.entities.required')}</li>
+            <li><span style={styles.attr}>{t('guide.attributes.text')}</span> ({t('guide.attributes.text_types')}) | {t('guide.entities.required')}</li>
           </ul>
           <p>{t('guide.entities.example')}</p>
           <CodeExample title='Voiceover example'
@@ -149,7 +149,7 @@ export default class Guide extends Component {
           <p>{t('guide.entities.keywords')}: <span style={styles.attr}>{t('guide.chart.keywords')}</span></p>
           <p>{t('guide.entities.attributes')}:</p>
           <ul>
-            <li><span style={styles.attr}>src</span> (url) | {t('guide.entities.required')}</li>
+            <li><span style={styles.attr}>{t('guide.attributes.source')}</span> ({t('guide.attributes.source_types')}) | {t('guide.entities.required')}</li>
           </ul>
           <p>{t('guide.entities.example')}</p>
           <CodeExample title='Chart example'
@@ -161,7 +161,7 @@ export default class Guide extends Component {
           <p>{t('guide.entities.keywords')}: <span style={styles.attr}>{t('guide.background.keywords')}</span></p>
           <p>{t('guide.entities.attributes')}:</p>
           <ul>
-            <li><span style={styles.attr}>color</span> (string or hex color) | {t('guide.entities.required')}</li>
+            <li><span style={styles.attr}>{t('guide.attributes.color')}</span> ({t('guide.attributes.color_types')}) | {t('guide.entities.required')}</li>
           </ul>
           <p>{t('guide.entities.example')}</p>
           <CodeExample title='Background example'
@@ -173,7 +173,7 @@ export default class Guide extends Component {
           <p>{t('guide.entities.keywords')}: <span style={styles.attr}>{t('guide.3dmodel.keywords')}</span></p>
           <p>{t('guide.entities.attributes')}:</p>
           <ul>
-            <li><span style={styles.attr}>src</span> (url) | {t('guide.entities.required')}</li>
+            <li><span style={styles.attr}>{t('guide.attributes.source')}</span> ({t('guide.attributes.source_types')}) | {t('guide.entities.required')}</li>
           </ul>
           <p>{t('guide.entities.example')}</p>
           <CodeExample title='Model example'

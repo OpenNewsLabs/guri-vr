@@ -111,6 +111,20 @@
       "title": "Sharing",
       "first": "While logged in, you can save your stories and a share link is generated every time you save the story. This link can be shared as a standalone website or be embed into an iframe to be a part of a interactive piece.",
       "second": "The generated link is a HTML file using <a href='https://aframe.io'>A-Frame</a> so it can be easily modified. The link sets also the required information for the Twitter Card player for a better integration. This is an example:"
+    },
+    "attributes": {
+      "source": "source",
+      "source_types": "url",
+      "position": "position",
+      "position_types": "left, right, front, behind",
+      "scale": "scale",
+      "scale_types": "tiny, small, large, huge",
+      "text": "text",
+      "text_types": "string",
+      "duration": "duration",
+      "duration_types": "number",
+      "color": "color",
+      "color_types": "string or hex color"
     }
   },
   "header": {

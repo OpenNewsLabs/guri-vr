@@ -112,6 +112,20 @@
       "title": "Compartiendo",
       "first": "Una vez registrado podes guardar tus historias y se generará un link para compartir cada vez que guardes la historia. Este link puede ser compartido como un sitio por si mismo o ser embebido en un iframe para ser parte de una pieza interactiva, por ejemplo",
       "second": "El link generado es un archivo HTML que usa <a href='https://aframe.io'>A-Frame</a> para que pueda ser facilmente modificado si se requiere. El link también contiene la información requerida por el reproductor embebido de Twitter para una mejor integración. Este es un ejemplo:"
+    },
+    "attributes": {
+      "source": "fuente",
+      "source_types": "url",
+      "position": "posición",
+      "position_types": "atrás, frente, izquierda, derecha",
+      "scale": "escala",
+      "scale_types": "diminuto, pequeño, grande, enorme",
+      "text": "texto",
+      "text_types": "texto",
+      "duration": "duración",
+      "duration_types": "número",
+      "color": "color",
+      "color_types": "nombre o valor hexadecimal"
     }
   },
   "header": {
