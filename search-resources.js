@@ -24,8 +24,6 @@ module.exports = (req, res) => {
     break;
     case 'panorama':
     default:
-    console.log(`${FLICKR_BASE_URL}${FLICKR_PARAMS}&text=${query}`)
-
       fetch(`${FLICKR_BASE_URL}${FLICKR_PARAMS}&group_id=44671723@N00&text=${query}`)
       .then(response => response.json())
       .then(data => res.json(data.photos.photo))

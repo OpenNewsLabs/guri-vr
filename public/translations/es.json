@@ -20,7 +20,6 @@
       "second": "Podés crear cuantas escenas quieras pero nunca te olvides de especificar la duración en segundos de cada una de ellas.",
       "third": "Ahora que sabes como crear escenas, veamos que tipo de elementos podes agregar a tus escenas:",
       "preview": "Esta es mi primera escena. dura 4 segundos, tiene un fondo #87ceeb (eso es celeste en hexa) y muestra un texto que dice \"Esta es la primera escena\"\n\nEste párrafo nunca es interpretado porque no estoy sugiriendo una duración. Este párrafo puede ser usado para describir la historia sin agregar elementos a la escena de RV.\n\nLa última escena dura 10 segundos y tiene un texto que dice \"Fin!\"."
-
     },
     "entities": {
       "title": "Entidades",
@@ -107,6 +106,11 @@
       "title": "Modo Realidad Aumentada",
       "description": "RV y RA tienen mucho en común. Podés usar la camara de tu usuario como fondo en vez de un video o un panorama. Para hacer esto hay que escribir \"modo ra\" en cualquier punto de la historia. Usualmente lo hacemos al comienzo de la historia para dejarlo en claro.",
       "preview": "Esta historia usa el modo ra\n\nLa única escena dura 500 segundos y tiene un texto que dice \"Estamos en modo RA!\""
+    },
+    "speech_recognition": {
+      "title": "Reconocimiento de voz",
+      "how": "Si tu navegador soporta reconocimiento de voz, vas a ver un ícono de un micrófono arriba a la derecha del editor. Si hacés click en él podés comenzar a crear tus escenas de Realidad Virtual usando la voz en vez del teclado.\nPara generar comillas podés decir \"abrir comillas\" y/o \"cerrar comillas\". Para pasar de escena podés usar el comando \"nueva escena\".",
+      "description": "Los sistemas de reconocimiento de voz de los navegadores están mejorando rápidamente pero tenés que ser tolerante con los resultados. Lo genial es que también podés crear las escenas estando en modo VR (para eso tenes que hacer click en el ícono de los lentes abajo a la derecha del previsualizador)."
     },
     "sharing": {
       "title": "Compartiendo",

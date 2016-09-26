@@ -2,11 +2,12 @@
 import { h, Component } from 'preact'
 import Radium from 'radium'
 import codemirror from 'codemirror'
-import { uploadAsset } from 'services/datalayer'
-import { debounce } from 'services/utils'
-import { searchResources } from 'services/datalayer'
-import nlp from 'services/nlp'
 import 'codemirror/addon/mode/simple'
+import { IconToggle, Icon } from 'preact-mdl'
+import { debounce } from 'services/utils'
+import { searchResources, uploadAsset } from 'services/datalayer'
+import nlp from 'services/nlp'
+import { getLocale } from 'services/i18n'
 
 @Radium
 export default class Editor extends Component {
@@ -14,18 +15,25 @@ export default class Editor extends Component {
   constructor (props) {
     super(props)
 
+    this.state = {
+      speech: false
+    }
+
     this.searchReplaceResources = this.searchReplaceResources.bind(this)
+    this.onMicChange = this.onMicChange.bind(this)
+    this._speechAPI = window.SpeechRecognition || window.webkitSpeechRecognition ||
+      window.mozSpeechRecognition || window.msSpeechRecognition || window.oSpeechRecognition
   }
 
-  shouldComponentUpdate () {
-    return false
+  shouldComponentUpdate (nextProps, nextState) {
+    return nextState.mic !== this.state.mic
   }
 
   componentDidMount () {
     if (this.editor) return this.editor.refresh()
     const { value, onInput } = this.props
 
-    this.editor = codemirror(this.base, {
+    this.editor = codemirror(this._editorDiv, {
       value: String(value),
       theme: 'one-dark',
       lineNumbers: true,
@@ -64,6 +72,60 @@ export default class Editor extends Component {
     })
   }
 
+  onMicChange (e) {
+    const enabled = e.target.checked
+    let lastResult = -1
+    
+    this.setState({
+      speech: enabled
+    })
+
+    if (!this.recognition) {
+      this.recognition = new this._speechAPI()
+
+      this.recognition.continuous = true
+      this.recognition.interimResults = true
+      this.recognition.maxAlternatives = 5
+      this.recognition.lang = `${getLocale()}-${getLocale().toUpperCase()}`
+
+      this.recognition.onresult = e => {
+        let transcription = ''
+
+        for (let i = lastResult + 1; i < e.results.length; i++) {
+          if (e.results[i].isFinal) {
+            this.editor.replaceSelection(this.replaceQuotes(e.results[i][0].transcript))
+            lastResult = i
+          }
+        }
+      }
+    }
+
+    if (enabled) {
+      this.recognition.start()
+    } else {
+      this.recognition.stop()
+    }
+  }
+
+  replaceQuotes (str = '') {
+    return str
+      .replace(/open quotes?|close quotes?|abrir comillas?|cerrar comillas?/gi, '"')
+      .replace(/nueva escena|new scene/gi, '\n\n')
+  }
+
+  render (props, { speech }) {
+    return (
+      <div style={styles.container}>
+        {this._speechAPI ? (
+          <IconToggle onChange={this.onMicChange} style={styles.mic} checked={speech}>
+            <Icon icon={'mic'} />
+          </IconToggle>
+        ) : null}
+        <div ref={div => { this._editorDiv = div }}></div>
+      </div>
+    )
+  }
+
   searchReplaceResources () {
     try {
       const body = nlp(this.editor.getValue())
@@ -85,10 +147,6 @@ export default class Editor extends Component {
     } catch (err) {
       console.error(err)
     }
-  }
-
-  render () {
-    return <div style={styles.container} autofocus />
   }
 }
 
@@ -129,6 +187,13 @@ const styles = {
   container: {
     flex: 0,
     height: 300,
-    textAlign: 'left'
+    textAlign: 'left',
+    position: 'relative'
+  },
+  mic: {
+    position: 'absolute',
+    right: 10,
+    top: 5,
+    zIndex: 10
   }
 }

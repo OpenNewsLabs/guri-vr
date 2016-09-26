@@ -180,6 +180,11 @@ export default class Guide extends Component {
             text={t('guide.3dmodel.preview')} />
         </section>
         <section>
+          <h3>{t('guide.speech_recognition.title')}</h3>
+          <p>{t('guide.speech_recognition.how')}</p>
+          <p>{t('guide.speech_recognition.description')}</p>
+        </section>
+        <section>
           <h4>{t('guide.search.title')}</h4>
           <p>{t('guide.search.description')}</p>
           <p>{t('guide.search.example')}</p>

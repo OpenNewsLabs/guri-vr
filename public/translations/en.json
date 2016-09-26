@@ -107,6 +107,11 @@
       "description": "VR and AR share a lot in common from the technical standpoint. You can use the user camera instead of an asset for the background on your experiences. To do this you just need to write down \"ar mode\" at any point in your story. Usually you'll do it at the beginning to make it clear.",
       "preview": "This is a story that uses the AR mode\n\nThe only scene lasts 500 seconds and shows a text saying \"We are in AR mode!\""
     },
+    "speech_recognition": {
+      "title": "Speech recognition",
+      "how": "If your browser supports speech recognition you'll be able to see a microphone icon at the top right of the editor. If you click on it you'll be able to use your voice to create VR scenes instead of using a keyboard.\nTo add quotes for text or a search for example you can say \"open quotes\" and/or \"close quotes\". To create a new scene inside your story you can say \"new scene\".",
+      "description": "Browsers built-in speech recognition engines are improving very fast you need to be tolerant with the results. The cool thing is you can create your scene while on VR mode (if you click on the glasses icon on the preview you can enter to fullscreen mode)"
+    },
     "sharing": {
       "title": "Sharing",
       "first": "While logged in, you can save your stories and a share link is generated every time you save the story. This link can be shared as a standalone website or be embed into an iframe to be a part of a interactive piece.",
