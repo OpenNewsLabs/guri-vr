@@ -82,9 +82,11 @@ function getObjects (p) {
         }
       case 'panorama':
       case '🌅':
+        var panoUrl = getUrl(str)
         return {
           type: 'panorama',
-          src: getUrl(str)
+          src: panoUrl,
+          text: !panoUrl && getQuote(str)
         }
       case 'video':
         return {
@@ -104,9 +106,11 @@ function getObjects (p) {
       case 'image':
       case 'picture':
       case 'foto':
+        var imgUrl = getUrl(str)
         return {
           type: 'image',
-          src: getUrl(str),
+          src: imgUrl,
+          text: !imgUrl && getQuote(str),
           position: getPosition(str),
           scale: getSize(str),
           rotation: getRotation(str)
@@ -166,7 +170,7 @@ function convertModelPosition (pos) {
 
 function getUrl (str, validate) {
   var match = str.match(/https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g)
-  if (!match.length) return
+  if (!(match && match.length)) return
   if (validate) {
     match = match.filter(function (m) { return validate.test(m) })
   }
