@@ -74,6 +74,8 @@ export default class Editor extends Component {
 
   onMicChange (e) {
     const enabled = e.target.checked
+    let lastResult = -1
+    
     this.setState({
       speech: enabled
     })
@@ -85,7 +87,6 @@ export default class Editor extends Component {
       this.recognition.interimResults = true
       this.recognition.maxAlternatives = 5
       this.recognition.lang = `${getLocale()}-${getLocale().toUpperCase()}`
-      let lastResult = -1
 
       this.recognition.onresult = e => {
         let transcription = ''
@@ -107,7 +108,9 @@ export default class Editor extends Component {
   }
 
   replaceQuotes (str = '') {
-    return str.replace(/open quotes?|close quotes?|abrir comillas?|cerrar comillas?/gi, '"')
+    return str
+      .replace(/open quotes?|close quotes?|abrir comillas?|cerrar comillas?/gi, '"')
+      .replace(/nueva escena|new scene/gi, '\n\n')
   }
 
   render (props, { speech }) {
