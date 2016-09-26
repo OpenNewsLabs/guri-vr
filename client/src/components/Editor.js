@@ -2,21 +2,35 @@
 import { h, Component } from 'preact'
 import Radium from 'radium'
 import codemirror from 'codemirror'
-import { uploadAsset } from 'services/datalayer'
+import { IconToggle, Icon } from 'preact-mdl'
 import 'codemirror/addon/mode/simple'
+import { uploadAsset } from 'services/datalayer'
+import { getLocale } from 'services/i18n'
 
 @Radium
 export default class Editor extends Component {
 
-  shouldComponentUpdate () {
-    return false
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      speech: false
+    }
+
+    this.onMicChange = this.onMicChange.bind(this)
+    this._speechAPI = window.SpeechRecognition || window.webkitSpeechRecognition ||
+      window.mozSpeechRecognition || window.msSpeechRecognition || window.oSpeechRecognition
+  }
+
+  shouldComponentUpdate (nextProps, nextState) {
+    return nextState.mic !== this.state.mic
   }
 
   componentDidMount () {
     if (this.editor) return this.editor.refresh()
     const { value, onInput } = this.props
 
-    this.editor = codemirror(this.base, {
+    this.editor = codemirror(this._editorDiv, {
       value: String(value),
       theme: 'one-dark',
       lineNumbers: true,
@@ -53,8 +67,55 @@ export default class Editor extends Component {
     })
   }
 
-  render () {
-    return <div style={styles.container} autofocus />
+  onMicChange (e) {
+    const enabled = e.target.checked
+    this.setState({
+      speech: enabled
+    })
+
+    if (!this.recognition) {
+      this.recognition = new this._speechAPI()
+
+      this.recognition.continuous = true
+      this.recognition.interimResults = true
+      this.recognition.maxAlternatives = 5
+      this.recognition.lang = `${getLocale()}-${getLocale().toUpperCase()}`
+      let lastResult = -1
+
+      this.recognition.onresult = e => {
+        let transcription = ''
+
+        for (let i = lastResult + 1; i < e.results.length; i++) {
+          if (e.results[i].isFinal) {
+            this.editor.replaceSelection(this.replaceQuotes(e.results[i][0].transcript))
+            lastResult = i
+          }
+        }
+      }
+    }
+
+    if (enabled) {
+      this.recognition.start()
+    } else {
+      this.recognition.stop()
+    }
+  }
+
+  replaceQuotes (str = '') {
+    return str.replace(/open quotes?|close quotes?|abrir comillas?|cerrar comillas?/gi, '"')
+  }
+
+  render ({}, { speech }) {
+    return (
+      <div style={styles.container}>
+        {this._speechAPI ? (
+          <IconToggle onChange={this.onMicChange} style={styles.mic} checked={speech}>
+            <Icon icon={'mic'} />
+          </IconToggle>
+        ) : null}
+        <div ref={div => { this._editorDiv = div }}></div>
+      </div>
+    )
   }
 }
 
@@ -95,6 +156,13 @@ const styles = {
   container: {
     flex: 0,
     height: 300,
-    textAlign: 'left'
+    textAlign: 'left',
+    position: 'relative'
+  },
+  mic: {
+    position: 'absolute',
+    right: 15,
+    top: 10,
+    zIndex: 10
   }
 }
