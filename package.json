@@ -22,7 +22,8 @@
     "node-uuid": "1.4.7",
     "passwordless": "1.1.1",
     "passwordless-mongostore": "0.1.3",
-    "pug": "2.0.0-beta3"
+    "pug": "2.0.0-beta3",
+    "isomorphic-fetch": "2.2.1"
   },
   "devDependencies": {
     "offline-plugin": "3.4.2",

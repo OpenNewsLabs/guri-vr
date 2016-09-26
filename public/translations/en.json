@@ -97,6 +97,11 @@
       "keywords": "model",
       "preview": "My scene is 500 seconds long, has skyblue background and a model of some trees from https://s3.amazonaws.com/gurivr/23f1972f-99c6-4f68-a0f0-392c16a02333-trees.dae you can move around with wasd 😎"
     },
+    "search": {
+      "title": "Perform a resource search",
+      "description": "The editor can help you getting resources from the internet. Instead of dropping a file or a link into the editor you can search for terms and get back a url. This feature works for now with panoramas and images and can be used by enclosing your search between quotes (\").\nWhen searching for panoramas It will get them from the Flickr equirectangular group and the images from Flickr in general.",
+      "example": "For example searching for \"soccer\" can result in https://farm6.staticflickr.com/5129/5335199935_b6d84f29e6_o.jpg"
+    },
     "ar": {
       "title": "Augmented Reality mode",
       "description": "VR and AR share a lot in common from the technical standpoint. You can use the user camera instead of an asset for the background on your experiences. To do this you just need to write down \"ar mode\" at any point in your story. Usually you'll do it at the beginning to make it clear.",
@@ -106,6 +111,20 @@
       "title": "Sharing",
       "first": "While logged in, you can save your stories and a share link is generated every time you save the story. This link can be shared as a standalone website or be embed into an iframe to be a part of a interactive piece.",
       "second": "The generated link is a HTML file using <a href='https://aframe.io'>A-Frame</a> so it can be easily modified. The link sets also the required information for the Twitter Card player for a better integration. This is an example:"
+    },
+    "attributes": {
+      "source": "source",
+      "source_types": "url",
+      "position": "position",
+      "position_types": "left, right, front, behind",
+      "scale": "scale",
+      "scale_types": "tiny, small, large, huge",
+      "text": "text",
+      "text_types": "string",
+      "duration": "duration",
+      "duration_types": "number",
+      "color": "color",
+      "color_types": "string or hex color"
     }
   },
   "header": {
@@ -122,7 +141,7 @@
     },
     "preview": {
       "title": "Use your own words",
-      "text": "You not need to be a coder to create VR experiences. The GuriVR editor interprets your words and creates the world you described.\n\nTry adding some scenes. For example my first scene will last 500 seconds and display an image located at https://s3.amazonaws.com/gurivr/logo.png along with a text saying: \"Guri is cool!\" to my left and a panorama located at https://s3.amazonaws.com/gurivr/pano.jpg\n\nTry adding more scenes\n\nhint: Try with words like audio, panorama, text, videosphere, voiceover and chart.\n\nYou can also drag your files into the editor and get back a url 🙀"
+      "text": "You not need to be a coder to create VR experiences. The GuriVR editor interprets your words and creates the world you described.\n\nTry adding some scenes. For example my first scene will last 500 seconds and display an image located at https://s3.amazonaws.com/gurivr/logo.png along with a text saying: \"Guri is cool!\" to my left and a panorama located at https://s3.amazonaws.com/gurivr/pano.jpg\n\nTry adding more scenes\n\nhint: Try with words like audio, panorama, text, videosphere, voiceover and chart.\n\nYou can also drag your files into the editor and get back a url or even find images and panoramas enclosing the search terms inside double quotes 🙀"
     },
     "share": {
       "title": "Share it everywhere",

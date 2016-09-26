@@ -15,5 +15,8 @@
     "sender": "your@mail.com"
   },
   "s3": {
+  },
+  "searchApis": {
+    "flickr": ""
   }
 }

@@ -98,6 +98,11 @@
       "keywords": "modelo",
       "preview": "My escena dura 500 segundos, tiene un fondo #87ceeb y un modelo de un bosque de https://s3.amazonaws.com/gurivr/23f1972f-99c6-4f68-a0f0-392c16a02333-trees.dae podes moverte usando las teclas wasd 😎"
     },
+    "search": {
+      "title": "Búsqueda de recursos",
+      "description": "El editor te puede ayudar a obtener recursos de internet. En vez de pegar un archivo o un link en el editor, podés hacer una búsqueda por términos y obtener de vuelta una url. Esta característica funciona por ahora con panoramas e imagenes y puede ser usada simplemente encerrando la búsqueda entre comillas dobles (\").\nCuando busques un panorama va a ser buscado en el grupo equirectangular de Flickr y el resto de las imagenes desde Flickr en general.",
+      "example": "For example searching for \"soccer\" can result in https://farm6.staticflickr.com/5129/5335199935_b6d84f29e6_o.jpg"
+    },
     "ar": {
       "title": "Modo Realidad Aumentada",
       "description": "RV y RA tienen mucho en común. Podés usar la camara de tu usuario como fondo en vez de un video o un panorama. Para hacer esto hay que escribir \"modo ra\" en cualquier punto de la historia. Usualmente lo hacemos al comienzo de la historia para dejarlo en claro.",
@@ -107,6 +112,20 @@
       "title": "Compartiendo",
       "first": "Una vez registrado podes guardar tus historias y se generará un link para compartir cada vez que guardes la historia. Este link puede ser compartido como un sitio por si mismo o ser embebido en un iframe para ser parte de una pieza interactiva, por ejemplo",
       "second": "El link generado es un archivo HTML que usa <a href='https://aframe.io'>A-Frame</a> para que pueda ser facilmente modificado si se requiere. El link también contiene la información requerida por el reproductor embebido de Twitter para una mejor integración. Este es un ejemplo:"
+    },
+    "attributes": {
+      "source": "fuente",
+      "source_types": "url",
+      "position": "posición",
+      "position_types": "atrás, frente, izquierda, derecha",
+      "scale": "escala",
+      "scale_types": "diminuto, pequeño, grande, enorme",
+      "text": "texto",
+      "text_types": "texto",
+      "duration": "duración",
+      "duration_types": "número",
+      "color": "color",
+      "color_types": "nombre o valor hexadecimal"
     }
   },
   "header": {
@@ -123,7 +142,7 @@
     },
     "preview": {
       "title": "Usá tus propias palabras",
-      "text": "No necesitás ser un programador para crear historias con Realidad Virtual. El editor de GuriVR interpreta tus palabras y crea el mundo que describiste.\n\nIntentá creando algunas escenas. Por ejemplo mi primera escena dura 500 segundos y muestra una foto alojada en https://s3.amazonaws.com/gurivr/logo.png con un texto que dice: \"Guri es genial!\" a mi izquierda y un panorama de https://s3.amazonaws.com/gurivr/pano.jpg\n\nAgregá más escenas!\n\nayuda: Probá usando términos como audio, panorama, texto, video esfera, voz en off o modelo.\n\nTambién podés arrastrar archivos en el editor y obtener las urls directamente 🙀"
+      "text": "No necesitás ser un programador para crear historias con Realidad Virtual. El editor de GuriVR interpreta tus palabras y crea el mundo que describiste.\n\nIntentá creando algunas escenas. Por ejemplo mi primera escena dura 500 segundos y muestra una foto alojada en https://s3.amazonaws.com/gurivr/logo.png con un texto que dice: \"Guri es genial!\" a mi izquierda y un panorama de https://s3.amazonaws.com/gurivr/pano.jpg\n\nAgregá más escenas!\n\nayuda: Probá usando términos como audio, panorama, texto, video esfera, voz en off o modelo.\n\nTambién podés arrastrar archivos en el editor y obtener las urls directamente o incluso buscar imagenes y panoramas haciendo la búsqueda entre comillas 🙀"
     },
     "share": {
       "title": "Compartilo en todas partes",

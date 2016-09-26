@@ -5,6 +5,7 @@ const db = require('./db')
 const buildStory = require('./story-builder')
 const upload = require('./uploader')
 const nlp = require('./nlp')
+const searchResources = require('./search-resources')
 
 const app = module.exports = express.Router()
 
@@ -61,6 +62,8 @@ app.post('/login', auth.requestToken(
       })
       .catch(err => callback(err))),
   (req, res) => res.send('ok'))
+
+app.get('/assets/search', searchResources)
 
 app.use(auth.restricted())
 

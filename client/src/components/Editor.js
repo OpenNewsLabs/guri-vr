@@ -2,8 +2,12 @@
 import { h, Component } from 'preact'
 import Radium from 'radium'
 import codemirror from 'codemirror'
-import { IconToggle, Icon } from 'preact-mdl'
 import 'codemirror/addon/mode/simple'
+import { IconToggle, Icon } from 'preact-mdl'
+import { uploadAsset } from 'services/datalayer'
+import { debounce } from 'services/utils'
+import { searchResources } from 'services/datalayer'
+import nlp from 'services/nlp'
 import { uploadAsset } from 'services/datalayer'
 import { getLocale } from 'services/i18n'
 
@@ -17,6 +21,7 @@ export default class Editor extends Component {
       speech: false
     }
 
+    this.searchReplaceResources = this.searchReplaceResources.bind(this)
     this.onMicChange = this.onMicChange.bind(this)
     this._speechAPI = window.SpeechRecognition || window.webkitSpeechRecognition ||
       window.mozSpeechRecognition || window.msSpeechRecognition || window.oSpeechRecognition
@@ -52,6 +57,8 @@ export default class Editor extends Component {
       this.value = this.editor.getValue()
       onInput(this.value)
     })
+
+    this.editor.on('change', debounce(this.searchReplaceResources, 1000))
 
     this.editor.on('drop', (editor, evt) => {
       evt.stopPropagation()
@@ -105,7 +112,7 @@ export default class Editor extends Component {
     return str.replace(/open quotes?|close quotes?|abrir comillas?|cerrar comillas?/gi, '"')
   }
 
-  render ({}, { speech }) {
+  render (props, { speech }) {
     return (
       <div style={styles.container}>
         {this._speechAPI ? (
@@ -116,6 +123,29 @@ export default class Editor extends Component {
         <div ref={div => { this._editorDiv = div }}></div>
       </div>
     )
+  }
+
+  searchReplaceResources () {
+    try {
+      const body = nlp(this.editor.getValue())
+      body.forEach(chapter => chapter.forEach(obj => {
+        switch (obj.type) {
+          case 'image':
+          case 'panorama':
+            if (obj.text) {
+              console.log(obj.text, body)
+              searchResources(obj.type, obj.text)
+              .then(photos => {
+                if (!(photos && photos.length && (photos[0].url_k || photos[0].url_o))) return
+                this.editor.setValue(this.editor.getValue()
+                .replace(`"${obj.text}"`, `${obj.text} ${photos[0].url_k || photos[0].url_o}`))
+              })
+            }
+        }
+      }))
+    } catch (err) {
+      console.error(err)
+    }
   }
 }
 
