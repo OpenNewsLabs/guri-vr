@@ -185,7 +185,7 @@ export default class Guide extends Component {
           <p>{t('guide.speech_recognition.description')}</p>
         </section>
         <section>
-          <h4>{t('guide.search.title')}</h4>
+          <h3>{t('guide.search.title')}</h3>
           <p>{t('guide.search.description')}</p>
           <p>{t('guide.search.example')}</p>
         </section>
