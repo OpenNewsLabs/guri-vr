@@ -189,8 +189,8 @@ const styles = {
   },
   mic: {
     position: 'absolute',
-    right: 15,
-    top: 10,
+    right: 10,
+    top: 5,
     zIndex: 10
   }
 }
