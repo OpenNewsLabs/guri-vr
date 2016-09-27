@@ -6,7 +6,7 @@
     "title": "Guide",
     "introduction": {
       "title": "Introduction",
-      "first": "GuriVR is a free, open source project created to allow everybody to make <a href='https://en.wikipedia.org/wiki/Virtual_reality'>Virtual Reality</a> experiences with the lowest possible learning curve. The main tool that follows the goal is the online editor which is described below but Guri attempts to make the job easy in different ways. For example, it is possible to create a basic 360 panorama that works in the browser and with headsets like the Google Cardboard just by tweeting the picture with a mention to <a href='https://twitter.com/guri_vr'>@guri_vr</a>.",
+      "first": "GuriVR is a free, open source project created to allow anyone to make <a href='https://en.wikipedia.org/wiki/Virtual_reality'>Virtual Reality</a> experiences with the lowest possible learning curve. Guri provides a quick and easy online editor that creates virtual reality from your words. Guri even makes it possible to create a 360 panorama that works in the browser and with headsets like the Google Cardboard in seconds - just tweet a 360 panorama with a mention to <a href='https://twitter.com/guri_vr'>@guri_vr</a>.",
       "second": "Guri is under <a href='https://github.com/opennewslabs/guri-vr'>active development</a> and <a href='https://github.com/opennewslabs/guri-vr/issues'>feedback</a> is always welcome and under consideration for new features and bug reports. If you see something, say something 🚨 👮"
     },
     "getting_started": {
@@ -16,10 +16,10 @@
     },
     "scenes": {
       "title": "Scenes",
-      "first": "Guri organize your stories into sequential scenes. Each scene is directly mapped with a paragraph in your description as soon as you specify the scene length.",
-      "second": "You can create as many scenes as you want but don't forget about to set the duration in seconds.",
-      "third": "Now that you know how to create scenes, let's see what kind of element you can add to your scenes:",
-      "preview": "This is my first scene. It lasts 4 seconds, has a skyblue background and shows a text saying \"This is the first scene\"\n\nThis paragraph is never interpreted because I'm not specifying the duration. This paragraphs can be used for talking about different parts of your story without generating scenes.\n\nThe last scene lasts 10 seconds and has just a text saying \"The End!\"."
+      "first": "Guri organizes your stories into sequential scenes. Each scene is mapped with a paragraph in your description as soon as you specify the scene length.",
+      "second": "You can create as many scenes as you want just make sure to set the duration in seconds.",
+      "third": "Now that you know how to create scenes, let's add some elements to your scenes:",
+      "preview": "This is my first scene. It lasts 4 seconds, has a skyblue background and shows a text saying \"This is the first scene\"\n\nThis paragraph is never interpreted because I'm not specifying the duration. This is a good way to make a comment or talk about different parts of your story without generating scenes.\n\nThe last scene lasts 10 seconds and has just a text saying \"The End!\"."
     },
     "entities": {
       "title": "Entities",
@@ -35,18 +35,18 @@
     },
     "audio": {
       "title": "Audio",
-      "description": "Audio source in the 3d space. It can be positioned in different parts of the scene. It needs a url as the source, the prefered format is mp3.",
+      "description": "Audio source in the 3d space. It can be positioned in different parts of the scene. It needs a url as the source, the preferred format is mp3.",
       "preview": "I want a 5 seconds scene showing a text saying \"Hi!\"\n\nThen I want a 40 seconds scene with a white background and an audio located at https://gurivr.s3.amazonaws.com/86474203-6d3d-4d39-9342-5ed63dca56c6-santa.mp3 behind me",
       "keywords": "audio | sound"
     },
     "panorama": {
       "title": "Panorama",
-      "description": "360 spherical image envolving the user view. It needs a url to display. It works better with equirectangular panoramas but works with any kind of images.",
+      "description": "A panorama is a 360 spherical image. It needs a url to display. It works best with equirectangular panoramas but can also work with any kind of image.",
       "preview": "My scene is 500 seconds long and shows a panorama located at https://gurivr.s3.amazonaws.com/7ec6043a-3924-4341-96ab-e8df10faaa93-pa.jpg"
     },
     "videosphere": {
       "title": "Videosphere",
-      "description": "360 spherical video envolving the user view. It needs a url to display. It works better with equirectangular videos but works with any kind of video.",
+      "description": "A videosphere is a 360 spherical video. It needs a url to display. It works best with equirectangular videos but can also work with any kind of video.",
       "preview": "My scene is 30 seconds long and shows a videosphere located at https://ucarecdn.com/bcece0a8-86ce-460e-856b-40dac4875f15/ and a voiceover saying \"This is the future. I know, is not that good\"",
       "keywords": "videosphere"
     },
@@ -63,13 +63,13 @@
     },
     "text": {
       "title": "Text",
-      "description": "You can write text and it will be displayed into the screen. There is no color or font support (it's just blank text for now)",
+      "description": "You can write text and it will be displayed in the scene. There is no color or font support (it's just blank text for now)",
       "keywords": "text",
       "preview": "My scene is 500 seconds long, it has red background, a text telling me \"You can read\" and another text that says \"Say no more\" to my left"
     },
     "duration": {
       "title": "Duration",
-      "description": "You need to specify the duration of each scene in seconds. Otherwise it won't be displayed.",
+      "description": "You need to specify the duration of each scene in seconds. Otherwise the scene will not be displayed.",
       "keywords": "seconds",
       "preview": "My scene is 8 seconds long, it has blue background and text saying \"This will finish soon\""
     },
@@ -81,7 +81,7 @@
     },
     "chart": {
       "title": "Chart",
-      "description": "Everything here is experimental but this feature really is. (In theory) you can create a chart on <a href='https://quartz.github.io/Chartbuilder/'>ChartBuilder</a>, drag the json into the editor (or host it by yourself), and GuriVR will render it as a 3d chart. Give it a chance and if it don't work please raise an <a href='https://github.com/opennewslabs/guri-vr/issues'>issue</a>.",
+      "description": "This feature is under development. You can test it by creating a chart on <a href='https://quartz.github.io/Chartbuilder/'>ChartBuilder</a>, drag the json into the editor (or host it by yourself), and GuriVR will render it as a 3d chart. You can help with development by filing an <a href='https://github.com/opennewslabs/guri-vr/issues'>issue</a>.",
       "keywords": "chart",
       "preview": "My scene is 500 seconds long and have a #eee background and a chart from https://s3.amazonaws.com/gurivr/my-data.json in front of me"
     },
@@ -99,18 +99,18 @@
     },
     "search": {
       "title": "Perform a resource search",
-      "description": "The editor can help you getting resources from the internet. Instead of dropping a file or a link into the editor you can search for terms and get back a url. This feature works for now with panoramas and images and can be used by enclosing your search between quotes (\").\nWhen searching for panoramas It will get them from the Flickr equirectangular group and the images from Flickr in general.",
+      "description": "The editor can help you find resources from the internet. Instead of dropping a file or a link into the editor you can search for terms and get back a url. This feature currently works with panoramas and images and can be used by enclosing your search between quotes (\").\nWhen searching for panoramas, the editor will locate them from the Flickr equirectangular group and general images from Flickr.",
       "example": "For example searching for \"soccer\" can result in https://farm6.staticflickr.com/5129/5335199935_b6d84f29e6_o.jpg"
     },
     "ar": {
       "title": "Augmented Reality mode",
-      "description": "VR and AR share a lot in common from the technical standpoint. You can use the user camera instead of an asset for the background on your experiences. To do this you just need to write down \"ar mode\" at any point in your story. Usually you'll do it at the beginning to make it clear.",
+      "description": "VR and AR share a lot in common from the technical standpoint. You can use the user camera instead of an asset for the background on your experiences. To do this you just need to write down \"ar mode\" at any point in your story. Try to start the scene by asking for \"ar mode\" to make it clear to the editor.",
       "preview": "This is a story that uses the AR mode\n\nThe only scene lasts 500 seconds and shows a text saying \"We are in AR mode!\""
     },
     "speech_recognition": {
       "title": "Speech recognition",
-      "how": "If your browser supports speech recognition you'll be able to see a microphone icon at the top right of the editor. If you click on it you'll be able to use your voice to create VR scenes instead of using a keyboard.\nTo add quotes for text or a search for example you can say \"open quotes\" and/or \"close quotes\". To create a new scene inside your story you can say \"new scene\".",
-      "description": "Browsers built-in speech recognition engines are improving very fast you need to be tolerant with the results. The cool thing is you can create your scene while on VR mode (if you click on the glasses icon on the preview you can enter to fullscreen mode)"
+      "how": "If your browser supports speech recognition you'll be able to see a microphone icon at the top right of the editor. If you click on it you can use your voice to create VR scenes instead of using a keyboard.\nTo add quotes for text or a search for example you can say \"open quotes\" and/or \"close quotes\". To create a new scene inside your story you can say \"new scene\".",
+      "description": "Browsers built-in speech recognition engines are improving very fast so be tolerant with the results. The best part is you can create your scene while on VR mode (if you click on the glasses icon on the preview you can enter to fullscreen mode)"
     },
     "sharing": {
       "title": "Sharing",
@@ -140,7 +140,7 @@
   },
   "home": {
     "intro": {
-      "tagline": "Describe how do you want to tell your VR experience and will do the rest",
+      "tagline": "Describe your VR experience and the editor will do the rest",
       "login": "Login to create a story",
       "create": "Create a story"
     },
@@ -169,7 +169,7 @@
     "share": "Share link",
     "preview": "Fullscreen preview",
     "initial_title": "Untitled story",
-    "initial_text": "\n\nThis is the GuriVR editor 🎉. You can create your VR experience by describing how you would like it to be. Every paragraph will be a scene as soon as you mention the duration. Let's start with an example:\n\nMy first scene lasts 5 seconds and has a text that says \"This is my first scene. This is amazing!\".\n\nThe second is 30 seconds and have just a panorama located at https://ucarecdn.com/8e6da182-c794-4692-861d-d43da2fd5507/ along with the audio https://ucarecdn.com/49f6a82b-30fc-4ab9-80b5-85f286d67830/\n\nhint: Try with words like audio, panorama, text, videosphere, voiceover and chart.\n\nYou can also drag your files into the editor and get back a url 🙀"
+    "initial_text": "\n\nThis is the GuriVR editor 🎉. You can create your VR experience by just describing how you would like your scene to be. Every paragraph will be a scene as soon as you mention the duration. Let's start with an example:\n\nMy first scene lasts 5 seconds and has a text that says \"This is my first scene. This is amazing!\".\n\nThe second is 30 seconds and have just a panorama located at https://ucarecdn.com/8e6da182-c794-4692-861d-d43da2fd5507/ along with the audio https://ucarecdn.com/49f6a82b-30fc-4ab9-80b5-85f286d67830/\n\nhint: Try with words like audio, panorama, text, videosphere, voiceover and chart.\n\nYou can also drag your files into the editor and get back a url 🙀"
   },
   "stories": {
     "delete_confirm": "Are you sure you want to delete this story?",
