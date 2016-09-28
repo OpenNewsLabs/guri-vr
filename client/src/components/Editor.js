@@ -75,7 +75,7 @@ export default class Editor extends Component {
   onMicChange (e) {
     const enabled = e.target.checked
     let lastResult = -1
-    
+
     this.setState({
       speech: enabled
     })
@@ -153,7 +153,7 @@ export default class Editor extends Component {
 codemirror.defineSimpleMode('guri', {
   start: [
     {
-      regex: /(audio|sound|panorama|image|picture|texto|text|videosphere|video|voiceover|chart|modelo|model|foto|video esfera|voz en off|gráfico)/gi,
+      regex: /(^|\s|;|\.|,|:)(audio|sound|🔊|panorama|🌅|image|foto|picture|text|texto|📝|videosphere|video esfera|🎥|video|seconds|second|segundos|⏲|voiceover|voz en off|📢|chart|gráfico|📊|background|fondo|model|modelo)(\s|$|;|\.|,|:)/gi,
       token: 'atom'
     },
     {
@@ -173,7 +173,7 @@ codemirror.defineSimpleMode('guri', {
       token: 'string'
     },
     {
-      regex: /(right|left|behind|front|tiny|small|large|huge|derecha|izquierda|atrás|frente|diminuto|pequeño|grande|enorme)/gi,
+      regex: /(right|left|behind|front|below|above|tiny|small|large|huge|derecha|izquierda|atrás|arriba|abajo|frente|diminuto|pequeño|grande|enorme)/gi,
       token: 'string'
     },
     {

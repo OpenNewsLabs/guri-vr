@@ -24,7 +24,7 @@ module.exports = story =>
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>${story.title}</title>
-    <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
+    <script src="https://s3.amazonaws.com/gurivr/aframe.min.js"></script>
     ${renderExternalUrls(story)}
     <style>
       html, body, #root, #arVideo {
@@ -64,6 +64,7 @@ module.exports = story =>
   </head>
   <body>
     <a-scene>
+      <a-entity camera="userHeight: 1.6" universal-controls></a-entity>
       <a-assets>${story.chapters.map(renderChapterAssets).filter(assets => assets.trim().length)}</a-assets>
       <a-sky color="#000"></a-sky>
       ${story.chapters.map(renderChapter).join('\n')}
@@ -122,7 +123,6 @@ const renderObject = (obj, i, j) => {
     case 'image':
       return `<a-image scale="${obj.scale.join(' ')}" width="5" height="5" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}" ></a-image>`
     case 'audio':
-      return ''
       return `<a-entity position="${obj.position.join(' ')}" sound="src: #asset-${i}-${j}; autoplay: false;"></a-entity>`
     case 'chart':
       return `<a-entity rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src}; scale: ${obj.scale.join(' ')};"></a-entity>`

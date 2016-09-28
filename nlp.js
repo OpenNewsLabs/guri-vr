@@ -4,7 +4,7 @@
  */
 
 var ENTITIES_REGEX = /(^|\s|;|\.|,|:)(audio|sound|🔊|panorama|🌅|image|foto|picture|text|texto|📝|videosphere|video esfera|🎥|video|seconds|second|segundos|⏲|voiceover|voz en off|📢|chart|gráfico|📊|background|fondo|model|modelo)(\s|$|;|\.|,|:)/gi
-var LOCATION_REGEX = /right|left|behind|front|atrás|frente|izquierda|derecha/i
+var LOCATION_REGEX = /right|left|behind|front|above|below|atrás|frente|izquierda|derecha|arriba|abajo/i
 var SIZE_REGEX = /tiny|small|large|huge|diminuto|pequeño|grande|enorme/i
 
 module.exports = function (str) {
@@ -156,7 +156,6 @@ function getObjects (p) {
           type: 'background',
           color: match[1]
         }
-
     }
 
     return entity
@@ -207,6 +206,12 @@ function getAbsPos (str, width, height) {
     case 'right':
     case 'derecha':
       return [8, 1.6 + ySize, -xSize]
+    case 'above':
+    case 'arriba':
+      return [xSize, 6, 0]
+    case 'below':
+    case 'abajo':
+      return [xSize, -3, 0]
     case 'behind':
     case 'atrás':
       return [-xSize, 1.6 + ySize, 8]
@@ -227,12 +232,17 @@ function getRotation (str) {
     case 'right':
     case 'derecha':
       return [0, -90, 0]
+    case 'above':
+    case 'arriba':
+      return [90, 0, 0]
+    case 'below':
+    case 'abajo':
+      return [-90, 0, 0]
     case 'behind':
     case 'atrás':
       return [0, 180, 0]
     case 'front':
     case 'frente':
-      return [0, 0, 0]
     default:
       return [0, 0, 0]
   }
