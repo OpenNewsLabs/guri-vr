@@ -121,7 +121,7 @@
       "source": "fuente",
       "source_types": "url",
       "position": "posición",
-      "position_types": "atrás, frente, izquierda, derecha",
+      "position_types": "atrás, frente, izquierda, derecha, arriba, abajo",
       "scale": "escala",
       "scale_types": "diminuto, pequeño, grande, enorme",
       "text": "texto",
