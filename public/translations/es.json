@@ -85,6 +85,12 @@
       "keywords": "gráfico",
       "preview": "Mi escena dura 500 segundos, tiene un fondo #eee y un gráfico de https://s3.amazonaws.com/gurivr/my-data.json frente a mi"
     },
+    "sky": {
+      "title": "Cielo",
+      "description": "Tenemos disponible un hermoso cielo para tus escenas y podés determinar el momento del día en el que ocurre.",
+      "keywords": "cielo",
+      "preview": "Mi escena dura 500 seconds y muestra un lindo paisaje de un cielo al atardecer"
+    },
     "background": {
       "title": "Fondo",
       "description": "Podés cambiar el fondo negro aburrido en cada escena por un color más lindo.",
@@ -129,7 +135,9 @@
       "duration": "duración",
       "duration_types": "número",
       "color": "color",
-      "color_types": "nombre o valor hexadecimal"
+      "color_types": "nombre o valor hexadecimal",
+      "sun_position": "posición del sol",
+      "sun_position_types": "amanecer, atardecer, mañana, mediodía, tarde, noche"
     }
   },
   "header": {

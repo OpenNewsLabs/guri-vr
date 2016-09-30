@@ -3,9 +3,10 @@
  * Module constants
  */
 
-var ENTITIES_REGEX = /(^|\s|;|\.|,|:)(audio|sound|🔊|panorama|🌅|image|foto|picture|text|texto|📝|videosphere|video esfera|🎥|video|seconds|second|segundos|⏲|voiceover|voz en off|📢|chart|gráfico|📊|background|fondo|model|modelo)(\s|$|;|\.|,|:)/gi
+var ENTITIES_REGEX = /(^|\s|;|\.|,|:)(audio|sound|🔊|panorama|🌅|image|foto|picture|text|texto|📝|videosphere|video esfera|🎥|video|seconds|second|segundos|⏲|voiceover|voz en off|📢|chart|gráfico|📊|background|fondo|model|modelo|sky|cielo)(\s|$|;|\.|,|:)/gi
 var LOCATION_REGEX = /right|left|behind|front|above|below|atrás|frente|izquierda|derecha|arriba|abajo/i
 var SIZE_REGEX = /tiny|small|large|huge|diminuto|pequeño|grande|enorme/i
+var SUN_POSITION_REGEX = /sunrise|sunset|morning|noon|afternoon|evening|night|amanecer|atardecer|mañana|mediodía|tarde|noche/i
 
 module.exports = function (str) {
   return str
@@ -126,6 +127,12 @@ function getObjects (p) {
           scale: getSize(str).map(function (el) { return el * 5 }),
           rotation: getRotation(str)
         }
+      case 'sky':
+      case 'cielo':
+        return {
+          type: 'sky',
+          position: getSunPosition(str)
+        }
       case 'model':
       case 'modelo':
         var url = getUrl(str, /\.obj$/)
@@ -202,10 +209,10 @@ function getAbsPos (str, width, height) {
   switch (str) {
     case 'left':
     case 'izquierda':
-      return [-8, 1.6 + ySize, -xSize]
+      return [-7, 1.6 + ySize, -xSize]
     case 'right':
     case 'derecha':
-      return [8, 1.6 + ySize, -xSize]
+      return [7, 1.6 + ySize, -xSize]
     case 'above':
     case 'arriba':
       return [xSize, 6, 0]
@@ -264,5 +271,24 @@ function getAbsSize (str) {
       return [3, 3, 3]
     default:
       return [1, 1, 1]
+  }
+}
+
+function getSunPosition (str) {
+  var match = str.match(SUN_POSITION_REGEX)
+  return getAbsSunPos(match && match.length ? match[0] : null)
+}
+
+function getAbsSunPos (str) {
+  switch (str) {
+    case 'noon': case 'mediodía':
+      return [0, 1, 0]
+    case 'sunrise': case 'sunset': case 'amanecer': case 'atardecer':
+      return [0, 0, -1]
+    case 'evening': case 'night': case 'noche':
+      return [10, -1, 0]
+    case 'morning': case 'afternoon': case 'mañana': case 'tarde':
+    default:
+      return [1, 0.5, 0]
   }
 }

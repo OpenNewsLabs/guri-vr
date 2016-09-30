@@ -2,7 +2,8 @@
 const EXTERNAL_URLS = {
   text: 'https://s3.amazonaws.com/gurivr/aframe-bmfont-text-component.min.js',
   chart: 'https://s3.amazonaws.com/gurivr/aframe-chartbuilder-component.js',
-  ply: 'https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js'
+  ply: 'https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js',
+  sky: 'https://rawgit.com/ngokevin/kframe/master/components/sun-sky/dist/aframe-sun-sky.min.js'
 }
 
 const MANUAL_PLAY_TYPES = ['video', 'videosphere', 'audio']
@@ -66,7 +67,6 @@ module.exports = story =>
     <a-scene>
       <a-entity camera="userHeight: 1.6" universal-controls></a-entity>
       <a-assets>${story.chapters.map(renderChapterAssets).filter(assets => assets.trim().length)}</a-assets>
-      <a-sky color="#000"></a-sky>
       ${story.chapters.map(renderChapter).join('\n')}
     </a-scene>
     <div id="root" style="background: #000; z-index: 999 !important; cursor: pointer; position: absolute; top: 0; left: 0;" onclick="javascript:start()"><svg style="width:48px;height:48px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div>
@@ -124,6 +124,8 @@ const renderObject = (obj, i, j) => {
       return `<a-image scale="${obj.scale.join(' ')}" width="5" height="5" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}" ></a-image>`
     case 'audio':
       return `<a-entity position="${obj.position.join(' ')}" sound="src: #asset-${i}-${j}; autoplay: false;"></a-entity>`
+    case 'sky':
+      return `<a-sun-sky material="sunPosition: ${obj.position.join(' ')}"></a-sun-sky>`
     case 'chart':
       return `<a-entity rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src}; scale: ${obj.scale.join(' ')};"></a-entity>`
     case 'model':
@@ -254,6 +256,11 @@ const renderExternalUrls = story => {
       case 'model':
         if (!loaded.ply && entity.extension === 'ply') {
           urls.push(EXTERNAL_URLS.ply)
+        }
+        break
+      case 'sky':
+        if (!loaded.sky) {
+          urls.push(EXTERNAL_URLS.sky)
         }
         break
     }

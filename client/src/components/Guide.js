@@ -155,6 +155,18 @@ export default class Guide extends Component {
           <CodeExample title='Chart example'
             text={t('guide.chart.preview')} />
         </section>
+        <section id="sky">
+          <h4>{t('guide.sky.title')}</h4>
+          <p>{t('guide.sky.description')}</p>
+          <p>{t('guide.entities.keywords')}: <span style={styles.attr}>{t('guide.sky.keywords')}</span></p>
+          <p>{t('guide.entities.attributes')}:</p>
+          <ul>
+            <li><span style={styles.attr}>{t('guide.attributes.sun_position')}</span> ({t('guide.attributes.sun_position_types')}) | {t('guide.entities.optional')}</li>
+          </ul>
+          <p>{t('guide.entities.example')}</p>
+          <CodeExample title='Sky example'
+            text={t('guide.sky.preview')} />
+        </section>
         <section id="background">
           <h4>{t('guide.background.title')}</h4>
           <p>{t('guide.background.description')}</p>

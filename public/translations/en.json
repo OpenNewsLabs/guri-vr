@@ -85,6 +85,12 @@
       "keywords": "chart",
       "preview": "My scene is 500 seconds long and have a #eee background and a chart from https://s3.amazonaws.com/gurivr/my-data.json in front of me"
     },
+    "sky": {
+      "title": "Sky",
+      "description": "We have a nice sky set up for you and you can specify the part of the day.",
+      "keywords": "sky",
+      "preview": "My scene is 500 seconds long and shows a pretty sky at sunset"
+    },
     "background": {
       "title": "Background",
       "description": "You can change the boring black background on each scene with a cooler color.",
@@ -129,7 +135,9 @@
       "duration": "duration",
       "duration_types": "number",
       "color": "color",
-      "color_types": "string or hex color"
+      "color_types": "string or hex color",
+      "sun_position": "sun position",
+      "sun_position_types": "sunrise, sunset, morning, noon, afternoon, evening, night"
     }
   },
   "header": {

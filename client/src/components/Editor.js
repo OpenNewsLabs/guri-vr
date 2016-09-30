@@ -153,7 +153,7 @@ export default class Editor extends Component {
 codemirror.defineSimpleMode('guri', {
   start: [
     {
-      regex: /(^|\s|;|\.|,|:)(audio|sound|🔊|panorama|🌅|image|foto|picture|text|texto|📝|videosphere|video esfera|🎥|video|seconds|second|segundos|⏲|voiceover|voz en off|📢|chart|gráfico|📊|background|fondo|model|modelo)(\s|$|;|\.|,|:)/gi,
+      regex: /audio|sound|🔊|panorama|🌅|image|foto|picture|text|texto|📝|videosphere|video esfera|🎥|video|seconds|second|segundos|⏲|voiceover|voz en off|📢|chart|gráfico|📊|background|fondo|model|modelo|sky|cielo/gi,
       token: 'atom'
     },
     {
@@ -174,6 +174,10 @@ codemirror.defineSimpleMode('guri', {
     },
     {
       regex: /(right|left|behind|front|below|above|tiny|small|large|huge|derecha|izquierda|atrás|arriba|abajo|frente|diminuto|pequeño|grande|enorme)/gi,
+      token: 'string'
+    },
+    {
+      regex: /sunrise|sunset|morning|noon|afternoon|evening|night|amanecer|atardecer|mañana|mediodía|tarde|noche/gi,
       token: 'string'
     },
     {
