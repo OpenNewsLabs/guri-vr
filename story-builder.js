@@ -145,15 +145,13 @@ const renderScript = story => {
   const chapters = story.chapters
   const times = []
   const voices = []
-  chapters.forEach(chapter =>
-    chapter.filter(obj => obj.type === 'duration')
-    .forEach(obj => times.push(obj.value)))
-
   chapters.forEach(chapter => {
+    var time = chapter.filter(obj => obj.type === 'duration')
+    times.push(time.length ? time[0].value : null)
+
     var voice = chapter.filter(obj => obj.type === 'voiceover')
     voices.push(voice.length ? voice[0].text : null)
   })
-
 
   return `
     var times = ${JSON.stringify(times)};
@@ -183,7 +181,9 @@ const renderScript = story => {
         assets[i] && assets[i].play && assets[i].play();
       }
 
-      setTimeout(nextChapter, times[actual] * 1000);
+      if (times[actual]) {
+        setTimeout(nextChapter, times[actual] * 1000);
+      }
       actual++;
     }
 

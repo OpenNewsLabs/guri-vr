@@ -3,7 +3,22 @@
  * Module constants
  */
 
-var ENTITIES_REGEX = /(^|\s|;|\.|,|:)(audio|sound|🔊|panorama|🌅|image|foto|picture|text|texto|📝|videosphere|video esfera|🎥|video|seconds|second|segundos|⏲|voiceover|voz en off|📢|chart|gráfico|📊|background|fondo|model|modelo|sky|cielo)(\s|$|;|\.|,|:)/gi
+var TYPES = {
+  'audio': { alias: ['sound', '🔊'] },
+  'panorama': { alias: ['🌅'] },
+  'image': { alias: ['foto', 'picture'] },
+  'text': { alias: ['texto', '📝'] },
+  'videosphere': { alias: ['video esfera', '🎥'] },
+  'video': { alias: [] },
+  'seconds': { alias: ['second', 'segundo', 'segundos', '⏲'] },
+  'voiceover': { alias: ['voz en off', '📢'] },
+  'chart': { alias: ['gráfico', '📊'] },
+  'background': { alias: ['fondo'] },
+  'model': { alias: ['modelo'] },
+  'sky': { alias: ['cielo'] }
+}
+
+var ENTITIES_REGEX = new RegExp('(^|\\s|;|\\.|,|:)(' + Object.keys(TYPES).map(function (type) { return TYPES[type].alias.concat(type).join('|') }).join('|') + ')(\\s|$|;|\\.|,|:)', 'gi')
 var LOCATION_REGEX = /right|left|behind|front|above|below|atrás|frente|izquierda|derecha|arriba|abajo/i
 var SIZE_REGEX = /tiny|small|large|huge|diminuto|pequeño|grande|enorme/i
 var SUN_POSITION_REGEX = /sunrise|sunset|morning|noon|afternoon|evening|night|amanecer|atardecer|mañana|mediodía|tarde|noche/i
@@ -11,8 +26,8 @@ var SUN_POSITION_REGEX = /sunrise|sunset|morning|noon|afternoon|evening|night|am
 module.exports = function (str) {
   return str
   .split('\n')
-  .filter(function (p) { return /[0-9]+ (⏲|seconds?|segundos)/.test(p) })
   .map(getObjects)
+  .filter(function (obj) { return obj.length })
 }
 
 function getObjects (p) {
@@ -59,24 +74,30 @@ function getObjects (p) {
       case 'audio':
       case 'sound':
       case '🔊':
+        var audioUrl = getUrl(str)
+        if (!audioUrl) return
         return {
           type: 'audio',
-          src: getUrl(str),
+          src: audioUrl,
           position: getPosition(str)
         }
       case 'voiceover':
       case 'voz en off':
       case '📢':
+        var voiceoverQuote = getQuote(str)
+        if (!voiceoverQuote) return
         return {
           type: 'voiceover',
-          text: getQuote(str)
+          text: voiceoverQuote
         }
       case 'chart':
       case 'gráfico':
       case '📊':
+        var chartUrl = getUrl(str)
+        if (!chartUrl) return
         return {
           type: 'chart',
-          src: getUrl(str),
+          src: chartUrl,
           position: getPosition(str, 10, 10),
           rotation: getRotation(str),
           scale: getSize(str)
@@ -84,34 +105,42 @@ function getObjects (p) {
       case 'panorama':
       case '🌅':
         var panoUrl = getUrl(str)
+        var panoQuote = getQuote(str)
+        if (!(panoUrl || panoQuote)) return
         return {
           type: 'panorama',
           src: panoUrl,
-          text: !panoUrl && getQuote(str)
+          text: !panoUrl && panoQuote
         }
       case 'video':
+        var videoUrl = getUrl(str)
+        if (!videoUrl) return
         return {
           type: 'video',
-          src: getUrl(str),
+          src: videoUrl,
           position: getPosition(str),
           scale: getSize(str),
           rotation: getRotation(str)
         }
       case 'videosphere':
       case 'video esfera':
+      var sphereUrl = getUrl(str)
+      if (!sphereUrl) return
       case '🎥':
         return {
           type: 'videosphere',
-          src: getUrl(str)
+          src: sphereUrl
         }
       case 'image':
       case 'picture':
       case 'foto':
         var imgUrl = getUrl(str)
+        var imgQuote = getQuote(str)
+        if(!(imgUrl || imgQuote)) return
         return {
           type: 'image',
           src: imgUrl,
-          text: !imgUrl && getQuote(str),
+          text: !imgUrl && imgQuote,
           position: getPosition(str),
           scale: getSize(str),
           rotation: getRotation(str)
@@ -119,11 +148,12 @@ function getObjects (p) {
       case 'text':
       case 'texto':
       case '📝':
-        var text = getQuote(str)
+        var textQuote = getQuote(str)
+        if (!textQuote) return
         return {
           type: 'text',
-          text: text,
-          position: getPosition(str, 14, text.length / 30),
+          text: textQuote,
+          position: getPosition(str, 14, textQuote.length / 30),
           scale: getSize(str).map(function (el) { return el * 5 }),
           rotation: getRotation(str)
         }
@@ -148,6 +178,7 @@ function getObjects (p) {
           }
         }
 
+        if (!url) return
         return {
           type: 'model',
           src: url,
@@ -159,6 +190,7 @@ function getObjects (p) {
         }
       case 'fondo':
         match = sp.match(/fondo (#[a-fA-F0-9]{3,6})/i)
+        if (!(match && match.length >= 2)) return
         return {
           type: 'background',
           color: match[1]
@@ -187,7 +219,7 @@ function getUrl (str, validate) {
 
 function getQuote (str) {
   var match = str.match(/".*"/)
-  if (!(match && match.length)) return
+  if (!(match && match.length)) return ''
   return match[0].replace(/"/g, '')
 }
 
