@@ -40,6 +40,6 @@ app.use(function (req, res, next) {
     next()
   }
 })
-app.get('*', (req, res) => res.render('index', {user: req.userData, analyticsId: config.analyticsId}))
+app.get('*', (req, res) => res.render('index', {user: req.userData, mapsKey: config.searchApis.gmaps || '', analyticsId: config.analyticsId}))
 
 app.listen(config.server.port, () => { console.log(`App running on port ${config.server.port}`) })

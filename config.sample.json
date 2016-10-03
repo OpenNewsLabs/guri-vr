@@ -17,6 +17,7 @@
   "s3": {
   },
   "searchApis": {
-    "flickr": ""
+    "flickr": "",
+    "gmaps": ""
   }
 }
