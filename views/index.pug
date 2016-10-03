@@ -9,7 +9,7 @@ html
     #root
     script
       | var __user__ = !{JSON.stringify(user)};
-    script(src="https://maps.google.com/maps/api/js?sensor=false&key=#{mapsKey}", async)
+    script(src="https://maps.google.com/maps/api/js?sensor=false&key=" + mapsKey, async)
     script(src="/app.js")
     if analyticsId
       script
