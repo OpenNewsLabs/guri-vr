@@ -6,7 +6,7 @@ Code for [GuriVR.com](https://gurivr.com)
 ## Requirements
 
 - Mongodb
-- Node.js >= v4
+- Node.js >= v6
 
 ## Installation
 
