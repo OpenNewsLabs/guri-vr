@@ -22,6 +22,7 @@ var ENTITIES_REGEX = new RegExp('(^|\\s|;|\\.|,|:)(' + Object.keys(TYPES).map(fu
 var LOCATION_REGEX = /right|left|behind|front|above|below|atrás|frente|izquierda|derecha|arriba|abajo/i
 var SIZE_REGEX = /tiny|small|large|huge|diminuto|pequeño|grande|enorme/i
 var SUN_POSITION_REGEX = /sunrise|sunset|morning|noon|afternoon|evening|night|amanecer|atardecer|mañana|mediodía|tarde|noche/i
+var LATLON_REGEX = /\-?\d+\.\d+,\s*\-?\d+\.\d+/
 
 module.exports = function (str) {
   return str
@@ -106,11 +107,13 @@ function getObjects (p) {
       case '🌅':
         var panoUrl = getUrl(str)
         var panoQuote = getQuote(str)
-        if (!(panoUrl || panoQuote)) return
+        var panoLatLon = getLatLon(str)
+        if (!(panoUrl || panoQuote || panoLatLon)) return
         return {
           type: 'panorama',
           src: panoUrl,
-          text: !panoUrl && panoQuote
+          text: !panoUrl && panoQuote,
+          latlon: !(panoUrl || panoQuote) && panoLatLon
         }
       case 'video':
         var videoUrl = getUrl(str)
@@ -124,9 +127,9 @@ function getObjects (p) {
         }
       case 'videosphere':
       case 'video esfera':
-      var sphereUrl = getUrl(str)
-      if (!sphereUrl) return
       case '🎥':
+        var sphereUrl = getUrl(str)
+        if (!sphereUrl) return
         return {
           type: 'videosphere',
           src: sphereUrl
@@ -323,4 +326,10 @@ function getAbsSunPos (str) {
     default:
       return [1, 0.5, 0]
   }
+}
+
+function getLatLon (str) {
+  var match = str.match(LATLON_REGEX)
+  if (!(match && match.length)) return null
+  return match[0].split(',').map(parseFloat)
 }

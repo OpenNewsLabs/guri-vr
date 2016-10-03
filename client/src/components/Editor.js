@@ -4,10 +4,11 @@ import Radium from 'radium'
 import codemirror from 'codemirror'
 import 'codemirror/addon/mode/simple'
 import { IconToggle, Icon } from 'preact-mdl'
-import { debounce } from 'services/utils'
+import { debounce, dataURItoBlob } from 'services/utils'
 import { searchResources, uploadAsset } from 'services/datalayer'
 import nlp from 'services/nlp'
 import { getLocale } from 'services/i18n'
+import streetview from 'services/streetview'
 
 @Radium
 export default class Editor extends Component {
@@ -134,19 +135,40 @@ export default class Editor extends Component {
           case 'image':
           case 'panorama':
             if (obj.text) {
-              console.log(obj.text, body)
-              searchResources(obj.type, obj.text)
-              .then(photos => {
-                if (!(photos && photos.length && (photos[0].url_k || photos[0].url_o))) return
-                this.editor.setValue(this.editor.getValue()
-                .replace(`"${obj.text}"`, `${obj.text} ${photos[0].url_k || photos[0].url_o}`))
-              })
+              this.searchRemoteResource(obj)
+            } else if (obj.latlon) {
+              this.searchLatLonResource(obj)
             }
         }
       }))
     } catch (err) {
       console.error(err)
     }
+  }
+
+  searchLatLonResource (obj) {
+    const loader = streetview()
+    const self = this
+    loader.addEventListener('load', function() {
+      const dataURL = this.canvas.toDataURL('image/jpeg', 0.5)
+      const blob = dataURItoBlob(dataURL)
+      uploadAsset(blob)
+        .then(({ url }) => {
+          self.editor.replaceSelection(` ${url} `)
+        })
+    })
+
+    const latLng = new google.maps.LatLng(obj.latlon[0], obj.latlon[1])
+    loader.loadFromLocation(latLng, 3)
+  }
+
+  searchRemoteResource (obj) {
+    searchResources(obj.type, obj.text)
+    .then(photos => {
+      if (!(photos && photos.length && (photos[0].url_k || photos[0].url_o))) return
+      this.editor.setValue(this.editor.getValue()
+      .replace(`"${obj.text}"`, `${obj.text} ${photos[0].url_k || photos[0].url_o}`))
+    })
   }
 }
 
@@ -182,6 +204,10 @@ codemirror.defineSimpleMode('guri', {
     },
     {
       regex: /".+"/,
+      token: 'string'
+    },
+    {
+      regex: /\-?\d+\.\d+,\s*\-?\d+\.\d+/,
       token: 'string'
     }
   ]
