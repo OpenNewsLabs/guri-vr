@@ -16,10 +16,10 @@
     },
     "scenes": {
       "title": "Escenas",
-      "first": "Guri organiza tus historias en escenas secuenciales. Cada escena mapea directamente con un párrafo en tu descripción siempre y cuando especifiques la duración de la misma.",
-      "second": "Podés crear cuantas escenas quieras pero nunca te olvides de especificar la duración en segundos de cada una de ellas.",
+      "first": "Guri organiza tus historias en escenas secuenciales. Cada escena mapea directamente con un párrafo en tu descripción siempre y cuando especifiques al menos una entidad.",
+      "second": "Podés crear cuantas escenas quieras pero nunca te olvides de que tenés que especificar la duración en segundos si querés que termine.",
       "third": "Ahora que sabes como crear escenas, veamos que tipo de elementos podes agregar a tus escenas:",
-      "preview": "Esta es mi primera escena. dura 4 segundos, tiene un fondo #87ceeb (eso es celeste en hexa) y muestra un texto que dice \"Esta es la primera escena\"\n\nEste párrafo nunca es interpretado porque no estoy sugiriendo una duración. Este párrafo puede ser usado para describir la historia sin agregar elementos a la escena de RV.\n\nLa última escena dura 10 segundos y tiene un texto que dice \"Fin!\"."
+      "preview": "Esta es mi primera escena. dura 4 segundos, tiene un fondo #87ceeb (eso es celeste en hexa) y muestra un texto que dice \"Esta es la primera escena\"\n\nEste párrafo nunca es interpretado porque no estoy agregando ninguna entidad. Este párrafo puede ser usado para describir la historia sin agregar elementos a la escena de RV.\n\nLa última escena dura 10 segundos y tiene un texto que dice \"Fin!\"."
     },
     "entities": {
       "title": "Entidades",
@@ -31,7 +31,7 @@
       "required": "requerido",
       "optional": "opcional",
       "example": "Ejemplo",
-      "preview": "Quiero que mi escena dure 30 segundos y tenga un fondo #ffc0cb (rosa) y una foto de un pokemon (por qué no?) https://gurivr.s3.amazonaws.com/c5155f5b-83eb-4729-873b-238abb916362-psyduck.png a mi izquierda, y hacelo pequeño por favor. Además agregá un texto que diga \"mira a tu izquieeeeerda!\""
+      "preview": "Quiero que mi escena tenga un fondo #ffc0cb (rosa) y una foto de un pokemon (por qué no?) https://gurivr.s3.amazonaws.com/c5155f5b-83eb-4729-873b-238abb916362-psyduck.png a mi izquierda, y hacelo pequeño por favor. Además agregá un texto que diga \"mira a tu izquieeeeerda!\""
     },
     "audio": {
       "title": "Audio",
@@ -42,7 +42,7 @@
     "panorama": {
       "title": "Panorama",
       "description": "Imagen esférica que envuelve la vista del usuario. Necesita una url de fuente. Funciona mejor con panoramas equirectangulares pero funciona con cualquier tipo de imagen.",
-      "preview": "Mi escena dura 500 segundos y muestra un panorama alojado en https://gurivr.s3.amazonaws.com/7ec6043a-3924-4341-96ab-e8df10faaa93-pa.jpg"
+      "preview": "Mi escena muestra un panorama alojado en https://gurivr.s3.amazonaws.com/7ec6043a-3924-4341-96ab-e8df10faaa93-pa.jpg"
     },
     "videosphere": {
       "title": "Video esfera",
@@ -54,22 +54,22 @@
       "title": "Imagen",
       "description": "Imagen 2d que puede ser localizada dentro de la escena en distintas posiciones.",
       "keywords": "foto",
-      "preview": "Mi escena dura 500 segundos, tiene fondo #0000ff (azul), una voz en off que dice \"mirá a tu derecha\" y una foto de un gatito https://gurivr.s3.amazonaws.com/7944cde7-b842-483f-a8b1-f953476b2cbb-gatito.png a mi derecha"
+      "preview": "Mi escena tiene fondo #0000ff (azul), una voz en off que dice \"mirá a tu derecha\" y una foto de un gatito https://gurivr.s3.amazonaws.com/7944cde7-b842-483f-a8b1-f953476b2cbb-gatito.png a mi derecha"
     },
     "video": {
       "title": "Video",
       "description": "Video 2d que puede ser localizado en distintas posiciones dentro de la escena.",
-      "preview": "Mi escena dura 500 segundos, tiene un fondo #87ceeb y un video video de https://s3.amazonaws.com/gurivr/licha.mp4 a mi izquierda"
+      "preview": "Mi escena tiene un fondo #87ceeb y un video video de https://s3.amazonaws.com/gurivr/licha.mp4 a mi izquierda"
     },
     "text": {
       "title": "Texto",
       "description": "Podés escribir texto y va a ser ubicado dentro de la pantalla. No hay soporte de color ni texto por ahora.",
       "keywords": "texto",
-      "preview": "Mi escena dura 500 segundos, tiene fondo #f00 (rojo), un texto que me dice \"podes leer esto\" y otro texto que dice \"Say no more\" a mi izquierda"
+      "preview": "Mi escena tiene fondo #f00 (rojo), un texto que me dice \"podes leer esto\" y otro texto que dice \"Say no more\" a mi izquierda"
     },
     "duration": {
       "title": "Duración",
-      "description": "Es necesario especificar la duración de cada escena en segundos. De otro modo la escena no es tomada en cuenta.",
+      "description": "Es necesario especificar la duración de cada escena en segundos. De otro modo la escena no termina.",
       "keywords": "segundos",
       "preview": "Mi escena dura 8 segundos, tiene un fondo #00f y un texto que dice \"Esto se termina pronto\""
     },
@@ -83,25 +83,25 @@
       "title": "Gráfico",
       "description": "Toda funcionalidad acá es experimental pero esta lo es en serio. (En teoría) podés crear un gráfico en <a href='https://quartz.github.io/Chartbuilder/'>ChartBuilder</a>, arrastrar el json en el editor (o hostearlo por tu cuenta), y GuriVR va a dibujarlo como un gráfico 3D. Probalo y si no funciona <a href='https://github.com/opennewslabs/guri-vr/issues'>reportalo</a>.",
       "keywords": "gráfico",
-      "preview": "Mi escena dura 500 segundos, tiene un fondo #eee y un gráfico de https://s3.amazonaws.com/gurivr/my-data.json frente a mi"
+      "preview": "Mi escena tiene un fondo #eee y un gráfico de https://s3.amazonaws.com/gurivr/my-data.json frente a mi"
     },
     "sky": {
       "title": "Cielo",
       "description": "Tenemos disponible un hermoso cielo para tus escenas y podés determinar el momento del día en el que ocurre.",
       "keywords": "cielo",
-      "preview": "Mi escena dura 500 seconds y muestra un lindo paisaje de un cielo al atardecer"
+      "preview": "Mi escena muestra un lindo paisaje de un cielo al atardecer"
     },
     "background": {
       "title": "Fondo",
       "description": "Podés cambiar el fondo negro aburrido en cada escena por un color más lindo.",
       "keywords": "fondo",
-      "preview": "Mi escena dura 500 segundos y tiene un fondo #ccc con un texto que dice \"Calaaaar\""
+      "preview": "Mi escena dura tiene un fondo #ccc con un texto que dice \"Calaaaar\""
     },
     "3dmodel": {
       "title": "Modelos 3D",
       "description": "Otra funcionalidad <del>rota</del> experimental. Podés insertar modelos de Collada (.cae), Obj y Bake en las escenas.",
       "keywords": "modelo",
-      "preview": "My escena dura 500 segundos, tiene un fondo #87ceeb y un modelo de un bosque de https://s3.amazonaws.com/gurivr/23f1972f-99c6-4f68-a0f0-392c16a02333-trees.dae podes moverte usando las teclas wasd 😎"
+      "preview": "My escena tiene un fondo #87ceeb y un modelo de un bosque de https://s3.amazonaws.com/gurivr/23f1972f-99c6-4f68-a0f0-392c16a02333-trees.dae podes moverte usando las teclas wasd 😎"
     },
     "search": {
       "title": "Búsqueda de recursos",
@@ -111,7 +111,7 @@
     "ar": {
       "title": "Modo Realidad Aumentada",
       "description": "RV y RA tienen mucho en común. Podés usar la camara de tu usuario como fondo en vez de un video o un panorama. Para hacer esto hay que escribir \"modo ra\" en cualquier punto de la historia. Usualmente lo hacemos al comienzo de la historia para dejarlo en claro.",
-      "preview": "Esta historia usa el modo ra\n\nLa única escena dura 500 segundos y tiene un texto que dice \"Estamos en modo RA!\""
+      "preview": "Esta historia usa el modo ra\n\nLa única escena tiene un texto que dice \"Estamos en modo RA!\""
     },
     "speech_recognition": {
       "title": "Reconocimiento de voz",
@@ -177,7 +177,7 @@
     "share": "Link para compartir",
     "preview": "Previsualizar",
     "initial_title": "Historia sin título",
-    "initial_text": "\n\nEste es el editor de GuriVR 🎉. Podés crear tu experiencia de Realidad Virtual describiendo como querés que sea con palabras. Cada párrafo se va a convertir en una escena siempre y cuando anuncies su duración. Empecemos con un ejemplo:\n\nMi primera escena dura 5 segundos y tiene un texto que dice \"Esta es mi primera escena. Esto es increible!\".\n\nLa segunda escena dura 30 segundos y tiene un panorama https://ucarecdn.com/8e6da182-c794-4692-861d-d43da2fd5507/ y un audio https://ucarecdn.com/49f6a82b-30fc-4ab9-80b5-85f286d67830/\n\nayuda: Probá con términos como audio, panorama, texto, video esfera, voz en off y modelo.\n\nTambién podés arrastrar archivos al navegador y obtener la url 🙀"
+    "initial_text": "\n\nEste es el editor de GuriVR 🎉. Podés crear tu experiencia de Realidad Virtual describiendo como querés que sea con palabras. Cada párrafo se va a convertir en una escena siempre y cuando anuncies al menos una entidad. Empecemos con un ejemplo:\n\nMi primera escena dura 5 segundos y tiene un texto que dice \"Esta es mi primera escena. Esto es increible!\".\n\nLa segunda escena dura 30 segundos y tiene un panorama https://ucarecdn.com/8e6da182-c794-4692-861d-d43da2fd5507/ y un audio https://ucarecdn.com/49f6a82b-30fc-4ab9-80b5-85f286d67830/\n\nayuda: Probá con términos como audio, panorama, texto, video esfera, voz en off y modelo.\n\nTambién podés arrastrar archivos al navegador y obtener la url 🙀"
   },
   "stories": {
     "delete_confirm": "Seguro querés borrar esta historia?",

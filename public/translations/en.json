@@ -17,9 +17,9 @@
     "scenes": {
       "title": "Scenes",
       "first": "Guri organizes your stories into sequential scenes. Each scene is mapped with a paragraph in your description as soon as you specify the scene length.",
-      "second": "You can create as many scenes as you want just make sure to set the duration in seconds.",
+      "second": "You can create as many scenes as you want. Just make sure to set the duration in seconds of a scene if you have more than one in your story.",
       "third": "Now that you know how to create scenes, let's add some elements to your scenes:",
-      "preview": "This is my first scene. It lasts 4 seconds, has a skyblue background and shows a text saying \"This is the first scene\"\n\nThis paragraph is never interpreted because I'm not specifying the duration. This is a good way to make a comment or talk about different parts of your story without generating scenes.\n\nThe last scene lasts 10 seconds and has just a text saying \"The End!\"."
+      "preview": "This is my first scene. It lasts 4 seconds, has a skyblue background and shows a text saying \"This is the first scene\"\n\nThis paragraph is never interpreted because I'm not specifying any entity. This is a good way to make a comment or talk about different parts of your story without generating scenes.\n\nThe last scene lasts 10 seconds and has just a text saying \"The End!\"."
     },
     "entities": {
       "title": "Entities",
@@ -31,7 +31,7 @@
       "required": "required",
       "optional": "optional",
       "example": "Example",
-      "preview": "I want my scene to last 30 seconds and to have a pink background and a picture of a pokemon (why not?) located at https://gurivr.s3.amazonaws.com/c5155f5b-83eb-4729-873b-238abb916362-psyduck.png to my left, and make it tiny please. Also add a text saying \"Look to your leeeeeeeft!\""
+      "preview": "I want my scene to have a pink background and a picture of a pokemon (why not?) located at https://gurivr.s3.amazonaws.com/c5155f5b-83eb-4729-873b-238abb916362-psyduck.png to my left, and make it tiny please. Also add a text saying \"Look to your leeeeeeeft!\""
     },
     "audio": {
       "title": "Audio",
@@ -42,7 +42,7 @@
     "panorama": {
       "title": "Panorama",
       "description": "A panorama is a 360 spherical image. It needs a url to display. It works best with equirectangular panoramas but can also work with any kind of image.",
-      "preview": "My scene is 500 seconds long and shows a panorama located at https://gurivr.s3.amazonaws.com/7ec6043a-3924-4341-96ab-e8df10faaa93-pa.jpg"
+      "preview": "My scene shows a panorama located at https://gurivr.s3.amazonaws.com/7ec6043a-3924-4341-96ab-e8df10faaa93-pa.jpg"
     },
     "videosphere": {
       "title": "Videosphere",
@@ -54,24 +54,24 @@
       "title": "Image",
       "description": "2d images can be located inside the scene and placed in different positions.",
       "keywords": "image | picture",
-      "preview": "My scene is 500 seconds long, it has blue background, a voiceover saying \"Look to your right\" and a random picture of a cat from https://gurivr.s3.amazonaws.com/7944cde7-b842-483f-a8b1-f953476b2cbb-gatito.png to my right"
+      "preview": "My scene has blue background, a voiceover saying \"Look to your right\" and a random picture of a cat from https://gurivr.s3.amazonaws.com/7944cde7-b842-483f-a8b1-f953476b2cbb-gatito.png to my right"
     },
     "video": {
       "title": "Video",
       "description": "2d videos can be located inside the scene and placed in different positions.",
-      "preview": "My scene is 500 seconds long, it has skyblue background and a video from https://s3.amazonaws.com/gurivr/licha.mp4 to my left"
+      "preview": "My scene has skyblue background and a video from https://s3.amazonaws.com/gurivr/licha.mp4 to my left"
     },
     "text": {
       "title": "Text",
       "description": "You can write text and it will be displayed in the scene. There is no color or font support (it's just blank text for now)",
       "keywords": "text",
-      "preview": "My scene is 500 seconds long, it has red background, a text telling me \"You can read\" and another text that says \"Say no more\" to my left"
+      "preview": "My scene has red background, a text telling me \"You can read\" and another text that says \"Say no more\" to my left"
     },
     "duration": {
       "title": "Duration",
-      "description": "You need to specify the duration of each scene in seconds. Otherwise the scene will not be displayed.",
+      "description": "You can specify the duration of each scene in seconds. Otherwise the scene will not end.",
       "keywords": "seconds",
-      "preview": "My scene is 8 seconds long, it has blue background and text saying \"This will finish soon\""
+      "preview": "My scene lasts 8 seconds, has blue background and text saying \"This will finish soon\""
     },
     "voiceover": {
       "title": "Voiceover",
@@ -83,25 +83,25 @@
       "title": "Chart",
       "description": "This feature is under development. You can test it by creating a chart on <a href='https://quartz.github.io/Chartbuilder/'>ChartBuilder</a>, drag the json into the editor (or host it by yourself), and GuriVR will render it as a 3d chart. You can help with development by filing an <a href='https://github.com/opennewslabs/guri-vr/issues'>issue</a>.",
       "keywords": "chart",
-      "preview": "My scene is 500 seconds long and have a #eee background and a chart from https://s3.amazonaws.com/gurivr/my-data.json in front of me"
+      "preview": "My scene have a #eee background and a chart from https://s3.amazonaws.com/gurivr/my-data.json in front of me"
     },
     "sky": {
       "title": "Sky",
       "description": "We have a nice sky set up for you and you can specify the part of the day.",
       "keywords": "sky",
-      "preview": "My scene is 500 seconds long and shows a pretty sky at sunset"
+      "preview": "My scene shows a pretty sky at sunset"
     },
     "background": {
       "title": "Background",
       "description": "You can change the boring black background on each scene with a cooler color.",
       "keywords": "background",
-      "preview": "My scene is 500 seconds long and have a #ccc background and a text saying \"Calaaaar\""
+      "preview": "My scene have a #ccc background and a text saying \"Calaaaar\""
     },
     "3dmodel": {
       "title": "3D Models",
       "description": "Another <del>broken</del> experimental feature. You can insert Collada, Obj and Bake models into the scene.",
       "keywords": "model",
-      "preview": "My scene is 500 seconds long, has skyblue background and a model of some trees from https://s3.amazonaws.com/gurivr/23f1972f-99c6-4f68-a0f0-392c16a02333-trees.dae you can move around with wasd 😎"
+      "preview": "My scene has skyblue background and a model of some trees from https://s3.amazonaws.com/gurivr/23f1972f-99c6-4f68-a0f0-392c16a02333-trees.dae you can move around with wasd 😎"
     },
     "search": {
       "title": "Perform a resource search",
@@ -111,7 +111,7 @@
     "ar": {
       "title": "Augmented Reality mode",
       "description": "VR and AR share a lot in common from the technical standpoint. You can use the user camera instead of an asset for the background on your experiences. To do this you just need to write down \"ar mode\" at any point in your story. Try to start the scene by asking for \"ar mode\" to make it clear to the editor.",
-      "preview": "This is a story that uses the AR mode\n\nThe only scene lasts 500 seconds and shows a text saying \"We are in AR mode!\""
+      "preview": "This is a story that uses the AR mode\n\nThe only scene shows a text saying \"We are in AR mode!\""
     },
     "speech_recognition": {
       "title": "Speech recognition",
@@ -177,7 +177,7 @@
     "share": "Share link",
     "preview": "Fullscreen preview",
     "initial_title": "Untitled story",
-    "initial_text": "\n\nThis is the GuriVR editor 🎉. You can create your VR experience by just describing how you would like your scene to be. Every paragraph will be a scene as soon as you mention the duration. Let's start with an example:\n\nMy first scene lasts 5 seconds and has a text that says \"This is my first scene. This is amazing!\".\n\nThe second is 30 seconds and have just a panorama located at https://ucarecdn.com/8e6da182-c794-4692-861d-d43da2fd5507/ along with the audio https://ucarecdn.com/49f6a82b-30fc-4ab9-80b5-85f286d67830/\n\nhint: Try with words like audio, panorama, text, videosphere, voiceover and chart.\n\nYou can also drag your files into the editor and get back a url 🙀"
+    "initial_text": "\n\nThis is the GuriVR editor 🎉. You can create your VR experience by just describing how you would like your scene to be. Every paragraph will be a scene as soon as you add an entity to it. Let's start with an example:\n\nMy first scene lasts 5 seconds and has a text that says \"This is my first scene. This is amazing!\".\n\nThe second is 30 seconds and have just a panorama located at https://ucarecdn.com/8e6da182-c794-4692-861d-d43da2fd5507/ along with the audio https://ucarecdn.com/49f6a82b-30fc-4ab9-80b5-85f286d67830/\n\nhint: Try with words like audio, panorama, text, videosphere, voiceover and chart.\n\nYou can also drag your files into the editor and get back a url 🙀"
   },
   "stories": {
     "delete_confirm": "Are you sure you want to delete this story?",
