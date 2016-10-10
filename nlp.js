@@ -247,7 +247,7 @@ function getAbsPos (str, width, height) {
       return [-7, 1.6 + ySize, -xSize]
     case 'right':
     case 'derecha':
-      return [7, 1.6 + ySize, -xSize]
+      return [7, 1.6 + ySize, +xSize]
     case 'above':
     case 'arriba':
       return [xSize, 6, 0]
