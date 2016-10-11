@@ -19,7 +19,7 @@ var TYPES = {
 }
 
 var ENTITIES_REGEX = new RegExp('(^|\\s|;|\\.|,|:)(' + Object.keys(TYPES).map(function (type) { return TYPES[type].alias.concat(type).join('|') }).join('|') + ')(\\s|$|;|\\.|,|:)', 'gi')
-var LOCATION_REGEX = /right|left|behind|front|above|below|atrás|frente|izquierda|derecha|arriba|abajo/i
+var LOCATION_REGEX = /right|left|behind|front|above|below|atrás|frente|izquierda|derecha|arriba|abajo/gi
 var SIZE_REGEX = /tiny|small|large|huge|diminuto|pequeño|grande|enorme/i
 var SUN_POSITION_REGEX = /sunrise|sunset|morning|noon|afternoon|evening|night|amanecer|atardecer|mañana|mediodía|tarde|noche/i
 var LATLON_REGEX = /\-?\d+\.\d+,\s*\-?\d+\.\d+/
@@ -96,11 +96,11 @@ function getObjects (p) {
       case '📊':
         var chartUrl = getUrl(str)
         if (!chartUrl) return
+        var chartPos = getPosition(str, 10, 10)
         return {
           type: 'chart',
           src: chartUrl,
-          position: getPosition(str, 10, 10),
-          rotation: getRotation(str),
+          position: chartPos,
           scale: getSize(str)
         }
       case 'panorama':
@@ -118,12 +118,12 @@ function getObjects (p) {
       case 'video':
         var videoUrl = getUrl(str)
         if (!videoUrl) return
+        var videoPos = getPosition(str)
         return {
           type: 'video',
           src: videoUrl,
-          position: getPosition(str),
-          scale: getSize(str),
-          rotation: getRotation(str)
+          position: videoPos,
+          scale: getSize(str)
         }
       case 'videosphere':
       case 'video esfera':
@@ -140,25 +140,25 @@ function getObjects (p) {
         var imgUrl = getUrl(str)
         var imgQuote = getQuote(str)
         if(!(imgUrl || imgQuote)) return
+        var imgPos = getPosition(str)
         return {
           type: 'image',
           src: imgUrl,
           text: !imgUrl && imgQuote,
-          position: getPosition(str),
-          scale: getSize(str),
-          rotation: getRotation(str)
+          position: imgPos,
+          scale: getSize(str)
         }
       case 'text':
       case 'texto':
       case '📝':
         var textQuote = getQuote(str)
         if (!textQuote) return
+        var textPos = getPosition(str/*, 14, textQuote.length / 30*/)
         return {
           type: 'text',
           text: textQuote,
-          position: getPosition(str, 14, textQuote.length / 30),
-          scale: getSize(str).map(function (el) { return el * 5 }),
-          rotation: getRotation(str)
+          position: textPos,
+          scale: getSize(str).map(function (el) { return el * 5 })
         }
       case 'sky':
       case 'cielo':
@@ -182,14 +182,14 @@ function getObjects (p) {
         }
 
         if (!url) return
+        var modelPos = convertModelPosition(getPosition(str))
         return {
           type: 'model',
           src: url,
           mtl: mtl,
           extension: ext[ext.length - 1],
-          position: convertModelPosition(getPosition(str)),
-          scale: getSize(str),
-          rotation: getRotation(str)
+          position: modelPos,
+          scale: getSize(str)
         }
       case 'fondo':
         match = sp.match(/fondo (#[a-fA-F0-9]{3,6})/i)
@@ -229,8 +229,18 @@ function getQuote (str) {
 function getPosition (str, width, height) {
   width = width || 0
   height = height || 0
-  var match = str.match(LOCATION_REGEX)
-  return getAbsPos(match && match.length ? match[0] : 'front', width, height)
+
+  var positions = []
+  var position = null
+  var input = str
+  var distance = null
+  while ((position = LOCATION_REGEX.exec(str)) !== null) {
+    positions.push({ type: position[0], index: position.index })
+    distance = input.substring(0, position.index).match(/(\d*(\.\d+)?) meter/i)
+    positions[positions.length - 1].distance = distance && distance.length ? parseFloat(distance[0].replace(/meter/i, '')) : 0
+    input = input.slice(position.index)
+  }
+  return getAbsPos(positions.length ? positions : [{type: 'front', distance: 0}], width, height)
 }
 
 function getSize (str) {
@@ -238,56 +248,50 @@ function getSize (str) {
   return getAbsSize(match && match.length ? match[0] : 'normal')
 }
 
-function getAbsPos (str, width, height) {
+function getAbsPos (positions, width, height) {
   var xSize = -0.5 * width
   var ySize = -0.5 * height
-  switch (str) {
-    case 'left':
-    case 'izquierda':
-      return [-7, 1.6 + ySize, -xSize]
-    case 'right':
-    case 'derecha':
-      return [7, 1.6 + ySize, +xSize]
-    case 'above':
-    case 'arriba':
-      return [xSize, 6, 0]
-    case 'below':
-    case 'abajo':
-      return [xSize, -3, 0]
-    case 'behind':
-    case 'atrás':
-      return [-xSize, 1.6 + ySize, 8]
-    case 'front':
-    case 'frente':
-    default:
-      return [0 + xSize, 1.6 + ySize, -8]
+  var initialPosition = [0, 1.6, 0]
+  for (var i = 0; i < positions.length; i++) {
+    switch (positions[i].type) {
+      case 'left':
+      case 'izquierda':
+        initialPosition[0] -= positions[i].distance || 7
+        initialPosition[1] += ySize
+        initialPosition[2] -= xSize
+        break
+      case 'right':
+      case 'derecha':
+        initialPosition[0] += positions[i].distance || 7
+        initialPosition[1] += ySize
+        initialPosition[2] += xSize
+        break
+      case 'above':
+      case 'arriba':
+        initialPosition[0] += xSize
+        initialPosition[1] += positions[i].distance || 6
+        break
+      case 'below':
+      case 'abajo':
+        initialPosition[0] += xSize
+        initialPosition[1] -= positions[i].distance || 3
+        break
+      case 'behind':
+      case 'atrás':
+        initialPosition[0] -= xSize
+        initialPosition[1] += ySize
+        initialPosition[2] += positions[i].distance || 8
+        break
+      case 'front':
+      case 'frente':
+      default:
+        initialPosition[0] += xSize
+        initialPosition[1] += ySize
+        initialPosition[2] -= positions[i].distance || 8
+        break
+    }
   }
-}
-
-function getRotation (str) {
-  var match = str.match(LOCATION_REGEX)
-  var pos = match && match.length ? match[0] : 'front'
-  switch (pos) {
-    case 'left':
-    case 'izquierda':
-      return [0, 90, 0]
-    case 'right':
-    case 'derecha':
-      return [0, -90, 0]
-    case 'above':
-    case 'arriba':
-      return [90, 0, 0]
-    case 'below':
-    case 'abajo':
-      return [-90, 0, 0]
-    case 'behind':
-    case 'atrás':
-      return [0, 180, 0]
-    case 'front':
-    case 'frente':
-    default:
-      return [0, 0, 0]
-  }
+  return initialPosition
 }
 
 function getAbsSize (str) {
