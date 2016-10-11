@@ -236,8 +236,8 @@ function getPosition (str, width, height) {
   var distance = null
   while ((position = LOCATION_REGEX.exec(str)) !== null) {
     positions.push({ type: position[0], index: position.index })
-    distance = input.substring(0, position.index).match(/(\d*(\.\d+)?) meter/i)
-    positions[positions.length - 1].distance = distance && distance.length ? parseFloat(distance[0].replace(/meter/i, '')) : 0
+    distance = input.substring(0, position.index).match(/(\d*(\.\d+)?) (meter|metro)/i)
+    positions[positions.length - 1].distance = distance && distance.length ? parseFloat(distance[0].replace(/meter|metro/i, '')) : 0
     input = input.slice(position.index)
   }
   return getAbsPos(positions.length ? positions : [{type: 'front', distance: 0}], width, height)

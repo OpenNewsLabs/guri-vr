@@ -203,6 +203,10 @@ codemirror.defineSimpleMode('guri', {
       token: 'string'
     },
     {
+      regex: /\d*(\.\d+)? meters?|metros?/gi,
+      token: ['number', 'atom']
+    },
+    {
       regex: /".+"/,
       token: 'string'
     },
