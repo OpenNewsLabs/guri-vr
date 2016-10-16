@@ -2,9 +2,9 @@
 const express = require('express')
 const auth = require('./auth')
 const db = require('./db')
-const buildStory = require('./story-builder')
+const buildStory = require('./client/shared/story-builder')
 const upload = require('./uploader')
-const nlp = require('./nlp')
+const nlp = require('./client/shared/nlp')
 const searchResources = require('./search-resources')
 
 const app = module.exports = express.Router()

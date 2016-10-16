@@ -11,9 +11,9 @@ module.exports = Object.assign({}, devConfig, {
       }
     }),
     new OfflinePlugin({
-      externals: ['styles.css', 'translations/en.json', 'translations/es.json'],
+			externals: ['index.html', 'styles.css', 'translations/en.json', 'translations/es.json'],
       caches: {
-        main: ['app.js', 'styles.css', 'translations/en.json', 'translations/es.json']
+				main: ['index.html', 'app.js', 'styles.css', 'translations/en.json', 'translations/es.json']
       },
       ServiceWorker: {
         navigateFallbackURL: '/'

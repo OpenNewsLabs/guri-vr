@@ -3,11 +3,13 @@
   "name": "Guri VR",
   "icons": [
     {
-      "src": "logo.png",
-      "sizes": "96x96",
+      "src": "/logo.png",
+      "sizes": "192x192",
       "type": "image/png"
     }
   ],
+  "background_color": "#FFFFFF",
+  "theme_color": "#673ab7", 
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait"

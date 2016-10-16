@@ -1,4 +1,4 @@
 
-import nlp from '../../../nlp'
+import nlp from '../../shared/nlp'
 
 export default nlp
