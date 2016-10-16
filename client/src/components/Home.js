@@ -117,7 +117,7 @@ const styles = {
   },
   featureItem: {
     flex: 1,
-    minWidth: 350,
+    minWidth: 300,
     textAlign: 'justify'
   },
   footer: {
