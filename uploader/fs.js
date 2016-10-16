@@ -5,7 +5,7 @@
 
 const fs = require('fs');
 const multer = require('multer');
-const storyBuilder = require('../story-builder');
+const storyBuilder = require('../client/shared/story-builder');
 const config = require('../config.json');
 
 
