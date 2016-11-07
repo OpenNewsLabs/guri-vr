@@ -1,5 +1,6 @@
 
 const express = require('express')
+const cors = require('cors')
 const auth = require('./auth')
 const db = require('./db')
 const buildStory = require('./client/shared/story-builder')
@@ -63,7 +64,7 @@ app.post('/login', auth.requestToken(
       .catch(err => callback(err))),
   (req, res) => res.send('ok'))
 
-app.get('/assets/search', searchResources)
+app.get('/assets/search', cors(), searchResources)
 
 app.use(auth.restricted())
 
