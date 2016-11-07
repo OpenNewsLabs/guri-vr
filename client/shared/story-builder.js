@@ -17,7 +17,7 @@ module.exports = story =>
     <meta name="twitter:card" content="player">
     <meta name="twitter:site" content="@guri_vr">
     <meta name="twitter:title" content="${story.title}">
-    <meta name="twitter:image" content="${getMainImage(story.chapters)}">
+    <meta name="twitter:image" content="https://s3.amazonaws.com/gurivr/logo_twitter.png">
     <meta name="twitter:description" content="">
     <meta name="twitter:player" content="https://s3.amazonaws.com/gurivr/s/${story._id}.html">
     <meta name="twitter:player:width" content="400">
@@ -267,18 +267,6 @@ const renderExternalUrls = story => {
   }))
 
   return urls.map(url => `<script src="${url}"></script>`).join('\n')
-}
-
-const getMainImage = chapters => {
-  for (var i = 0; i < chapters.length; i++) {
-    for (var j = 0; j < chapters[i].length; j++) {
-      if (['panorama', 'image'].indexOf(chapters[i][j].type) !== -1) {
-        return chapters[i][j].src
-      }
-    }
-  }
-
-  return 'https://s3.amazonaws.com/gurivr/logo.png'
 }
 
 /**
