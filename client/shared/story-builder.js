@@ -65,7 +65,7 @@ module.exports = story =>
   </head>
   <body>
     <a-scene>
-      <a-entity camera="userHeight: 1.6"></a-entity>
+      <a-entity camera="userHeight: 1.6" look-controls wasd-controls></a-entity>
       <a-assets>${story.chapters.map(renderChapterAssets).filter(assets => assets.trim().length)}</a-assets>
       ${story.chapters.map(renderChapter).join('\n')}
     </a-scene>
