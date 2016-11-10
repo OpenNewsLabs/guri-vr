@@ -33,11 +33,11 @@ module.exports = (req, res) => {
       fetch(`${FREESOUND_BASE_URL}/search/text/?query=${query}&token=${config.searchApis.freesound}`)
       .then(response => response.json())
       .then(({ results }) => {
-        if (!results.length) return null
+        if (!results.length) return ''
 
         fetch(`${FREESOUND_BASE_URL}/sounds/${results[0].id}/?token=${config.searchApis.freesound}`)
         .then(response => response.json())
-        .then(({ previews }) => res.json(previews['preview-hq-mp3']))
+        .then(({ previews }) => res.json(previews['preview-hq-mp3'].replace('http://', 'https://')))
         .catch(() => res.status(500).send('error'))
       })
       .catch(() => res.status(500).send('error'))
