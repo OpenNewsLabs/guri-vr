@@ -134,6 +134,7 @@ export default class Editor extends Component {
         switch (obj.type) {
           case 'image':
           case 'panorama':
+          case 'audio':
             if (obj.text) {
               this.searchRemoteResource(obj)
             } else if (obj.latlon) {
@@ -164,10 +165,15 @@ export default class Editor extends Component {
 
   searchRemoteResource (obj) {
     searchResources(obj.type, obj.text)
-    .then(photos => {
-      if (!(photos && photos.length && (photos[0].url_k || photos[0].url_o))) return
-      this.editor.setValue(this.editor.getValue()
-      .replace(`"${obj.text}"`, `${obj.text} ${photos[0].url_k || photos[0].url_o}`))
+    .then(resources => {
+      if (obj.type === 'audio') {
+        this.editor.setValue(this.editor.getValue()
+        .replace(`"${obj.text}"`, `${obj.text} ${resources}`))
+      } else {
+        if (!(resources && resources.length && (resources[0].url_k || resources[0].url_o))) return
+        this.editor.setValue(this.editor.getValue()
+        .replace(`"${obj.text}"`, `${obj.text} ${resources[0].url_k || resources[0].url_o}`))
+      }
     })
   }
 }
