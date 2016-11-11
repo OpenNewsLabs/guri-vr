@@ -129,7 +129,8 @@ export default class Editor extends Component {
 
   searchReplaceResources () {
     try {
-      const body = nlp(this.editor.getValue())
+      const txt = this.editor.getValue()
+      const body = nlp(txt)
       body.forEach(chapter => chapter.forEach(obj => {
         switch (obj.type) {
           case 'image':
@@ -142,6 +143,25 @@ export default class Editor extends Component {
             }
         }
       }))
+
+      if (/go to ".+"/i.test(txt)) {
+        const input = txt.match(/go to ".+"/i).input
+        const query = input.replace(/go to /i, '').replace(/"/g, '')
+        Promise.all([searchResources('panorama', query), searchResources('audio', query)])
+        .then(([pano, audio]) => {
+          let out = ''
+          if (pano && pano.length && (pano[0].url_k || pano[0].url_o)) {
+            out += ` panorama ${pano[0].url_k || pano[0].url_o}`
+          }
+
+          if (audio) {
+            out += ` audio ${audio}`
+          }
+
+          this.editor.setValue(this.editor.getValue()
+          .replace(input, `go to ${query}: ${out.trim()}`))
+        })
+      }
     } catch (err) {
       console.error(err)
     }
