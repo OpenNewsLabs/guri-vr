@@ -141,6 +141,7 @@
     }
   },
   "header": {
+    "home": "Inicio",
     "guide": "Guía",
     "my_stories": "Mis historias",
     "logout": "Desconectarme",
@@ -148,7 +149,7 @@
   },
   "home": {
     "intro": {
-      "tagline": "Describí como querés contar tu experiencia VR y nosotros hacemos el resto",
+      "tagline": "Describí como querés contar tu experiencia VR y<br/>el editor hace el resto",
       "login": "Ingresá para crear una historia",
       "create": "Creá una historia"
     },

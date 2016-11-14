@@ -1,8 +1,7 @@
 
 import { h, Component } from 'preact'
-import { Layout } from 'preact-mdl'
 import Router from 'preact-router'
-import Radium from 'radium'
+import { style } from 'glamor'
 import guri, { user } from 'services/guri'
 import Header from 'components/Header'
 import Home from 'components/Home'
@@ -11,7 +10,6 @@ import StoryList from 'components/StoryList'
 import StoryEditor from 'components/StoryEditor'
 import Guide from 'components/Guide'
 
-@Radium
 export default class App extends Component {
   constructor (props) {
     super(props)
@@ -25,24 +23,24 @@ export default class App extends Component {
 
   render (props, { user }) {
     return (
-      <Layout fixed-header js={false}>
+      <div {...styles.container}>
         <Header user={user} />
-        <Layout.Content style={styles.mainContainer}>
-          <Router>
-            <Home path='/' />
-            <Guide path='/guide' />
-            <Login path='/login' />
-            <StoryList path='/stories' />
-            <StoryEditor path='/stories/:id' />
-          </Router>
-        </Layout.Content>
-      </Layout>
+        <Router>
+          <Home path='/' />
+          <Guide path='/guide' />
+          <Login path='/login' />
+          <StoryList path='/stories' />
+          <StoryEditor path='/stories/:id' />
+        </Router>
+      </div>
     )
   }
 }
 
 const styles = {
-  mainContainer: {
-    display: 'flex'
-  }
+  container: style({
+    minHeight: '100vh',
+    minWidth: '100vw',
+    backgroundColor: '#673AB7'
+  })
 }

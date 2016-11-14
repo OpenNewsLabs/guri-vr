@@ -4,7 +4,7 @@ html
     meta(name="viewport", content="width=device-width, initial-scale=1")
     title GuriVR
     link(href="https://fonts.googleapis.com/css?family=Roboto", rel="stylesheet", type="text/css")
-    link(rel="stylesheet", href="/styles.css")
+    link(href="https://fonts.googleapis.com/css?family=Shrikhand", rel="stylesheet")
     link(rel="manifest", href="/manifest.json")
     meta(name="theme-color", content="#673ab7")
     meta(name="description", content="Describe your VR experience and the editor will do the rest")
@@ -22,6 +22,10 @@ html
     meta(property="twitter:url", content="https://gurivr.com/")
     meta(property="twitter:image", content="https://s3.amazonaws.com/gurivr/logo.png")
     meta(property="twitter:description", content="Describe your VR experience and the editor will do the rest")
+    style
+      | html, body, #root {
+      |   margin: 0; padding: 0; min-width: 100vw; min-height: 100vh; font-family: 'Roboto', sans-serif;
+      | }
 
   body
     #root
