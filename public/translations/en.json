@@ -149,23 +149,37 @@
   },
   "home": {
     "intro": {
-      "tagline": "Describe your VR experience and<br/>the editor will do the rest.",
-      "login": "Login to create a story",
-      "create": "Create a story"
+      "tagline": "Describe your VR experience and<br/>the editor will do the rest."
     },
     "preview": {
-      "title": "Use your own words",
-      "text": "You not need to be a coder to create VR experiences. The GuriVR editor interprets your words and creates the world you described.\n\nTry adding some scenes. For example my first scene will last 500 seconds and display an image located at https://s3.amazonaws.com/gurivr/logo.png along with a text saying: \"Guri is cool!\" to my left and a panorama located at https://s3.amazonaws.com/gurivr/pano.jpg\n\nTry adding more scenes\n\nhint: Try with words like audio, panorama, text, videosphere, voiceover and chart.\n\nYou can also drag your files into the editor and get back a url or even find images and panoramas enclosing the search terms inside double quotes 🙀"
+      "text": "You not need to be a coder to create VR experiences. The GuriVR editor interprets your words and creates the world you described.\n\nTry adding some scenes. For example my first scene will last 500 seconds and display an image located at https://s3.amazonaws.com/gurivr/logo.png along with a text saying: \"Guri is cool!\" to my left and a panorama located at https://s3.amazonaws.com/gurivr/pano.jpg\n\nTry adding more scenes...\n\nhint: Try with words like audio, panorama, text, videosphere, voiceover and chart. You can also drag your files into the editor and get back a url or even find images and panoramas enclosing the search terms inside double quotes 🙀"
+    },
+    "templates": {
+      "start": "...or start with a Template",
+      "panorama_title": "Panorama",
+      "panorama_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel feugiat ante.",
+      "chart_title": "Chart",
+      "chart_desc": "Suspendisse lacus arcu, cursus sed tincidunt nec, malesuada non tortor. Cras egestas.",
+      "voiceover_title": "Voiceover",
+      "voiceover_desc": "Donec sed euismod urna. Nam varius eros nec quam.",
+      "videosphere_title": "Videosphere",
+      "videosphere_desc": "Aliquam interdum, sem eget sodales dapibus, dui leo commodo."
+    },
+    "oss": {
+      "title": "I'm Open source",
+      "description": "This is an <a href='https://github.com/opennewslabs/guri-vr'>open source project</a> created as part of a <a href='https://opennews.org/what/fellowships/'>Knight-Mozilla fellowship</a>. You can contribute and/or propose ideas you have for this project. <strong>Note</strong>: A wise reporter once said \"60% of the time it works every time\". This tool is under development and you may find some bugs. In that case we will appreciate if you can <a href='https://github.com/opennewslabs/guri-vr/issues'>fill an issue</a>."
     },
     "share": {
       "title": "Share it everywhere",
       "description": "GuriVR uses <a href='https://webvr.info'>WebVR</a>, the Web Open Standard for the Virtual Reality World. This works on modern web browsers, Google Cardboard and Oculus rift among others. It also fallback for desktop browsers using drag controls. You can share your experiences as standalone websites or inside your site as an iframe."
     },
-    "oss": {
-      "title": "Open source",
-      "description": "This is an <a href='https://github.com/opennewslabs/guri-vr'>open source project</a> created as part of a <a href='https://opennews.org/what/fellowships/'>Knight-Mozilla fellowship</a>. You can contribute and/or propose ideas you have for this project. <strong>Note</strong>: A wise reporter once said \"60% of the time it works every time\". This tool is under development and you may find some bugs. In that case we will appreciate if you can <a href='https://github.com/opennewslabs/guri-vr/issues'>fill an issue</a>."
-    },
-    "by": "Made with ♥️ by"
+    "footer": {
+      "title": "Now is your turn to have fun!",
+      "description": "Start making cool stuff in the VR World just with a few lines of text.",
+      "button": "Create your first story",
+      "by": "Made with ♥️ by <a href='https://twitter.com/impronunciable'>Dan Zajdband</a>",
+      "design_by": "Web design by <a href='https://twitter.com/abad'>Federico Abad</a>"
+    }
   },
   "login": {
     "sent": "Magic Link sent to your Email address!",

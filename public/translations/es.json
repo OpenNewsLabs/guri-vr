@@ -154,18 +154,34 @@
       "create": "Creá una historia"
     },
     "preview": {
-      "title": "Usá tus propias palabras",
-      "text": "No necesitás ser un programador para crear historias con Realidad Virtual. El editor de GuriVR interpreta tus palabras y crea el mundo que describiste.\n\nIntentá creando algunas escenas. Por ejemplo mi primera escena dura 500 segundos y muestra una foto alojada en https://s3.amazonaws.com/gurivr/logo.png con un texto que dice: \"Guri es genial!\" a mi izquierda y un panorama de https://s3.amazonaws.com/gurivr/pano.jpg\n\nAgregá más escenas!\n\nayuda: Probá usando términos como audio, panorama, texto, video esfera, voz en off o modelo.\n\nTambién podés arrastrar archivos en el editor y obtener las urls directamente o incluso buscar imagenes y panoramas haciendo la búsqueda entre comillas 🙀"
+      "text": "No necesitás ser un programador para crear historias con Realidad Virtual. El editor de GuriVR interpreta tus palabras y crea el mundo que describiste.\n\nIntentá creando algunas escenas. Por ejemplo mi primera escena dura 500 segundos y muestra una foto alojada en https://s3.amazonaws.com/gurivr/logo.png con un texto que dice: \"Guri es genial!\" a mi izquierda y un panorama de https://s3.amazonaws.com/gurivr/pano.jpg\n\nAgregá más escenas!\n\nayuda: Probá usando términos como audio, panorama, texto, video esfera, voz en off o modelo. También podés arrastrar archivos en el editor y obtener las urls directamente o incluso buscar imagenes y panoramas haciendo la búsqueda entre comillas 🙀"
+    },
+    "templates": {
+      "start": "...o empezá con una Plantilla",
+      "panorama_title": "Panorama",
+      "panorama_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel feugiat ante.",
+      "chart_title": "Gráfico",
+      "chart_desc": "Suspendisse lacus arcu, cursus sed tincidunt nec, malesuada non tortor. Cras egestas.",
+      "voiceover_title": "Voz en off",
+      "voiceover_desc": "Donec sed euismod urna. Nam varius eros nec quam.",
+      "videosphere_title": "Videoesfera",
+      "videosphere_desc": "Aliquam interdum, sem eget sodales dapibus, dui leo commodo."
+    },
+    "oss": {
+      "title": "Soy Open source",
+      "description": "Este es un <a href='https://github.com/opennewslabs/guri-vr'>proyecto open source</a> creado como parte de mi <a href='https://opennews.org/what/fellowships/'>Knight-Mozilla fellowship</a>. Podés contribuir y/o aportar ideas que tengas para este proyecto. <strong>Nota</strong>: Como un sabio periodista una vez dijo \"60% de las veces, funciona todas las veces\". Esta herramienta se encuentra bajo activo desarrollo y podés encontrar fallas. En ese caso nos encantaría que las <a href='https://github.com/opennewslabs/guri-vr/issues'>reportes</a>."
     },
     "share": {
       "title": "Compartilo en todas partes",
       "description": "GuriVR usa <a href='https://webvr.info'>WebVR</a>, el estándar web para el mundo de la Realidad Virtual. esto funciona en navegadores, Google Cardboard y Oculus rift entre otros. También cuenta con controles para el mouse y teclado. Podés compartir tus experiencias como sitios web o embeberlas en iframes."
     },
-    "oss": {
-      "title": "Código abierto",
-      "description": "Este es un <a href='https://github.com/opennewslabs/guri-vr'>proyecto open source</a> creado como parte de mi <a href='https://opennews.org/what/fellowships/'>Knight-Mozilla fellowship</a>. Podés contribuir y/o aportar ideas que tengas para este proyecto. <strong>Nota</strong>: Como un sabio periodista una vez dijo \"60% de las veces, funciona todas las veces\". Esta herramienta se encuentra bajo activo desarrollo y podés encontrar fallas. En ese caso nos encantaría que las <a href='https://github.com/opennewslabs/guri-vr/issues'>reportes</a>."
-    },
-    "by": "Con ♥️ por"
+    "footer": {
+      "title": "Ahora es tu turno de divertirte!",
+      "description": "Empezá haciendo cosas geniales en el mundo de VR en solo unas líneas de texto.",
+      "button": "Creá tu primera historia",
+      "by": "Hecho con ♥️ por <a href='https://twitter.com/impronunciable'>Dan Zajdband</a>",
+      "design_by": "Sitio diseñado por <a href='https://twitter.com/abad'>Federico Abad</a>"
+    }
   },
   "login": {
     "sent": "Un link mágico fue enviado a tu correo!",
