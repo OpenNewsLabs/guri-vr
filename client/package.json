@@ -37,6 +37,6 @@
   },
   "standard": {
     "parser": "babel-eslint",
-    "globals": ["it", "describe", "fetch", "Headers", "FormData", "__user__", "localStorage"]
+    "globals": ["it", "describe", "fetch", "Headers", "FormData", "__user__", "localStorage", "google"]
   }
 }

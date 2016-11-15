@@ -1,33 +1,16 @@
 
 import { h, Component } from 'preact'
-import Radium from 'radium'
 import codemirror from 'codemirror'
+import { style } from 'glamor'
 import 'codemirror/addon/mode/simple'
-import { IconToggle, Icon } from 'preact-mdl'
 import { debounce, dataURItoBlob } from 'services/utils'
 import { searchResources, uploadAsset } from 'services/datalayer'
 import nlp from 'services/nlp'
-import { getLocale } from 'services/i18n'
 import streetview from 'services/streetview'
 
-@Radium
 export default class Editor extends Component {
-
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      speech: false
-    }
-
-    this.searchReplaceResources = this.searchReplaceResources.bind(this)
-    this.onMicChange = this.onMicChange.bind(this)
-    this._speechAPI = window.SpeechRecognition || window.webkitSpeechRecognition ||
-      window.mozSpeechRecognition || window.msSpeechRecognition || window.oSpeechRecognition
-  }
-
   shouldComponentUpdate (nextProps, nextState) {
-    return nextState.mic !== this.state.mic
+    return false
   }
 
   componentDidMount () {
@@ -47,6 +30,7 @@ export default class Editor extends Component {
       allowDropFileTypes: ['image/jpeg', 'image/png', 'image/gif', 'audio/mpeg3', 'video/mpeg'],
       mode: 'guri'
     })
+
     this.editor.setCursor(this.editor.lineCount(), 0)
 
     onInput(this.editor.getValue())
@@ -73,55 +57,9 @@ export default class Editor extends Component {
     })
   }
 
-  onMicChange (e) {
-    const enabled = e.target.checked
-    let lastResult = -1
-
-    this.setState({
-      speech: enabled
-    })
-
-    if (!this.recognition) {
-      this.recognition = new this._speechAPI()
-
-      this.recognition.continuous = true
-      this.recognition.interimResults = true
-      this.recognition.maxAlternatives = 5
-      this.recognition.lang = `${getLocale()}-${getLocale().toUpperCase()}`
-
-      this.recognition.onresult = e => {
-        let transcription = ''
-
-        for (let i = lastResult + 1; i < e.results.length; i++) {
-          if (e.results[i].isFinal) {
-            this.editor.replaceSelection(this.replaceQuotes(e.results[i][0].transcript))
-            lastResult = i
-          }
-        }
-      }
-    }
-
-    if (enabled) {
-      this.recognition.start()
-    } else {
-      this.recognition.stop()
-    }
-  }
-
-  replaceQuotes (str = '') {
-    return str
-      .replace(/open quotes?|close quotes?|abrir comillas?|cerrar comillas?/gi, '"')
-      .replace(/nueva escena|new scene/gi, '\n\n')
-  }
-
-  render (props, { speech }) {
+  render () {
     return (
-      <div style={styles.container}>
-        {this._speechAPI ? (
-          <IconToggle onChange={this.onMicChange} style={styles.mic} checked={speech}>
-            <Icon icon={'mic'} />
-          </IconToggle>
-        ) : null}
+      <div {...styles.container}>
         <div ref={div => { this._editorDiv = div }}></div>
       </div>
     )
@@ -170,7 +108,7 @@ export default class Editor extends Component {
   searchLatLonResource (obj) {
     const loader = streetview()
     const self = this
-    loader.addEventListener('load', function() {
+    loader.addEventListener('load', function () {
       const dataURL = this.canvas.toDataURL('image/jpeg', 0.5)
       const blob = dataURItoBlob(dataURL)
       uploadAsset(blob)
@@ -201,7 +139,7 @@ export default class Editor extends Component {
 codemirror.defineSimpleMode('guri', {
   start: [
     {
-      regex: /audio|sound|🔊|panorama|🌅|image|foto|picture|text|texto|📝|videosphere|video esfera|🎥|video|seconds|second|segundos|⏲|voiceover|voz en off|📢|chart|gráfico|📊|background|fondo|model|modelo|sky|cielo/gi,
+      regex: /audio|sound|🔊|panoramas?|🌅|image(nes|s)?|foto|picture|texto?|📝|videosphere|video esfera|🎥|video|seconds|second|segundos|⏲|voiceover|voz en off|📢|chart|gráfico|📊|background|fondo|modelo?|sky|cielo/gi,
       token: 'atom'
     },
     {
@@ -240,16 +178,10 @@ codemirror.defineSimpleMode('guri', {
 })
 
 const styles = {
-  container: {
-    flex: 0,
-    height: 300,
+  container: style({
+    flex: 1,
+    height: 338,
     textAlign: 'left',
     position: 'relative'
-  },
-  mic: {
-    position: 'absolute',
-    right: 10,
-    top: 5,
-    zIndex: 10
-  }
+  })
 }

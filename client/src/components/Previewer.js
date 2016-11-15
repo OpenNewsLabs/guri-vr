@@ -1,15 +1,16 @@
 
 import { h } from 'preact'
-import Radium from 'radium'
+import { style } from 'glamor'
 
-export default Radium(({ body, height, mode = 'vr' }) => (
-  <iframe height={height} style={styles.container}
+export default ({ body, height, mode = 'vr' }) => (
+  <iframe height={height} {...styles.container}
     src={`/api/preview?mode=${mode}&body=${encodeURIComponent(JSON.stringify(body))}`}
     allowfullscreen />
-))
+)
 
 const styles = {
-  container: {
-    flex: 1
-  }
+  container: style({
+    flex: 1,
+    border: 'none'
+  })
 }
