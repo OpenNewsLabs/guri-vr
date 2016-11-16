@@ -39,8 +39,7 @@ export default class App extends Component {
 
 const styles = {
   container: style({
-    minHeight: '100vh',
-    minWidth: '100vw',
+    minWidth: '100%',
     backgroundColor: '#673AB7'
   })
 }

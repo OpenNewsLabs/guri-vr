@@ -18,7 +18,8 @@ const styles = {
     backgroundColor: '#fff',
     borderRadius: 12,
     margin: 10,
-    boxShadow: '0 2px 11px 0 rgba(0,0,0,0.09)'
+    boxShadow: '0 2px 11px 0 rgba(0,0,0,0.09)',
+    zIndex: 1
   }),
 
   desc: style({
