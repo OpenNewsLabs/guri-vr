@@ -1,6 +1,7 @@
 node_modules
 .DS_Store
 config.json
+.yarn.lock
 npm-debug.log
 public/app.js
 public/uploads/*
