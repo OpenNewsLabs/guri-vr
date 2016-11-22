@@ -8,6 +8,7 @@ import Hero from 'components/Home/Hero'
 import Oss from 'components/Home/Oss'
 import Templates from 'components/Home/Templates'
 import Share from 'components/Home/Share'
+import Header from 'components/Home/Header'
 import Footer from 'components/Home/Footer'
 import t from 'services/i18n'
 
@@ -48,11 +49,14 @@ export default class Home extends Component {
   render (props, { text, body, mode }) {
     return (
       <div {...styles.container}>
-        <Hero body={body} mode={mode} onInput={this.onInput} />
-        <Templates />
-        <Oss />
-        <Share />
-        <Footer />
+        <Header user={user} />
+        <div {...styles.main}>
+          <Hero body={body} mode={mode} onInput={this.onInput} />
+          <Templates />
+          <Oss />
+          <Share />
+          <Footer />
+        </div>
       </div>
     )
   }
@@ -60,6 +64,11 @@ export default class Home extends Component {
 
 const styles = {
   container: style({
+    backgroundColor: '#673AB7',
     overflowX: 'hidden'
+  }),
+
+  main: style({
+    backgroundColor: '#673AB7'
   })
 }

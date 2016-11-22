@@ -1,15 +1,12 @@
 import { h } from 'preact'
 import { style } from 'glamor'
-import t from 'services/i18n'
+import Logo from 'components/Logo'
+import Navbar from 'components/Navbar'
 
 export default () => (
   <div {...styles.container}>
-    <nav {...styles.navbar}>
-      <a href='/' {...styles.link}>{t('header.home')}</a>
-      <a href='/guide' {...styles.link}>{t('header.guide')}</a>
-      <a href='/login' {...styles.link}>{t('header.login')}</a>
-    </nav>
-    <img src='/logo.svg' width='220' height='104' />
+    <Navbar active='home' />
+    <Logo />
     <nav {...styles.social}>
       <a href='https://github.com/opennewslabs/guri-vr' {...styles.link}>
         <img src='/git.svg' />
@@ -29,12 +26,6 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingTop: 50
-  }),
-
-  navbar: style({
-    width: 250,
-    display: 'flex',
-    justifyContent: 'space-between'
   }),
 
   link: style({

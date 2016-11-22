@@ -24,9 +24,6 @@ export default () => (
 
 const styles = {
   container: style({
-    marginTop: 20,
-    float: 'right',
-    marginRight: 20,
     fontSize: 14,
     textTransform: 'uppercase'
   }),

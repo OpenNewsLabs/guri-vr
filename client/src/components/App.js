@@ -3,7 +3,6 @@ import { h, Component } from 'preact'
 import Router from 'preact-router'
 import { style } from 'glamor'
 import guri, { user } from 'services/guri'
-import Header from 'components/Header'
 import Home from 'components/Home'
 import Login from 'components/Login'
 import StoryList from 'components/StoryList'
@@ -24,7 +23,6 @@ export default class App extends Component {
   render (props, { user }) {
     return (
       <div {...styles.container}>
-        <Header user={user} />
         <Router>
           <Home path='/' />
           <Guide path='/guide' />
@@ -39,7 +37,6 @@ export default class App extends Component {
 
 const styles = {
   container: style({
-    minWidth: '100%',
-    backgroundColor: '#673AB7'
+    minWidth: '100%'
   })
 }
