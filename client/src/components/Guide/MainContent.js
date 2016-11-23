@@ -7,17 +7,17 @@ import CodeExample from 'components/CodeExample'
 export default () => (
   <div {...styles.container}>
     <section>
-      <h3>{t('guide.introduction.title')}</h3>
+      <h3 {...styles.sectionTitle}>{t('guide.introduction.title')}</h3>
       <p dangerouslySetInnerHTML={{ __html: t('guide.introduction.first') }}></p>
       <p dangerouslySetInnerHTML={{ __html: t('guide.introduction.second') }}></p>
     </section>
     <section id='getting-started'>
-      <h3>{t('guide.getting_started.title')}</h3>
+      <h3 {...styles.sectionTitle}>{t('guide.getting_started.title')}</h3>
       <p dangerouslySetInnerHTML={{ __html: t('guide.getting_started.first') }}></p>
       <p>{t('guide.getting_started.second')}</p>
     </section>
     <section id='scenes'>
-      <h3>{t('guide.scenes.title')}</h3>
+      <h3 {...styles.sectionTitle}>{t('guide.scenes.title')}</h3>
       <p>{t('guide.scenes.first')}</p>
       <CodeExample text={t('guide.scenes.preview')} />
 
@@ -25,7 +25,7 @@ export default () => (
       <p>{t('guide.scenes.third')}</p>
     </section>
     <section id='entities'>
-      <h3>{t('guide.entities.title')}</h3>
+      <h3 {...styles.sectionTitle}>{t('guide.entities.title')}</h3>
       <p>{t('guide.entities.first')}</p>
       <p>{t('guide.entities.second')}</p>
       <CodeExample
@@ -185,28 +185,28 @@ export default () => (
         text={t('guide.3dmodel.preview')} />
     </section>
     <section id='speech-recognition'>
-      <h3>{t('guide.speech_recognition.title')}</h3>
+      <h3 {...styles.sectionTitle}>{t('guide.speech_recognition.title')}</h3>
       <p>{t('guide.speech_recognition.how')}</p>
       <p>{t('guide.speech_recognition.description')}</p>
     </section>
     <section id='search'>
-      <h3>{t('guide.search.title')}</h3>
+      <h3 {...styles.sectionTitle}>{t('guide.search.title')}</h3>
       <p>{t('guide.search.description')}</p>
       <p>{t('guide.search.example')}</p>
     </section>
     <section id='ar'>
-      <h3>{t('guide.ar.title')}</h3>
+      <h3 {...styles.sectionTitle}>{t('guide.ar.title')}</h3>
       <p>{t('guide.ar.description')}</p>
       <p>{t('guide.entities.example')}</p>
       <CodeExample title='AR mode example' text={t('guide.ar.preview')} />
     </section>
     <section id='sharing'>
-      <h3>{t('guide.sharing.title')}</h3>
+      <h3 {...styles.sectionTitle}>{t('guide.sharing.title')}</h3>
       <p>
         {t('guide.sharing.first')}
 
         <div {...styles.embed}>
-          <iframe src='https://s3.amazonaws.com/gurivr/s/87298957f8e8d6a3696098d8.html' width='100%' height='300'></iframe>
+          <iframe src='https://s3.amazonaws.com/gurivr/s/5835cb9b5a3fda970fbb672c.html' width='100%' height='300'></iframe>
         </div>
 
         <span dangerouslySetInnerHTML={{ __html: t('guide.sharing.second') }}></span>
@@ -223,7 +223,10 @@ export default () => (
 const styles = {
   container: style({
     flex: 1,
-    maxWidth: 700
+    maxWidth: 700,
+    marginTop: -30,
+    color: '#898989',
+    fontSize: 18
   }),
 
   title: style({
@@ -239,5 +242,10 @@ const styles = {
   attr: style({
     backgroundColor: '#eee',
     padding: 3
+  }),
+
+  sectionTitle: style({
+    fontSize: 40,
+    color: '#57309D'
   })
 }

@@ -11,6 +11,24 @@ export default () => (
 
     <a {...merge(styles.link, styles.title)} href='#entities'>{t('guide.entities.title')}</a>
     <a {...styles.link} href='#audio'>{t('guide.audio.title')}</a>
+    <a {...styles.link} href='#panorama'>{t('guide.panorama.title')}</a>
+    <a {...styles.link} href='#videosphere'>{t('guide.videosphere.title')}</a>
+    <a {...styles.link} href='#image'>{t('guide.image.title')}</a>
+    <a {...styles.link} href='#video'>{t('guide.video.title')}</a>
+    <a {...styles.link} href='#text'>{t('guide.text.title')}</a>
+    <a {...styles.link} href='#duration'>{t('guide.duration.title')}</a>
+    <a {...styles.link} href='#voiceover'>{t('guide.voiceover.title')}</a>
+    <a {...styles.link} href='#chart'>{t('guide.chart.title')}</a>
+    <a {...styles.link} href='#sky'>{t('guide.sky.title')}</a>
+    <a {...styles.link} href='#background'>{t('guide.background.title')}</a>
+    <a {...styles.link} href='#3dmodel'>{t('guide.3dmodel.title')}</a>
+
+    <div {...styles.separator}></div>
+    <a {...merge(styles.link, styles.title)} href='#speech-recognition'>{t('guide.speech_recognition.title')}</a>
+    <a {...merge(styles.link, styles.title)} href='#search'>{t('guide.search.title')}</a>
+    <a {...merge(styles.link, styles.title)} href='#ar'>{t('guide.ar.title')}</a>
+    <a {...merge(styles.link, styles.title)} href='#sharing'>{t('guide.sharing.title')}</a>
+
   </div>
 )
 
@@ -24,7 +42,8 @@ const styles = {
     color: '#000000',
     textTransform: 'none',
     fontWeight: 'bold',
-    marginBottom: 15
+    marginBottom: 15,
+    marginTop: 20
   }),
 
   link: style({
@@ -32,6 +51,11 @@ const styles = {
     textTransform: 'uppercase',
     fontSize: 18,
     textDecoration: 'none',
-    display: 'block'
+    display: 'block',
+    marginTop: 10
+  }),
+
+  separator: style({
+    marginBottom: 40
   })
 }

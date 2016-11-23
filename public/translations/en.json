@@ -7,7 +7,7 @@
     "introduction": {
       "title": "Introduction",
       "first": "GuriVR is a free, open source project created to allow anyone to make <a href='https://en.wikipedia.org/wiki/Virtual_reality'>Virtual Reality</a> experiences with the lowest possible learning curve. Guri provides a quick and easy online editor that creates virtual reality from your words. Guri even makes it possible to create a 360 panorama that works in the browser and with headsets like the Google Cardboard in seconds - just tweet a 360 panorama with a mention to <a href='https://twitter.com/guri_vr'>@guri_vr</a>.",
-      "second": "Guri is under <a href='https://github.com/opennewslabs/guri-vr'>active development</a> and <a href='https://github.com/opennewslabs/guri-vr/issues'>feedback</a> is always welcome and under consideration for new features and bug reports. If you see something, say something 🚨 👮"
+      "second": "Guri is under <a href='https://github.com/opennewslabs/guri-vr'>active development</a> and <a href='https://github.com/opennewslabs/guri-vr/issues'>feedback</a> is always welcome and under consideration for new features and bug reports.<br>If you see something, say something 🚨 👮"
     },
     "getting_started": {
       "title": "Getting started",

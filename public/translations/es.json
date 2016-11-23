@@ -7,7 +7,7 @@
     "introduction": {
       "title": "Introducción",
       "first": "GuriVR es un proyecto libre y open source con el fín de que cualquiera pueda crear experiencias de <a href='https://es.wikipedia.org/wiki/Realidad_virtual'>Realidad Virtual</a> con la menor curva de aprendizaje posible. La herramienta principal para llegar a esta meta es el editor online descripto a continuación pero Guri intenta hacer esta tarea más simple de distintas maneras. Por ejemplo, es posible crear un simple panorama 360 tanto en el navegador como en headsets como el Google Cardboard tan solo twiteando la foto mencionando a <a href='https://twitter.com/guri_vr'>@guri_vr</a>.",
-      "second": "Guri se encuentra bajo <a href='https://github.com/opennewslabs/guri-vr'>activo desarrollo</a> y el <a href='https://github.com/opennewslabs/guri-vr/issues'>feedback</a> es siempre bien recibido y bajo consideración para nuevas características y reportes de fallas. Si ves algo, decí algo 🚨 👮"
+      "second": "Guri se encuentra bajo <a href='https://github.com/opennewslabs/guri-vr'>activo desarrollo</a> y el <a href='https://github.com/opennewslabs/guri-vr/issues'>feedback</a> es siempre bien recibido y bajo consideración para nuevas características y reportes de fallas.<br>Si ves algo, decí algo 🚨 👮"
     },
     "getting_started": {
       "title": "Comenzando",

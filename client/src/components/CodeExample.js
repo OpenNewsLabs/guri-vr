@@ -2,28 +2,46 @@
 import { h } from 'preact'
 import nlp from 'services/nlp'
 import t from 'services/i18n'
+import { style } from 'glamor'
 
 export default ({ text, title = 'GuriVR' }) => (
-  <div style={styles.container}>
-    <pre style={styles.text}>{text}</pre>
-    <a href={`/api/preview?mode=${getMode(text)}&title=${title}&body=${encodeURIComponent(JSON.stringify(nlp(text)))}`} target='_blank' style={styles.run}>{t('code_example.run')}</a>
+  <div {...styles.container}>
+    <pre {...styles.text}>{text}</pre>
+    <a href={`/api/preview?mode=${getMode(text)}&title=${title}&body=${encodeURIComponent(JSON.stringify(nlp(text)))}`} target='_blank' {...styles.run}>{t('code_example.run')}</a>
   </div>
 )
 
 const getMode = str => /ar mode|modo ra/gi.test(str) ? 'ar' : 'vr'
 
 const styles = {
-  container: {
+  container: style({
     padding: 20,
-    margin: 20,
-    backgroundColor: '#eee'
-  },
-  text: {
+    margin: 0,
+    backgroundColor: '#282C34',
+    borderRadius: 3,
+    color: '#818181',
+    fontSize: 16,
+    position: 'relative',
+    paddingBottom: 40
+  }),
+  text: style({
     whiteSpace: 'pre-wrap',
-    margin: 0
-  },
-  run: {
-    display: 'block',
-    textAlign: 'right'
-  }
+    margin: 0,
+    fontFamily: 'monospace'
+  }),
+
+  run: style({
+    display: 'inline-block',
+    textAlign: 'right',
+    backgroundColor: '#fff',
+    color: '#57309D',
+    fontSize: 16,
+    position: 'absolute',
+    borderRadius: 3.75,
+    bottom: 8,
+    right: 15,
+    padding: 8,
+    textTransform: 'uppercase',
+    textDecoration: 'none'
+  })
 }
