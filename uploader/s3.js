@@ -9,6 +9,7 @@ const multerS3 = require('multer-s3');
 const uuid = require('node-uuid');
 const storyBuilder = require('../client/shared/story-builder');
 const config = require('../config.json');
+const unzipToS3 = require('unzip-to-s3');
 
 /**
  * S3 configuration
@@ -20,7 +21,17 @@ AWS.config.update({
   secretAccessKey: config.s3.secretAccessKey
 });
 
-var s3bucket = new AWS.S3({params: {Bucket: config.s3.bucket}});
+const s3bucket = new AWS.S3({params: {Bucket: config.s3.bucket}});
+
+/**
+ * Unzip to s3 config
+ */
+
+const unzipClient = unzipToS3.createClient({
+	key: config.s3.accessKeyId,
+	secret: config.s3.secretAccessKey,
+	bucket: config.s3.bucket
+})
 
 /**
  * Upload a story to AWS S3
@@ -65,3 +76,9 @@ s3bucket.deleteObject(
   { Bucket: `${config.s3.bucket}`, Key: `s/${id}.html`, },
   (err, data) => err ? reject(new Error('Error deleting file on s3')) : resolve()
 ));
+
+/**
+ * Unzip to s3
+ */
+
+exports.unzipToS3 = stream => unzipClient(stream)

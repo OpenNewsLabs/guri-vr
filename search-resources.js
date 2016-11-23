@@ -3,8 +3,9 @@
  * Module dependencies
  */
 
-require('isomorphic-fetch')
+const request = require('axios')
 const config = require('./config.json')
+const uploader = require('./uploader')
 
 /**
  * Module constants
@@ -20,46 +21,44 @@ module.exports = (req, res, next) => {
 
   switch (type) {
     case 'image':
-      fetch(`${FLICKR_BASE_URL}${FLICKR_PARAMS}&text=${query}`)
-      .then(response => response.json())
+      request(`${FLICKR_BASE_URL}${FLICKR_PARAMS}&text=${query}`)
 			.then(data => res.json(data.photos.photo))
 			.catch(next)
     break
     case 'panorama':
     default:
-      fetch(`${FLICKR_BASE_URL}${FLICKR_PARAMS}&group_id=44671723@N00&text=${query}`)
-      .then(response => response.json())
+      request(`${FLICKR_BASE_URL}${FLICKR_PARAMS}&group_id=44671723@N00&text=${query}`)
 			.then(data => res.json(data.photos.photo))
 			.catch(next)
       break
     case 'audio':
-      fetch(`${FREESOUND_BASE_URL}/search/text/?query=${query}&token=${config.searchApis.freesound}`)
-      .then(response => response.json())
+      request(`${FREESOUND_BASE_URL}/search/text/?query=${query}&token=${config.searchApis.freesound}`)
       .then(({ results }) => {
         if (!results.length) res.json('')
 
-        fetch(`${FREESOUND_BASE_URL}/sounds/${results[0].id}/?token=${config.searchApis.freesound}`)
-        .then(response => response.json())
+        request(`${FREESOUND_BASE_URL}/sounds/${results[0].id}/?token=${config.searchApis.freesound}`)
         .then(({ previews }) => res.json(previews['preview-hq-mp3'].replace('http://', 'https://')))
         .catch(next)
       })
       .catch(next)
 			break
 		case '3dmodel':
-			fetch(`${CLARA_BASE_URL}?page=1&perPage=1&type=library&query=${query}`)
-			.then(response => response.json())
-			.then(data => res.json(data))
-			.then(data => {
-				if (!data.total) {
+			request(`${CLARA_BASE_URL}?page=1&perPage=1&type=library&query=${query}`)
+				.then(data => {
+					console.log(data.data.total)
+				if (!data.data.total) {
 					return res.json('')
 				}
-
-				fetch(`${CLARA_BASE_URL}/https://clara.io/api/scenes/${data.models[0]._id}/export/obj?zip=true&centerScene=true`)
-				.then(response => response.json())
-				.then(data => {
+					
+				request.get(`${CLARA_BASE_URL}/${data.data.models[0]._id}/export/dae?zip=true&centerScene=true`, {responseType: 'blob'})
+				.then(response => {
+					const stream = response.data
+					uploader.unzipToS3(stream)
+					.on('end', () => )
 				})
+				.catch(next)
 			})
-			.catch(next)	
+			.catch(next)
 			break
   }
 }
