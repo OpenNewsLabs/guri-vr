@@ -5,11 +5,19 @@ import t from 'services/i18n'
 import { style } from 'glamor'
 
 export default ({ text, title = 'GuriVR' }) => (
-  <div {...styles.container}>
-    <pre {...styles.text}>{text}</pre>
-    <a href={`/api/preview?mode=${getMode(text)}&title=${title}&body=${encodeURIComponent(JSON.stringify(nlp(text)))}`} target='_blank' {...styles.run}>{t('code_example.run')}</a>
+  <div class='cm-s-one-dark' {...styles.container}>
+    <pre {...styles.text} dangerouslySetInnerHTML={{ __html: text }}></pre>
+    <a href={`/api/preview?mode=${getMode(text)}&title=${title}&body=${encodeURIComponent(JSON.stringify(nlp(getText(text))))}`}
+      target='_blank' {...styles.run}>{t('code_example.run')}</a>
   </div>
 )
+
+const bufferDiv = document.createElement()
+
+const getText = str => {
+  bufferDiv.innerHTML = str
+  return bufferDiv.textContent || bufferDiv.innerText
+}
 
 const getMode = str => /ar mode|modo ra/gi.test(str) ? 'ar' : 'vr'
 
@@ -22,7 +30,7 @@ const styles = {
     color: '#818181',
     fontSize: 16,
     position: 'relative',
-    paddingBottom: 40
+    paddingBottom: 50
   }),
   text: style({
     whiteSpace: 'pre-wrap',

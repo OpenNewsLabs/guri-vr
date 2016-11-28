@@ -5,7 +5,7 @@ import t from 'services/i18n'
 
 export default () => (
   <footer {...styles.footer}>
-    <h3 {...styles.fun}>{t('home.footer.title')}</h3>
+    <h2 {...styles.fun}>{t('home.footer.title')}</h2>
     <p {...styles.start}>{t('home.footer.description')}</p>
     <a {...styles.button} href='/stories'>{t('home.footer.button')}</a>
     <p {...styles.by} dangerouslySetInnerHTML={{ __html: t('home.footer.by') }}></p>

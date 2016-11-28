@@ -6,7 +6,7 @@ export default ({ title, text, bgUrl }) => (
   <div {...styles.container}>
     <img src={bgUrl} />
     <div {...styles.desc}>
-      <h4 {...styles.title}>{title}</h4>
+      <h3 {...styles.title}>{title}</h3>
       <p {...styles.text}>{text}</p>
     </div>
   </div>

@@ -13,7 +13,7 @@ export default ({ body, mode, onInput }) => (
       <Previewer body={body} height={338} mode={mode} />
     </section>
     <img src='/images/a-loves-b.png' alt='Text loves VR' {...styles.love} />
-    <h3 {...styles.templatesTitle}>{t('home.templates.start')}</h3>
+    <h2 {...styles.templatesTitle}>{t('home.templates.start')}</h2>
   </div>
 )
 
