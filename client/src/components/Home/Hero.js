@@ -5,11 +5,11 @@ import t from 'services/i18n'
 import Editor from 'components/Editor'
 import Previewer from 'components/Previewer'
 
-export default ({ body, mode, onInput }) => (
+export default ({ body, text = t('home.preview.text'), mode, template, onInput }) => (
   <div>
     <h2 {...styles.hero} dangerouslySetInnerHTML={{ __html: t('home.intro.tagline') }}></h2>
     <section {...styles.editor}>
-      <Editor value={t('home.preview.text')} onInput={onInput} />
+      <Editor template={template} value={text} onInput={onInput} />
       <Previewer body={body} height={338} mode={mode} />
     </section>
     <img src='/images/a-loves-b.png' alt='Text loves VR' {...styles.love} />

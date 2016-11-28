@@ -10,6 +10,10 @@ import streetview from 'services/streetview'
 
 export default class Editor extends Component {
   shouldComponentUpdate (nextProps, nextState) {
+    if (this.editor && nextProps.template && nextProps.value !== this.props.value) {
+      console.log(nextProps.value)
+      this.editor.setValue(nextProps.value)
+    }
     return false
   }
 
@@ -144,15 +148,15 @@ codemirror.defineSimpleMode('guri', {
     },
     {
       regex: /[0-9]+ seconds|[0-9]+ second|[0-9]+ segundos/gi,
-      token: ['number', 'atom']
+      token: 'number'
     },
     {
-      regex: /(#[a-fA-F0-9]{3,6}|\w) (background)/gi,
-      token: ['string', 'atom']
+      regex: /(#[a-fA-F0-9]{3,6}|\w+) background/gi,
+      token: 'atom'
     },
     {
       regex: /(fondo) (#[a-fA-F0-9]{3,6})/gi,
-      token: ['string', 'atom']
+      token: 'atom'
     },
     {
       regex: /https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/gi,

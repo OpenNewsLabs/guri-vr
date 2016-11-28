@@ -184,11 +184,11 @@ export default () => (
       <CodeExample title='Model example'
         text={t('guide.3dmodel.preview')} />
     </section>
-    <section id='speech-recognition'>
+    {/* Removed for now <section id='speech-recognition'>
       <h2 {...styles.sectionTitle}>{t('guide.speech_recognition.title')}</h2>
       <p>{t('guide.speech_recognition.how')}</p>
       <p>{t('guide.speech_recognition.description')}</p>
-    </section>
+    </section>*/}
     <section id='search'>
       <h2 {...styles.sectionTitle}>{t('guide.search.title')}</h2>
       <p>{t('guide.search.description')}</p>

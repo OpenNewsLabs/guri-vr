@@ -158,12 +158,16 @@
       "start": "...or start with a Template",
       "panorama_title": "Panorama",
       "panorama_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel feugiat ante.",
+      "panorama_text": "I just want to display the following panorama https://gurivr.s3.amazonaws.com/1606c0f8-5561-4c44-a697-1f544b313308-30118869044_b5b44d0f7e_k.jpg",
       "chart_title": "Chart",
       "chart_desc": "Suspendisse lacus arcu, cursus sed tincidunt nec, malesuada non tortor. Cras egestas.",
+      "chart_text": "Show me the cool chart exported as https://s3.amazonaws.com/gurivr/my-data.json from https://quartz.github.io/Chartbuilder/ on a beige background",
       "voiceover_title": "Voiceover",
       "voiceover_desc": "Donec sed euismod urna. Nam varius eros nec quam.",
+      "voiceover_text": "Did you know your computer can now talk? Add a voiceover saying something like \"I'm not a ghost but your computer. I can speak out loud!\" and a quiet sky at sunset",
       "videosphere_title": "Videosphere",
-      "videosphere_desc": "Aliquam interdum, sem eget sodales dapibus, dui leo commodo."
+      "videosphere_desc": "Donec sed euismod urna. Nam varius eros nec quam.",
+      "videosphere_text": "We call 360 video as a videosphere. You just need to drop a url like the following into the editor: https://ucarecdn.com/bcece0a8-86ce-460e-856b-40dac4875f15/"
     },
     "oss": {
       "title": "I'm Open source",

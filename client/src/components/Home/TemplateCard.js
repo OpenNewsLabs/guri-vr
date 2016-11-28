@@ -2,8 +2,8 @@
 import { h } from 'preact'
 import { style } from 'glamor'
 
-export default ({ title, text, bgUrl }) => (
-  <div {...styles.container}>
+export default ({ title, text, bgUrl, onClick }) => (
+  <div onClick={onClick} {...styles.container}>
     <img src={bgUrl} />
     <div {...styles.desc}>
       <h3 {...styles.title}>{title}</h3>
@@ -13,13 +13,18 @@ export default ({ title, text, bgUrl }) => (
 )
 const styles = {
   container: style({
+    cursor: 'pointer',
     width: 220,
     height: 300,
     backgroundColor: '#fff',
     borderRadius: 12,
     margin: 10,
     boxShadow: '0 2px 11px 0 rgba(0,0,0,0.09)',
-    zIndex: 1
+    zIndex: 1,
+    transition: 'all .2s ease-in-out',
+    ':hover': {
+      transform: 'scale(1.1)'
+    }
   }),
 
   desc: style({

@@ -24,17 +24,26 @@ export default class Home extends Component {
     }
 
     this.onInput = this.onInput.bind(this)
+    this.applyTemplate = this.applyTemplate.bind(this)
   }
 
-  onInput (text) {
+  onInput (text, template = false) {
     try {
       this.setState({
         text,
         body: nlp(text),
-        mode: /ar mode|modo ra/gi.test(text) ? 'ar' : 'vr'
+        mode: /ar mode|modo ra/gi.test(text) ? 'ar' : 'vr',
+        template
       })
     } catch (err) {
       this.setState({ text })
+    }
+  }
+
+  applyTemplate (text) {
+    this.onInput(text, true)
+    if (window.scrollY >= 600) {
+      window.scrollTo(0, 200)
     }
   }
 
@@ -46,13 +55,14 @@ export default class Home extends Component {
     }
   }
 
-  render (props, { text, body, mode }) {
+  render (props, { text, body, mode, template }) {
     return (
       <div {...styles.container}>
         <Header user={user} />
         <div {...styles.main}>
-          <Hero body={body} mode={mode} onInput={this.onInput} />
-          <Templates />
+          <Hero template={template} body={body} text={text} mode={mode}
+            onInput={this.onInput} />
+          <Templates onChange={this.applyTemplate} />
           <Oss />
           <Share />
           <Footer />
