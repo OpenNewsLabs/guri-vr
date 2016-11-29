@@ -29,7 +29,7 @@ const styles = {
   ossContainer: style({
     backgroundColor: 'rgba(255, 255, 255, .8)',
     transform: 'rotate(-5deg)',
-    marginTop: -120,
+    marginTop: -70,
     width: '120vw',
     marginLeft: '-10vw',
     paddingBottom: 40,

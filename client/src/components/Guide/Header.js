@@ -28,14 +28,19 @@ const styles = {
   navigation: style({
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    paddingBottom: 30
   }),
 
   header: style({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 80
+    marginBottom: 80,
+    flexWrap: 'wrap-reverse',
+    '@media(max-width: 700px)': {
+      marginBottom: 30
+    }
   }),
 
   switchContainer: style({

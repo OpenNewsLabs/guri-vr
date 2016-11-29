@@ -7,7 +7,7 @@ export default () => (
   <footer {...styles.footer}>
     <h2 {...styles.fun}>{t('home.footer.title')}</h2>
     <p {...styles.start}>{t('home.footer.description')}</p>
-    <a {...styles.button} href='/stories'>{t('home.footer.button')}</a>
+    <a {...styles.button} href='/stories/create'>{t('home.footer.button')}</a>
     <p {...styles.by} dangerouslySetInnerHTML={{ __html: t('home.footer.by') }}></p>
   </footer>
 )

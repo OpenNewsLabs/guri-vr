@@ -25,7 +25,22 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingTop: 50
+    paddingTop: 50,
+    paddingLeft: 20,
+    '@media(max-width: 700px)': {
+      paddingLeft: 0,
+      width: '100vw',
+      paddingTop: 30,
+      flexDirection: 'column',
+      alignItems: 'center',
+      '& > svg': {
+        margin: 20,
+        marginTop: 30
+      },
+      '& > nav': {
+        paddingTop: 30
+      }
+    }
   }),
 
   link: style({

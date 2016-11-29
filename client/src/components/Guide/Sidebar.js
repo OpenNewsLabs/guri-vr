@@ -35,7 +35,12 @@ export default () => (
 const styles = {
   container: style({
     flex: 0,
-    minWidth: 120
+    minWidth: 120,
+    '@media(max-width: 700px)': {
+      width: '100vw',
+      fontSize: 30,
+      flex: 1
+    }
   }),
 
   title: style({

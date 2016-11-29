@@ -24,7 +24,9 @@ const styles = {
     textAlign: 'center',
     fontSize: 36,
     margin: 0,
-    paddingTop: 50
+    paddingTop: 50,
+    paddingLeft: 10,
+    paddingRight: 10
   }),
 
   editor: style({
