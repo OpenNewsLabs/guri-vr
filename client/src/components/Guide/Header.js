@@ -39,6 +39,7 @@ const styles = {
   }),
 
   switchContainer: style({
-    marginLeft: 30
+    marginLeft: 30,
+    height: 30
   })
 }

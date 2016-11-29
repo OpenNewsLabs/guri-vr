@@ -45,6 +45,14 @@ const styles = {
   }),
 
   by: style({
-    fontSize: 16
+    fontSize: 16,
+    '& a': {
+      fontWeight: 'bold',
+      color: '#aaa',
+      textDecoration: 'none'
+    },
+    '& a:hover': {
+      color: '#ddd'
+    }
   })
 }

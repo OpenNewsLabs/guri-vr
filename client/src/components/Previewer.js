@@ -11,6 +11,7 @@ export default ({ body, height, mode = 'vr' }) => (
 const styles = {
   container: style({
     flex: 1,
-    border: 'none'
+    border: 'none',
+    backgroundColor: '#000'
   })
 }

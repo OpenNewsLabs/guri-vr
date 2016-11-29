@@ -20,7 +20,7 @@ export default () => (
 
 const styles = {
   container: style({
-    width: 860,
+    maxWidth: 860,
     margin: '0 auto',
     display: 'flex',
     justifyContent: 'space-between',

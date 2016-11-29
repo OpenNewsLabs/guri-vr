@@ -30,7 +30,8 @@ const styles = {
   editor: style({
     paddingTop: 75,
     display: 'flex',
-    zIndex: 5
+    zIndex: 5,
+    flexWrap: 'wrap'
   }),
 
   templatesTitle: style({

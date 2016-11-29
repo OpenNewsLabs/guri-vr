@@ -159,13 +159,17 @@
     "templates": {
       "start": "...o empezá con una Plantilla",
       "panorama_title": "Panorama",
-      "panorama_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vel feugiat ante.",
+      "panorama_desc": "Los panoramas son imágenes 360 que pueden ser exploradas de forma inmersiva.",
+      "panorama_text": "Solo quiero mostrar el siguiente panorama https://gurivr.s3.amazonaws.com/1606c0f8-5561-4c44-a697-1f544b313308-30118869044_b5b44d0f7e_k.jpg",
       "chart_title": "Gráfico",
-      "chart_desc": "Suspendisse lacus arcu, cursus sed tincidunt nec, malesuada non tortor. Cras egestas.",
-      "voiceover_title": "Voz en off",
-      "voiceover_desc": "Donec sed euismod urna. Nam varius eros nec quam.",
-      "videosphere_title": "Videoesfera",
-      "videosphere_desc": "Aliquam interdum, sem eget sodales dapibus, dui leo commodo."
+      "chart_desc": "Guri se puede combinar con el Chartbuilder de Quartz, dibujando tus datos en Realidad Virtual.",
+      "chart_text": "Mostrame un lindo gráfico exportado desde https://s3.amazonaws.com/gurivr/my-data.json from https://quartz.github.io/Chartbuilder/ con fondo #f5f5dc",
+      "voiceover_title": "Realidad Aumentada",
+      "voiceover_desc": "Dale permiso a capturar tu cámara a Guri y explorá tu mundo de una forma particular.",
+      "voiceover_text": "Podemos adentrarnos en el modo ra con por ejemplo un texto que diga \"Es esta la realidad?\"",
+      "videosphere_title": "Video esfera",
+      "videosphere_desc": "Llamamos Videoesfera a los videos 360. Simplemente pegá la url de tu video en el editor.",
+      "videosphere_text": "Llamamos al video 360 video esfera. Simplemente tenés que pegar la url en el editor: https://ucarecdn.com/bcece0a8-86ce-460e-856b-40dac4875f15/"
     },
     "oss": {
       "title": "Soy Open source",
@@ -179,7 +183,7 @@
       "title": "Ahora es tu turno de divertirte!",
       "description": "Empezá haciendo cosas geniales en el mundo de VR en solo unas líneas de texto.",
       "button": "Creá tu primera historia",
-      "by": "Hecho con ♥️ por <a href='https://twitter.com/impronunciable'>Dan Zajdband</a> - Sitio diseñado por <a href='https://twitter.com/abad'>Federico Abad</a>"
+      "by": "Hecho con ♥️ por <a href='https://twitter.com/impronunciable'>Dan Zajdband</a><br><br>Sitio diseñado por <a href='https://twitter.com/abad'>Federico Abad</a>"
     }
   },
   "login": {
