@@ -186,7 +186,8 @@
   },
   "login": {
     "sent": "Magic Link sent to your Email address!",
-    "login": "Login"
+    "login": "Login",
+    "text": "We will send you an E-mail with a simple link to login."
   },
   "editor": {
     "title_missing": "Please enter a name for the story",

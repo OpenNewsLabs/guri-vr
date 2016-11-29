@@ -188,7 +188,8 @@
   },
   "login": {
     "sent": "Un link mágico fue enviado a tu correo!",
-    "login": "Ingresar"
+    "login": "Ingresar",
+    "text": "Te enviaremos un E-mail con un simple link para ingresar."
   },
   "editor": {
     "title_missing": "Por favor ingresá un título para la historia",
