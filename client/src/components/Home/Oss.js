@@ -52,7 +52,7 @@ const styles = {
 
   ossDescription: style({
     color: '#777',
-    fontSize: 22,
+    fontSize: 20,
     maxWidth: 750
   }),
 
@@ -62,5 +62,5 @@ const styles = {
     bottom: -100,
     height: 532,
     width: 532
-  }),
+  })
 }

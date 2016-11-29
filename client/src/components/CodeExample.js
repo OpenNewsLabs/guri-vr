@@ -43,12 +43,12 @@ const styles = {
     textAlign: 'right',
     backgroundColor: '#fff',
     color: '#57309D',
-    fontSize: 16,
+    fontSize: 14,
     position: 'absolute',
     borderRadius: 3.75,
     bottom: 8,
     right: 15,
-    padding: 8,
+    padding: '8px 12px',
     textTransform: 'uppercase',
     textDecoration: 'none'
   })

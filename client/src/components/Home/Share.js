@@ -56,7 +56,7 @@ const styles = {
 
   shareDescription: style({
     color: '#B7A0E1',
-    fontSize: 22,
+    fontSize: 20,
     textAlign: 'right',
     maxWidth: 750,
     float: 'right'

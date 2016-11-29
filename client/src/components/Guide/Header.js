@@ -4,10 +4,11 @@ import { style } from 'glamor'
 import Navbar from 'components/Navbar'
 import LangSwitch from 'components/LangSwitch'
 import Logo from 'components/Logo'
+import { Link } from 'preact-router'
 
 export default () => (
   <header {...styles.header}>
-    <Logo color='#5A33A2' />
+    <Link href='/'><Logo color='#5A33A2' /></Link>
     <div {...styles.navigation}>
       <Navbar color='rgba(0, 0, 0, .4)' activeColor='#5A33A2' active='guide' />
       <div {...styles.switchContainer}>

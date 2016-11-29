@@ -226,7 +226,12 @@ const styles = {
     maxWidth: 700,
     marginTop: -30,
     color: '#898989',
-    fontSize: 18
+    fontSize: 18,
+    '& a': {
+      textDecoration: 'none',
+      fontWeight: 'bold',
+      color: '#333'
+    }
   }),
 
   title: style({

@@ -43,7 +43,11 @@ const styles = {
     textTransform: 'none',
     fontWeight: 'bold',
     marginBottom: 15,
-    marginTop: 20
+    marginTop: 20,
+    ':hover': {
+      color: '#000000',
+      textDecoration: 'none'
+    }
   }),
 
   link: style({
@@ -52,7 +56,11 @@ const styles = {
     fontSize: 18,
     textDecoration: 'none',
     display: 'block',
-    marginTop: 10
+    marginTop: 10,
+    ':hover': {
+      color: 'rgba(0, 0, 0, .65)',
+      textDecoration: 'underline'
+    }
   }),
 
   separator: style({
