@@ -6,7 +6,7 @@ import CodeExample from 'components/CodeExample'
 
 export default () => (
   <div {...styles.container}>
-    <section>
+    <section id='introduction'>
       <h2 {...styles.sectionTitle}>{t('guide.introduction.title')}</h2>
       <p dangerouslySetInnerHTML={{ __html: t('guide.introduction.first') }}></p>
       <p dangerouslySetInnerHTML={{ __html: t('guide.introduction.second') }}></p>
@@ -211,7 +211,7 @@ export default () => (
 
         <span dangerouslySetInnerHTML={{ __html: t('guide.sharing.second') }}></span>
 
-        <div style={styles.embed}>
+        <div {...styles.embed}>
           <blockquote class='twitter-tweet' data-lang='en'><p lang='en' dir='ltr'><a href='https://twitter.com/impronunciable'>@impronunciable</a> your scene is here <a href='https://t.co/n2O4S2OTh7'>https://t.co/n2O4S2OTh7</a></p>&mdash; Guri VR (@guri_vr) <a href='https://twitter.com/guri_vr/status/751870382219599872'>July 9, 2016</a></blockquote>
           <script async src='//platform.twitter.com/widgets.js' charset='utf-8'></script>
         </div>
@@ -222,6 +222,8 @@ export default () => (
 
 const styles = {
   container: style({
+    position: 'relative',
+    left: 250,
     flex: 1,
     maxWidth: 700,
     marginTop: -30,
@@ -231,6 +233,9 @@ const styles = {
       textDecoration: 'none',
       fontWeight: 'bold',
       color: '#333'
+    },
+    '@media(max-width: 1000px)': {
+      left: 0
     }
   }),
 
@@ -241,7 +246,7 @@ const styles = {
   embed: style({
     display: 'flex',
     justifyContent: 'center',
-    margin: 15
+    margin: '15px auto'
   }),
 
   attr: style({

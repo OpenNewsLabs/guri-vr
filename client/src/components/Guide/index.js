@@ -33,6 +33,7 @@ const styles = {
 
   main: style({
     display: 'flex',
+    position: 'relative',
     justifyContent: 'space-between',
     flexWrap: 'wrap'
   })
