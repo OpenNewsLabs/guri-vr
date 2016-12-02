@@ -79,7 +79,7 @@ const styles = {
   listContainer: style({
     marginTop: 50,
     display: 'flex',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     flexWrap: 'wrap'
   }),
 
@@ -130,7 +130,8 @@ const styles = {
 
   headerContainer: style({
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    flexWrap: 'wrap-reverse'
   }),
 
   navContainer: style({
