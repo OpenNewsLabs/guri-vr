@@ -200,6 +200,6 @@
   },
   "stories": {
     "delete_confirm": "Are you sure you want to delete this story?",
-    "empty": "It seems that you don't have stories yet. You can start by clicking on the + button below 😸"
+    "add": "Add new story"
   }
 }
