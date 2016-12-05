@@ -40,6 +40,3 @@ export const loadTranslations = () => {
 const fetchTranslations = locale => fetch(`/translations/${locale}.json`)
   .then(res => res.json())
   .then(json => { translations = json })
-
-// Load translations
-loadTranslations().then(() => bus.emit('renderApp'))

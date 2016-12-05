@@ -76,10 +76,12 @@ function getObjects (p) {
       case 'sound':
       case '🔊':
         var audioUrl = getUrl(str)
-        if (!audioUrl) return
+        var audioQuote = getQuote(str)
+        if (!(audioUrl || audioQuote)) return
         return {
           type: 'audio',
           src: audioUrl,
+          text: !audioUrl && audioQuote,
           position: getPosition(str)
         }
       case 'voiceover':

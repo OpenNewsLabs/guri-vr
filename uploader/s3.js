@@ -7,7 +7,7 @@ const AWS = require('aws-sdk');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
 const uuid = require('node-uuid');
-const storyBuilder = require('../story-builder');
+const storyBuilder = require('../client/shared/story-builder');
 const config = require('../config.json');
 
 /**

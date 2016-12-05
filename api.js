@@ -1,10 +1,11 @@
 
 const express = require('express')
+const cors = require('cors')
 const auth = require('./auth')
 const db = require('./db')
-const buildStory = require('./story-builder')
+const buildStory = require('./client/shared/story-builder')
 const upload = require('./uploader')
-const nlp = require('./nlp')
+const nlp = require('./client/shared/nlp')
 const searchResources = require('./search-resources')
 
 const app = module.exports = express.Router()
@@ -29,7 +30,11 @@ app.get('/preview', (req, res) => {
 
 app.post('/stories', (req, res, next) => {
   try {
-    const body = req.body.body || nlp(req.body.text)
+		const body = req.body.body || nlp(req.body.text)
+
+		if (req.body.store === false) {
+			return res.json(body)
+		}
 
     stories.insert({
       title: req.body.title,
@@ -63,7 +68,7 @@ app.post('/login', auth.requestToken(
       .catch(err => callback(err))),
   (req, res) => res.send('ok'))
 
-app.get('/assets/search', searchResources)
+app.get('/assets/search', cors(), searchResources)
 
 app.use(auth.restricted())
 

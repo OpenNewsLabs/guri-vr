@@ -1,5 +1,5 @@
 
-import { h, Component } from 'preact'
+import { h } from 'preact'
 import Radium from 'radium'
 
 export default Radium(({ body, height, mode = 'vr' }) => (

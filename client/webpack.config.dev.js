@@ -9,7 +9,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { loader: 'babel-loader', test: /\.js$/, exclude: /node_modules/ },
+      { loader: 'babel-loader', test: /\.js$/, include: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'shared')] },
       { loader: 'json-loader', test: /\.json$/, exclude: /node_modules/ }
     ]
   },

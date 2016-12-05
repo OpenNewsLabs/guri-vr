@@ -17,7 +17,7 @@ module.exports = story =>
     <meta name="twitter:card" content="player">
     <meta name="twitter:site" content="@guri_vr">
     <meta name="twitter:title" content="${story.title}">
-    <meta name="twitter:image" content="${getMainImage(story.chapters)}">
+    <meta name="twitter:image" content="https://s3.amazonaws.com/gurivr/logo_twitter.png">
     <meta name="twitter:description" content="">
     <meta name="twitter:player" content="https://s3.amazonaws.com/gurivr/s/${story._id}.html">
     <meta name="twitter:player:width" content="400">
@@ -66,7 +66,7 @@ module.exports = story =>
   </head>
   <body>
     <a-scene>
-      <a-entity id="camera" camera="userHeight: 1.6" universal-controls></a-entity>
+      <a-entity camera="userHeight: 1.6" look-controls wasd-controls></a-entity>
       <a-assets>${story.chapters.map(renderChapterAssets).filter(assets => assets.trim().length)}</a-assets>
       ${story.chapters.map(renderChapter).join('\n')}
     </a-scene>
@@ -267,18 +267,6 @@ const renderExternalUrls = story => {
   }))
 
   return urls.map(url => `<script src="${url}"></script>`).join('\n')
-}
-
-const getMainImage = chapters => {
-  for (var i = 0; i < chapters.length; i++) {
-    for (var j = 0; j < chapters[i].length; j++) {
-      if (['panorama', 'image'].indexOf(chapters[i][j].type) !== -1) {
-        return chapters[i][j].src
-      }
-    }
-  }
-
-  return 'https://s3.amazonaws.com/gurivr/logo.png'
 }
 
 /**
