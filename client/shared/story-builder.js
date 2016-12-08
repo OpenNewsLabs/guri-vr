@@ -1,6 +1,6 @@
 
 const EXTERNAL_URLS = {
-  text: 'https://s3.amazonaws.com/gurivr/aframe-bmfont-text-component.min.js',
+  text: '/bmfont.js',
   chart: 'https://s3.amazonaws.com/gurivr/aframe-chartbuilder-component.js',
   ply: 'https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js',
   sky: 'https://rawgit.com/ngokevin/kframe/master/components/sun-sky/dist/aframe-sun-sky.min.js'
@@ -112,7 +112,7 @@ const renderChapter = (chapter, i) => `
 const renderObject = (obj, i, j) => {
   switch (obj.type) {
     case 'text':
-      return `<a-entity scale="${obj.scale.join(' ')}" position="${obj.position.join(' ')}" bmfont-text="text: ${obj.text}; width: 600; color: white; align: center;"></a-entity>`
+      return `<a-entity material="color: #fff; " look-at="0 1.6 0" scale="${obj.scale.join(' ')}" position="${obj.position.join(' ')}" bmfont-text="text: ${obj.text}; width: 600; color: white; baseline: center; anchor: center; align: center; font: http://localhost:4444/Monoid.fnt"></a-entity>`
     case 'panorama':
       return `<a-sky src="#asset-${i}-${j}"></a-sky>`
     case 'background':
