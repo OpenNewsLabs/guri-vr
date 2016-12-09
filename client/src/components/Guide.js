@@ -86,6 +86,7 @@ export default class Guide extends Component {
             <li><span style={styles.attr}>{t('guide.attributes.source')}</span> ({t('guide.attributes.source_types')}) | {t('guide.entities.required')}</li>
             <li><span style={styles.attr}>{t('guide.attributes.position')}</span> ({t('guide.attributes.position_types')}) | {t('guide.entities.optional')}</li>
             <li><span style={styles.attr}>{t('guide.attributes.scale')}</span> ({t('guide.attributes.scale_types')}) | {t('guide.entities.optional')}</li>
+            <li><span style={styles.attr}>{t('guide.attributes.link')}</span> ({t('guide.attributes.link_types')}) | {t('guide.entities.optional')}</li>
           </ul>
           <p>{t('guide.entities.example')}</p>
           <CodeExample title='Image example'
@@ -100,6 +101,7 @@ export default class Guide extends Component {
             <li><span style={styles.attr}>{t('guide.attributes.source')}</span> ({t('guide.attributes.source_types')}) | {t('guide.entities.required')}</li>
             <li><span style={styles.attr}>{t('guide.attributes.position')}</span> ({t('guide.attributes.position_types')}) | {t('guide.entities.optional')}</li>
             <li><span style={styles.attr}>{t('guide.attributes.scale')}</span> ({t('guide.attributes.scale_types')}) | {t('guide.entities.optional')}</li>
+            <li><span style={styles.attr}>{t('guide.attributes.link')}</span> ({t('guide.attributes.link_types')}) | {t('guide.entities.optional')}</li>
           </ul>
           <p>{t('guide.entities.example')}</p>
           <CodeExample title='Video example'
@@ -187,9 +189,13 @@ export default class Guide extends Component {
           <ul>
             <li><span style={styles.attr}>{t('guide.attributes.source')}</span> ({t('guide.attributes.source_types')}) | {t('guide.entities.required')}</li>
           </ul>
+        </section>
+        <section id="links">
+          <h3>{t('guide.links.title')}</h3>
+          <p>{t('guide.links.description')}</p>
           <p>{t('guide.entities.example')}</p>
-          <CodeExample title='Model example'
-            text={t('guide.3dmodel.preview')} />
+          <CodeExample title='Links example'
+            text={t('guide.links.preview')} />
         </section>
         <section id="speech-recognition">
           <h3>{t('guide.speech_recognition.title')}</h3>
