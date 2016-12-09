@@ -6,11 +6,11 @@
 var TYPES = {
   'audio': { alias: ['sound', '🔊'] },
   'panorama': { alias: ['🌅'] },
-  'image': { alias: ['foto', 'picture'] },
+  'image': { alias: ['foto', 'picture', 'imagen'] },
   'text': { alias: ['texto', '📝'] },
   'videosphere': { alias: ['video esfera', '🎥'] },
   'video': { alias: [] },
-  'seconds': { alias: ['second', 'segundo', 'segundos', '⏲'] },
+  'seconds': { alias: ['segundos', '⏲'] },
   'voiceover': { alias: ['voz en off', '📢'] },
   'chart': { alias: ['gráfico', '📊'] },
   'background': { alias: ['fondo'] },
@@ -23,6 +23,8 @@ var LOCATION_REGEX = /right|left|behind|front|above|below|atrás|frente|izquierd
 var SIZE_REGEX = /tiny|small|large|huge|diminuto|pequeño|grande|enorme/i
 var SUN_POSITION_REGEX = /sunrise|sunset|morning|noon|afternoon|evening|night|amanecer|atardecer|mañana|mediodía|tarde|noche/i
 var LATLON_REGEX = /\-?\d+\.\d+,\s*\-?\d+\.\d+/
+var SCENE_LINK_REGEX = /(first|second|third|fourth|fifth|sixth|primera|segunda|tercera|cuarta|quinta|sexta) (scene|escena)/i
+var SCENE_INDEXES = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'primera', 'segunda', 'tercera', 'cuarta', 'quinta', 'sexta']
 
 module.exports = function (str) {
   return str
@@ -49,7 +51,7 @@ function getObjects (p) {
 
     // special case for duration
     var match
-    if (entity.type === 'seconds' || entity.type === 'second' || entity.type === '⏲' || entity.type === 'segundos') {
+    if (entity.type === 'seconds' || entity.type === 'second' || entity.type === '⏲' || entity.type === 'segundo' || entity.type === 'segundos') {
       match = sp.match(/[0-9]+ (⏲|seconds?|segundos)/)
       if (!match) return false
 
@@ -125,7 +127,8 @@ function getObjects (p) {
           src: videoUrl,
           position: getPosition(str),
           scale: getSize(str),
-          rotation: getRotation(str)
+          rotation: getRotation(str),
+          link: getLink(str)
         }
       case 'videosphere':
       case 'video esfera':
@@ -139,6 +142,7 @@ function getObjects (p) {
       case 'image':
       case 'picture':
       case 'foto':
+      case 'imagen':
         var imgUrl = getUrl(str)
         var imgQuote = getQuote(str)
         if(!(imgUrl || imgQuote)) return
@@ -148,7 +152,8 @@ function getObjects (p) {
           text: !imgUrl && imgQuote,
           position: getPosition(str),
           scale: getSize(str),
-          rotation: getRotation(str)
+          rotation: getRotation(str),
+          link: getLink(str)
         }
       case 'text':
       case 'texto':
@@ -238,6 +243,12 @@ function getPosition (str, width, height) {
 function getSize (str) {
   var match = str.match(SIZE_REGEX)
   return getAbsSize(match && match.length ? match[0] : 'normal')
+}
+
+function getLink (str) {
+  var match = str.match(SCENE_LINK_REGEX)
+  if (!(match && match.length >= 2 && SCENE_INDEXES.indexOf(match[1]) !== -1)) return
+  return SCENE_INDEXES.indexOf(match[1]) % (SCENE_INDEXES.length / 2)
 }
 
 function getAbsPos (str, width, height) {

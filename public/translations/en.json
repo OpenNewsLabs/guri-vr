@@ -113,6 +113,11 @@
       "description": "VR and AR share a lot in common from the technical standpoint. You can use the user camera instead of an asset for the background on your experiences. To do this you just need to write down \"ar mode\" at any point in your story. Try to start the scene by asking for \"ar mode\" to make it clear to the editor.",
       "preview": "This is a story that uses the AR mode\n\nThe only scene shows a text saying \"We are in AR mode!\""
     },
+    "links": {
+      "title": "Links",
+      "description": "Links are a way to navigate the scene in a non-linear fashion. You can attach a link to an image or video just by specifying which scene you want to link to. Once you do this, the user will see a cursor to point that on click will automatically go to the scene that you want.",
+      "preview": "My first scene lasts 4 seconds and displays a text that says \"Wait for it...\"\n\nThe second shows an image of the Guri logo https://s3.amazonaws.com/gurivr/logo.png that points to the first scene when the user clicks on it.\n\n"
+    },
     "speech_recognition": {
       "title": "Speech recognition",
       "how": "If your browser supports speech recognition you'll be able to see a microphone icon at the top right of the editor. If you click on it you can use your voice to create VR scenes instead of using a keyboard.\nTo add quotes for text or a search for example you can say \"open quotes\" and/or \"close quotes\". To create a new scene inside your story you can say \"new scene\".",
@@ -137,7 +142,9 @@
       "color": "color",
       "color_types": "string or hex color",
       "sun_position": "sun position",
-      "sun_position_types": "sunrise, sunset, morning, noon, afternoon, evening, night"
+      "sun_position_types": "sunrise, sunset, morning, noon, afternoon, evening, night",
+      "link": "link",
+      "link_types": "first, second, third... scene"
     }
   },
   "header": {
