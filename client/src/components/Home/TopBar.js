@@ -29,8 +29,8 @@ const styles = {
     paddingLeft: 20,
     '@media(max-width: 700px)': {
       paddingLeft: 0,
+      paddingTop: 0,
       width: '100vw',
-      paddingTop: 30,
       flexDirection: 'column',
       alignItems: 'center',
       '& > svg': {

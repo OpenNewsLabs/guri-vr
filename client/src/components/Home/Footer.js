@@ -30,7 +30,8 @@ const styles = {
   }),
 
   start: style({
-    color: 'rgba(255, 255, 255, .4)'
+    color: 'rgba(255, 255, 255, .4)',
+    padding: 10
   }),
 
   button: style({

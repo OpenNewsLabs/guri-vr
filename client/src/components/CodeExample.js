@@ -12,7 +12,7 @@ export default ({ text, title = 'GuriVR' }) => (
   </div>
 )
 
-const bufferDiv = document.createElement()
+const bufferDiv = document.createElement('div')
 
 const getText = str => {
   bufferDiv.innerHTML = str
@@ -32,10 +32,12 @@ const styles = {
     position: 'relative',
     paddingBottom: 50
   }),
+  
   text: style({
     whiteSpace: 'pre-wrap',
     margin: 0,
-    fontFamily: 'monospace'
+    fontFamily: 'monospace',
+    wordBreak: 'break-all'
   }),
 
   run: style({
@@ -43,7 +45,7 @@ const styles = {
     textAlign: 'right',
     backgroundColor: '#fff',
     color: '#57309D',
-    fontSize: 14,
+    fontSize: '14px !important',
     position: 'absolute',
     borderRadius: 3.75,
     bottom: 8,

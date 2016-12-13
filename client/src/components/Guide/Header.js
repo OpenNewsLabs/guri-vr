@@ -29,6 +29,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
+    flexWrap: 'wrap-reverse',
     paddingBottom: 30
   }),
 
@@ -39,12 +40,21 @@ const styles = {
     marginBottom: 80,
     flexWrap: 'wrap-reverse',
     '@media(max-width: 700px)': {
-      marginBottom: 30
+      marginBottom: 30,
+      marginTop: 60
+    },
+    '@media(max-width: 530px)': {
+      justifyContent: 'center'
     }
   }),
 
   switchContainer: style({
     marginLeft: 30,
-    height: 30
+    height: 30,
+    '@media(max-width: 700px)': {
+      position: 'absolute',
+      right: 20,
+      top: 20
+    }
   })
 }

@@ -45,7 +45,7 @@ export default class Editor extends Component {
       onInput(this.value)
     })
 
-    this.editor.on('change', debounce(this.searchReplaceResources, 1000))
+    this.editor.on('change', debounce(this.searchReplaceResources.bind(this), 1000))
 
     this.editor.on('drop', (editor, evt) => {
       evt.stopPropagation()
@@ -186,6 +186,7 @@ const styles = {
     flex: 1,
     height: 338,
     textAlign: 'left',
-    position: 'relative'
+    position: 'relative',
+    width: '100%'
   })
 }

@@ -125,19 +125,32 @@ const styles = {
   switchContainer: style({
     marginLeft: 30,
     height: 30,
-    display: 'inline-block'
+    display: 'inline-block',
+    '@media(max-width: 700px)': {
+      position: 'absolute',
+      right: 20,
+      top: 20
+    }
   }),
 
   headerContainer: style({
     display: 'flex',
     justifyContent: 'space-between',
-    flexWrap: 'wrap-reverse'
+    flexWrap: 'wrap-reverse',
+    '@media(max-width: 700px)': {
+      marginBottom: 30,
+      marginTop: 60
+    },
+    '@media(max-width: 530px)': {
+      justifyContent: 'center'
+    }
   }),
 
   navContainer: style({
     display: 'flex',
     alignItems: 'center',
-    paddingBottom: 30
+    paddingBottom: 30,
+    flexWrap: 'wrap-reverse'
   }),
 
   createText: style({

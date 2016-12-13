@@ -113,6 +113,11 @@
       "description": "RV y RA tienen mucho en común. Podés usar la camara de tu usuario como fondo en vez de un video o un panorama. Para hacer esto hay que escribir \"modo ra\" en cualquier punto de la historia. Usualmente lo hacemos al comienzo de la historia para dejarlo en claro.",
       "preview": "Esta historia usa el <span class='cm-atom'>modo ra</span>\n\nLa única escena tiene un <span class='cm-atom'>texto</span> que dice <span class='cm-string'>\"Estamos en modo RA!\"</span>"
     },
+    "links": {
+      "title": "Links",
+      "description": "Los Links son una forma de navegar las escenas de manera no-lineal. Podés asociar un link a una imagen o video simplemente especificando a que escena querés linkear. Una vez hecho esto, el usuario va a ver un cursor que, cuando haga click sobre la imagen que indicaste, lo va a llevar a la escena deseada.",
+      "preview": "Mi primera escena dura 4 segundos y muestra un texto que dice \"Lo que viene, lo que viene...\"\n\nLa segunda muestra una imagen del logo de Guri https://s3.amazonaws.com/gurivr/logo.png que apunta a la primera escena cuando el usuario clickea en ella.\n\n"
+    },
     "speech_recognition": {
       "title": "Reconocimiento de voz",
       "how": "Si tu navegador soporta reconocimiento de voz, vas a ver un ícono de un micrófono arriba a la derecha del editor. Si hacés click en él podés comenzar a crear tus escenas de Realidad Virtual usando la voz en vez del teclado.\nPara generar comillas podés decir \"abrir comillas\" y/o \"cerrar comillas\". Para pasar de escena podés usar el comando \"nueva escena\".",
@@ -137,7 +142,9 @@
       "color": "color",
       "color_types": "nombre o valor hexadecimal",
       "sun_position": "posición del sol",
-      "sun_position_types": "amanecer, atardecer, mañana, mediodía, tarde, noche"
+      "sun_position_types": "amanecer, atardecer, mañana, mediodía, tarde, noche",
+      "link": "link",
+      "link_types": "primera, segunda, tercera... escena"
     }
   },
   "header": {

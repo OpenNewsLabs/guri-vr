@@ -11,7 +11,7 @@ export default () => (
 
     <a {...merge(styles.link, styles.title)} href='#entities'>{t('guide.entities.title')}</a>
 
-    <a {...merge(styles.link, styles.title)} href='#speech-recognition'>{t('guide.speech_recognition.title')}</a>
+    <a {...merge(styles.link, styles.title)} href='#links'>{t('guide.links.title')}</a>
     <a {...merge(styles.link, styles.title)} href='#search'>{t('guide.search.title')}</a>
     <a {...merge(styles.link, styles.title)} href='#ar'>{t('guide.ar.title')}</a>
     <a {...merge(styles.link, styles.title)} href='#sharing'>{t('guide.sharing.title')}</a>
@@ -24,7 +24,7 @@ const styles = {
     flex: 0,
     position: 'fixed',
     width: 250,
-    overflowY: 'scroll',
+    overflowY: 'auto',
     '@media(max-width: 1000px)': {
       'display': 'none'
     }

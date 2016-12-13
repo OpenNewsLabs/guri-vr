@@ -28,7 +28,10 @@ const styles = {
     width: '100vw',
     maxWidth: 960,
     padding: 20,
-    margin: '0 auto'
+    margin: '0 auto',
+    '@media(max-width: 1000px)': {
+      width: 'auto'
+    }
   }),
 
   main: style({

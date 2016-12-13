@@ -14,11 +14,7 @@ module.exports = {
     ]
   },
   resolve: {
-    root: [ path.resolve('./src') ],
-    alias: {
-      'react': 'preact-compat',
-      'react-dom': 'preact-compat'
-    }
+    root: [ path.resolve('./src') ]
   },
   plugins: []
 }

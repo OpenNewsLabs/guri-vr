@@ -184,15 +184,17 @@ export default () => (
       <CodeExample title='Model example'
         text={t('guide.3dmodel.preview')} />
     </section>
-    {/* Removed for now <section id='speech-recognition'>
-      <h2 {...styles.sectionTitle}>{t('guide.speech_recognition.title')}</h2>
-      <p>{t('guide.speech_recognition.how')}</p>
-      <p>{t('guide.speech_recognition.description')}</p>
-    </section>*/}
+    <section id='links'>
+      <h3>{t('guide.links.title')}</h3>
+      <p>{t('guide.links.description')}</p>
+      <p>{t('guide.entities.example')}</p>
+      <CodeExample title='Links example'
+        text={t('guide.links.preview')} />
+    </section>
     <section id='search'>
       <h2 {...styles.sectionTitle}>{t('guide.search.title')}</h2>
       <p>{t('guide.search.description')}</p>
-      <p>{t('guide.search.example')}</p>
+      <p {...styles.sectionDesc}>{t('guide.search.example')}</p>
     </section>
     <section id='ar'>
       <h2 {...styles.sectionTitle}>{t('guide.ar.title')}</h2>
@@ -226,13 +228,18 @@ const styles = {
     left: 250,
     flex: 1,
     maxWidth: 700,
+    width: '100%',
     marginTop: -30,
-    color: '#898989',
+    color: '#666',
     fontSize: 18,
+    '& p': {
+      lineHeight: 1.5
+    },
     '& a': {
       textDecoration: 'none',
       fontWeight: 'bold',
-      color: '#333'
+      color: '#333',
+      fontSize: 20
     },
     '@media(max-width: 1000px)': {
       left: 0
@@ -261,5 +268,9 @@ const styles = {
   sectionTitle: style({
     fontSize: 40,
     color: '#57309D'
+  }),
+
+  sectionDesc: style({
+    wordBreak: 'break-all'
   })
 }

@@ -1,16 +1,17 @@
 
 import { h, Component } from 'preact'
-import { Button, TextField } from 'preact-mdl'
-import Radium from 'radium'
-import { route } from 'preact-router'
+import { route, Link } from 'preact-router'
+import { style } from 'glamor'
 import nlp from 'services/nlp'
 import { fetchStory, createStory, updateStory } from 'services/datalayer'
 import Previewer from 'components/Previewer'
 import Editor from 'components/Editor'
+import Logo from 'components/Logo'
+import Navbar from 'components/Navbar'
+import LangSwitch from 'components/LangSwitch'
 import { assetsHost } from 'services/config'
 import t from 'services/i18n'
 
-@Radium
 export default class StoryEditor extends Component {
   constructor (props) {
     super(props)
@@ -38,7 +39,7 @@ export default class StoryEditor extends Component {
       this.setState({
         text,
         body: nlp(text),
-        mode: /ar mode|modo ar/gi.test(text) ? 'ar' : 'vr'
+        mode: /ar mode|modo ra/gi.test(text) ? 'ar' : 'vr'
       })
     } catch (err) {
       this.setState({ text })
@@ -81,8 +82,9 @@ export default class StoryEditor extends Component {
 
   render ({ matches }, { text, body, title, _id, loading, mode }) {
     return (
-      <div style={styles.container}>
-        {!loading ? <Editor value={text} onInput={this.onEditorChange.bind(this)} /> : null}
+      <div {...styles.container}>
+        <Header />
+        {!loading ? <div><Editor value={text} onInput={this.onEditorChange.bind(this)} /></div> : null}
         <Previewer body={body} mode={mode} />
         <Toolbar onSave={this.onSave.bind(this)}
           onPreview={this.onPreview.bind(this)}
@@ -95,30 +97,121 @@ export default class StoryEditor extends Component {
   }
 }
 
+const Header = () => (
+  <header {...styles.header}>
+    <div {...styles.logoContainer}>
+    <Link href='/'><Logo width='75' color='#fff' /></Link>
+    </div>
+    <div {...styles.navigation}>
+      <Navbar color='#898989' activeColor='#ccc' />
+      <div {...styles.switchContainer}>
+        <LangSwitch />
+      </div>
+    </div>
+  </header>
+)
+
 const Toolbar = ({ onSave, onPreview, onShare, title, onChangeTitle, id }) => (
-  <footer style={styles.toolbarContainer}>
+  <footer {...styles.toolbarContainer}>
     <div>
-      <TextField label={t('editor.title')} value={title} onChange={onChangeTitle} required floatingLabel />
-      <Button onClick={onSave} colored>{t('editor.save')}</Button>
+      <input {...styles.title} type='text' placeholder={t('editor.title')}
+        value={title} onChange={onChangeTitle} required />
+      <button {...styles.button} onClick={onSave}>{t('editor.save')}</button>
     </div>
     <div>
-      {id ? <Button onClick={onShare} colored>{t('editor.share')}</Button> : null}
-      <Button onClick={onPreview} colored>{t('editor.preview')}</Button>
+      {id ? <button {...styles.button} onClick={onShare}>{t('editor.share')}</button> : null}
+      <button {...styles.button} onClick={onPreview}>{t('editor.preview')}</button>
     </div>
   </footer>
 )
 
 const styles = {
-  container: {
+  container: style({
     display: 'flex',
     flexDirection: 'column',
-    flex: 1
-  },
-  toolbarContainer: {
+    flex: 0,
+    height: '100vh'
+  }),
+
+  toolbarContainer: style({
     backgroundColor: '#eee',
     display: 'flex',
     padding: '0 10px',
     justifyContent: 'space-between',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+    height: 60,
+    '@media(max-width: 500px)': {
+      flexDirection: 'column',
+      height: 120,
+      alignItems: 'space-between',
+      justifyContent: 'space-between'
+    }
+  }),
+
+  logo: style({
+    width: 220,
+    height: 104,
+    fill: '#5A33A2',
+    '@media(max-width: 500px)': {
+      width: 60,
+      height: 30
+    }
+  }),
+
+  navigation: style({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingBottom: 30,
+    '@media(max-width: 500px)': {
+      display: 'none'
+    }
+  }),
+
+  header: style({
+    display: 'flex',
+    backgroundColor: '#282C34',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    paddingTop: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    '@media(max-width: 500px)': {
+      padding: 0
+    }
+  }),
+
+  logoContainer: style({
+    '@media(max-width: 500px)': {
+      margin: '0 auto'
+    }
+  }),
+
+  switchContainer: style({
+    marginLeft: 30,
+    height: 30
+  }),
+
+  title: style({
+    backgroundColor: 'transparent',
+    border: 'none',
+    borderBottom: '1px solid #5A33A2',
+    fontSize: 18,
+    '@media(max-width: 500px)': {
+      fontSize: 13
+    }
+  }),
+
+  button: style({
+    border: 'none',
+    color: '#5A33A2',
+    backgroundColor: 'transparent',
+    fontSize: 18,
+    cursor: 'pointer',
+    marginLeft: 20,
+    '@media(max-width: 500px)': {
+      fontSize: 13
+    }
+  })
 }

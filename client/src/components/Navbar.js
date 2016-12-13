@@ -35,6 +35,8 @@ const styles = {
       borderBottom: underline ? `3px solid ${activeColor}` : 'none',
       ':hover': {
         color: activeColor
+      },
+      ':visited': {
       }
     })
   }
