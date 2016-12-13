@@ -47,13 +47,18 @@ const styles = {
 
   ossTitle: style({
     color: '#202020',
-    fontSize: 64
+    fontSize: 30,
+    letterSpacing: 0.7,
+    marginBottom: 2.5,
+    marginTop: 100.5
   }),
 
   ossDescription: style({
     color: '#777',
-    fontSize: 20,
-    maxWidth: 750
+    fontSize: 19,
+    maxWidth: 650,
+    lineHeight: 1.5,
+    letterSpacing: 0.2
   }),
 
   highFive: style({

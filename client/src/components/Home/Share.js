@@ -51,14 +51,19 @@ const styles = {
 
   shareTitle: style({
     color: '#fff',
-    fontSize: 64
+    fontSize: 30,
+    letterSpacing: 0.7,
+    marginBottom: 2.5,
+    marginTop: -50
   }),
 
   shareDescription: style({
     color: '#B7A0E1',
-    fontSize: 20,
+    fontSize: 19,
     textAlign: 'right',
-    maxWidth: 750,
-    float: 'right'
+    maxWidth: 650,
+    float: 'right',
+    lineHeight: 1.5,
+    letterSpacing: 0.2
   })
 }

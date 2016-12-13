@@ -106,7 +106,7 @@
     "search": {
       "title": "Búsqueda de recursos",
       "description": "El editor te puede ayudar a obtener recursos de internet. En vez de pegar un archivo o un link en el editor, podés hacer una búsqueda por términos y obtener de vuelta una url. Esta característica funciona por ahora con panoramas e imagenes y puede ser usada simplemente encerrando la búsqueda entre comillas dobles (\").\nCuando busques un panorama va a ser buscado en el grupo equirectangular de Flickr y el resto de las imagenes desde Flickr en general.",
-      "example": "For example searching for \"soccer\" can result in https://farm6.staticflickr.com/5129/5335199935_b6d84f29e6_o.jpg"
+      "example": "Por ejemplo buscar \"fútbol\" puede resultar en https://farm6.staticflickr.com/5129/5335199935_b6d84f29e6_o.jpg"
     },
     "ar": {
       "title": "Modo Realidad Aumentada",
@@ -116,7 +116,7 @@
     "links": {
       "title": "Links",
       "description": "Los Links son una forma de navegar las escenas de manera no-lineal. Podés asociar un link a una imagen o video simplemente especificando a que escena querés linkear. Una vez hecho esto, el usuario va a ver un cursor que, cuando haga click sobre la imagen que indicaste, lo va a llevar a la escena deseada.",
-      "preview": "Mi primera escena dura 4 segundos y muestra un texto que dice \"Lo que viene, lo que viene...\"\n\nLa segunda muestra una imagen del logo de Guri https://s3.amazonaws.com/gurivr/logo.png que apunta a la primera escena cuando el usuario clickea en ella.\n\n"
+      "preview": "Mi primera escena dura <span class='cm-number'>4 segundos</span> y muestra un <span class='cm-atom'>texto</span> que dice <span class='cm-string'>\"Lo que viene, lo que viene...\"</span>\n\nLa segunda muestra una <span class='cm-atom'>imagen</span> del logo de Guri <span class='cm-string'>https://s3.amazonaws.com/gurivr/logo.png</span> que apunta a la primera escena cuando el usuario clickea en ella.\n\n"
     },
     "speech_recognition": {
       "title": "Reconocimiento de voz",
@@ -179,7 +179,7 @@
       "videosphere_text": "Llamamos al video 360 video esfera. Simplemente tenés que pegar la url en el editor: https://ucarecdn.com/bcece0a8-86ce-460e-856b-40dac4875f15/"
     },
     "oss": {
-      "title": "Soy Open source",
+      "title": "Soy Open Source",
       "description": "Este es un <a href='https://github.com/opennewslabs/guri-vr'>proyecto open source</a> creado como parte de mi <a href='https://opennews.org/what/fellowships/'>Knight-Mozilla fellowship</a>. Podés contribuir y/o aportar ideas que tengas para este proyecto. <strong>Nota</strong>: Como un sabio periodista una vez dijo \"60% de las veces, funciona todas las veces\". Esta herramienta se encuentra bajo activo desarrollo y podés encontrar fallas. En ese caso nos encantaría que las <a href='https://github.com/opennewslabs/guri-vr/issues'>reportes</a>."
     },
     "share": {
@@ -205,7 +205,7 @@
     "share": "Link para compartir",
     "preview": "Previsualizar",
     "initial_title": "Historia sin título",
-    "initial_text": "\n\nEste es el editor de GuriVR 🎉. Podés crear tu experiencia de Realidad Virtual describiendo como querés que sea con palabras. Cada párrafo se va a convertir en una escena siempre y cuando anuncies al menos una entidad. Empecemos con un ejemplo:\n\nMi primera escena dura 5 segundos y tiene un texto que dice \"Esta es mi primera escena. Esto es increible!\".\n\nLa segunda escena dura 30 segundos y tiene un panorama https://ucarecdn.com/8e6da182-c794-4692-861d-d43da2fd5507/ y un audio https://ucarecdn.com/49f6a82b-30fc-4ab9-80b5-85f286d67830/\n\nayuda: Probá con términos como audio, panorama, texto, video esfera, voz en off y modelo.\n\nTambién podés arrastrar archivos al navegador y obtener la url 🙀"
+    "initial_text": "Este es el editor de GuriVR 🎉. Podés crear tu experiencia de Realidad Virtual describiendo como querés que sea con palabras. Cada párrafo se va a convertir en una escena siempre y cuando anuncies al menos una entidad. Empecemos con un ejemplo:\n\nMi primera escena dura 5 segundos y tiene un texto que dice \"Esta es mi primera escena. Esto es increible!\".\n\nLa segunda escena dura 30 segundos y tiene un panorama https://ucarecdn.com/8e6da182-c794-4692-861d-d43da2fd5507/ y un audio https://ucarecdn.com/49f6a82b-30fc-4ab9-80b5-85f286d67830/\n\nayuda: Probá con términos como audio, panorama, texto, video esfera, voz en off y modelo.\n\nTambién podés arrastrar archivos al navegador y obtener la url 🙀"
   },
   "stories": {
     "delete_confirm": "Seguro querés borrar esta historia?",

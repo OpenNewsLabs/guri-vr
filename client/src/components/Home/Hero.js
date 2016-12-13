@@ -33,7 +33,7 @@ const styles = {
     paddingTop: 75,
     display: 'flex',
     zIndex: 5,
-    flexWrap: 'wrap'
+    flexWrap: 'wrap-reverse'
   }),
 
   templatesTitle: style({
@@ -45,7 +45,7 @@ const styles = {
 
   love: style({
     width: 333,
-    paddingTop: 82,
+    paddingTop: 62,
     margin: '0 auto',
     display: 'block'
   })
