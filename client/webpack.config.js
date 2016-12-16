@@ -5,7 +5,6 @@ var devConfig = require('./webpack.config.dev')
 
 module.exports = Object.assign({}, devConfig, {
   plugins: [
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
