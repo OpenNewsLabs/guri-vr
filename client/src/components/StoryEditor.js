@@ -99,9 +99,7 @@ export default class StoryEditor extends Component {
 
 const Header = () => (
   <header {...styles.header}>
-    <div {...styles.logoContainer}>
-    <Link href='/'><Logo width='75' color='#fff' /></Link>
-    </div>
+    <Link {...styles.logoContainer} href='/'><Logo width='75' color='#fff' /></Link>
     <div {...styles.navigation}>
       <Navbar color='#898989' activeColor='#ccc' />
       <div {...styles.switchContainer}>
@@ -163,6 +161,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingBottom: 30,
+    paddingTop: 35,
     '@media(max-width: 500px)': {
       display: 'none'
     }
@@ -172,9 +171,9 @@ const styles = {
     display: 'flex',
     backgroundColor: '#282C34',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     flexWrap: 'wrap',
-    paddingTop: 10,
+    paddingTop: 0,
     paddingLeft: 10,
     paddingRight: 10,
     '@media(max-width: 500px)': {
@@ -183,6 +182,7 @@ const styles = {
   }),
 
   logoContainer: style({
+    display: 'block',
     '@media(max-width: 500px)': {
       margin: '0 auto'
     }

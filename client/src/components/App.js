@@ -3,11 +3,7 @@ import { h, Component } from 'preact'
 import Router from 'preact-router'
 import { style } from 'glamor'
 import guri, { user } from 'services/guri'
-import Home from 'components/Home'
-import Login from 'components/Login'
-import StoryList from 'components/StoryList'
-import StoryEditor from 'components/StoryEditor'
-import Guide from 'components/Guide'
+import SplitPoint from 'components/SplitPoint'
 
 export default class App extends Component {
   constructor (props) {
@@ -24,11 +20,11 @@ export default class App extends Component {
     return (
       <div {...styles.container}>
         <Router>
-          <Home path='/' />
-          <Guide path='/guide' />
-          <Login path='/login' />
-          <StoryList path='/stories' />
-          <StoryEditor path='/stories/:id' />
+          <SplitPoint key={0} path='/' load={() => System.import('components/Home')} />
+          <SplitPoint key={1} path='/guide' load={() => System.import('components/Guide')} />
+          <SplitPoint key={2} path='/login' load={() => System.import('components/Login')} />
+          <SplitPoint key={3} path='/stories' load={() => System.import('components/StoryList')} />
+          <SplitPoint key={4} path='/stories/:id' load={() => System.import('components/StoryEditor')} />
         </Router>
       </div>
     )
