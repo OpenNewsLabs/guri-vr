@@ -11,9 +11,13 @@ module.exports = Object.assign({}, devConfig, {
       }
     }),
     new OfflinePlugin({
-			externals: ['index.html', 'styles.css', 'translations/en.json', 'translations/es.json'],
+      externals: ['index.html', 'styles.css', 'translations/en.json', 'translations/es.json'],
       caches: {
-				main: ['index.html', 'app.js', 'styles.css', 'translations/en.json', 'translations/es.json']
+        main: [
+          'index.html', 'app.js', 'styles.css',
+          'translations/en.json', 'translations/es.json',
+          '0.app.js', '1.app.js', '2.app.js', '3.app.js', '4.app.js'
+        ]
       },
       ServiceWorker: {
         navigateFallbackURL: '/'

@@ -76,7 +76,7 @@ module.exports = story =>
       <a-assets>${story.chapters.map(renderChapterAssets).filter(assets => assets.trim().length)}</a-assets>
       ${story.chapters.map(renderChapter).join('\n')}
     </a-scene>
-    <div id="root" style="background: #000; z-index: 999 !important; cursor: pointer; position: absolute; top: 0; left: 0;" onclick="javascript:start()"><svg style="width:48px;height:48px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div>
+    <div id="root" style="background: #000; z-index: 999 !important; cursor: pointer; position: absolute; top: 0; left: 0;" onclick="javascript:start()"><svg style="width:50px;height:50px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div>
 
     ${story.mode === 'ar' ? '<video autoplay="true" id="arVideo">' : ''}
     <script>
@@ -171,8 +171,6 @@ const renderScript = story => {
 
     function nextChapter(i) {
       if(i >= chapters.length) return end();
-
-      console.log(prevIdx, i, chapters)
 
       clearTimeout(cancelNext);
 

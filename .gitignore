@@ -3,6 +3,7 @@ node_modules
 config.json
 npm-debug.log
 public/app.js
+public/*.app.js
 public/uploads/*
 !public/uploads/.gitkeep
 !public/uploads/s

@@ -1,17 +1,10 @@
 
 import { h, Component } from 'preact'
-import { Layout } from 'preact-mdl'
 import Router from 'preact-router'
-import Radium from 'radium'
+import { style } from 'glamor'
 import guri, { user } from 'services/guri'
-import Header from 'components/Header'
-import Home from 'components/Home'
-import Login from 'components/Login'
-import StoryList from 'components/StoryList'
-import StoryEditor from 'components/StoryEditor'
-import Guide from 'components/Guide'
+import SplitPoint from 'components/SplitPoint'
 
-@Radium
 export default class App extends Component {
   constructor (props) {
     super(props)
@@ -25,24 +18,21 @@ export default class App extends Component {
 
   render (props, { user }) {
     return (
-      <Layout fixed-header js={false}>
-        <Header user={user} />
-        <Layout.Content style={styles.mainContainer}>
-          <Router>
-            <Home path='/' />
-            <Guide path='/guide' />
-            <Login path='/login' />
-            <StoryList path='/stories' />
-            <StoryEditor path='/stories/:id' />
-          </Router>
-        </Layout.Content>
-      </Layout>
+      <div {...styles.container}>
+        <Router>
+          <SplitPoint key={0} path='/' load={() => System.import('components/Home')} />
+          <SplitPoint key={1} path='/guide' load={() => System.import('components/Guide')} />
+          <SplitPoint key={2} path='/login' load={() => System.import('components/Login')} />
+          <SplitPoint key={3} path='/stories' load={() => System.import('components/StoryList')} />
+          <SplitPoint key={4} path='/stories/:id' load={() => System.import('components/StoryEditor')} />
+        </Router>
+      </div>
     )
   }
 }
 
 const styles = {
-  mainContainer: {
-    display: 'flex'
-  }
+  container: style({
+    minWidth: '100%'
+  })
 }
