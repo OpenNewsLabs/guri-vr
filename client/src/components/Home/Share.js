@@ -64,6 +64,11 @@ const styles = {
     maxWidth: 650,
     float: 'right',
     lineHeight: 1.5,
-    letterSpacing: 0.2
+    letterSpacing: 0.2,
+    '& a': {
+      color: '#fff',
+      fontWeight: 'bold'
+    },
+    '& a:visited': {}
   })
 }

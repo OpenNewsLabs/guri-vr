@@ -184,13 +184,13 @@
     },
     "share": {
       "title": "Compartilo en todas partes",
-      "description": "GuriVR usa <a href='https://webvr.info'>WebVR</a>, el estándar web para el mundo de la Realidad Virtual. esto funciona en navegadores, Google Cardboard y Oculus rift entre otros. También cuenta con controles para el mouse y teclado. Podés compartir tus experiencias como sitios web o embeberlas en iframes."
+      "description": "GuriVR está basado en <a href='https://aframe.io'>A-Frame</a> de Mozilla para acceder a <a href='https://webvr.info'>WebVR</a>, el estándar web para el mundo de la Realidad Virtual. esto funciona en navegadores, Google Cardboard y Oculus rift entre otros. También cuenta con controles para el mouse y teclado. Podés compartir tus experiencias como sitios web o embeberlas en iframes."
     },
     "footer": {
       "title": "Ahora es tu turno de divertirte!",
       "description": "Empezá haciendo cosas geniales en el mundo de VR en solo unas líneas de texto.",
       "button": "Creá tu primera historia",
-      "by": "Hecho con ♥️ por <a href='https://twitter.com/impronunciable'>Dan Zajdband</a><br><br>Sitio diseñado por <a href='https://twitter.com/abad'>Federico Abad</a>"
+      "by": "Hecho con ♥️ por <a href='https://twitter.com/impronunciable'>Dan Zajdband</a>"
     }
   },
   "login": {

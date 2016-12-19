@@ -58,7 +58,12 @@ const styles = {
     fontSize: 19,
     maxWidth: 650,
     lineHeight: 1.5,
-    letterSpacing: 0.2
+    letterSpacing: 0.2,
+    '& a': {
+      color: '#652470',
+      fontWeight: 'bold'
+    },
+    '& a:visited': {}
   }),
 
   highFive: style({
