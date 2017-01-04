@@ -71,6 +71,7 @@ const styles = {
     right: 120,
     bottom: -100,
     height: 532,
-    width: 532
+    width: 532,
+    zIndex: -1
   })
 }

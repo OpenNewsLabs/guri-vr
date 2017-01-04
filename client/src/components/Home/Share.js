@@ -25,7 +25,8 @@ const styles = {
     position: 'absolute',
     left: 0,
     width: 525,
-    height: 509
+    height: 509,
+    zIndex: -1
   }),
 
   shareContainer: style({
