@@ -1,6 +1,5 @@
 
 const EXTERNAL_URLS = {
-  text: '/bmfont.js',
   chart: 'https://s3.amazonaws.com/gurivr/aframe-chartbuilder-component.js',
   ply: 'https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js',
   sky: 'https://rawgit.com/ngokevin/kframe/master/components/sun-sky/dist/aframe-sun-sky.min.js'
@@ -25,7 +24,7 @@ module.exports = story =>
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>${story.title}</title>
-    <script src="https://s3.amazonaws.com/gurivr/aframe.min.js"></script>
+    <script src="https://rawgit.com/aframevr/aframe/master/dist/aframe-master.min.js"></script>
     <script src="https://rawgit.com/ngokevin/aframe-look-at-component/master/dist/aframe-look-at-component.min.js"></script>
     ${renderExternalUrls(story)}
     <style>
@@ -112,7 +111,7 @@ const renderChapter = (chapter, i) => `
 const renderObject = (obj, i, j) => {
   switch (obj.type) {
     case 'text':
-      return `<a-entity material="color: #fff; " look-at="0 1.6 0" scale="${obj.scale.join(' ')}" position="${obj.position.join(' ')}" bmfont-text="text: ${obj.text}; width: 600; color: white; baseline: center; anchor: center; align: center; font: http://localhost:4444/Monoid.fnt"></a-entity>`
+      return `<a-entity look-at="0 1.6 0" scale="${obj.scale.join(' ')}" position="${obj.position.join(' ')}" text="value: ${obj.text}; font: mozillavr; align: center; anchor: center;"></a-entity>`
     case 'panorama':
       return `<a-sky src="#asset-${i}-${j}"></a-sky>`
     case 'background':
@@ -243,11 +242,6 @@ const renderExternalUrls = story => {
   const urls = []
   story.chapters.forEach(chapter => chapter.forEach(entity => {
     switch (entity.type) {
-      case 'text':
-        if (!loaded.text) {
-          urls.push(EXTERNAL_URLS.text)
-        }
-        break
       case 'chart':
         if (!loaded.chart) {
           urls.push(EXTERNAL_URLS.chart)
