@@ -126,9 +126,8 @@ function getObjects (p) {
         return {
           type: 'video',
           src: videoUrl,
-          position: getPosition(str),
+          position: videoPos,
           scale: getSize(str),
-          rotation: getRotation(str),
           link: getLink(str)
         }
       case 'videosphere':
@@ -152,11 +151,9 @@ function getObjects (p) {
           type: 'image',
           src: imgUrl,
           text: !imgUrl && imgQuote,
-          position: getPosition(str),
+          position: imgPos,
           scale: getSize(str),
-          rotation: getRotation(str),
           link: getLink(str)
->>>>>>> master
         }
       case 'text':
       case 'texto':
@@ -168,7 +165,7 @@ function getObjects (p) {
           type: 'text',
           text: textQuote,
           position: textPos,
-          scale: getSize(str).map(function (el) { return el * 5 })
+          scale: getSize(str).map(function (el) { return el * 25 })
         }
       case 'sky':
       case 'cielo':
@@ -264,7 +261,7 @@ function getLink (str) {
   return SCENE_INDEXES.indexOf(match[1]) % (SCENE_INDEXES.length / 2)
 }
 
-function getAbsPos (str, width, height) {
+function getAbsPos (positions, width, height) {
   var xSize = -0.5 * width
   var ySize = -0.5 * height
   var initialPosition = [0, 1.6, 0]
