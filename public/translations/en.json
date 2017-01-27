@@ -7,7 +7,7 @@
     "introduction": {
       "title": "Introduction",
       "first": "GuriVR is a free, open source project created to allow anyone to make <a href='https://en.wikipedia.org/wiki/Virtual_reality'>Virtual Reality</a> experiences with the lowest possible learning curve. Guri provides a quick and easy online editor that creates virtual reality from your words. Guri even makes it possible to create a 360 panorama that works in the browser and with headsets like the Google Cardboard in seconds - just tweet a 360 panorama with a mention to <a href='https://twitter.com/guri_vr'>@guri_vr</a>.",
-      "second": "Guri is under <a href='https://github.com/opennewslabs/guri-vr'>active development</a> and <a href='https://github.com/opennewslabs/guri-vr/issues'>feedback</a> is always welcome and under consideration for new features and bug reports. If you see something, say something 🚨 👮"
+      "second": "Guri is under <a href='https://github.com/opennewslabs/guri-vr'>active development</a> and <a href='https://github.com/opennewslabs/guri-vr/issues'>feedback</a> is always welcome and under consideration for new features and bug reports.<br>If you see something, say something 🚨 👮"
     },
     "getting_started": {
       "title": "Getting started",
@@ -19,7 +19,7 @@
       "first": "Guri organizes your stories into sequential scenes. Each scene is mapped with a paragraph in your description as soon as you specify the scene length.",
       "second": "You can create as many scenes as you want. Just make sure to set the duration in seconds of a scene if you have more than one in your story.",
       "third": "Now that you know how to create scenes, let's add some elements to your scenes:",
-      "preview": "This is my first scene. It lasts 4 seconds, has a skyblue background and shows a text saying \"This is the first scene\"\n\nThis paragraph is never interpreted because I'm not specifying any entity. This is a good way to make a comment or talk about different parts of your story without generating scenes.\n\nThe last scene lasts 10 seconds and has just a text saying \"The End!\"."
+      "preview": "This is my first scene. It lasts <span class='cm-number'>4 seconds</span>, has a <span class='cm-string'>skyblue</span> <span class='cm-atom'>background</span> and shows a text saying <span class='cm-string'>\"This is the first scene\"</span>\n\nThis paragraph is never interpreted because I'm not specifying any entity. This is a good way to make a comment or talk about different parts of your story without generating scenes.\n\nThe last scene lasts <span class='cm-number'>10 seconds</span> and has just a <span class='cm-atom'>text</span> saying <span class='cm-string'>\"The End!\"</span>."
     },
     "entities": {
       "title": "Entities",
@@ -31,77 +31,77 @@
       "required": "required",
       "optional": "optional",
       "example": "Example",
-      "preview": "I want my scene to have a pink background and a picture of a pokemon (why not?) located at https://gurivr.s3.amazonaws.com/c5155f5b-83eb-4729-873b-238abb916362-psyduck.png to my left, and make it tiny please. Also add a text saying \"Look to your leeeeeeeft!\""
+      "preview": "I want my scene to have a <span class='cm-string'>pink</span> <span class='cm-atom'>background</span> and a <span class='cm-atom'>picture</span> of a pokemon (why not?) located at <span class='cm-string'>https://gurivr.s3.amazonaws.com/c5155f5b-83eb-4729-873b-238abb916362-psyduck.png</span> to my <span class='cm-string'>left</span>, and make it <span class='cm-string'>tiny</span> please. Also add a <span class='cm-atom'>text</span> saying <span class='cm-string'>\"Look to your leeeeeeeft!\"</span>"
     },
     "audio": {
       "title": "Audio",
       "description": "Audio source in the 3d space. It can be positioned in different parts of the scene. It needs a url as the source, the preferred format is mp3.",
-      "preview": "I want a 5 seconds scene showing a text saying \"Hi!\"\n\nThen I want a 40 seconds scene with a white background and an audio located at https://gurivr.s3.amazonaws.com/86474203-6d3d-4d39-9342-5ed63dca56c6-santa.mp3 behind me",
+      "preview": "I want a <span class='cm-number'>5 seconds</span> scene showing a <span class='cm-atom'>text</span> saying <span class='cm-string'>\"Hi!\"</span>\n\nThen I want a <span class='cm-number'>40 seconds</span> scene with a <span class='cm-string'>white</span> <span class='cm-atom'>background</span> and an <span class='cm-atom'>audio</span> located at <span class='cm-string'>https://gurivr.s3.amazonaws.com/86474203-6d3d-4d39-9342-5ed63dca56c6-santa.mp3</span> <span class='cm-string'>behind</span> me",
       "keywords": "audio | sound"
     },
     "panorama": {
       "title": "Panorama",
       "description": "A panorama is a 360 spherical image. It needs a url to display. It works best with equirectangular panoramas but can also work with any kind of image.",
-      "preview": "My scene shows a panorama located at https://gurivr.s3.amazonaws.com/7ec6043a-3924-4341-96ab-e8df10faaa93-pa.jpg"
+      "preview": "My scene shows a <span class='cm-atom'>panorama</span> located at <span class='cm-string'>https://gurivr.s3.amazonaws.com/7ec6043a-3924-4341-96ab-e8df10faaa93-pa.jpg</span>"
     },
     "videosphere": {
       "title": "Videosphere",
       "description": "A videosphere is a 360 spherical video. It needs a url to display. It works best with equirectangular videos but can also work with any kind of video.",
-      "preview": "My scene is 30 seconds long and shows a videosphere located at https://ucarecdn.com/bcece0a8-86ce-460e-856b-40dac4875f15/ and a voiceover saying \"This is the future. I know, is not that good\"",
+      "preview": "My scene is <span class='cm-number'>30 seconds</span> long and shows a <span class='cm-atom'>videosphere</span> located at <span class='cm-string'>https://ucarecdn.com/bcece0a8-86ce-460e-856b-40dac4875f15/</span> and a <span class='cm-atom'>voiceover</span> saying <span class='cm-string'>\"This is the future. I know, is not that good\"</span>",
       "keywords": "videosphere"
     },
     "image": {
       "title": "Image",
       "description": "2d images can be located inside the scene and placed in different positions.",
       "keywords": "image | picture",
-      "preview": "My scene has blue background, a voiceover saying \"Look to your right\" and a random picture of a cat from https://gurivr.s3.amazonaws.com/7944cde7-b842-483f-a8b1-f953476b2cbb-gatito.png to my right"
+      "preview": "My scene has <span class='cm-string'>blue</span> <span class='cm-atom'>background</span>, a <span class='cm-atom'>voiceover</span> saying <span class='cm-string'>\"Look to your right\"</span> and a random <span class='cm-atom'>picture</span> of a cat from <span class='cm-string'>https://gurivr.s3.amazonaws.com/7944cde7-b842-483f-a8b1-f953476b2cbb-gatito.png</span> to my <span class='cm-string'>right</span>"
     },
     "video": {
       "title": "Video",
       "description": "2d videos can be located inside the scene and placed in different positions.",
-      "preview": "My scene has skyblue background and a video from https://s3.amazonaws.com/gurivr/licha.mp4 to my left"
+      "preview": "My scene has <span class='cm-string'>skyblue</span> <span class='cm-atom'>background</span> and a <span class='cm-atom'>video</span> from <span class='cm-string'>https://s3.amazonaws.com/gurivr/licha.mp4</span> to my <span class='cm-string'>left</span>"
     },
     "text": {
       "title": "Text",
       "description": "You can write text and it will be displayed in the scene. There is no color or font support (it's just blank text for now)",
       "keywords": "text",
-      "preview": "My scene has red background, a text telling me \"You can read\" and another text that says \"Say no more\" to my left"
+      "preview": "My scene has <span class='cm-string'>red</span> <span class='cm-atom'>background</span>, a <span class='cm-atom'>text</span> telling me <span class='cm-string'>\"You can read\"</span> and another <span class='cm-atom'>text</span> that says <span class='cm-string'>\"Say no more\"</span> to my <span class='cm-string'>left</span>"
     },
     "duration": {
       "title": "Duration",
       "description": "You can specify the duration of each scene in seconds. Otherwise the scene will not end.",
       "keywords": "seconds",
-      "preview": "My scene lasts 8 seconds, has blue background and text saying \"This will finish soon\""
+      "preview": "My scene lasts <span class='cm-number'>8 seconds</span>, has <span class='cm-string'>blue</span> <span class='cm-atom'>background</span> and <span class='cm-atom'>text</span> saying <span class='cm-string'>\"This will finish soon\"</span>"
     },
     "voiceover": {
       "title": "Voiceover",
       "description": "You can make your computer say phrases out loud. This will only work on browsers supporting speech synthesis.",
       "keywords": "voiceover",
-      "preview": "My scene is 8 seconds long and have a voiceover saying \"If you are listening to me, your computer, then your browser supports speech synthesis.\""
+      "preview": "My scene is <span class='cm-number'>8 seconds</span> long and have a <span class='cm-atom'>voiceover</span> saying <span class='cm-string'>\"If you are listening to me, your computer, then your browser supports speech synthesis.\"</span>"
     },
     "chart": {
       "title": "Chart",
       "description": "This feature is under development. You can test it by creating a chart on <a href='https://quartz.github.io/Chartbuilder/'>ChartBuilder</a>, drag the json into the editor (or host it by yourself), and GuriVR will render it as a 3d chart. You can help with development by filing an <a href='https://github.com/opennewslabs/guri-vr/issues'>issue</a>.",
       "keywords": "chart",
-      "preview": "My scene have a #eee background and a chart from https://s3.amazonaws.com/gurivr/my-data.json in front of me"
+      "preview": "My scene have a <span class='cm-string'>#eee</span> <span class='cm-atom'>background</span> and a <span class='cm-atom'>chart</span> from <span class='cm-string'>https://s3.amazonaws.com/gurivr/my-data.json</span> in <span class='cm-string'>front</span> of me"
     },
     "sky": {
       "title": "Sky",
       "description": "We have a nice sky set up for you and you can specify the part of the day.",
       "keywords": "sky",
-      "preview": "My scene shows a pretty sky at sunset"
+      "preview": "My scene shows a pretty <span class='cm-atom'>sky</span> at <span class='cm-string'>sunset</span>"
     },
     "background": {
       "title": "Background",
       "description": "You can change the boring black background on each scene with a cooler color.",
       "keywords": "background",
-      "preview": "My scene have a #ccc background and a text saying \"Calaaaar\""
+      "preview": "My scene have a <span class='cm-string'>#ccc</span> <span class='cm-atom'>background</span> and a <span class='cm-atom'>text</span> saying <span class='cm-string'>\"Calaaaar\"</span>"
     },
     "3dmodel": {
       "title": "3D Models",
       "description": "Another <del>broken</del> experimental feature. You can insert Collada, Obj and Bake models into the scene.",
       "keywords": "model",
-      "preview": "My scene has skyblue background and a model of some trees from https://s3.amazonaws.com/gurivr/23f1972f-99c6-4f68-a0f0-392c16a02333-trees.dae you can move around with wasd 😎"
+      "preview": "My scene has <span class='cm-string'>skyblue</span> <span class='cm-atom'>background</span> and a <span class='cm-atom'>model</span> of some trees from <span class='cm-string'>https://s3.amazonaws.com/gurivr/23f1972f-99c6-4f68-a0f0-392c16a02333-trees.dae</span> you can move around with wasd 😎"
     },
     "search": {
       "title": "Perform a resource search",
@@ -111,7 +111,12 @@
     "ar": {
       "title": "Augmented Reality mode",
       "description": "VR and AR share a lot in common from the technical standpoint. You can use the user camera instead of an asset for the background on your experiences. To do this you just need to write down \"ar mode\" at any point in your story. Try to start the scene by asking for \"ar mode\" to make it clear to the editor.",
-      "preview": "This is a story that uses the AR mode\n\nThe only scene shows a text saying \"We are in AR mode!\""
+      "preview": "This is a story that uses the <span class='cm-atom'>AR mode</span>\n\nThe only scene shows a <span class='cm-atom'>text</span> saying <span class='cm-string'>\"We are in AR mode!\"</span>"
+    },
+    "links": {
+      "title": "Links",
+      "description": "Links are a way to navigate the scene in a non-linear fashion. You can attach a link to an image or video just by specifying which scene you want to link to. Once you do this, the user will see a cursor to point that on click will automatically go to the scene that you want.",
+      "preview": "My first scene lasts <span class='cm-number'>4 seconds</span> and displays a <span class='cm-atom'>text</span> that says <span class='cm-string'>\"Wait for it...\"</span>\n\nThe second shows an <span class='cm-atom'>image</span> of the Guri logo <span class='cm-string'>https://s3.amazonaws.com/gurivr/logo.png</span> that points to the first scene when the user clicks on it.\n\n"
     },
     "speech_recognition": {
       "title": "Speech recognition",
@@ -137,10 +142,13 @@
       "color": "color",
       "color_types": "string or hex color",
       "sun_position": "sun position",
-      "sun_position_types": "sunrise, sunset, morning, noon, afternoon, evening, night"
+      "sun_position_types": "sunrise, sunset, morning, noon, afternoon, evening, night",
+      "link": "link",
+      "link_types": "first, second, third... scene"
     }
   },
   "header": {
+    "home": "Home",
     "guide": "Guide",
     "my_stories": "My stories",
     "logout": "Logout",
@@ -148,27 +156,45 @@
   },
   "home": {
     "intro": {
-      "tagline": "Describe your VR experience and the editor will do the rest",
-      "login": "Login to create a story",
-      "create": "Create a story"
+      "tagline": "Describe your VR experience and<br/>the editor will do the rest."
     },
     "preview": {
-      "title": "Use your own words",
-      "text": "You not need to be a coder to create VR experiences. The GuriVR editor interprets your words and creates the world you described.\n\nTry adding some scenes. For example my first scene will last 500 seconds and display an image located at https://s3.amazonaws.com/gurivr/logo.png along with a text saying: \"Guri is cool!\" to my left and a panorama located at https://s3.amazonaws.com/gurivr/pano.jpg\n\nTry adding more scenes\n\nhint: Try with words like audio, panorama, text, videosphere, voiceover and chart.\n\nYou can also drag your files into the editor and get back a url or even find images and panoramas enclosing the search terms inside double quotes 🙀"
+      "text": "You not need to be a coder to create VR experiences. The GuriVR editor interprets your words and creates the world you described.\n\nTry adding some scenes. For example my first scene will last 500 seconds and display an image located at https://s3.amazonaws.com/gurivr/logo.png along with a text saying: \"Guri is cool!\" to my left and a panorama located at https://s3.amazonaws.com/gurivr/pano.jpg\n\nTry adding more scenes...\n\nhint: Try with words like audio, panorama, text, videosphere, voiceover and chart. You can also drag your files into the editor and get back a url or even find images and panoramas enclosing the search terms inside double quotes 🙀"
+    },
+    "templates": {
+      "start": "...or start with a Template",
+      "panorama_title": "Panorama",
+      "panorama_desc": "Panoramas are 360 pictures that can be explored in an inmersive fashion.",
+      "panorama_text": "I just want to display the following panorama https://gurivr.s3.amazonaws.com/1606c0f8-5561-4c44-a697-1f544b313308-30118869044_b5b44d0f7e_k.jpg",
+      "chart_title": "Chart",
+      "chart_desc": "Guri plays well with Quartz's Chartbuilder, displaying your data in VR.",
+      "chart_text": "Show me the cool chart exported as https://s3.amazonaws.com/gurivr/my-data.json from https://quartz.github.io/Chartbuilder/ on a beige background",
+      "voiceover_title": "Augmented Reality",
+      "voiceover_desc": "Enable permission to your camera and explore your world in a different way.",
+      "voiceover_text": "We can go to AR mode and enhance it with for example a text saying \"Is this reality?\"",
+      "videosphere_title": "Videosphere",
+      "videosphere_desc": "360 video is also possible with Guri. Just paste the video url into the editor.",
+      "videosphere_text": "We call 360 video as a videosphere. You just need to drop a url like the following into the editor: https://ucarecdn.com/bcece0a8-86ce-460e-856b-40dac4875f15/"
+    },
+    "oss": {
+      "title": "I'm Open Source",
+      "description": "This is an <a href='https://github.com/opennewslabs/guri-vr'>open source project</a> created as part of a <a href='https://opennews.org/what/fellowships/'>Knight-Mozilla fellowship</a>. You can contribute and/or propose ideas you have for this project. <strong>Note</strong>: A wise reporter once said \"60% of the time it works every time\". This tool is under development and you may find some bugs. In that case we will appreciate if you can <a href='https://github.com/opennewslabs/guri-vr/issues'>fill an issue</a>."
     },
     "share": {
       "title": "Share it everywhere",
-      "description": "GuriVR uses <a href='https://webvr.info'>WebVR</a>, the Web Open Standard for the Virtual Reality World. This works on modern web browsers, Google Cardboard and Oculus rift among others. It also fallback for desktop browsers using drag controls. You can share your experiences as standalone websites or inside your site as an iframe."
+      "description": "GuriVR is based on Mozilla's <a href='https://aframe.io'>A-Frame</a> to interface with <a href='https://webvr.info'>WebVR</a> the Web Open Standard for the Virtual Reality World. This works on modern web browsers, Google Cardboard and Oculus rift among others. It also fallback for desktop browsers using drag controls. You can share your experiences as standalone websites or inside your site as an iframe."
     },
-    "oss": {
-      "title": "Open source",
-      "description": "This is an <a href='https://github.com/opennewslabs/guri-vr'>open source project</a> created as part of a <a href='https://opennews.org/what/fellowships/'>Knight-Mozilla fellowship</a>. You can contribute and/or propose ideas you have for this project. <strong>Note</strong>: A wise reporter once said \"60% of the time it works every time\". This tool is under development and you may find some bugs. In that case we will appreciate if you can <a href='https://github.com/opennewslabs/guri-vr/issues'>fill an issue</a>."
-    },
-    "by": "Made with ♥️ by"
+    "footer": {
+      "title": "Now is your turn to have fun!",
+      "description": "Start making cool stuff in the VR World just with a few lines of text.",
+      "button": "Create your first story",
+      "by": "Made with ♥️ by <a href='https://twitter.com/impronunciable'>Dan Zajdband</a>"
+    }
   },
   "login": {
     "sent": "Magic Link sent to your Email address!",
-    "login": "Login"
+    "login": "Login",
+    "text": "We will send you an E-mail with a simple link to login."
   },
   "editor": {
     "title_missing": "Please enter a name for the story",
@@ -177,10 +203,10 @@
     "share": "Share link",
     "preview": "Fullscreen preview",
     "initial_title": "Untitled story",
-    "initial_text": "\n\nThis is the GuriVR editor 🎉. You can create your VR experience by just describing how you would like your scene to be. Every paragraph will be a scene as soon as you add an entity to it. Let's start with an example:\n\nMy first scene lasts 5 seconds and has a text that says \"This is my first scene. This is amazing!\".\n\nThe second is 30 seconds and have just a panorama located at https://ucarecdn.com/8e6da182-c794-4692-861d-d43da2fd5507/ along with the audio https://ucarecdn.com/49f6a82b-30fc-4ab9-80b5-85f286d67830/\n\nhint: Try with words like audio, panorama, text, videosphere, voiceover and chart.\n\nYou can also drag your files into the editor and get back a url 🙀"
+    "initial_text": "This is the GuriVR editor 🎉. You can create your VR experience by just describing how you would like your scene to be. Every paragraph will be a scene as soon as you add an entity to it. Let's start with an example:\n\nMy first scene lasts 5 seconds and has a text that says \"This is my first scene. This is amazing!\".\n\nThe second is 30 seconds and have just a panorama located at https://ucarecdn.com/8e6da182-c794-4692-861d-d43da2fd5507/ along with the audio https://ucarecdn.com/49f6a82b-30fc-4ab9-80b5-85f286d67830/\n\nhint: Try with words like audio, panorama, text, videosphere, voiceover and chart.\n\nYou can also drag your files into the editor and get back a url 🙀"
   },
   "stories": {
     "delete_confirm": "Are you sure you want to delete this story?",
-    "empty": "It seems that you don't have stories yet. You can start by clicking on the + button below 😸"
+    "add": "Add new story"
   }
 }

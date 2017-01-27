@@ -1,7 +1,6 @@
 {
   "presets": ["es2015"],
   "plugins": [
-    ["syntax-decorators"],
     ["transform-react-jsx", { "pragma": "h" }]
   ]
 }
