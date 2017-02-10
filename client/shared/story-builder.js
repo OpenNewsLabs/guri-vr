@@ -1,6 +1,5 @@
 
 const EXTERNAL_URLS = {
-  text: 'https://s3.amazonaws.com/gurivr/aframe-bmfont-text-component.min.js',
   chart: 'https://s3.amazonaws.com/gurivr/aframe-chartbuilder-component.js',
   ply: 'https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js',
   sky: 'https://rawgit.com/ngokevin/kframe/master/components/sun-sky/dist/aframe-sun-sky.min.js'
@@ -25,7 +24,8 @@ module.exports = story =>
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>${story.title}</title>
-    <script src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/ngokevin/aframe-look-at-component/master/dist/aframe-look-at-component.min.js"></script>
     ${renderExternalUrls(story)}
     <style>
       html, body, #root, #arVideo {
@@ -118,32 +118,32 @@ const renderChapter = (chapter, i) => `
 const renderObject = (obj, i, j) => {
   switch (obj.type) {
     case 'text':
-      return `<a-entity scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" bmfont-text="text: ${obj.text}; width: 600; color: white; align: center;"></a-entity>`
+      return `<a-entity look-at="0 1.6 0" scale="${obj.scale.join(' ')}" position="${obj.position.join(' ')}" text="value: ${obj.text}; font: mozillavr; align: center; anchor: center;"></a-entity>`
     case 'panorama':
-      return `<a-sky rotation="0 180 0" src="#asset-${i}-${j}"></a-sky>`
+      return `<a-sky src="#asset-${i}-${j}"></a-sky>`
     case 'background':
-      return `<a-sky rotation="0 180 0" color="${obj.color}"></a-sky>`
+      return `<a-sky color="${obj.color}"></a-sky>`
     case 'videosphere':
       return `<a-videosphere src="#asset-${i}-${j}"></a-videosphere>`
     case 'video':
-      return `<a-video scale="${obj.scale.join(' ')}" width="10" height="6" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"${typeof obj.link ? renderEvents(obj) : ''}></a-video>`
+      return `<a-video look-at="0 1.6 0" scale="${obj.scale.join(' ')}" width="10" height="6" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-video>`
     case 'image':
-      return `<a-image scale="${obj.scale.join(' ')}" width="5" height="5" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"${typeof obj.link ? renderEvents(obj) : ''}></a-image>`
+      return `<a-image look-at="0 1.6 0" scale="${obj.scale.join(' ')}" width="5" height="5" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-image>`
     case 'audio':
       return `<a-entity position="${obj.position.join(' ')}" sound="src: #asset-${i}-${j}; autoplay: false;"></a-entity>`
     case 'sky':
       return `<a-sun-sky material="sunPosition: ${obj.position.join(' ')}"></a-sun-sky>`
     case 'chart':
-      return `<a-entity rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src}; scale: ${obj.scale.join(' ')};"></a-entity>`
+      return `<a-entity look-at="0 1.6 0" position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src}; scale: ${obj.scale.join(' ')};"></a-entity>`
     case 'model':
       switch (obj.extension) {
         case 'ply':
-          return `<a-entity ply-model="src: #asset-${i}-${j}" rotation="-90 0 0" position="${obj.position.join(' ')}" ></a-entity>`
+          return `<a-entity look-at="0 1.6 0" ply-model="src: #asset-${i}-${j}" position="${obj.position.join(' ')}"></a-entity>`
         case 'obj':
-          return `<a-entity scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" obj-model="obj: #asset-${i}-${j}-obj; mtl:  #asset-${i}-${j}-mtl;"></a-entity>`
+          return `<a-entity look-at="0 1.6 0" scale="${obj.scale.join(' ')}" position="${obj.position.join(' ')}" obj-model="obj: #asset-${i}-${j}-obj; mtl:  #asset-${i}-${j}-mtl;"></a-entity>`
         case 'dae':
         default:
-          return `<a-collada-model scale="${obj.scale.join(' ')}" rotation="${obj.rotation.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-collada-model>`
+          return `<a-collada-model look-at="0 1.6 0" scale="${obj.scale.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-collada-model>`
       }
   }
 }
@@ -235,7 +235,6 @@ const renderScript = story => {
         } catch (err) {}
       }
     }
-
     ${!needsManualPlay(story.chapters) ? 'start()' : ''}
 
     ${story.mode === 'ar' ? renderARScript() : ''}
@@ -271,11 +270,6 @@ const renderExternalUrls = story => {
   const urls = []
   story.chapters.forEach(chapter => chapter.forEach(entity => {
     switch (entity.type) {
-      case 'text':
-        if (!loaded.text) {
-          urls.push(EXTERNAL_URLS.text)
-        }
-        break
       case 'chart':
         if (!loaded.chart) {
           urls.push(EXTERNAL_URLS.chart)
