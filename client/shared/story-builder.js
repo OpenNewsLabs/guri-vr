@@ -1,6 +1,6 @@
 
 const EXTERNAL_URLS = {
-  chart: 'https://s3.amazonaws.com/gurivr/aframe-chartbuilder-component.js',
+  chart: 'https://cdn.rawgit.com/impronunciable/aframe-chartbuilder-component/4693e47a/dist/aframe-chartbuilder-component.min.js',
   ply: 'https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js',
   sky: 'https://rawgit.com/ngokevin/kframe/master/components/sun-sky/dist/aframe-sun-sky.min.js'
 }
@@ -118,7 +118,7 @@ const renderChapter = (chapter, i) => `
 const renderObject = (obj, i, j) => {
   switch (obj.type) {
     case 'text':
-      return `<a-entity look-at="0 1.6 0" scale="${obj.scale.join(' ')}" position="${obj.position.join(' ')}" text="value: ${obj.text}; font: mozillavr; align: center; anchor: center;"></a-entity>`
+      return `<a-entity look-at="0 1.6 0" scale="${obj.scale.join(' ')}" position="${obj.position.join(' ')}" text="value: ${obj.text}; font: roboto; align: center; anchor: center;"></a-entity>`
     case 'panorama':
       return `<a-sky src="#asset-${i}-${j}"></a-sky>`
     case 'background':
@@ -134,7 +134,7 @@ const renderObject = (obj, i, j) => {
     case 'sky':
       return `<a-sun-sky material="sunPosition: ${obj.position.join(' ')}"></a-sun-sky>`
     case 'chart':
-      return `<a-entity look-at="0 1.6 0" position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src}; scale: ${obj.scale.join(' ')};"></a-entity>`
+      return `<a-entity position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src}; scale: ${obj.scale.join(' ')};"></a-entity>`
     case 'model':
       switch (obj.extension) {
         case 'ply':
