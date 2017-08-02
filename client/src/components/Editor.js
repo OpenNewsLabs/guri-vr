@@ -167,6 +167,10 @@ codemirror.defineSimpleMode('guri', {
       token: 'string'
     },
     {
+      regex: /(marcador|marker)/i,
+      token: 'string'
+    },
+    {
       regex: /sunrise|sunset|morning|noon|afternoon|evening|night|amanecer|atardecer|mañana|mediodía|tarde|noche/gi,
       token: 'string'
     },
