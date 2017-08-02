@@ -23,6 +23,7 @@ var LOCATION_REGEX = /right|left|behind|front|above|below|atrás|frente|izquierd
 var SIZE_REGEX = /tiny|small|large|huge|diminuto|pequeño|grande|enorme/i
 var SUN_POSITION_REGEX = /sunrise|sunset|morning|noon|afternoon|evening|night|amanecer|atardecer|mañana|mediodía|tarde|noche/i
 var LATLON_REGEX = /\-?\d+\.\d+,\s*\-?\d+\.\d+/
+var MARKER_REGEX = /marker|marcador/i
 var SCENE_LINK_REGEX = /(first|second|third|fourth|fifth|sixth|primera|segunda|tercera|cuarta|quinta|sexta) (scene|escena)/i
 var SCENE_INDEXES = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'primera', 'segunda', 'tercera', 'cuarta', 'quinta', 'sexta']
 
@@ -99,13 +100,15 @@ function getObjects (p) {
       case 'gráfico':
       case '📊':
         var chartUrl = getUrl(str)
+        var chartMarker = getMarker(str)
         if (!chartUrl) return
         var chartPos = getPosition(str, 10, 10)
         return {
           type: 'chart',
           src: chartUrl,
           position: chartPos,
-          scale: getSize(str)
+          scale: getSize(str),
+          marker: chartMarker
         }
       case 'panorama':
       case '🌅':
@@ -128,7 +131,8 @@ function getObjects (p) {
           src: videoUrl,
           position: videoPos,
           scale: getSize(str),
-          link: getLink(str)
+          link: getLink(str),
+          marker: getMarker(str)
         }
       case 'videosphere':
       case 'video esfera':
@@ -145,7 +149,7 @@ function getObjects (p) {
       case 'imagen':
         var imgUrl = getUrl(str)
         var imgQuote = getQuote(str)
-        if(!(imgUrl || imgQuote)) return
+        if (!(imgUrl || imgQuote)) return
         var imgPos = getPosition(str)
         return {
           type: 'image',
@@ -153,19 +157,21 @@ function getObjects (p) {
           text: !imgUrl && imgQuote,
           position: imgPos,
           scale: getSize(str),
-          link: getLink(str)
+          link: getLink(str),
+          marker: getMarker(str)
         }
       case 'text':
       case 'texto':
       case '📝':
         var textQuote = getQuote(str)
         if (!textQuote) return
-        var textPos = getPosition(str/*, 14, textQuote.length / 30*/)
+        var textPos = getPosition(str /*, 14, textQuote.length / 30*/)
         return {
           type: 'text',
           text: textQuote,
           position: textPos,
-          scale: getSize(str).map(function (el) { return el * 25 })
+          scale: getSize(str).map(function (el) { return el * 25 }),
+          marker: getMarker(str)
         }
       case 'sky':
       case 'cielo':
@@ -196,7 +202,8 @@ function getObjects (p) {
           mtl: mtl,
           extension: ext[ext.length - 1],
           position: modelPos,
-          scale: getSize(str)
+          scale: getSize(str),
+          marker: getMarker(str)
         }
       case 'fondo':
         match = sp.match(/fondo (#[a-fA-F0-9]{3,6})/i)
@@ -349,4 +356,10 @@ function getLatLon (str) {
   var match = str.match(LATLON_REGEX)
   if (!(match && match.length)) return null
   return match[0].split(',').map(parseFloat)
+}
+
+function getMarker (str) {
+  var match = str.match(MARKER_REGEX)
+  if (!(match && match.length)) return null
+  return true
 }

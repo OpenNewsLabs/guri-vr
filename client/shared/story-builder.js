@@ -2,7 +2,8 @@
 const EXTERNAL_URLS = {
   chart: 'https://cdn.rawgit.com/impronunciable/aframe-chartbuilder-component/4693e47a/dist/aframe-chartbuilder-component.min.js',
   ply: 'https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js',
-  sky: 'https://rawgit.com/ngokevin/kframe/master/components/sun-sky/dist/aframe-sun-sky.min.js'
+  sky: 'https://rawgit.com/ngokevin/kframe/master/components/sun-sky/dist/aframe-sun-sky.min.js',
+  arjs: 'https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js'
 }
 
 const MANUAL_PLAY_TYPES = ['video', 'videosphere', 'audio']
@@ -24,7 +25,7 @@ module.exports = story =>
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>${story.title}</title>
-    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
     <script src="https://rawgit.com/ngokevin/aframe-look-at-component/master/dist/aframe-look-at-component.min.js"></script>
     ${renderExternalUrls(story)}
     <style>
@@ -77,8 +78,6 @@ module.exports = story =>
       ${story.chapters.map(renderChapter).join('\n')}
     </a-scene>
     <div id="root" style="background: #000; z-index: 999 !important; cursor: pointer; position: absolute; top: 0; left: 0;" onclick="javascript:start()"><svg style="width:50px;height:50px" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg></div>
-
-    ${story.mode === 'ar' ? '<video autoplay="true" id="arVideo">' : ''}
     <script>
       ${renderScript(story)}
     </script>
@@ -116,35 +115,65 @@ const renderChapter = (chapter, i) => `
 `
 
 const renderObject = (obj, i, j) => {
+  let str = ''
+  if (obj.marker) {
+    marker = {
+      position: obj.position,
+      scale: obj.scale
+    }
+    obj.position = ['']
+    obj.scale = ['']
+  }
   switch (obj.type) {
     case 'text':
-      return `<a-entity look-at="0 1.6 0" scale="${obj.scale.join(' ')}" position="${obj.position.join(' ')}" text="value: ${obj.text}; font: roboto; align: center; anchor: center;"></a-entity>`
+      str = `<a-entity look-at="0 1.6 0" scale="${obj.scale.join(' ')}" position="${obj.position.join(' ')}" text="value: ${obj.text}; font: roboto; align: center; anchor: center;"></a-entity>`
+      break
     case 'panorama':
-      return `<a-sky src="#asset-${i}-${j}"></a-sky>`
+      str = `<a-sky src="#asset-${i}-${j}"></a-sky>`
+      break
     case 'background':
-      return `<a-sky color="${obj.color}"></a-sky>`
+      str = `<a-sky color="${obj.color}"></a-sky>`
+      break
     case 'videosphere':
-      return `<a-videosphere src="#asset-${i}-${j}"></a-videosphere>`
+      str = `<a-videosphere src="#asset-${i}-${j}"></a-videosphere>`
+      break
     case 'video':
-      return `<a-video look-at="0 1.6 0" scale="${obj.scale.join(' ')}" width="10" height="6" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-video>`
+      str = `<a-video look-at="0 1.6 0" scale="${obj.scale.join(' ')}" width="10" height="6" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-video>`
+      break
     case 'image':
-      return `<a-image look-at="0 1.6 0" scale="${obj.scale.join(' ')}" width="5" height="5" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-image>`
+      str = `<a-image look-at="0 1.6 0" scale="${obj.scale.join(' ')}" width="5" height="5" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-image>`
+      break
     case 'audio':
-      return `<a-entity position="${obj.position.join(' ')}" sound="src: #asset-${i}-${j}; autoplay: false;"></a-entity>`
+      str = `<a-entity position="${obj.position.join(' ')}" sound="src: #asset-${i}-${j}; autoplay: false;"></a-entity>`
+      break
     case 'sky':
-      return `<a-sun-sky material="sunPosition: ${obj.position.join(' ')}"></a-sun-sky>`
+      str = `<a-sun-sky material="sunPosition: ${obj.position.join(' ')}"></a-sun-sky>`
+      break
     case 'chart':
-      return `<a-entity position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src}; scale: ${obj.scale.join(' ')};"></a-entity>`
+      str = `<a-entity position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src}; scale: ${obj.scale.join(' ')};"></a-entity>`
+      break
     case 'model':
       switch (obj.extension) {
         case 'ply':
-          return `<a-entity look-at="0 1.6 0" ply-model="src: #asset-${i}-${j}" position="${obj.position.join(' ')}"></a-entity>`
+          str = `<a-entity look-at="0 1.6 0" ply-model="src: #asset-${i}-${j}" position="${obj.position.join(' ')}"></a-entity>`
+          break
         case 'obj':
-          return `<a-entity look-at="0 1.6 0" scale="${obj.scale.join(' ')}" position="${obj.position.join(' ')}" obj-model="obj: #asset-${i}-${j}-obj; mtl:  #asset-${i}-${j}-mtl;"></a-entity>`
+          str = `<a-entity look-at="0 1.6 0" scale="${obj.scale.join(' ')}" position="${obj.position.join(' ')}" obj-model="obj: #asset-${i}-${j}-obj; mtl:  #asset-${i}-${j}-mtl;"></a-entity>`
+          break
         case 'dae':
         default:
-          return `<a-collada-model look-at="0 1.6 0" scale="${obj.scale.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-collada-model>`
+          str = `<a-collada-model look-at="0 1.6 0" scale="${obj.scale.join(' ')}" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-collada-model>`
+          break
       }
+  }
+  if (!obj.marker) {
+    return str
+  } else {
+    return `
+      <a-marker preset="hiro">
+        ${str}
+      </a-marker>
+    `
   }
 }
 
@@ -249,25 +278,17 @@ const renderARScript = () =>
     sky[i].setAttribute('visible', 'false');
   }
 
-  var video = document.querySelector("#arVideo");
-  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-
-  if (navigator.getUserMedia) {
-    navigator.getUserMedia({video: true}, handleVideo, videoError);
-  }
-
-  function handleVideo(stream) {
-    video.src = window.URL.createObjectURL(stream);
-  }
-
-  function videoError(e) {
-    alert('There was an error trying to get your camera stream :(');
-  }
+  var scene = document.querySelector('a-scene');
+  scene.setAttribute('arjs', 'sourceType: webcam;')
+  scene.setAttribute('embedded', 'embedded')
 `
 
 const renderExternalUrls = story => {
   const loaded = {}
   const urls = []
+  if (story.mode === 'ar') {
+    urls.push(EXTERNAL_URLS.arjs)
+  }
   story.chapters.forEach(chapter => chapter.forEach(entity => {
     switch (entity.type) {
       case 'chart':
