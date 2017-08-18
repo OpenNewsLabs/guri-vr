@@ -128,6 +128,13 @@
       "first": "Una vez registrado podes guardar tus historias y se generará un link para compartir cada vez que guardes la historia. Este link puede ser compartido como un sitio por si mismo o ser embebido en un iframe para ser parte de una pieza interactiva, por ejemplo",
       "second": "El link generado es un archivo HTML que usa <a href='https://aframe.io'>A-Frame</a> para que pueda ser facilmente modificado si se requiere. El link también contiene la información requerida por el reproductor embebido de Twitter para una mejor integración. Este es un ejemplo:"
     },
+    "api": {
+      "title": "API",
+      "description": "Si querés crear historias programáticamente y/o integrar funcionalidad de GuriVR en tu sistema podés usar la API que tiene un solo endpoint:",
+      "params": "Parametros del body del request",
+      "curl": "curl --data \"text=Un cielo al atardecer\" --data \"title=Hola manola\" \\\nhttps://gurivr.com/api/stories",
+      "tweetbot": "Si querés ver una implementación de la API, el <a href=\"https://github.com/OpenNewsLabs/guri-tweetbot\" target=\"_blank\">código</a> detrás del bot de la cuenta de twitter de <a href=\"https://twitter.com/guri_vr\" target=\"_blank\">@guri_vr</a> es un buen ejemplo.\nMe encantaría saber que uso le das a la API 🤔. Por favor <a href=\"https://twitter.com/impronunciable\" target=\"_blank\">contame</a> ❤️"
+    },
     "attributes": {
       "source": "fuente",
       "source_types": "url",

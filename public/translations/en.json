@@ -128,6 +128,13 @@
       "first": "While logged in, you can save your stories and a share link is generated every time you save the story. This link can be shared as a standalone website or be embed into an iframe to be a part of a interactive piece.",
       "second": "The generated link is a HTML file using <a href='https://aframe.io'>A-Frame</a> so it can be easily modified. The link sets also the required information for the Twitter Card player for a better integration. This is an example:"
     },
+    "api": {
+      "title": "API",
+      "description": "If you want to create stories programatically and/or integrate GuriVR functionality into your system you can use the one-endpoint API. There is only one endpoint:",
+      "params": "Body parameters",
+      "curl": "curl --data \"text=A sky at sunset\" --data \"title=Hi there\" \\\nhttps://gurivr.com/api/stories",
+      "tweetbot": "If you want to see an API implementation, the <a href=\"https://github.com/OpenNewsLabs/guri-tweetbot\" target=\"_blank\">code</a> powering the Twitter account <a href=\"https://twitter.com/guri_vr\" target=\"_blank\">@guri_vr</a> is a good example.\nI'd love to know how and why you use this API 🤔. Please <a href=\"https://twitter.com/impronunciable\" target=\"_blank\">let me know</a> ❤️"
+    },
     "attributes": {
       "source": "source",
       "source_types": "url",

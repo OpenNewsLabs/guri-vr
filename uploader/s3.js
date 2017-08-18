@@ -33,7 +33,8 @@ exports.story = story => new Promise((resolve, reject) => {
     if(err) {
       return reject(new Error('Error writing to s3'));
     }
-    return resolve(story);
+    story.url = storyUrl(story._id)
+    return resolve(story)
   });
 });
 
@@ -65,3 +66,9 @@ s3bucket.deleteObject(
   { Bucket: `${config.s3.bucket}`, Key: `s/${id}.html`, },
   (err, data) => err ? reject(new Error('Error deleting file on s3')) : resolve()
 ));
+
+/**
+ * Get story url
+ */
+
+const storyUrl = id => `${config.s3.bucket}/s/${id}.html`

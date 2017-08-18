@@ -30,11 +30,10 @@ app.get('/preview', (req, res) => {
 
 app.post('/stories', (req, res, next) => {
   try {
-		const body = req.body.body || nlp(req.body.text)
-
-		if (req.body.store === false) {
-			return res.json(body)
-		}
+    const body = req.body.body || nlp(req.body.text)
+    if (req.body.store === false) {
+      return res.json(body)
+    }
 
     stories.insert({
       title: req.body.title,
