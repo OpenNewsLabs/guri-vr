@@ -219,6 +219,23 @@ export default () => (
         </div>
       </p>
     </section>
+    <section id='api'>
+      <h2 {...styles.sectionTitle}>{t('guide.api.title')}</h2>
+      <p>{t('guide.api.description')}</p>
+      <p><strong>POST https://gurivr.com/api/stories</strong></p>
+      <p>{t('guide.api.params')}</p>
+      <ul>
+        <li {...styles.attrItem}><span {...styles.attr}>text</span> (string) | {t('guide.entities.required')}</li>
+        <li {...styles.attrItem}><span {...styles.attr}>mode</span> (vr|ar) | (default: vr)</li>
+        <li {...styles.attrItem}><span {...styles.attr}>title</span> (string)</li>
+      </ul>
+      <p>{t('guide.entities.example')}</p>
+      <div class="cm-s-one-dark">
+        <pre {...styles.attr}>{t('guide.api.curl')}</pre>
+      </div>
+      <p dangerouslySetInnerHTML={{ __html: t('guide.api.tweetbot') }}></p>
+    </section>
+
   </div>
 )
 

@@ -15,6 +15,7 @@ export default () => (
     <a {...merge(styles.link, styles.title)} href='#search'>{t('guide.search.title')}</a>
     <a {...merge(styles.link, styles.title)} href='#ar'>{t('guide.ar.title')}</a>
     <a {...merge(styles.link, styles.title)} href='#sharing'>{t('guide.sharing.title')}</a>
+    <a {...merge(styles.link, styles.title)} href='#api'>{t('guide.api.title')}</a>
 
   </div>
 )
