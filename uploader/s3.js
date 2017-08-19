@@ -71,4 +71,4 @@ s3bucket.deleteObject(
  * Get story url
  */
 
-const storyUrl = id => `${config.s3.baseURL}${config.s3.bucket}/s/${id}.html`
+const storyUrl = id => `https://s3.amazonaws.com/${config.s3.bucket}/s/${id}.html`
