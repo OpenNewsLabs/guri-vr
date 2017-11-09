@@ -26,7 +26,7 @@ module.exports = story =>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>${story.title}</title>
     <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
-    <script src="https://rawgit.com/ngokevin/aframe-look-at-component/master/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.5.1/dist/aframe-look-at-component.min.js"></script>
     ${renderExternalUrls(story)}
     <style>
       html, body, #root, #arVideo {
