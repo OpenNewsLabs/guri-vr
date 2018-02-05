@@ -186,7 +186,7 @@ const renderScript = story => {
     times.push(time.length ? time[0].value : null)
 
     var voice = chapter.filter(obj => obj.type === 'voiceover')
-    voices.push(voice.length ? {voice[0] : null)
+    voices.push(voice.length ? {voice[0]} : null)
   })
 
   return `
