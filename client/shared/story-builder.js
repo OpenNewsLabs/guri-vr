@@ -186,7 +186,7 @@ const renderScript = story => {
     times.push(time.length ? time[0].value : null)
 
     var voice = chapter.filter(obj => obj.type === 'voiceover')
-    voices.push(voice.length ? voice[0].text : null)
+    voices.push(voice.length ? {voice[0] : null)
   })
 
   return `
@@ -259,7 +259,8 @@ const renderScript = story => {
       if (voices[i]) {
         try {
           speechSynthesis.cancel();
-          var txt = new SpeechSynthesisUtterance(voices[i]);
+          var txt = new SpeechSynthesisUtterance(voices[i].text);
+          txt.lang = voices[i].lang;
           speechSynthesis.speak(txt);
         } catch (err) {}
       }

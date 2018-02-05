@@ -94,7 +94,8 @@ function getObjects (p) {
         if (!voiceoverQuote) return
         return {
           type: 'voiceover',
-          text: voiceoverQuote
+          text: voiceoverQuote,
+          lang: getVoiceoverLang(entity.type)
         }
       case 'chart':
       case 'gráfico':
@@ -362,4 +363,13 @@ function getMarker (str) {
   var match = str.match(MARKER_REGEX)
   if (!(match && match.length)) return null
   return true
+}
+
+function getVoiceoverLang(type) {
+  switch (type) {
+    case 'voz en off':
+      return 'es-ES'
+    default:
+      return 'en-US'
+  }
 }
