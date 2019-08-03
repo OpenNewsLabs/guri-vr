@@ -3,7 +3,7 @@ const EXTERNAL_URLS = {
   chart: 'https://cdn.rawgit.com/impronunciable/aframe-chartbuilder-component/4693e47a/dist/aframe-chartbuilder-component.min.js',
   ply: 'https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js',
   sky: 'https://rawgit.com/ngokevin/kframe/master/components/sun-sky/dist/aframe-sun-sky.min.js',
-  arjs: 'https://jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js'
+  arjs: 'https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.7/aframe/build/aframe-ar.js'
 }
 
 const MANUAL_PLAY_TYPES = ['video', 'videosphere', 'audio']
@@ -25,7 +25,7 @@ module.exports = story =>
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>${story.title}</title>
-    <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-look-at-component@0.5.1/dist/aframe-look-at-component.min.js"></script>
     ${renderExternalUrls(story)}
     <style>
@@ -280,7 +280,7 @@ const renderARScript = () =>
   }
 
   var scene = document.querySelector('a-scene');
-  scene.setAttribute('arjs', 'sourceType: webcam;')
+  scene.setAttribute('arjs', 'arjs')
   scene.setAttribute('embedded', 'embedded')
 `
 
