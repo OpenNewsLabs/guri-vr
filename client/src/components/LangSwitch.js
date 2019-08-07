@@ -11,7 +11,7 @@ const locales = {
 export default () => (
   <div {...styles.container}>
     <div onClick={() => setLocale(locales[getLocale()].value)} {...styles.button} {...select(':hover + div', { display: 'block' })}>
-      <span {...styles.name}>{locales[getLocale()].name}</span>
+      <span {...styles.name}>{locales[getLocale()] ? locales[getLocale()].name : 'English'}</span>
       <span {...styles.arrowDown} />
     </div>
     <div {...styles.content}>

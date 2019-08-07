@@ -2,7 +2,7 @@
 const EXTERNAL_URLS = {
   chart: 'https://cdn.rawgit.com/impronunciable/aframe-chartbuilder-component/4693e47a/dist/aframe-chartbuilder-component.min.js',
   ply: 'https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js',
-  sky: 'https://rawgit.com/ngokevin/kframe/master/components/sun-sky/dist/aframe-sun-sky.min.js',
+  sky: 'https://cdn.jsdelivr.net/npm/aframe-sun-sky@3.0.3/dist/aframe-sun-sky.min.js',
   arjs: 'https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.7/aframe/build/aframe-ar.js'
 }
 
@@ -97,7 +97,7 @@ const renderObjectAsset = (obj, i, j) => {
       return `<img src="${obj.src}" id="asset-${i}-${j}" crossorigin="anonymous">`
     case 'video':
     case 'videosphere':
-      return `<video src="${obj.src}" id="asset-${i}-${j}" class="chapter-${i}" crossorigin="anonymous" autoplay="false"></video>`
+      return `<video src="${obj.src}" id="asset-${i}-${j}" class="chapter-${i}" crossorigin="anonymous"></video>`
     case 'audio':
       return `<audio src="${obj.src}" id="asset-${i}-${j}" class="chapter-${i}" crossorigin="anonymous"></audio>`
     case 'model':
@@ -147,7 +147,7 @@ const renderObject = (obj, i, j) => {
       str = `<a-entity position="${obj.position.join(' ')}" sound="src: #asset-${i}-${j}; autoplay: false;"></a-entity>`
       break
     case 'sky':
-      str = `<a-sun-sky material="sunPosition: ${obj.position.join(' ')}"></a-sun-sky>`
+      str = `<a-sun-sky material="sunPosition: ${obj.position.join(' ')}; side: back"></a-sun-sky>`
       break
     case 'chart':
       str = `<a-entity position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src}; scale: ${obj.scale.join(' ')};"></a-entity>`
