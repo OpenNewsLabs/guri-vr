@@ -1,0 +1,43 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GuriVR</title>
+    <link href="/styles.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Shrikhand" rel="stylesheet" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#673ab7" />
+    <meta name="description" content="Describe your VR experience and the editor will do the rest" />
+    <meta property="og:title" content="GuriVR" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://s3.amazonaws.com/gurivr/logo.png" />
+    <meta property="og:image:width" content="512" />
+    <meta property="og:image:height" content="512" />
+    <meta property="og:description" content="Describe your VR experience and the editor will do the rest" />
+    <meta property="og:site_name" content="GuriVR" />
+    <meta property="og:locale" content="en_us" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@guri_vr" />
+    <meta property="twitter:url" content="https://gurivr.com/" />
+    <meta property="twitter:image" content="https://s3.amazonaws.com/gurivr/logo.png" />
+    <meta property="twitter:description" content="Describe your VR experience and the editor will do the rest" />
+</head>
+
+<body>
+    <div id="root"></div>
+    <script src="https://maps.google.com/maps/api/js?sensor=false&amp;key=<%= mapsKey %>" async="async"></script>
+    <script src="/app.js"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        ga('create', '<%= analyticsId %>', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+</body>
+
+</html>

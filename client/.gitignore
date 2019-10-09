@@ -1,4 +1,6 @@
 node_modules
-.DS_Store
 config.json
 yarn.lock
+dist/*.js
+dist/appcache
+dist/index.html

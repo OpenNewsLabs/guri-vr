@@ -26,11 +26,11 @@ export default class StoryList extends Component {
       .then(stories => this.setState({ stories }))
   }
 
-  onDelete (id) {
+  onDelete (storyId) {
     if (window.confirm(t('stories.delete_confirm'))) {
-      deleteStory(id)
+      deleteStory(storyId)
         .then(() => this.setState({
-          stories: this.state.stories.filter(({ _id }) => _id !== id)
+          stories: this.state.stories.filter(({ id }) => id !== storyId)
         }))
     }
   }

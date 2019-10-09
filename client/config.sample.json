@@ -1,3 +1,8 @@
 {
-  "assetsHost": "/uploads"
+  "assetsHost": "/uploads",
+  "loginRedirectUrl": "https://gurivr.com",
+  "analyticsId": "",
+  "mapsKey": "",
+  "firebase": {
+  }
 }

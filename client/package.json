@@ -17,6 +17,8 @@
     "babel-loader": "6.2.4",
     "babel-plugin-transform-react-jsx": "6.8.0",
     "babel-preset-es2015": "6.9.0",
+    "fast-async": "^6.3.8",
+    "html-webpack-plugin": "^3.2.0",
     "install": "^0.8.2",
     "json-loader": "0.5.4",
     "mocha": "2.5.3",
@@ -26,11 +28,13 @@
   },
   "dependencies": {
     "codemirror": "5.28.0",
+    "firebase": "^7.1.0",
     "glamor": "^2.20.12",
     "isomorphic-fetch": "2.2.1",
     "material-design-lite": "1.1.3",
     "preact": "7.1.0",
     "preact-router": "2.0.0",
+    "uuid": "^3.3.3",
     "wildemitter": "1.2.0"
   },
   "standard": {

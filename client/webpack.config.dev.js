@@ -1,10 +1,11 @@
-
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path')
+var config = require('./config.json')
 
 module.exports = {
   entry: path.join(__dirname, 'src', 'index.js'),
   output: {
-    path: path.join(__dirname, '..', 'public'),
+    path: path.join(__dirname, 'dist'),
     filename: 'app.js',
     publicPath: '/'
   },
@@ -20,5 +21,10 @@ module.exports = {
       'node_modules'
     ]
   },
-  plugins: []
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'src', 'index.ejs'),
+      templateParameters: config
+    })
+  ]
 }

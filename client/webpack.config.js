@@ -1,10 +1,17 @@
 
 var webpack = require('webpack')
+var path = require('path')
 var OfflinePlugin = require('offline-plugin')
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var devConfig = require('./webpack.config.dev')
+var config = require('./config.json')
 
 module.exports = Object.assign({}, devConfig, {
   plugins: [
+    new HtmlWebpackPlugin({
+      template:path.join(__dirname, 'src', 'index.ejs'),
+      templateParameters: config
+    }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false

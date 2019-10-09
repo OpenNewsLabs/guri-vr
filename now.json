@@ -1,0 +1,24 @@
+{
+    "version": 2,
+    "name": "gurivr",
+    "builds": [
+        { "src": "api/**", "use": "@now/node" },
+        { "src": "client/dist/**", "use": "@now/static" }
+    ],
+    "routes": [
+        { "src": "/api/preview", "dest": "api/preview.js" },
+        { "src": "/api/stories", "dest": "api/stories.js" },
+        { "src": "/api/stories/([^/]+)", "dest": "api/story.js?id=$1" },
+        { "src": "/api/assets/search", "dest": "api/assets/search.js", "headers": { "Access-Control-Allow-Origin": "*" } },
+        { "src": "/(login|guide|stories)", "dest": "/client/dist/index.html" },
+        { "src": "/stories/create", "dest": "/client/dist/index.html" },
+        { "src": "/(.*)", "dest": "/client/dist/$1" }
+      ],
+      "env": {
+        "FIREBASE_ADMIN": "@firebase-admin",
+        "FLICKR_SECRET_KEY": "@flickr-secret-key",
+        "GMAPS_SECRET_KEY": "@gmaps-secret-key",
+        "FREESOUND_SECRET_KEY": "@freesound-secret-key",
+        "STORAGE_BUCKET": "@storage-bucket"
+      }
+    }
