@@ -30,9 +30,9 @@ module.exports = (req, res) => {
     case 'audio':
       axios.get(`${FREESOUND_BASE_URL}/search/text/?query=${query}&token=${process.env.FREESOUND_SECRET_KEY}`)
       .then(({ data }) => {
-        if (!data.length) return ''
+        if (!data.results.length) return ''
 
-        fetch(`${FREESOUND_BASE_URL}/sounds/${results[0].id}/?token=${process.env.FREESOUND_SECRET_KEY}`)
+        fetch(`${FREESOUND_BASE_URL}/sounds/${data.results[0].id}/?token=${process.env.FREESOUND_SECRET_KEY}`)
         .then(({ data }) => res.json(data.previews['preview-hq-mp3'].replace('http://', 'https://')))
         .catch(() => res.status(500).send('error'))
       })
