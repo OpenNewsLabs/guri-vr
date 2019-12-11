@@ -32,7 +32,7 @@ module.exports = (req, res) => {
       .then(({ data }) => {
         if (!data.results.length) return ''
 
-        fetch(`${FREESOUND_BASE_URL}/sounds/${data.results[0].id}/?token=${process.env.FREESOUND_SECRET_KEY}`)
+        axios.get(`${FREESOUND_BASE_URL}/sounds/${data.results[0].id}/?token=${process.env.FREESOUND_SECRET_KEY}`)
         .then(({ data }) => res.json(data.previews['preview-hq-mp3'].replace('http://', 'https://')))
         .catch(() => res.status(500).send('error'))
       })
