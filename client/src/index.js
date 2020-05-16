@@ -6,7 +6,7 @@ import { loadTranslations } from 'services/i18n'
 import { install as offlineInstall } from 'offline-plugin/runtime'
 import bus from 'services/guri'
 
-bus.on('renderApp', () => render(<App />, document.getElementById('root'), document.getElementById('root').firstChild))
+bus.on('renderApp', () => render(<App />, document.getElementById('root')/*, document.getElementById('root').firstChild*/))
 offlineInstall()
 
 // Load translations and session info

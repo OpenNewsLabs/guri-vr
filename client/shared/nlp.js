@@ -195,16 +195,20 @@ function getObjects (p) {
           }
         }
 
-        if (!url) return
-        var modelPos = convertModelPosition(getPosition(str))
+        var txt = getQuote(str)
+        if (!(url || txt)) return
+        var isPoly =  /^https\:\/\/poly.google\.com/.test(url);
+        var modelPos = convertModelPosition(getPosition(str), isPoly)
         return {
           type: 'model',
           src: url,
           mtl: mtl,
+          text: txt,
           extension: ext[ext.length - 1],
           position: modelPos,
           scale: getSize(str),
-          marker: getMarker(str)
+          marker: getMarker(str),
+          poly: isPoly ? getPoly(url) : undefined,
         }
       case 'fondo':
         match = sp.match(/fondo (#[a-fA-F0-9]{3,6})/i)
@@ -220,7 +224,8 @@ function getObjects (p) {
   .filter(function (entity) { return !!entity })
 }
 
-function convertModelPosition (pos) {
+function convertModelPosition (pos, isPoly) {
+  if (isPoly) return [pos[0], pos[1] - 1.6, pos[2] + 6]
   return [pos[0], pos[1] - 3, pos[2]]
 }
 
@@ -233,6 +238,20 @@ function getUrl (str, validate) {
   if (!match.length) return
 
   return match[0]
+}
+
+function getPoly (url) {
+  var polyPart = url.split('/').pop()
+  try {
+    var key = polyPart.split('=')[1]
+    var id = polyPart.split('?')[0]
+    return {
+      src: id,
+      key: key
+    }
+  } catch (err) {
+    return undefined
+  }
 }
 
 function getQuote (str) {

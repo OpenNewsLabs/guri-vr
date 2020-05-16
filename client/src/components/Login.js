@@ -1,6 +1,7 @@
 
 import { h, Component } from 'preact'
 import { Link } from 'preact-router'
+import linkState from 'linkstate'
 import Logo from 'components/Logo'
 import { sendVerification } from 'services/datalayer'
 import { style } from 'glamor'
@@ -40,7 +41,7 @@ export default class Login extends Component {
         <div {...styles.emailGroup}>
           <label for='email' {...styles.label}>E-mail</label>
           <input type='email' id='email' required placeholder='me@gmail.com'
-            value={email} {...styles.email} onInput={this.linkState('email')}
+            value={email} {...styles.email} onInput={linkState(this, 'email')}
             autofocus />
         </div>
         <button {...styles.button} type='submit'>{t('login.login')}</button>

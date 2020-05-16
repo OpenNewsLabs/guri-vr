@@ -20,6 +20,7 @@
     "FLICKR_SECRET_KEY": "@flickr-secret-key",
     "GMAPS_SECRET_KEY": "@gmaps-secret-key",
     "FREESOUND_SECRET_KEY": "@freesound-secret-key",
-    "STORAGE_BUCKET": "@storage-bucket"
+    "STORAGE_BUCKET": "@storage-bucket",
+    "POLY_API_KEY": "@poly-api-key"
   }
 }

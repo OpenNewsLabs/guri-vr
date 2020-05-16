@@ -3,7 +3,8 @@ const EXTERNAL_URLS = {
   chart: 'https://cdn.rawgit.com/impronunciable/aframe-chartbuilder-component/4693e47a/dist/aframe-chartbuilder-component.min.js',
   ply: 'https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js',
   sky: 'https://cdn.jsdelivr.net/npm/aframe-sun-sky@3.0.3/dist/aframe-sun-sky.min.js',
-  arjs: 'https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.7/aframe/build/aframe-ar.js'
+  arjs: 'https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.7/aframe/build/aframe-ar.js',
+  poly: 'https://unpkg.com/aframe-google-poly-component@1.0.0/dist/aframe-google-poly-component.min.js'
 }
 
 const MANUAL_PLAY_TYPES = ['video', 'videosphere', 'audio']
@@ -25,7 +26,7 @@ module.exports = story =>
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>${story.title}</title>
-    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-look-at-component@0.5.1/dist/aframe-look-at-component.min.js"></script>
     ${renderExternalUrls(story)}
     <style>
@@ -65,7 +66,7 @@ module.exports = story =>
     </style>
   </head>
   <body>
-    <a-scene>
+    <a-scene loading-screen="enabled: false">
       <a-entity camera="userHeight: 1.6" look-controls wasd-controls>
         <a-entity id="cursor"
                   cursor="fuse: false; maxDistance: 30; timeout: 500"
@@ -101,6 +102,7 @@ const renderObjectAsset = (obj, i, j) => {
     case 'audio':
       return `<audio src="${obj.src}" id="asset-${i}-${j}" class="chapter-${i}" crossorigin="anonymous"></audio>`
     case 'model':
+      if (obj.poly) return '';
       const ext = obj.src.split('.')
       return ext[ext.length - 1] === 'obj'
       ? `<a-asset-item src="${obj.src}" id="asset-${i}-${j}-obj"  crossorigin="anonymous"></a-asset-item><a-asset-item src="${obj.mtl}" id="asset-${i}-${j}-mtl"  crossorigin="anonymous"></a-asset-item>`
@@ -153,6 +155,9 @@ const renderObject = (obj, i, j) => {
       str = `<a-entity position="${obj.position.join(' ')}" chartbuilder="src: ${obj.src}; scale: ${obj.scale.join(' ')};"></a-entity>`
       break
     case 'model':
+      if (obj.poly) {
+        return `<a-entity rotation="0 90 0" google-poly="src: ${obj.poly.src}; apiKey: ${obj.poly.key}" look-at="0 1.6 0" position="${obj.position.join(' ')}"></a-entity>`
+      }
       switch (obj.extension) {
         case 'ply':
           str = `<a-entity look-at="0 1.6 0" ply-model="src: #asset-${i}-${j}" position="${obj.position.join(' ')}"></a-entity>`
@@ -291,20 +296,27 @@ const renderExternalUrls = story => {
     urls.push(EXTERNAL_URLS.arjs)
   }
   story.chapters.forEach(chapter => chapter.forEach(entity => {
+    if (!loaded.poly) {
+      urls.push(EXTERNAL_URLS.poly)
+      loaded.poly = true
+    }
     switch (entity.type) {
       case 'chart':
         if (!loaded.chart) {
           urls.push(EXTERNAL_URLS.chart)
+          loaded.chart = true
         }
         break
       case 'model':
         if (!loaded.ply && entity.extension === 'ply') {
           urls.push(EXTERNAL_URLS.ply)
+          loaded.ply = true
         }
         break
       case 'sky':
         if (!loaded.sky) {
           urls.push(EXTERNAL_URLS.sky)
+          loaded.sky = true
         }
         break
     }

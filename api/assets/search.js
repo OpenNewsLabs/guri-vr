@@ -16,6 +16,11 @@ module.exports = (req, res) => {
   const { type, query } = req.query
 
   switch (type) {
+    case 'model':
+      axios.get(`https://poly.googleapis.com/v1/assets?key=${process.env.POLY_API_KEY}&format=GLTF2&keywords=${query}`)
+      .then(({ data }) => res.json({ url: `https://poly.google.com/view/${data.assets[0].name.split('/').pop()}?key=${process.env.POLY_API_KEY}` }))
+      .catch(err => res.status(500).send('error' + err))
+      break
     case 'image':
       axios.get(`${FLICKR_BASE_URL}${FLICKR_PARAMS}&text=${query}`)
       .then(({ data }) => res.json(data.photos.photo))

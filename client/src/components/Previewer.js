@@ -3,7 +3,7 @@ import { h } from 'preact'
 import { style } from 'glamor'
 
 export default ({ body, height, mode = 'vr' }) => (
-  <iframe height={height} {...styles.container}
+  <iframe crossorigin="anonymous" height={height} {...styles.container}
     src={`/api/preview?mode=${mode}&body=${encodeURIComponent(JSON.stringify(body))}`}
     allowfullscreen />
 )

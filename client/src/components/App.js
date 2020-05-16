@@ -1,9 +1,9 @@
 
 import { h, Component } from 'preact'
 import Router from 'preact-router'
+import AsyncRoute from 'preact-async-route'
 import { style } from 'glamor'
 import guri, { user } from 'services/guri'
-import SplitPoint from 'components/SplitPoint'
 
 export default class App extends Component {
   constructor (props) {
@@ -20,11 +20,11 @@ export default class App extends Component {
     return (
       <div {...styles.container}>
         <Router>
-          <SplitPoint key={0} path='/' load={() => System.import('components/Home')} />
-          <SplitPoint key={1} path='/guide' load={() => System.import('components/Guide')} />
-          <SplitPoint key={2} path='/login' load={() => System.import('components/Login')} />
-          <SplitPoint key={3} path='/stories' load={() => System.import('components/StoryList')} />
-          <SplitPoint key={4} path='/stories/:id' load={() => System.import('components/StoryEditor')} />
+          <AsyncRoute path='/' getComponent={() => System.import('components/Home').then(module => module.default)} />
+          <AsyncRoute path='/guide' getComponent={() => System.import('components/Guide').then(module => module.default)} />
+          <AsyncRoute path='/login' getComponent={() => System.import('components/Login').then(module => module.default)} />
+          <AsyncRoute path='/stories' getComponent={() => System.import('components/StoryList').then(module => module.default)} />
+          <AsyncRoute path='/stories/:id' getComponent={() => System.import('components/StoryEditor').then(module => module.default)} />
         </Router>
       </div>
     )

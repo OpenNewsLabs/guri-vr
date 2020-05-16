@@ -31,9 +31,11 @@
     "firebase": "^7.1.0",
     "glamor": "^2.20.12",
     "isomorphic-fetch": "2.2.1",
+    "linkstate": "^1.1.1",
     "material-design-lite": "1.1.3",
-    "preact": "7.1.0",
-    "preact-router": "2.0.0",
+    "preact": "^10.4.1",
+    "preact-async-route": "^2.2.1",
+    "preact-router": "^3.2.1",
     "uuid": "^3.3.3",
     "wildemitter": "1.2.0"
   },
