@@ -47,7 +47,7 @@
     "videosphere": {
       "title": "Videosphere",
       "description": "A videosphere is a 360 spherical video. It needs a url to display. It works best with equirectangular videos but can also work with any kind of video.",
-      "preview": "My scene is <span class='cm-number'>30 seconds</span> long and shows a <span class='cm-atom'>videosphere</span> located at <span class='cm-string'>https://ucarecdn.com/bcece0a8-86ce-460e-856b-40dac4875f15/</span> and a <span class='cm-atom'>voiceover</span> saying <span class='cm-string'>\"This is the future. I know, is not that good\"</span>",
+      "preview": "My scene is <span class='cm-number'>30 seconds</span> long and shows a <span class='cm-atom'>videosphere</span> located at <span class='cm-string'>https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-197/walking_the_dog_360_video_short.webm</span> and a <span class='cm-atom'>voiceover</span> saying <span class='cm-string'>\"This is the future. I know, is not that good\"</span>",
       "keywords": "videosphere"
     },
     "image": {
@@ -181,7 +181,7 @@
       "voiceover_text": "We can go to AR mode and enhance it with for example a text saying \"Is this reality?\"",
       "videosphere_title": "Videosphere",
       "videosphere_desc": "360 video is also possible with Guri. Just paste the video url into the editor.",
-      "videosphere_text": "We call 360 video as a videosphere. You just need to drop a url like the following into the editor: https://ucarecdn.com/bcece0a8-86ce-460e-856b-40dac4875f15/"
+      "videosphere_text": "We call 360 video as a videosphere. You just need to drop a url like the following into the editor: https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-197/walking_the_dog_360_video_short.webm"
     },
     "oss": {
       "title": "I'm Open Source",

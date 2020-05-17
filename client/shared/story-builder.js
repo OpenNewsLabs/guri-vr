@@ -1,9 +1,9 @@
 
 const EXTERNAL_URLS = {
-  chart: 'https://cdn.rawgit.com/impronunciable/aframe-chartbuilder-component/4693e47a/dist/aframe-chartbuilder-component.min.js',
-  ply: 'https://rawgit.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js',
+  chart: 'https://rawcdn.githack.com/impronunciable/aframe-chartbuilder-component/4693e47a/dist/aframe-chartbuilder-component.min.js',
+  ply: 'https://rawcdn.githack.com/donmccurdy/aframe-extras/v2.1.1/dist/aframe-extras.loaders.min.js',
   sky: 'https://cdn.jsdelivr.net/npm/aframe-sun-sky@3.0.3/dist/aframe-sun-sky.min.js',
-  arjs: 'https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.7/aframe/build/aframe-ar.js',
+  arjs: 'https://rawcdn.githack.com/jeromeetienne/AR.js/1.7.7/aframe/build/aframe-ar.js',
   poly: 'https://unpkg.com/aframe-google-poly-component@1.0.0/dist/aframe-google-poly-component.min.js'
 }
 
@@ -27,7 +27,7 @@ module.exports = story =>
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>${story.title}</title>
     <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-look-at-component@0.5.1/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@1.0.0/dist/aframe-look-at-component.min.js"></script>
     ${renderExternalUrls(story)}
     <style>
       html, body, #root, #arVideo {
@@ -156,7 +156,7 @@ const renderObject = (obj, i, j) => {
       break
     case 'model':
       if (obj.poly) {
-        return `<a-entity rotation="0 90 0" google-poly="src: ${obj.poly.src}; apiKey: ${obj.poly.key}" look-at="0 1.6 0" position="${obj.position.join(' ')}"></a-entity>`
+        return `<a-entity rotation="0 90 0" google-poly="src: ${obj.poly.src}; apiKey: ${obj.poly.key}" position="${obj.position.join(' ')}"></a-entity>`
       }
       switch (obj.extension) {
         case 'ply':

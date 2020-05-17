@@ -47,7 +47,7 @@
     "videosphere": {
       "title": "Video esfera",
       "description": "Video esférico que envuelve la vista del usuario. Necesita una url de fuente. Funciona mejor con videos equirectangulares pero funciona con cualquier tipo de video.",
-      "preview": "Mi escena dura <span class='cm-number'>30 segundos</span> y muestra una <span class='cm-atom'>video esfera</span> alojada en <span class='cm-string'>https://ucarecdn.com/bcece0a8-86ce-460e-856b-40dac4875f15/</span> y una <span class='cm-'>voz en off</span> que dice <span class='cm-string'>\"Este es el futuro. Ya se, no es tan bueno\"</span>",
+      "preview": "Mi escena dura <span class='cm-number'>30 segundos</span> y muestra una <span class='cm-atom'>video esfera</span> alojada en <span class='cm-string'>https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-197/walking_the_dog_360_video_short.webm</span> y una <span class='cm-'>voz en off</span> que dice <span class='cm-string'>\"Este es el futuro. Ya se, no es tan bueno\"</span>",
       "keywords": "video esfera"
     },
     "image": {
@@ -183,7 +183,7 @@
       "voiceover_text": "Podemos adentrarnos en el modo ra con por ejemplo un texto que diga \"Es esta la realidad?\"",
       "videosphere_title": "Video esfera",
       "videosphere_desc": "Llamamos Videoesfera a los videos 360. Simplemente pegá la url de tu video en el editor.",
-      "videosphere_text": "Llamamos al video 360 video esfera. Simplemente tenés que pegar la url en el editor: https://ucarecdn.com/bcece0a8-86ce-460e-856b-40dac4875f15/"
+      "videosphere_text": "Llamamos al video 360 video esfera. Simplemente tenés que pegar la url en el editor: https://s3-us-west-2.amazonaws.com/s.cdpn.io/t-197/walking_the_dog_360_video_short.webm"
     },
     "oss": {
       "title": "Soy Open Source",
