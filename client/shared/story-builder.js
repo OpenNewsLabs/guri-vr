@@ -140,10 +140,10 @@ const renderObject = (obj, i, j) => {
       str = `<a-videosphere src="#asset-${i}-${j}"></a-videosphere>`
       break
     case 'video':
-      str = `<a-video look-at="0 1.6 0" scale="${obj.scale.join(' ')}" width="10" height="6" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-video>`
+      str = `<a-video look-at="0 1.6 0" scale="${obj.scale.join(' ')}" width="10" height="6" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"${renderEvents(obj)}></a-video>`
       break
     case 'image':
-      str = `<a-image look-at="0 1.6 0" scale="${obj.scale.join(' ')}" width="5" height="5" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"></a-image>`
+      str = `<a-image look-at="0 1.6 0" scale="${obj.scale.join(' ')}" width="5" height="5" position="${obj.position.join(' ')}" src="#asset-${i}-${j}"${renderEvents(obj)}></a-image>`
       break
     case 'audio':
       str = `<a-entity position="${obj.position.join(' ')}" sound="src: #asset-${i}-${j}; autoplay: false;"></a-entity>`
@@ -329,7 +329,7 @@ const renderExternalUrls = story => {
  * Render click event
  */
 
-const renderEvents = obj => ` onclick="nextChapter(${obj.link})"`
+const renderEvents = obj => typeof obj.link !== 'undefined' ? ` onclick="nextChapter(${obj.link})"` : ''
 
 /**
  * Checks if needs a play button for audios and videos

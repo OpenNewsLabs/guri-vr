@@ -19,11 +19,13 @@ module.exports = async (req, res) => {
     data.id = getDoc.id
     if (req.method === 'GET') {      
         res.json(data);  
+        return;
     } else if (req.method === 'DELETE') {
         await db.collection('stories').doc(req.query.id).delete()
         const file = bucket.file(`stories/${req.query.id}.html`)
         await file.delete()
         res.json('ok')
+        return
     } else if (req.method === 'PUT') {
       const newData = {
         title: req.body.title,
@@ -34,6 +36,7 @@ module.exports = async (req, res) => {
        await db.collection('stories').doc(req.query.id).set(newData, { merge: true })
       const newDoc = Object.assign({}, data, newData)
       res.json(newDoc)
+      return
     }
     res.status(405).send('Method not allowed')
 }
