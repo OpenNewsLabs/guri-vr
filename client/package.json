@@ -27,7 +27,7 @@
     "webpack": "2.2.0-rc.0"
   },
   "dependencies": {
-    "codemirror": "5.28.0",
+    "codemirror": "5.58.2",
     "firebase": "^7.1.0",
     "glamor": "^2.20.12",
     "isomorphic-fetch": "2.2.1",
